@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { prisma } from "../client";
 import type { TocItem } from "@/lib/utils/content";
 
@@ -92,10 +93,12 @@ export async function createArticle(data: {
   published: boolean;
   featured?: boolean;
 }) {
+  const { toc, ...rest } = data;
   return prisma.article.create({
     data: {
-      ...data,
+      ...rest,
       featured: data.featured ?? false,
+      ...(toc !== undefined && { toc: toc === null ? Prisma.JsonNull : toc }),
     },
     select: ARTICLE_SELECT,
   });
@@ -116,9 +119,13 @@ export async function updateArticle(
     featured?: boolean;
   }
 ) {
+  const { toc, ...rest } = data;
+  const updateData = toc !== undefined
+    ? { ...rest, toc: toc === null ? Prisma.JsonNull : toc }
+    : rest;
   return prisma.article.update({
     where: { id },
-    data,
+    data: updateData,
     select: ARTICLE_SELECT,
   });
 }

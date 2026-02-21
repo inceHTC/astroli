@@ -32,7 +32,8 @@ export interface TestResultTemplate {
   primaryLabel: string;
   description: string;
   subtitle: string | null;
-  strengths: string[] | null;
+  /** Prisma returns JsonValue; at runtime we normalize to string[] */
+  strengths: string[] | null | unknown;
   shadowSide: string;
   elementData: unknown;
 }
@@ -96,12 +97,13 @@ export function computeResult(
   }
 
   const elementData = template.elementData as Record<string, number>;
+  const strengths = Array.isArray(template.strengths) ? template.strengths : [];
   return {
     primaryType: template.primaryLabel,
     elements,
     description: template.description,
     subtitle: template.subtitle ?? undefined,
-    strengths: template.strengths ?? [],
+    strengths,
     shadowSide: template.shadowSide ?? "",
     elementData: elementData && typeof elementData === "object" ? elementData : elements,
   };

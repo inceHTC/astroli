@@ -12,6 +12,10 @@ import {
 
 const ZODIAC_IDS = ZODIAC_SIGNS.map((z) => z.id);
 
+function isZodiacParam(p: string): p is (typeof ZODIAC_IDS)[number] {
+  return (ZODIAC_IDS as readonly string[]).includes(p);
+}
+
 function getZodiacInfo(zodiacId: string) {
   return ZODIAC_SIGNS.find((z) => z.id === zodiacId);
 }
@@ -27,7 +31,7 @@ export async function generateMetadata({
   params: Promise<{ param: string }>;
 }) {
   const { param } = await params;
-  if (ZODIAC_IDS.includes(param)) {
+  if (isZodiacParam(param)) {
     const sign = getZodiacInfo(param);
     return {
       title: `${sign?.nameTr ?? param} Burcu Ünlüler | Astroli`,
@@ -50,7 +54,7 @@ export default async function UnlulerParamPage({
 }) {
   const { param } = await params;
 
-  if (ZODIAC_IDS.includes(param)) {
+  if (isZodiacParam(param)) {
     const sign = getZodiacInfo(param);
     const celebrities = await listCelebritiesByZodiac(param);
     const list = celebrities.map((c) => ({

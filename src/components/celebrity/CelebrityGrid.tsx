@@ -105,31 +105,27 @@ export function CelebrityGrid({ celebrities }: CelebrityGridProps) {
             </ul>
           </div>
 
-          {totalPages > 1 && (
-            <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-gray-200 bg-white px-4 py-3 sm:px-6">
-              <p className="text-sm text-gray-600">
-                {start + 1}–{Math.min(start + PAGE_SIZE, filtered.length)} / {filtered.length} ünlü
-              </p>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={page <= 1}
-                  className="rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
-                >
-                  Geri
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={page >= totalPages}
-                  className="rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
-                >
-                  İleri
-                </button>
-              </div>
-            </div>
-          )}
+        {totalPages > 1 && (
+  <div className="flex items-center justify-end gap-2 rounded-xl border border-gray-200 bg-white px-4 py-3 sm:px-6">
+    <button
+      type="button"
+      onClick={() => setPage((p) => Math.max(1, p - 1))}
+      disabled={page <= 1}
+      className="rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
+    >
+      Geri
+    </button>
+
+    <button
+      type="button"
+      onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+      disabled={page >= totalPages}
+      className="rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
+    >
+      İleri
+    </button>
+  </div>
+)}
         </>
       )}
     </div>

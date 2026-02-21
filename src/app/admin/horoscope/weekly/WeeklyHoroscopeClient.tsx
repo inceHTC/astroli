@@ -194,46 +194,53 @@ export function WeeklyHoroscopeClient() {
                       />
                     </div>
 
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="rounded-lg border border-gray-100 p-3">
-                        <label className="block text-xs font-medium text-gray-600 mb-2">Aşk</label>
-                        <textarea
-                          value={data.loveText}
-                          onChange={(e) => update("loveText", e.target.value)}
-                          placeholder="Kısa yorum, örn: Ciddi konuşmalar gündeme gelebilir."
-                          className="w-full rounded border border-gray-200 px-2 py-1.5 text-sm min-h-[48px] resize-y mb-2"
-                        />
-                        <StarInput value={data.love} onChange={(v) => update("love", v)} />
-                      </div>
-                      <div className="rounded-lg border border-gray-100 p-3">
-                        <label className="block text-xs font-medium text-gray-600 mb-2">İş</label>
-                        <textarea
-                          value={data.workText}
-                          onChange={(e) => update("workText", e.target.value)}
-                          placeholder="Kısa yorum, örn: Mevcut düzeni güçlendirmek için iyi bir hafta."
-                          className="w-full rounded border border-gray-200 px-2 py-1.5 text-sm min-h-[48px] resize-y mb-2"
-                        />
-                        <StarInput value={data.work} onChange={(v) => update("work", v)} />
-                      </div>
-                      <div className="rounded-lg border border-gray-100 p-3">
-                        <label className="block text-xs font-medium text-gray-600 mb-2">Para</label>
-                        <textarea
-                          value={data.moneyText}
-                          onChange={(e) => update("moneyText", e.target.value)}
-                          placeholder="Kısa yorum, örn: Planlama için uygun, ani riskten kaçın."
-                          className="w-full rounded border border-gray-200 px-2 py-1.5 text-sm min-h-[48px] resize-y mb-2"
-                        />
-                        <StarInput value={data.money} onChange={(v) => update("money", v)} />
-                      </div>
-                      <div className="rounded-lg border border-gray-100 p-3">
-                        <label className="block text-xs font-medium text-gray-600 mb-2">Sağlık</label>
-                        <textarea
-                          value={data.healthText}
-                          onChange={(e) => update("healthText", e.target.value)}
-                          placeholder="Kısa yorum, örn: Boyun-omuz gerginliğine dikkat."
-                          className="w-full rounded border border-gray-200 px-2 py-1.5 text-sm min-h-[48px] resize-y mb-2"
-                        />
-                        <StarInput value={data.health} onChange={(v) => update("health", v)} />
+                    <div className="space-y-4">
+                      <p className="text-xs font-medium text-gray-500">Her kategori için kısa yorum yazın ve 1–5 yıldız verin.</p>
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="rounded-xl border-2 border-gray-200 bg-gray-50/50 p-4">
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Aşk</label>
+                          <textarea
+                            value={data.loveText}
+                            onChange={(e) => update("loveText", e.target.value)}
+                            placeholder="Örn: Ciddi konuşmalar gündeme gelebilir."
+                            className="mb-3 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm min-h-[60px] resize-y"
+                          />
+                          <span className="text-xs text-gray-500 mr-2">Yıldız:</span>
+                          <StarInput value={data.love} onChange={(v) => update("love", v)} />
+                        </div>
+                        <div className="rounded-xl border-2 border-gray-200 bg-gray-50/50 p-4">
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">İş</label>
+                          <textarea
+                            value={data.workText}
+                            onChange={(e) => update("workText", e.target.value)}
+                            placeholder="Örn: Mevcut düzeni güçlendirmek için iyi bir hafta."
+                            className="mb-3 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm min-h-[60px] resize-y"
+                          />
+                          <span className="text-xs text-gray-500 mr-2">Yıldız:</span>
+                          <StarInput value={data.work} onChange={(v) => update("work", v)} />
+                        </div>
+                        <div className="rounded-xl border-2 border-gray-200 bg-gray-50/50 p-4">
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Para</label>
+                          <textarea
+                            value={data.moneyText}
+                            onChange={(e) => update("moneyText", e.target.value)}
+                            placeholder="Örn: Planlama için uygun, ani riskten kaçın."
+                            className="mb-3 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm min-h-[60px] resize-y"
+                          />
+                          <span className="text-xs text-gray-500 mr-2">Yıldız:</span>
+                          <StarInput value={data.money} onChange={(v) => update("money", v)} />
+                        </div>
+                        <div className="rounded-xl border-2 border-gray-200 bg-gray-50/50 p-4">
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Sağlık</label>
+                          <textarea
+                            value={data.healthText}
+                            onChange={(e) => update("healthText", e.target.value)}
+                            placeholder="Örn: Boyun-omuz gerginliğine dikkat."
+                            className="mb-3 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm min-h-[60px] resize-y"
+                          />
+                          <span className="text-xs text-gray-500 mr-2">Yıldız:</span>
+                          <StarInput value={data.health} onChange={(v) => update("health", v)} />
+                        </div>
                       </div>
                     </div>
 

@@ -3,9 +3,8 @@ import { getWeekRange } from "@/data/weeklyHoroscope";
 
 /** Günlük burç yorumunu tarihe göre getir */
 export async function getDailyHoroscope(zodiacId: string, date: Date = new Date()) {
-  const dateOnly = new Date(date);
-  dateOnly.setHours(0, 0, 0, 0);
-  
+  const dateOnly = toDateOnly(date);
+
   return prisma.dailyHoroscope.findFirst({
     where: {
       zodiacId: zodiacId.toLowerCase(),
@@ -18,8 +17,7 @@ export async function getDailyHoroscope(zodiacId: string, date: Date = new Date(
 /** Tüm burçlar için bugünün günlük yorumlarını getir. Tablo yoksa veya hata olursa boş dizi (build/CI uyumlu). */
 export async function getAllDailyHoroscopes(date: Date = new Date()) {
   try {
-    const dateOnly = new Date(date);
-    dateOnly.setHours(0, 0, 0, 0);
+    const dateOnly = toDateOnly(date);
     return prisma.dailyHoroscope.findMany({
       where: { date: dateOnly },
       include: { zodiac: true },
@@ -61,25 +59,37 @@ export async function getAllWeeklyHoroscopes(date: Date = new Date()) {
   }
 }
 
+/** Tarihi takvim günü olarak UTC'de normalize eder (timezone hatası önlenir). */
+function toDateOnly(date: Date | string): Date {
+  if (typeof date === "string") {
+    const [y, m, d] = date.split("-").map(Number);
+    return new Date(Date.UTC(y, (m ?? 1) - 1, d ?? 1));
+  }
+  const y = date.getUTCFullYear();
+  const m = date.getUTCMonth();
+  const d = date.getUTCDate();
+  return new Date(Date.UTC(y, m, d));
+}
+
 /** Günlük burç yorumu oluştur veya güncelle */
 export async function upsertDailyHoroscope(
   zodiacId: string,
-  date: Date,
+  date: Date | string,
   text: string
 ) {
-  const dateOnly = new Date(date);
-  dateOnly.setHours(0, 0, 0, 0);
-  
+  const dateOnly = toDateOnly(date);
+  const id = zodiacId.toLowerCase().trim();
+
   return prisma.dailyHoroscope.upsert({
     where: {
       zodiacId_date: {
-        zodiacId: zodiacId.toLowerCase(),
+        zodiacId: id,
         date: dateOnly,
       },
     },
     update: { text, updatedAt: new Date() },
     create: {
-      zodiacId: zodiacId.toLowerCase(),
+      zodiacId: id,
       date: dateOnly,
       text,
     },

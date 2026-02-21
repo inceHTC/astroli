@@ -1,0 +1,10 @@
+-- AlterTable
+ALTER TABLE "Article" ADD COLUMN     "featured" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "readTime" INTEGER,
+ADD COLUMN     "toc" JSONB,
+ALTER COLUMN "image" DROP NOT NULL,
+ALTER COLUMN "excerpt" DROP NOT NULL,
+ALTER COLUMN "content" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "Celebrity" ALTER COLUMN "updatedAt" DROP DEFAULT;

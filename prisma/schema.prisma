@@ -1,0 +1,163 @@
+// Astroli - Railway PostgreSQL
+// https://docs.railway.app/databases/postgresql
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ========== ADMIN ==========
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ========== ZODIAC & HOROSCOPE ==========
+model Zodiac {
+  id        String   @id
+  slug      String   @unique
+  name      String
+  nameTr    String
+  symbol    String
+  element   String
+  dates     String
+  overview  String
+  strengths String[]
+  weaknesses String[]
+  loveStyle String
+  career    String
+  money     String
+  published Boolean  @default(true)
+  weekly    WeeklyHoroscope[]
+  daily     DailyHoroscope[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DailyHoroscope {
+  id        String   @id @default(uuid())
+  zodiacId  String
+  date      DateTime @db.Date
+  text      String   @db.Text
+  zodiac    Zodiac   @relation(fields: [zodiacId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([zodiacId, date])
+  @@index([date])
+}
+
+model WeeklyHoroscope {
+  id        String   @id @default(uuid())
+  zodiacId  String
+  weekStart DateTime @db.Date
+  weekEnd   DateTime @db.Date
+  health    Int      // 1-5 yıldız
+  love      Int      // 1-5 yıldız
+  money     Int      // 1-5 yıldız
+  work      Int      // 1-5 yıldız
+  summary   String   @db.Text
+  advice    String   @db.Text
+  zodiac    Zodiac   @relation(fields: [zodiacId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([zodiacId, weekStart])
+  @@index([weekStart, weekEnd])
+}
+
+// ========== DERGI (Editorial) ==========
+model Article {
+  id        String   @id @default(uuid())
+  title     String
+  slug      String   @unique
+  tag       String
+  image     String?
+  excerpt   String?
+  content   String   @db.Text
+  readTime  Int?
+  toc       Json?    // Table of contents: { id, text, level }[]
+  published Boolean  @default(false)
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ========== PERSONALITY TESTS ==========
+model Test {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  description String
+  duration    String
+  image       String?
+  category    String?
+  published   Boolean  @default(false)
+  questions   Question[]
+  results     TestResult[]
+  completions TestCompletion[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Question {
+  id       String  @id @default(uuid())
+  testId   String
+  text     String
+  order    Int
+  test     Test    @relation(fields: [testId], references: [id], onDelete: Cascade)
+  options  Option[]
+}
+
+model Option {
+  id         String   @id @default(uuid())
+  questionId String
+  text       String
+  order      Int
+  weights    Json     // { fire: number, earth: number, air: number, water: number }
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+model TestResult {
+  id           String   @id @default(uuid())
+  testId       String
+  primaryKey   String   // fire | earth | air | water
+  minScore     Int
+  maxScore     Int
+  primaryLabel String
+  description  String
+  subtitle     String?
+  strengths    Json?    // string[]
+  shadowSide   String
+  elementData  Json     // Record<string, number>
+  test         Test     @relation(fields: [testId], references: [id], onDelete: Cascade)
+}
+
+model TestCompletion {
+  id        String   @id @default(uuid())
+  testId    String
+  device    String?
+  createdAt DateTime @default(now())
+  test      Test     @relation(fields: [testId], references: [id], onDelete: Cascade)
+}
+
+model Celebrity {
+  id        String    @id @default(uuid())
+  name      String
+  slug      String    @unique
+  job       String
+  zodiac    String
+  image     String?
+  birthDate DateTime?
+  bio       String?
+  featured  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}

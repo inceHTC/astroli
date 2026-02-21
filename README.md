@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Astroli 🌌
 
-## Getting Started
+Modern, mobil öncelikli astroloji kişilik platformu.
 
-First, run the development server:
+## Özellikler
+
+- **Burç Hesaplayıcı** – Güneş, yükselen ve ay burcu
+- **Kişilik Testleri** – Element keşif testi (veri tabanlı, ölçeklenebilir)
+- **Burç Uyumluluğu** – İki doğum tarihi ile uyum skoru
+- **Zodyak Kütüphanesi** – 12 burç için SEO optimize sayfalar
+- **Dergi** – Magazin tarzı içerikler
+- **Paylaşım Kartları** – 1080x1920 story formatında indirme/paylaşım
+
+## Teknoloji
+
+- **Next.js 16** (App Router)
+- **TypeScript**
+- **Tailwind CSS 4**
+- **html-to-image** – Share kartı oluşturma
+
+## Kurulum
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tarayıcıda [http://localhost:3000](http://localhost:3000) adresini aç.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Proje Yapısı
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/              # Next.js App Router sayfaları
+│   ├── burc-hesapla/
+│   ├── burc/[sign]/  # Burç detay sayfaları
+│   ├── burclar/
+│   ├── dergi/        # Magazine içerikleri
+│   ├── test/[slug]/  # Kişilik testleri
+│   ├── testler/
+│   └── uyumluluk/
+├── components/
+│   ├── layout/
+│   ├── share/
+│   └── ui/
+├── data/             # Zodiac, test verileri
+└── lib/              # Astroloji hesaplamaları
+```
 
-## Learn More
+## Sonraki Adımlar (Phase 2)
 
-To learn more about Next.js, take a look at the following resources:
+- [ ] Admin paneli (test/burç/içerik yönetimi)
+- [ ] Veritabanı entegrasyonu
+- [ ] Kullanıcı hesapları (opsiyonel)
+- [ ] Tam doğum haritası (ephemeris)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tasarım
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Derin lacivert arka plan (#0a0e1a)
+- Violet/fuchsia gradient aksanlar
+- Mobil öncelikli, single column
+- Premium app hissi

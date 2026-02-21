@@ -23,24 +23,21 @@ function StarInput({ value, onChange }: { value: number; onChange: (v: number) =
   );
 }
 
+type WeeklyHoroscopeEntry = {
+  health: number;
+  love: number;
+  money: number;
+  work: number;
+  summary: string;
+  advice: string;
+};
+
 export function WeeklyHoroscopeClient() {
   const [selectedWeek, setSelectedWeek] = useState(() => {
     const { start } = getWeekRange(new Date());
     return format(start, "yyyy-MM-dd");
   });
-  const [horoscopes, setHoroscopes] = useState<
-    Record<
-      string,
-      {
-        health: number;
-        love: number;
-        money: number;
-        work: number;
-        summary: string;
-        advice: string;
-      }
-    >
-  >({});
+  const [horoscopes, setHoroscopes] = useState<Record<string, WeeklyHoroscopeEntry>>({});
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
@@ -58,18 +55,26 @@ export function WeeklyHoroscopeClient() {
         `/api/admin/horoscope/weekly?weekStart=${format(weekStart, "yyyy-MM-dd")}&weekEnd=${format(end, "yyyy-MM-dd")}`
       );
       if (res.ok) {
-        const data = await res.json();
-        const map: Record<string, any> = {};
-        data.forEach((h: any) => {
+        const data = (await res.json()) as Array<{
+          zodiacId: string;
+          health?: number;
+          love?: number;
+          money?: number;
+          work?: number;
+          summary?: string;
+          advice?: string;
+        }>;
+        const map: Record<string, WeeklyHoroscopeEntry> = {};
+        for (const h of Array.isArray(data) ? data : []) {
           map[h.zodiacId] = {
             health: h.health ?? 3,
             love: h.love ?? 3,
             money: h.money ?? 3,
             work: h.work ?? 3,
-            summary: h.summary || "",
-            advice: h.advice || "",
+            summary: h.summary ?? "",
+            advice: h.advice ?? "",
           };
-        });
+        }
         setHoroscopes(map);
       }
     } catch (err) {

@@ -102,9 +102,8 @@ export function legacyBlocksToHtml(content: string): string {
       if (t === "paragraph" && "text" in b) {
         parts.push(`<p>${escapeHtml(String((b as { text: unknown }).text))}</p>`);
       } else if (t === "heading" && "text" in b) {
-        const level = [2, 3].includes(Number((b as { level?: unknown }).level))
-          ? Number((b as { level: unknown }).level)
-          : 2;
+        const levelVal = (b as unknown as { level?: unknown }).level;
+        const level = [2, 3].includes(Number(levelVal)) ? Number(levelVal) : 2;
         parts.push(`<h${level}>${escapeHtml(String((b as { text: unknown }).text))}</h${level}>`);
       } else if (t === "bulletList" && "items" in b) {
         const items = Array.isArray((b as { items: unknown }).items)

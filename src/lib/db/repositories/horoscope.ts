@@ -15,16 +15,19 @@ export async function getDailyHoroscope(zodiacId: string, date: Date = new Date(
   });
 }
 
-/** Tüm burçlar için bugünün günlük yorumlarını getir */
+/** Tüm burçlar için bugünün günlük yorumlarını getir. Tablo yoksa veya hata olursa boş dizi (build/CI uyumlu). */
 export async function getAllDailyHoroscopes(date: Date = new Date()) {
-  const dateOnly = new Date(date);
-  dateOnly.setHours(0, 0, 0, 0);
-  
-  return prisma.dailyHoroscope.findMany({
-    where: { date: dateOnly },
-    include: { zodiac: true },
-    orderBy: { zodiac: { id: "asc" } },
-  });
+  try {
+    const dateOnly = new Date(date);
+    dateOnly.setHours(0, 0, 0, 0);
+    return prisma.dailyHoroscope.findMany({
+      where: { date: dateOnly },
+      include: { zodiac: true },
+      orderBy: { zodiac: { id: "asc" } },
+    });
+  } catch {
+    return [];
+  }
 }
 
 /** Haftalık burç yorumunu hafta aralığına göre getir */
@@ -41,18 +44,21 @@ export async function getWeeklyHoroscope(zodiacId: string, date: Date = new Date
   });
 }
 
-/** Tüm burçlar için bu haftanın yorumlarını getir */
+/** Tüm burçlar için bu haftanın yorumlarını getir. Tablo yoksa veya hata olursa boş dizi (build/CI uyumlu). */
 export async function getAllWeeklyHoroscopes(date: Date = new Date()) {
-  const { start, end } = getWeekRange(date);
-  
-  return prisma.weeklyHoroscope.findMany({
-    where: {
-      weekStart: { lte: end },
-      weekEnd: { gte: start },
-    },
-    include: { zodiac: true },
-    orderBy: { zodiac: { id: "asc" } },
-  });
+  try {
+    const { start, end } = getWeekRange(date);
+    return prisma.weeklyHoroscope.findMany({
+      where: {
+        weekStart: { lte: end },
+        weekEnd: { gte: start },
+      },
+      include: { zodiac: true },
+      orderBy: { zodiac: { id: "asc" } },
+    });
+  } catch {
+    return [];
+  }
 }
 
 /** Günlük burç yorumu oluştur veya güncelle */

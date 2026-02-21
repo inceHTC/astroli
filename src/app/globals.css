@@ -185,11 +185,16 @@
 .editorial tbody tr:nth-child(even) {
   background: rgba(0, 0, 0, 0.02);
 }
+/* Makale içi görseller: en fazla 640px, küçük ekranda %100 */
 .editorial img {
-  max-width: 100%;
+  max-width: min(100%, 640px);
+  max-height: 480px;
+  width: auto;
   height: auto;
+  object-fit: contain;
   border-radius: var(--radius-md);
   margin: 1.5rem 0;
+  display: block;
 }
 .editorial figure {
   margin: 2rem 0;

@@ -48,6 +48,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    type DailyEntry = { zodiacId?: string; text?: string };
     let body: { date?: string; horoscopes?: unknown[] };
     try {
       body = await request.json();
@@ -64,7 +65,7 @@ export async function POST(request: NextRequest) {
 
     await ensureZodiacSignsExist();
 
-    for (const h of horoscopes) {
+    for (const h of horoscopes as DailyEntry[]) {
       if (h.zodiacId && typeof h.text === "string") {
         try {
           await upsertDailyHoroscope(h.zodiacId, dateStr, h.text.trim());

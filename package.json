@@ -10,7 +10,11 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "db:remove-duplicate-celebrities": "tsx prisma/remove-duplicate-celebrities.ts",
+    "db:add-100-celebrities": "tsx prisma/add-100-celebrities.ts",
+    "db:add-100-celebrities-batch2": "tsx prisma/add-100-celebrities-batch2.ts",
+    "db:add-26-celebrities": "tsx prisma/add-26-celebrities.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     description: defaultDescription,
     images: [
       {
-        url: "/logo.png",
+        url: `${getBaseUrl()}/logo.png`,
         width: 512,
         height: 512,
         alt: siteName,
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
-    images: ["/logo.png"],
+    images: [`${getBaseUrl()}/logo.png`],
   },
   robots: {
     index: true,

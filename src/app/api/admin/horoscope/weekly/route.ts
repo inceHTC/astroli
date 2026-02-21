@@ -45,7 +45,24 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const body = await request.json();
+    type WeeklyBody = {
+      weekStart?: string;
+      weekEnd?: string;
+      horoscopes?: Array<{
+        zodiacId?: string;
+        health?: number;
+        love?: number;
+        money?: number;
+        work?: number;
+        healthText?: string | null;
+        loveText?: string | null;
+        moneyText?: string | null;
+        workText?: string | null;
+        summary?: string;
+        advice?: string;
+      }>;
+    };
+    const body = (await request.json()) as WeeklyBody;
     const { weekStart, weekEnd, horoscopes } = body;
 
     if (!weekStart || !weekEnd || !Array.isArray(horoscopes)) {

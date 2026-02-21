@@ -9,6 +9,7 @@ const SIDEBAR_LINKS = [
   { href: "/admin/zodiac", label: "Burçlar", icon: "♈" },
   { href: "/admin/horoscope/daily", label: "Günlük Burç", icon: "☀️" },
   { href: "/admin/horoscope/weekly", label: "Haftalık Burç", icon: "📅" },
+  { href: "/admin/cosmic-energy", label: "Kozmik Enerji", icon: "☄" },
   { href: "/admin/articles", label: "Dergi", icon: "◇" },
   { href: "/admin/celebrities", label: "Ünlüler", icon: "★" },
 ];

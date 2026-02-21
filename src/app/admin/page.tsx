@@ -50,21 +50,21 @@ export default async function AdminDashboard() {
           <Link
             href={`/test/${SAMPLE_TEST.slug}`}
             target="_blank"
-            className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-400 hover:bg-white/10 hover:text-white"
+            className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-400 hover:bg-white/10 hover:text-blue-900"
           >
             Test Önizleme
           </Link>
           <Link
             href="/burclar"
             target="_blank"
-            className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-400 hover:bg-white/10 hover:text-white"
+            className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-400 hover:bg-white/10 hover:text-blue-900"
           >
             Burçlar
           </Link>
           <Link
             href="/dergi"
             target="_blank"
-            className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-400 hover:bg-white/10 hover:text-white"
+            className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-400 hover:bg-white/10 hover:text-blue-900"
           >
             Dergi
           </Link>

@@ -77,6 +77,30 @@ model WeeklyHoroscope {
   @@index([weekStart, weekEnd])
 }
 
+// Haftalık kozmik enerji (dergi) – hafta bazlı tek kayıt
+model WeeklyCosmicEnergy {
+  id             String   @id @default(uuid())
+  weekStart      DateTime @unique @db.Date
+  weekEnd        DateTime @db.Date
+  generalEnergy  String   @db.Text // Bu Haftanın Genel Enerjisi
+  elementFire    String   @db.Text
+  elementEarth   String   @db.Text
+  elementAir     String   @db.Text
+  elementWater   String   @db.Text
+  planetMercury  String   @db.Text
+  planetVenus    String   @db.Text
+  planetMars     String   @db.Text
+  advice         String   @db.Text // Genel tavsiyeler (madde madde, newline ile ayrılabilir)
+  overviewFire   String   @db.Text // Ateş burçları için kısa metin
+  overviewEarth  String   @db.Text
+  overviewAir    String   @db.Text
+  overviewWater  String   @db.Text
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([weekStart])
+}
+
 // ========== DERGI (Editorial) ==========
 model Article {
   id        String   @id @default(uuid())

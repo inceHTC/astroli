@@ -29,11 +29,12 @@ export const metadata = {
     "12 burcun günlük yorumları. Bugün burcunuz ne söylüyor? Genel rehber niteliğinde günlük burç değerlendirmeleri.",
 };
 
-type PageProps = { searchParams?: Promise<Record<string, string | string[] | undefined>> };
+type SearchParams = Record<string, string | string[] | undefined>;
+type PageProps = { searchParams?: Promise<SearchParams> };
 
 export default async function GunlukBurcPage(props: PageProps) {
-  const searchParams = await (props.searchParams ?? Promise.resolve({}));
-  const tarih = typeof searchParams?.tarih === "string" ? searchParams.tarih : null;
+  const searchParams: SearchParams = await (props.searchParams ?? Promise.resolve({} as SearchParams));
+  const tarih = typeof searchParams.tarih === "string" ? searchParams.tarih : null;
   const currentDate = parseDateParam(tarih);
 
   const [dailies, availableDates] = await Promise.all([

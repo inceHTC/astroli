@@ -92,12 +92,12 @@ export default async function DergiArticlePage({
         </header>
 
         {article.image && (
-          <div className="editorial-cover mb-14 overflow-hidden rounded-2xl">
+          <div className="editorial-cover editorial-cover--compact mb-14 overflow-hidden rounded-2xl">
             <Image
               src={article.image}
               alt={article.title}
-              width={1000}
-              height={650}
+              width={560}
+              height={360}
               className="w-full object-cover shadow-md"
               priority
             />

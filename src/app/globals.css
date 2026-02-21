@@ -185,12 +185,17 @@
 .editorial tbody tr:nth-child(even) {
   background: rgba(0, 0, 0, 0.02);
 }
-/* Makale içi görseller: 300x300 sınır */
-.editorial img {
-  max-width: 300px;
-  max-height: 300px;
-  width: auto;
-  height: auto;
+/* Makale kapak görseli: boyut sınırı, yazı ile sola hizalı */
+.editorial-cover--compact {
+  max-width: 560px;
+}
+
+/* Makale içi görseller: 250x250 sınır (HTML width/height attribute'larını ezmek için !important) */
+.article-content.editorial img {
+  max-width: 250px !important;
+  max-height: 250px !important;
+  width: auto !important;
+  height: auto !important;
   object-fit: contain;
   border-radius: var(--radius-md);
   margin: 1.5rem 0;

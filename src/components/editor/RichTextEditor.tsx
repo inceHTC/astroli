@@ -83,7 +83,7 @@ export function RichTextEditor({
 }
 
 function EditorToolbar({ editor }: { editor: Editor }) {
-  const button = (onClick: () => void, active?: boolean, label: string) => (
+  const button = (onClick: () => void, label: string, active?: boolean) => (
     <button
       type="button"
       onClick={onClick}
@@ -106,27 +106,27 @@ function EditorToolbar({ editor }: { editor: Editor }) {
 
   return (
     <div className="editor-toolbar sticky top-0 z-10 flex flex-wrap items-center gap-1 border-b border-gray-200 bg-gray-50/80 px-3 py-2 backdrop-blur-sm">
-      {button(() => editor.chain().focus().toggleBold().run(), editor.isActive("bold"), "Kalın")}
-      {button(() => editor.chain().focus().toggleItalic().run(), editor.isActive("italic"), "İtalik")}
-      {button(() => editor.chain().focus().toggleUnderline().run(), editor.isActive("underline"), "Altı çizili")}
+      {button(() => editor.chain().focus().toggleBold().run(), "Kalın", editor.isActive("bold"))}
+      {button(() => editor.chain().focus().toggleItalic().run(), "İtalik", editor.isActive("italic"))}
+      {button(() => editor.chain().focus().toggleUnderline().run(), "Altı çizili", editor.isActive("underline"))}
       <span className="mx-1 h-5 w-px bg-gray-300" />
-      {button(() => editor.chain().focus().toggleHeading({ level: 1 }).run(), editor.isActive("heading", { level: 1 }), "H1")}
-      {button(() => editor.chain().focus().toggleHeading({ level: 2 }).run(), editor.isActive("heading", { level: 2 }), "H2")}
-      {button(() => editor.chain().focus().toggleHeading({ level: 3 }).run(), editor.isActive("heading", { level: 3 }), "H3")}
+      {button(() => editor.chain().focus().toggleHeading({ level: 1 }).run(), "H1", editor.isActive("heading", { level: 1 }))}
+      {button(() => editor.chain().focus().toggleHeading({ level: 2 }).run(), "H2", editor.isActive("heading", { level: 2 }))}
+      {button(() => editor.chain().focus().toggleHeading({ level: 3 }).run(), "H3", editor.isActive("heading", { level: 3 }))}
       <span className="mx-1 h-5 w-px bg-gray-300" />
-      {button(() => editor.chain().focus().toggleBulletList().run(), editor.isActive("bulletList"), "Liste")}
-      {button(() => editor.chain().focus().toggleOrderedList().run(), editor.isActive("orderedList"), "Numara")}
-      {button(() => editor.chain().focus().toggleBlockquote().run(), editor.isActive("blockquote"), "Alıntı")}
-      {button(() => editor.chain().focus().toggleCodeBlock().run(), editor.isActive("codeBlock"), "Kod")}
-      {button(() => editor.chain().focus().setHorizontalRule().run(), false, "Çizgi")}
+      {button(() => editor.chain().focus().toggleBulletList().run(), "Liste", editor.isActive("bulletList"))}
+      {button(() => editor.chain().focus().toggleOrderedList().run(), "Numara", editor.isActive("orderedList"))}
+      {button(() => editor.chain().focus().toggleBlockquote().run(), "Alıntı", editor.isActive("blockquote"))}
+      {button(() => editor.chain().focus().toggleCodeBlock().run(), "Kod", editor.isActive("codeBlock"))}
+      {button(() => editor.chain().focus().setHorizontalRule().run(), "Çizgi", false)}
       <span className="mx-1 h-5 w-px bg-gray-300" />
-      {button(setLink, editor.isActive("link"), "Link")}
-      {button(addImage, false, "Görsel")}
-      {button(() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run(), false, "Tablo")}
+      {button(setLink, "Link", editor.isActive("link"))}
+      {button(addImage, "Görsel", false)}
+      {button(() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run(), "Tablo", false)}
       <span className="mx-1 h-5 w-px bg-gray-300" />
-      {button(() => editor.chain().focus().setTextAlign("left").run(), editor.isActive({ textAlign: "left" }), "Sol")}
-      {button(() => editor.chain().focus().setTextAlign("center").run(), editor.isActive({ textAlign: "center" }), "Orta")}
-      {button(() => editor.chain().focus().setTextAlign("right").run(), editor.isActive({ textAlign: "right" }), "Sağ")}
+      {button(() => editor.chain().focus().setTextAlign("left").run(), "Sol", editor.isActive({ textAlign: "left" }))}
+      {button(() => editor.chain().focus().setTextAlign("center").run(), "Orta", editor.isActive({ textAlign: "center" }))}
+      {button(() => editor.chain().focus().setTextAlign("right").run(), "Sağ", editor.isActive({ textAlign: "right" }))}
     </div>
   );
 }

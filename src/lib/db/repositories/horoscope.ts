@@ -28,6 +28,36 @@ export async function getAllDailyHoroscopes(date: Date = new Date()) {
   }
 }
 
+/** Admin API için: Zodiac join olmadan sadece günlük yorumları getirir (FK/join hatası riski yok). */
+export async function getDailyHoroscopesForAdmin(date: Date | string) {
+  try {
+    const dateOnly = toDateOnly(date);
+    return prisma.dailyHoroscope.findMany({
+      where: { date: dateOnly },
+      select: { zodiacId: true, text: true, date: true },
+      orderBy: { zodiacId: "asc" },
+    });
+  } catch (e) {
+    console.error("getDailyHoroscopesForAdmin error:", e);
+    return [];
+  }
+}
+
+/** Arşiv için: Yorum girilmiş tarihleri (en yeniden eskiye) döner. */
+export async function getDailyHoroscopeAvailableDates(limit = 60): Promise<string[]> {
+  try {
+    const rows = await prisma.dailyHoroscope.findMany({
+      select: { date: true },
+      orderBy: { date: "desc" },
+      distinct: ["date"],
+      take: limit,
+    });
+    return rows.map((r) => r.date.toISOString().slice(0, 10));
+  } catch {
+    return [];
+  }
+}
+
 /** Haftalık burç yorumunu hafta aralığına göre getir */
 export async function getWeeklyHoroscope(zodiacId: string, date: Date = new Date()) {
   const { start, end } = getWeekRange(date);

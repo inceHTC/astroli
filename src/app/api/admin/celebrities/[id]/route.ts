@@ -60,7 +60,8 @@ export async function PATCH(
       }
     }
     const birthDate = parsed.data.birthDate !== undefined ? parseBirthDate(parsed.data.birthDate) : undefined;
-    const updateData: Parameters<typeof updateCelebrity>[1] = { ...parsed.data };
+    const { birthDate: _bd, ...rest } = parsed.data;
+    const updateData: Parameters<typeof updateCelebrity>[1] = { ...rest };
     if (birthDate !== undefined) updateData.birthDate = birthDate;
     const updated = await updateCelebrity(id, updateData);
     return NextResponse.json(updated);

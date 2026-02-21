@@ -28,6 +28,10 @@ type WeeklyHoroscopeEntry = {
   love: number;
   money: number;
   work: number;
+  healthText: string;
+  loveText: string;
+  moneyText: string;
+  workText: string;
   summary: string;
   advice: string;
 };
@@ -61,6 +65,10 @@ export function WeeklyHoroscopeClient() {
           love?: number;
           money?: number;
           work?: number;
+          healthText?: string;
+          loveText?: string;
+          moneyText?: string;
+          workText?: string;
           summary?: string;
           advice?: string;
         }>;
@@ -71,6 +79,10 @@ export function WeeklyHoroscopeClient() {
             love: h.love ?? 3,
             money: h.money ?? 3,
             work: h.work ?? 3,
+            healthText: h.healthText ?? "",
+            loveText: h.loveText ?? "",
+            moneyText: h.moneyText ?? "",
+            workText: h.workText ?? "",
             summary: h.summary ?? "",
             advice: h.advice ?? "",
           };
@@ -151,95 +163,87 @@ export function WeeklyHoroscopeClient() {
                 love: 3,
                 money: 3,
                 work: 3,
+                healthText: "",
+                loveText: "",
+                moneyText: "",
+                workText: "",
                 summary: "",
                 advice: "",
               };
+              const update = (key: keyof WeeklyHoroscopeEntry, value: string | number) =>
+                setHoroscopes((prev) => ({
+                  ...prev,
+                  [sign.id]: { ...(prev[sign.id] || data), [key]: value },
+                }));
               return (
                 <div key={sign.id} className="rounded-lg border border-gray-200 p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">
                     {sign.nameTr} ({sign.dates})
                   </h3>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
-                    <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-2">Sağlık</label>
-                      <StarInput
-                        value={data.health}
-                        onChange={(v) =>
-                          setHoroscopes((prev) => ({
-                            ...prev,
-                            [sign.id]: { ...prev[sign.id] || data, health: v },
-                          }))
-                        }
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-2">Aşk</label>
-                      <StarInput
-                        value={data.love}
-                        onChange={(v) =>
-                          setHoroscopes((prev) => ({
-                            ...prev,
-                            [sign.id]: { ...prev[sign.id] || data, love: v },
-                          }))
-                        }
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-2">Para</label>
-                      <StarInput
-                        value={data.money}
-                        onChange={(v) =>
-                          setHoroscopes((prev) => ({
-                            ...prev,
-                            [sign.id]: { ...prev[sign.id] || data, money: v },
-                          }))
-                        }
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-2">İş</label>
-                      <StarInput
-                        value={data.work}
-                        onChange={(v) =>
-                          setHoroscopes((prev) => ({
-                            ...prev,
-                            [sign.id]: { ...prev[sign.id] || data, work: v },
-                          }))
-                        }
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Genel Değerlendirme
                       </label>
                       <textarea
                         value={data.summary}
-                        onChange={(e) =>
-                          setHoroscopes((prev) => ({
-                            ...prev,
-                            [sign.id]: { ...prev[sign.id] || data, summary: e.target.value },
-                          }))
-                        }
-                        placeholder="Bu hafta için genel değerlendirme..."
+                        onChange={(e) => update("summary", e.target.value)}
+                        placeholder="İstikrar ihtiyacın artıyor. Maddi ve duygusal güven teması ön planda..."
                         className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm min-h-[80px] resize-y"
                       />
                     </div>
+
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="rounded-lg border border-gray-100 p-3">
+                        <label className="block text-xs font-medium text-gray-600 mb-2">Aşk</label>
+                        <textarea
+                          value={data.loveText}
+                          onChange={(e) => update("loveText", e.target.value)}
+                          placeholder="Kısa yorum, örn: Ciddi konuşmalar gündeme gelebilir."
+                          className="w-full rounded border border-gray-200 px-2 py-1.5 text-sm min-h-[48px] resize-y mb-2"
+                        />
+                        <StarInput value={data.love} onChange={(v) => update("love", v)} />
+                      </div>
+                      <div className="rounded-lg border border-gray-100 p-3">
+                        <label className="block text-xs font-medium text-gray-600 mb-2">İş</label>
+                        <textarea
+                          value={data.workText}
+                          onChange={(e) => update("workText", e.target.value)}
+                          placeholder="Kısa yorum, örn: Mevcut düzeni güçlendirmek için iyi bir hafta."
+                          className="w-full rounded border border-gray-200 px-2 py-1.5 text-sm min-h-[48px] resize-y mb-2"
+                        />
+                        <StarInput value={data.work} onChange={(v) => update("work", v)} />
+                      </div>
+                      <div className="rounded-lg border border-gray-100 p-3">
+                        <label className="block text-xs font-medium text-gray-600 mb-2">Para</label>
+                        <textarea
+                          value={data.moneyText}
+                          onChange={(e) => update("moneyText", e.target.value)}
+                          placeholder="Kısa yorum, örn: Planlama için uygun, ani riskten kaçın."
+                          className="w-full rounded border border-gray-200 px-2 py-1.5 text-sm min-h-[48px] resize-y mb-2"
+                        />
+                        <StarInput value={data.money} onChange={(v) => update("money", v)} />
+                      </div>
+                      <div className="rounded-lg border border-gray-100 p-3">
+                        <label className="block text-xs font-medium text-gray-600 mb-2">Sağlık</label>
+                        <textarea
+                          value={data.healthText}
+                          onChange={(e) => update("healthText", e.target.value)}
+                          placeholder="Kısa yorum, örn: Boyun-omuz gerginliğine dikkat."
+                          className="w-full rounded border border-gray-200 px-2 py-1.5 text-sm min-h-[48px] resize-y mb-2"
+                        />
+                        <StarInput value={data.health} onChange={(v) => update("health", v)} />
+                      </div>
+                    </div>
+
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Tavsiye</label>
                       <textarea
                         value={data.advice}
-                        onChange={(e) =>
-                          setHoroscopes((prev) => ({
-                            ...prev,
-                            [sign.id]: { ...prev[sign.id] || data, advice: e.target.value },
-                          }))
-                        }
-                        placeholder="Bu hafta için tavsiye..."
-                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm min-h-[80px] resize-y"
+                        onChange={(e) => update("advice", e.target.value)}
+                        placeholder="Kontrol edemediğini zorlamak yerine sağlam olanı büyüt."
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm min-h-[60px] resize-y"
                       />
                     </div>
                   </div>

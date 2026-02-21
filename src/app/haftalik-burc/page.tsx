@@ -15,12 +15,12 @@ const ELEMENT_COLORS: Record<string, string> = {
   water: "border-blue-200 bg-blue-50/30",
 };
 
-const CATEGORY_LABELS: Record<string, string> = {
-  health: "Sağlık",
-  love: "Aşk",
-  money: "Para",
-  work: "İş",
-};
+const CATEGORY_ORDER: { key: "love" | "work" | "money" | "health"; label: string }[] = [
+  { key: "love", label: "Aşk" },
+  { key: "work", label: "İş" },
+  { key: "money", label: "Para" },
+  { key: "health", label: "Sağlık" },
+];
 
 function StarRating({ value }: { value: number }) {
   return (
@@ -46,36 +46,47 @@ export const metadata = {
 export default async function HaftalikBurcPage() {
   const { start, end } = getWeekRange(new Date());
 
-  // Database'den bu haftanın yorumlarını çek, yoksa static data kullan
-  const dbHoroscopes: Record<string, typeof WEEKLY_CONTENT.aries> = {};
+  type WeeklyEntry = {
+    health: number;
+    love: number;
+    money: number;
+    work: number;
+    healthText: string;
+    loveText: string;
+    moneyText: string;
+    workText: string;
+    summary: string;
+    advice: string;
+  };
+
+  const dbHoroscopes: Record<string, WeeklyEntry> = {};
   try {
     const weeklies = await getAllWeeklyHoroscopes(new Date());
     weeklies.forEach((h) => {
-      // Database'den gelen değerleri kontrol et ve dönüştür
-      // Prisma'dan gelen değerler number | null olabilir
-      // Type assertion kullanarak Prisma tipini kullanıyoruz
-      const horoscope = h as unknown as {
+      const row = h as unknown as {
         zodiacId: string;
         health: number | null;
         love: number | null;
         money: number | null;
         work: number | null;
+        healthText: string | null;
+        loveText: string | null;
+        moneyText: string | null;
+        workText: string | null;
         summary: string | null;
         advice: string | null;
       };
-      
-      const health = horoscope.health != null ? horoscope.health : 3;
-      const love = horoscope.love != null ? horoscope.love : 3;
-      const money = horoscope.money != null ? horoscope.money : 3;
-      const work = horoscope.work != null ? horoscope.work : 3;
-      
-      dbHoroscopes[horoscope.zodiacId.toLowerCase()] = {
-        health,
-        love,
-        money,
-        work,
-        summary: horoscope.summary || "",
-        advice: horoscope.advice || "",
+      dbHoroscopes[row.zodiacId.toLowerCase()] = {
+        health: row.health ?? 3,
+        love: row.love ?? 3,
+        money: row.money ?? 3,
+        work: row.work ?? 3,
+        healthText: row.healthText ?? "",
+        loveText: row.loveText ?? "",
+        moneyText: row.moneyText ?? "",
+        workText: row.workText ?? "",
+        summary: row.summary ?? "",
+        advice: row.advice ?? "",
       };
     });
   } catch {
@@ -105,8 +116,22 @@ export default async function HaftalikBurcPage() {
         <Container size="lg">
           <div className="space-y-10">
             {ZODIAC_SIGNS.map((sign) => {
-              // Önce database'den, yoksa static data'dan
-              const content = dbHoroscopes[sign.id] || WEEKLY_CONTENT[sign.id as ZodiacSign];
+              const fromDb = dbHoroscopes[sign.id];
+              const fallback = WEEKLY_CONTENT[sign.id as ZodiacSign];
+              const content: WeeklyEntry = fromDb
+                ? fromDb
+                : {
+                    health: fallback.health,
+                    love: fallback.love,
+                    money: fallback.money,
+                    work: fallback.work,
+                    healthText: "",
+                    loveText: "",
+                    moneyText: "",
+                    workText: "",
+                    summary: fallback.summary,
+                    advice: fallback.advice,
+                  };
               const colorClass = ELEMENT_COLORS[sign.element] ?? "border-gray-200 bg-gray-50/30";
               return (
                 <article
@@ -130,23 +155,31 @@ export default async function HaftalikBurcPage() {
                     </Link>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-                    {(["health", "love", "money", "work"] as const).map((key) => (
-                      <div key={key} className="flex flex-col gap-1">
-                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          {CATEGORY_LABELS[key]}
-                        </span>
-                        <StarRating value={content[key]} />
-                      </div>
-                    ))}
-                  </div>
-
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-sm font-semibold text-gray-700 mb-2">Genel değerlendirme</h3>
+                      <h3 className="text-sm font-semibold text-gray-700 mb-2">Genel Değerlendirme</h3>
                       <p className="text-gray-700 leading-relaxed">{content.summary}</p>
                     </div>
-                    <div className="rounded-xl bg-white/80 p-4 border border-gray-100">
+
+                    {CATEGORY_ORDER.map(({ key, label }) => {
+                      const text =
+                        key === "love"
+                          ? content.loveText
+                          : key === "work"
+                            ? content.workText
+                            : key === "money"
+                              ? content.moneyText
+                              : content.healthText;
+                      return (
+                        <div key={key} className="flex flex-wrap items-baseline gap-2">
+                          <span className="text-sm font-semibold text-gray-700">{label}:</span>
+                          {text && <span className="text-gray-700">{text}</span>}
+                          <StarRating value={content[key]} />
+                        </div>
+                      );
+                    })}
+
+                    <div className="rounded-xl bg-white/80 p-4 border border-gray-100 mt-4">
                       <h3 className="text-sm font-semibold text-gray-700 mb-2">Tavsiye</h3>
                       <p className="text-gray-700 leading-relaxed">{content.advice}</p>
                     </div>

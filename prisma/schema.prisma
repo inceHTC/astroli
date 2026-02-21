@@ -55,19 +55,23 @@ model DailyHoroscope {
 }
 
 model WeeklyHoroscope {
-  id        String   @id @default(uuid())
-  zodiacId  String
-  weekStart DateTime @db.Date
-  weekEnd   DateTime @db.Date
-  health    Int      // 1-5 yıldız
-  love      Int      // 1-5 yıldız
-  money     Int      // 1-5 yıldız
-  work      Int      // 1-5 yıldız
-  summary   String   @db.Text
-  advice    String   @db.Text
-  zodiac    Zodiac   @relation(fields: [zodiacId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(uuid())
+  zodiacId   String
+  weekStart  DateTime @db.Date
+  weekEnd    DateTime @db.Date
+  health     Int      // 1-5 yıldız
+  love       Int      // 1-5 yıldız
+  money      Int      // 1-5 yıldız
+  work       Int      // 1-5 yıldız
+  healthText String?  @db.Text // Sağlık kısa yorum
+  loveText   String?  @db.Text // Aşk kısa yorum
+  moneyText  String?  @db.Text // Para kısa yorum
+  workText   String?  @db.Text // İş kısa yorum
+  summary    String   @db.Text
+  advice     String   @db.Text
+  zodiac     Zodiac   @relation(fields: [zodiacId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@unique([zodiacId, weekStart])
   @@index([weekStart, weekEnd])

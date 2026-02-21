@@ -136,6 +136,10 @@ export async function upsertWeeklyHoroscope(
     love: number;
     money: number;
     work: number;
+    healthText?: string | null;
+    loveText?: string | null;
+    moneyText?: string | null;
+    workText?: string | null;
     summary: string;
     advice: string;
   }
@@ -153,7 +157,16 @@ export async function upsertWeeklyHoroscope(
       },
     },
     update: {
-      ...data,
+      health: data.health,
+      love: data.love,
+      money: data.money,
+      work: data.work,
+      healthText: data.healthText ?? null,
+      loveText: data.loveText ?? null,
+      moneyText: data.moneyText ?? null,
+      workText: data.workText ?? null,
+      summary: data.summary,
+      advice: data.advice,
       weekEnd: end,
       updatedAt: new Date(),
     },
@@ -161,7 +174,16 @@ export async function upsertWeeklyHoroscope(
       zodiacId: zodiacId.toLowerCase(),
       weekStart: start,
       weekEnd: end,
-      ...data,
+      health: data.health,
+      love: data.love,
+      money: data.money,
+      work: data.work,
+      healthText: data.healthText ?? null,
+      loveText: data.loveText ?? null,
+      moneyText: data.moneyText ?? null,
+      workText: data.workText ?? null,
+      summary: data.summary,
+      advice: data.advice,
     },
   });
 }

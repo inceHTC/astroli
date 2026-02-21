@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useCallback } from "react";
 import { useEditor, EditorContent, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -83,6 +84,8 @@ export function RichTextEditor({
 }
 
 function EditorToolbar({ editor }: { editor: Editor }) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const button = (onClick: () => void, label: string, active?: boolean) => (
     <button
       type="button"
@@ -99,13 +102,41 @@ function EditorToolbar({ editor }: { editor: Editor }) {
     if (url) editor.chain().focus().setLink({ href: url }).run();
   };
 
-  const addImage = () => {
+  const addImageByUrl = () => {
     const url = window.prompt("Görsel URL:");
     if (url) editor.chain().focus().setImage({ src: url }).run();
   };
 
+  const uploadImage = useCallback(
+    async (file: File) => {
+      const form = new FormData();
+      form.append("file", file);
+      const res = await fetch("/api/admin/upload", { method: "POST", body: form });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.url) {
+        editor.chain().focus().setImage({ src: data.url }).run();
+      } else {
+        window.alert(data.error ?? "Görsel yüklenemedi.");
+      }
+    },
+    [editor]
+  );
+
+  const onImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (f) uploadImage(f);
+    e.target.value = "";
+  };
+
   return (
     <div className="editor-toolbar sticky top-0 z-10 flex flex-wrap items-center gap-1 border-b border-gray-200 bg-gray-50/80 px-3 py-2 backdrop-blur-sm">
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/gif,image/webp"
+        className="hidden"
+        onChange={onImageFileChange}
+      />
       {button(() => editor.chain().focus().toggleBold().run(), "Kalın", editor.isActive("bold"))}
       {button(() => editor.chain().focus().toggleItalic().run(), "İtalik", editor.isActive("italic"))}
       {button(() => editor.chain().focus().toggleUnderline().run(), "Altı çizili", editor.isActive("underline"))}
@@ -121,7 +152,8 @@ function EditorToolbar({ editor }: { editor: Editor }) {
       {button(() => editor.chain().focus().setHorizontalRule().run(), "Çizgi", false)}
       <span className="mx-1 h-5 w-px bg-gray-300" />
       {button(setLink, "Link", editor.isActive("link"))}
-      {button(addImage, "Görsel", false)}
+      {button(addImageByUrl, "Görsel (URL)", false)}
+      {button(() => fileInputRef.current?.click(), "Görsel (yükle)", false)}
       {button(() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run(), "Tablo", false)}
       <span className="mx-1 h-5 w-px bg-gray-300" />
       {button(() => editor.chain().focus().setTextAlign("left").run(), "Sol", editor.isActive({ textAlign: "left" }))}

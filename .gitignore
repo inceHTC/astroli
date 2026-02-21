@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# admin uploads (optional: remove to commit uploads)
+/public/uploads
+
 # production
 /build
 

@@ -41,6 +41,7 @@ export function ArticleForm({ initial }: ArticleFormProps) {
   const [showPreview, setShowPreview] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   useEffect(() => {
     if (initial) return;
@@ -171,14 +172,46 @@ export function ArticleForm({ initial }: ArticleFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Kapak görseli URL</label>
-            <input
-              type="text"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              placeholder="/dergi/kapak.png"
-              className={inputClass}
-            />
+            <label className="block text-sm font-medium text-gray-700">Kapak görseli</label>
+            <div className="mt-1 flex flex-wrap items-center gap-3">
+              <input
+                type="text"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                placeholder="URL veya dosyadan yükleyin"
+                className={`${inputClass} flex-1 min-w-[200px]`}
+              />
+              <label className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">
+                {uploadingImage ? "Yükleniyor…" : "Dosyadan yükle"}
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/gif,image/webp"
+                  className="hidden"
+                  disabled={uploadingImage}
+                  onChange={async (e) => {
+                    const f = e.target.files?.[0];
+                    if (!f) return;
+                    setUploadingImage(true);
+                    try {
+                      const form = new FormData();
+                      form.append("file", f);
+                      const res = await fetch("/api/admin/upload", {
+                        method: "POST",
+                        body: form,
+                      });
+                      const data = await res.json().catch(() => ({}));
+                      if (res.ok && data.url) setImage(data.url);
+                      else setError(data.error ?? "Yükleme başarısız.");
+                    } catch {
+                      setError("Yükleme başarısız.");
+                    } finally {
+                      setUploadingImage(false);
+                      e.target.value = "";
+                    }
+                  }}
+                />
+              </label>
+            </div>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Özet (excerpt)</label>

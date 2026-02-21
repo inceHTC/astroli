@@ -15,7 +15,7 @@ export async function getDailyHoroscope(zodiacId: string, date: Date = new Date(
 }
 
 /** Tüm burçlar için bugünün günlük yorumlarını getir. Tablo yoksa veya hata olursa boş dizi (build/CI uyumlu). */
-export async function getAllDailyHoroscopes(date: Date = new Date()) {
+export async function getAllDailyHoroscopes(date: Date | string = new Date()) {
   try {
     const dateOnly = toDateOnly(date);
     return prisma.dailyHoroscope.findMany({

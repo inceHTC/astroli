@@ -37,8 +37,9 @@ export default async function GunlukBurcPage(props: PageProps) {
   const tarih = typeof searchParams.tarih === "string" ? searchParams.tarih : null;
   const currentDate = parseDateParam(tarih);
 
+  const weekDate = new Date(currentDate + "T12:00:00");
   const [dailies, availableDates] = await Promise.all([
-    getAllDailyHoroscopes(currentDate),
+    getAllDailyHoroscopes(weekDate),
     getDailyHoroscopeAvailableDates(60),
   ]);
 

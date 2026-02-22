@@ -38,7 +38,7 @@ export function Header({ isAdmin = false }: { isAdmin?: boolean }) {
               width={100}
               height={100}
               priority
-              className="h-11 w-auto md:h-10 object-contain object-left"
+              className="h-12 w-auto md:h-12 object-contain object-left"
             />
           </Link>
 
@@ -51,7 +51,7 @@ export function Header({ isAdmin = false }: { isAdmin?: boolean }) {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="relative rounded px-2 py-1.5 text-xs font-medium text-gray-100 hover:text-[#5B3FFF] hover:bg-white/5 transition whitespace-nowrap flex-shrink-0"
+                    className="relative rounded px-2 py-1.5 font-medium text-gray-100 hover:text-[#5B3FFF] hover:bg-white/5 transition whitespace-nowrap flex-shrink-0"
                   >
                     {link.label}
                     {active && (

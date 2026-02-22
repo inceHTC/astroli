@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { useEditor, EditorContent, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -52,24 +53,50 @@ function normalizePastedText(text: string): string {
     .replace(/\n{3,}/g, "\n\n");
 }
 
-const BULLET_CHARS = "[•\\-*·]";
+/** Satır başındaki madde işareti veya numarayı kaldırıp metni döndürür. */
+const LIST_LINE_REGEX = /^\s*([•\-*·▪◦‣]|\d+\.)\s*(.*)$/;
 
-/** Paragraf/div içeriği madde işareti veya numara ile başlıyorsa <ul>/<li> listesine dönüştürür. */
+function isListLikeLine(line: string): boolean {
+  return LIST_LINE_REGEX.test(line.trim());
+}
+
+function parseListLine(line: string): string {
+  const m = line.trim().match(LIST_LINE_REGEX);
+  return m ? m[2].trim() : line.trim();
+}
+
+/** Düz metin listesini HTML <ul><li>...</li></ul> yapısına çevirir. */
+function plainTextToListHtml(text: string): string {
+  const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+  const listItems: string[] = [];
+  for (const line of lines) {
+    if (isListLikeLine(line)) listItems.push(parseListLine(line));
+    else if (listItems.length > 0) break;
+  }
+  if (listItems.length < 2) return "";
+  const lis = listItems.map((t) => `<li>${escapeHtml(t)}</li>`).join("");
+  return `<ul>${lis}</ul>`;
+}
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+/** HTML'deki paragraf/div madde satırlarını gerçek <ul><li> listesine çevirir. */
 function convertListLikeBlocksToLists(html: string): string {
   let out = html;
-  // <p> veya <div> ile başlayan bloklarda • - * · veya 1. 2. gibi kalıpları <li> yap
-  const blockTag = "(?:p|div)";
-  const bulletPattern = new RegExp(
-    `<${blockTag}(?:\\s[^>]*)?>\\s*${BULLET_CHARS}\\s*([\\s\\S]*?)</${blockTag}>`,
-    "gi"
-  );
-  const numberPattern = new RegExp(
-    `<${blockTag}(?:\\s[^>]*)?>\\s*\\d+\\.\\s*([\\s\\S]*?)</${blockTag}>`,
-    "gi"
-  );
-  out = out.replace(bulletPattern, "<li>$1</li>");
-  out = out.replace(numberPattern, "<li>$1</li>");
-  // Sadece zaten <ul>/<ol> dışındaki ardışık <li> bloklarını <ul> ile sar (mevcut listeleri bozmayalım)
+  // Blok etiketleri (p, div, li içinde sadece metin) – madde işareti veya numara ile başlayan
+  const bulletRe = /<(p|div)(?:\s[^>]*)?>[\s\u00A0]*[•\-*·▪◦‣]\s*([\s\S]*?)<\/\1>/gi;
+  const numberRe = /<(p|div)(?:\s[^>]*)?>[\s\u00A0]*\d+\.\s*([\s\S]*?)<\/\1>/gi;
+  out = out.replace(bulletRe, "<li>$2</li>");
+  out = out.replace(numberRe, "<li>$2</li>");
+  // Mevcut <li>...</li> içindeki baştaki madde karakterini temizle
+  out = out.replace(/<li>[\s\u00A0]*[•\-*·▪◦‣]\s*/gi, "<li>");
+  // Ardışık <li> bloklarını tek <ul> içinde topla (zaten <ul> içinde olanlara dokunma)
   out = out.replace(/(<li>[\s\S]*?<\/li>\s*)+/gi, (match: string, offset: number, whole: string) => {
     const before = whole.substring(0, offset);
     const openUl = (before.match(/<ul\b/gi) || []).length;
@@ -91,6 +118,8 @@ export function RichTextEditor({
   editable?: boolean;
   placeholder?: string;
 }) {
+  const editorRef = useRef<Editor | null>(null);
+
   const editor = useEditor({
     immediatelyRender: false,
     editable,
@@ -112,7 +141,38 @@ export function RichTextEditor({
       Placeholder.configure({ placeholder }),
       Typography,
     ],
+    onCreate: ({ editor }) => {
+      editorRef.current = editor;
+    },
+    onDestroy: () => {
+      editorRef.current = null;
+    },
     editorProps: {
+      handlePaste(view, event) {
+        const ed = editorRef.current;
+        if (!ed || !event.clipboardData) return false;
+        const html = event.clipboardData.getData("text/html");
+        const text = event.clipboardData.getData("text/plain");
+        let listHtml = "";
+        if (html && html.trim()) {
+          let out = html;
+          if (/class="[^"]*Mso|<\/?w:|<\/?o:/i.test(out)) out = cleanWordHtml(out);
+          out = normalizePastedHtml(out);
+          out = convertListLikeBlocksToLists(out);
+          if (/<ul[\s>]/.test(out) && /<li[\s>]/.test(out)) listHtml = out;
+        }
+        if (!listHtml && text && text.trim()) {
+          const lines = text.split(/\r?\n/).filter((l) => l.trim());
+          const listLikeCount = lines.filter((l) => isListLikeLine(l)).length;
+          if (listLikeCount >= 2) listHtml = plainTextToListHtml(text);
+        }
+        if (listHtml) {
+          event.preventDefault();
+          ed.chain().focus().insertContent(listHtml).run();
+          return true;
+        }
+        return false;
+      },
       transformPastedHTML(html) {
         let out = html;
         if (/class="[^"]*Mso|<\/?w:|<\/?o:/i.test(out)) out = cleanWordHtml(out);

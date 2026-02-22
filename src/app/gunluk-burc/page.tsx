@@ -13,9 +13,9 @@ const ELEMENT_COLORS: Record<string, string> = {
   water: "border-blue-200 bg-blue-50/50",
 };
 
+/** Bugünün tarihini Türkiye saatine göre döner (YYYY-MM-DD). UTC kullanılmaz; böylece 23.02 günü Türkiye'de 22.02 yerine doğru gösterilir. */
 function todayStr(): string {
-  const d = new Date();
-  return d.toISOString().slice(0, 10);
+  return new Date().toLocaleDateString("en-CA", { timeZone: "Europe/Istanbul" });
 }
 
 function parseDateParam(tarih: string | null): string {

@@ -134,14 +134,7 @@
   margin-bottom: 1.5rem;
 }
 
-.editorial p:first-of-type::first-letter {
-  float: left;
-  font-size: 4rem;
-  line-height: 1;
-  padding-right: 0.35rem;
-  font-family: var(--font-display);
-  font-weight: 600;
-}
+/* Drop-cap kaldırıldı: liste/çoklu paragraf yapısında her satırda büyük harf (merdiven) oluşuyordu. */
 
 .editorial ul,
 .editorial ol {

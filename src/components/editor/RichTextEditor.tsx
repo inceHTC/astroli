@@ -26,6 +26,32 @@ function cleanWordHtml(html: string): string {
     .trim();
 }
 
+/** Yapıştırılan HTML'deki merdiven/girinti stillerini kaldırır. */
+function normalizePastedHtml(html: string): string {
+  return html.replace(/\s*style="([^"]*)"/gi, (_, styleValue) => {
+    const cleaned = styleValue
+      .split(";")
+      .map((s: string) => s.trim())
+      .filter((s: string) => {
+        if (!s) return false;
+        const prop = s.split(":")[0]?.trim().toLowerCase() ?? "";
+        if (/^margin|^padding|^text-indent/.test(prop)) return false;
+        return true;
+      })
+      .join("; ");
+    return cleaned ? ` style="${cleaned}"` : "";
+  });
+}
+
+/** Yapıştırılan düz metni satır bazında düzenler; merdiven etkisini önler. */
+function normalizePastedText(text: string): string {
+  return text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n");
+}
+
 export function RichTextEditor({
   content,
   onChange,
@@ -60,11 +86,12 @@ export function RichTextEditor({
     ],
     editorProps: {
       transformPastedHTML(html) {
-        if (/class="[^"]*Mso|<\/?w:|<\/?o:/i.test(html)) return cleanWordHtml(html);
-        return html;
+        let out = html;
+        if (/class="[^"]*Mso|<\/?w:|<\/?o:/i.test(out)) out = cleanWordHtml(out);
+        return normalizePastedHtml(out);
       },
       transformPastedText(text) {
-        return text;
+        return normalizePastedText(text);
       },
     },
     onUpdate: ({ editor }) => {
@@ -75,9 +102,11 @@ export function RichTextEditor({
   if (!editor) return null;
 
   return (
-    <div className="rich-text-editor rounded-xl border border-gray-200 bg-white">
+    <div className="rich-text-editor flex max-h-[78vh] flex-col rounded-xl border border-gray-200 bg-white overflow-hidden">
       <EditorToolbar editor={editor} />
-      <EditorContent editor={editor} className="editor-content px-4 py-4 min-h-[320px] prose prose-sm max-w-none" />
+      <div className="flex-1 min-h-0 overflow-y-auto">
+        <EditorContent editor={editor} className="editor-content px-4 py-4 min-h-[320px] prose prose-sm max-w-none" />
+      </div>
     </div>
   );
 }
@@ -105,7 +134,7 @@ function EditorToolbar({ editor }: { editor: Editor }) {
   };
 
   return (
-    <div className="editor-toolbar sticky top-0 z-10 flex flex-wrap items-center gap-1 border-b border-gray-200 bg-gray-50/80 px-3 py-2 backdrop-blur-sm">
+    <div className="editor-toolbar flex-shrink-0 flex flex-wrap items-center gap-1 border-b border-gray-200 bg-gray-50/80 px-3 py-2">
       {button(() => editor.chain().focus().toggleBold().run(), "Kalın", editor.isActive("bold"))}
       {button(() => editor.chain().focus().toggleItalic().run(), "İtalik", editor.isActive("italic"))}
       {button(() => editor.chain().focus().toggleUnderline().run(), "Altı çizili", editor.isActive("underline"))}

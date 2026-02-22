@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getAuthFromCookie } from "@/lib/auth";
 import { ensureZodiacSignsExist } from "@/lib/db/repositories/zodiac";
 import { getDailyHoroscopesForAdmin, upsertDailyHoroscope } from "@/lib/db/repositories/horoscope";
@@ -65,19 +66,32 @@ export async function POST(request: NextRequest) {
 
     await ensureZodiacSignsExist();
 
+    const errors: string[] = [];
     for (const h of horoscopes as DailyEntry[]) {
       if (h.zodiacId && typeof h.text === "string") {
         try {
           await upsertDailyHoroscope(h.zodiacId, dateStr, h.text.trim());
         } catch (e) {
           console.error("upsertDailyHoroscope error for", h.zodiacId, e);
+          errors.push(`${h.zodiacId}: ${e instanceof Error ? e.message : String(e)}`);
         }
       }
     }
+    if (errors.length > 0) {
+      return NextResponse.json(
+        { error: "Bazı kayıtlar başarısız", details: errors },
+        { status: 500 }
+      );
+    }
 
+    revalidatePath("/gunluk-burc");
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("POST daily horoscope error:", error);
-    return NextResponse.json({ success: true });
+    const message = error instanceof Error ? error.message : String(error);
+    return NextResponse.json(
+      { error: "Kayıt sırasında hata oluştu", details: message },
+      { status: 500 }
+    );
   }
 }

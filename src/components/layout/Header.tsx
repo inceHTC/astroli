@@ -38,7 +38,7 @@ export function Header({ isAdmin = false }: { isAdmin?: boolean }) {
               width={100}
               height={100}
               priority
-              className="h-8 w-auto md:h-9 object-contain object-left"
+              className="h-11 w-auto md:h-10 object-contain object-left"
             />
           </Link>
 

@@ -155,11 +155,7 @@ export default function BurcHesaplaPage() {
             </div>
 
             <div className="mt-10 flex flex-col items-center gap-4">
-              <ShareCard
-                title={`${result.sun.nameTr} · ${result.rising.nameTr} · ${result.moon.nameTr}`}
-                subtitle="Güneş · Yükselen · Ay"
-                type="chart"
-              />
+        
               <Link
                 href="/burclar"
                 className="rounded-xl bg-[#5B3FFF] px-6 py-3 text-sm font-medium text-white hover:bg-[#4A2FDD] transition"

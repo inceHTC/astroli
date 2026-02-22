@@ -58,7 +58,9 @@ export function DailyHoroscopeClient() {
         setMessage("Günlük yorumlar kaydedildi!");
         setTimeout(() => setMessage(""), 3000);
       } else {
-        setMessage("Hata: Kayıt başarısız");
+        const data = await res.json().catch(() => ({}));
+        const detail = data?.details ?? data?.error ?? "Kayıt başarısız";
+        setMessage("Hata: " + (Array.isArray(detail) ? detail.join("; ") : detail));
       }
     } catch (err) {
       setMessage("Hata: " + String(err));

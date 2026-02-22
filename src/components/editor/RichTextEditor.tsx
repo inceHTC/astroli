@@ -52,6 +52,34 @@ function normalizePastedText(text: string): string {
     .replace(/\n{3,}/g, "\n\n");
 }
 
+const BULLET_CHARS = "[•\\-*·]";
+
+/** Paragraf/div içeriği madde işareti veya numara ile başlıyorsa <ul>/<li> listesine dönüştürür. */
+function convertListLikeBlocksToLists(html: string): string {
+  let out = html;
+  // <p> veya <div> ile başlayan bloklarda • - * · veya 1. 2. gibi kalıpları <li> yap
+  const blockTag = "(?:p|div)";
+  const bulletPattern = new RegExp(
+    `<${blockTag}(?:\\s[^>]*)?>\\s*${BULLET_CHARS}\\s*([\\s\\S]*?)</${blockTag}>`,
+    "gi"
+  );
+  const numberPattern = new RegExp(
+    `<${blockTag}(?:\\s[^>]*)?>\\s*\\d+\\.\\s*([\\s\\S]*?)</${blockTag}>`,
+    "gi"
+  );
+  out = out.replace(bulletPattern, "<li>$1</li>");
+  out = out.replace(numberPattern, "<li>$1</li>");
+  // Sadece zaten <ul>/<ol> dışındaki ardışık <li> bloklarını <ul> ile sar (mevcut listeleri bozmayalım)
+  out = out.replace(/(<li>[\s\S]*?<\/li>\s*)+/gi, (match: string, offset: number, whole: string) => {
+    const before = whole.substring(0, offset);
+    const openUl = (before.match(/<ul\b/gi) || []).length;
+    const closeUl = (before.match(/<\/ul>/gi) || []).length;
+    if (openUl > closeUl) return match;
+    return `<ul>${match.trim()}</ul>`;
+  });
+  return out;
+}
+
 export function RichTextEditor({
   content,
   onChange,
@@ -88,7 +116,9 @@ export function RichTextEditor({
       transformPastedHTML(html) {
         let out = html;
         if (/class="[^"]*Mso|<\/?w:|<\/?o:/i.test(out)) out = cleanWordHtml(out);
-        return normalizePastedHtml(out);
+        out = normalizePastedHtml(out);
+        out = convertListLikeBlocksToLists(out);
+        return out;
       },
       transformPastedText(text) {
         return normalizePastedText(text);

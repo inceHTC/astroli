@@ -76,7 +76,7 @@ export default async function GunlukBurcPage(props: PageProps) {
               Günlük Burç Yorumları
             </h1>
             <p className="mt-4 text-lg text-[#444]">
-              Burcunuz için o güne ait yorum. Geçmiş günleri arşivden seçebilirsiniz.
+             Geçmiş günleri arşivden seçebilirsiniz.
             </p>
           </div>
         </Container>

@@ -29,62 +29,60 @@ export function Header({ isAdmin = false }: { isAdmin?: boolean }) {
   return (
     <>
       <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-[#1A163E] backdrop-blur-md">
-        <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 pl-2 pr-2 md:pl-4 md:pr-6 md:grid md:grid-cols-[minmax(5rem,1fr)_auto_1fr] md:justify-between">
-          {/* SOL: Logo – navbar yüksekliğine (72px) üstten alttan hizalı, okunaklı boyut */}
-          <Link href="/" className="flex min-w-0 flex-shrink-0 items-center self-stretch py-1.5">
+        <div className="mx-auto flex h-14 md:h-16 max-w-7xl items-center gap-2 pl-3 pr-3 md:pl-4 md:pr-4 md:gap-4">
+          {/* SOL: Logo – dar ve sabit, sola yaslı */}
+          <Link href="/" className="flex flex-shrink-0 items-center py-2">
             <Image
               src="/logo1.png"
               alt="Astroli Logo"
-              width={120}
-              height={120}
+              width={100}
+              height={100}
               priority
-              className="h-full w-auto max-h-14 object-contain object-left"
+              className="h-8 w-auto md:h-9 object-contain object-left"
             />
           </Link>
 
-          {/* ORTA: Menü linkleri – tam ortada, nefes alacak boşluk */}
-          <nav className="hidden md:flex items-center justify-center gap-6">
-            {NAV_LINKS.map((link) => {
-              const active = pathname === link.href;
-
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="relative text-sm font-medium text-gray-100 hover:text-[#5B3FFF] transition whitespace-nowrap"
-                >
-                  {link.label}
-
-                  <span
-                    className={`absolute -bottom-2 left-0 h-[2px] w-full bg-[#5B3FFF] transition-transform duration-300 origin-left ${
-                      active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                    }`}
-                  />
-                </Link>
-              );
-            })}
+          {/* ORTA: Menü linkleri – kalan alanda tek satır, küçük gap; taşarsa yatay kaydırma */}
+          <nav className="hidden md:flex flex-1 min-w-0 items-center justify-center overflow-x-auto overflow-y-hidden py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex items-center gap-1.5 md:gap-2 flex-nowrap">
+              {NAV_LINKS.map((link) => {
+                const active = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="relative rounded px-2 py-1.5 text-xs font-medium text-gray-100 hover:text-[#5B3FFF] hover:bg-white/5 transition whitespace-nowrap flex-shrink-0"
+                  >
+                    {link.label}
+                    {active && (
+                      <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-[#5B3FFF] rounded-full" />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
           </nav>
 
-          {/* SAĞ: Masaüstü butonlar / Mobil hamburger en sağda */}
-          <div className="flex flex-shrink-0 items-center justify-end gap-3 md:gap-4 md:pl-6">
-            <div className="hidden md:flex md:items-center md:gap-3 md:flex-nowrap">
+          {/* SAĞ: Butonlar – her zaman görünür, taşmaz */}
+          <div className="flex flex-shrink-0 items-center gap-2 md:gap-3 ml-auto">
+            <div className="hidden md:flex items-center gap-2">
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="inline-flex items-center justify-center whitespace-nowrap rounded-lg border border-[#5B3FFF] bg-transparent px-4 py-2 text-sm font-medium text-[#8C7BFF] hover:bg-[#5B3FFF]/10 transition"
+                  className="inline-flex items-center justify-center rounded-lg border border-[#5B3FFF] bg-transparent px-3 py-1.5 text-xs font-medium text-[#8C7BFF] hover:bg-[#5B3FFF]/10 transition whitespace-nowrap"
                 >
                   Admin Panel
                 </Link>
               )}
               <Link
                 href="/burc-hesapla"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-lg border border-transparent bg-white px-4 py-2 text-sm font-medium text-[#1A163E] hover:bg-gray-100 transition"
+                className="inline-flex items-center justify-center rounded-lg bg-white px-3 py-1.5 text-xs font-medium text-[#1A163E] hover:bg-gray-100 transition whitespace-nowrap"
               >
                 Burç Hesapla
               </Link>
             </div>
 
-            {/* MOBILE BUTTON – en sağda sabit */}
+            {/* MOBILE: Hamburger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded text-white hover:bg-white/10 md:hidden transition"

@@ -24,7 +24,11 @@ const defaultDescription =
   "Premium astroloji platformu. Burcunu hesapla, kişilik testlerini çöz, burç uyumluluğunu keşfet. Günlük ve haftalık burç yorumları, retro merkezi, doğum haritası.";
 
 export const metadata: Metadata = {
+  
   metadataBase: new URL(getBaseUrl()),
+  icons: {
+  icon: "/favicon.png",
+},
   title: {
     default: defaultTitle,
     template: `%s | ${siteName}`,

@@ -58,6 +58,19 @@ export async function getDailyHoroscopeAvailableDates(limit = 60): Promise<strin
   }
 }
 
+/** Admin dashboard: Günlük burç girilmiş gün sayısı (kaç tarih için yorum var). */
+export async function getDailyHoroscopeDatesCount(): Promise<number> {
+  try {
+    const result = await prisma.dailyHoroscope.groupBy({
+      by: ["date"],
+      _count: { date: true },
+    });
+    return result.length;
+  } catch {
+    return 0;
+  }
+}
+
 /** Haftalık burç yorumunu hafta aralığına göre getir */
 export async function getWeeklyHoroscope(zodiacId: string, date: Date = new Date()) {
   const { start, end } = getWeekRange(date);

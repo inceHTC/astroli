@@ -16,6 +16,7 @@ export function DailyHoroscopeClient() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    setHoroscopes({});
     loadHoroscopes();
   }, [selectedDate]);
 
@@ -38,6 +39,12 @@ export function DailyHoroscopeClient() {
     }
   }
 
+  function clearForm() {
+    setHoroscopes({});
+    setMessage("Form temizlendi. Yeni yorumları yazıp kaydedebilirsiniz.");
+    setTimeout(() => setMessage(""), 3000);
+  }
+
   async function saveAll() {
     setSaving(true);
     setMessage("");
@@ -55,8 +62,9 @@ export function DailyHoroscopeClient() {
       });
 
       if (res.ok) {
-        setMessage("Günlük yorumlar kaydedildi!");
+        setMessage("Günlük yorumlar kaydedildi! Yeni gönderi için form temizlendi.");
         setTimeout(() => setMessage(""), 3000);
+        setHoroscopes({});
       } else {
         const data = await res.json().catch(() => ({}));
         const detail = data?.details ?? data?.error ?? "Kayıt başarısız";
@@ -112,7 +120,14 @@ export function DailyHoroscopeClient() {
             ))}
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t">
+          <div className="flex justify-end gap-3 pt-4 border-t flex-wrap">
+            <button
+              type="button"
+              onClick={clearForm}
+              className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+            >
+              Formu temizle
+            </button>
             <button
               onClick={saveAll}
               disabled={saving}

@@ -141,7 +141,7 @@ export default async function GunlukBurcPage(props: PageProps) {
                         <p className="text-sm text-gray-500">{sign.dates}</p>
                       </div>
                     </Link>
-                    <p className="text-gray-700 leading-relaxed text-sm">
+                    <p className="text-gray-700 leading-relaxed text-sm whitespace-pre-line">
                       {text || "—"}
                     </p>
                   </div>

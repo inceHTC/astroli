@@ -2,7 +2,7 @@ export const NAV_LINKS = [
   { href: "/burclar", label: "Burçlar" },
   { href: "/gunluk-burc", label: "Günlük Burç" },
   { href: "/haftalik-burc", label: "Haftalık Burç" },
-    { href: "/burclar/meslekler", label: "Burç & Meslek" },
+  { href: "/burclar/meslekler", label: "Burç & Meslek" },
   { href: "/dergi/haftalik-burc-enerjisi", label: "Kozmik Enerji" },
   { href: "/retro", label: "Retro Merkezi" },
   { href: "/testler", label: "Testler" },

@@ -178,6 +178,15 @@ export default function BirthChartPage() {
                   </p>
                 </motion.div>
               </section>
+
+              <section className="flex justify-center">
+                <Link
+                  href="/burclar"
+                  className="rounded-xl bg-[#5B3FFF] px-6 py-3 text-sm font-medium text-white hover:bg-[#4A2FDD] transition"
+                >
+                  Burcunun özelliklerini incele →
+                </Link>
+              </section>
             </motion.div>
           )}
         </AnimatePresence>

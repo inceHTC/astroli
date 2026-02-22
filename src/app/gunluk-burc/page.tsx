@@ -30,18 +30,33 @@ export const metadata = {
 };
 
 type SearchParams = Record<string, string | string[] | undefined>;
-type PageProps = { searchParams?: Promise<SearchParams> };
+type PageProps = { searchParams?: Promise<SearchParams> | SearchParams };
 
 export default async function GunlukBurcPage(props: PageProps) {
-  const searchParams: SearchParams = await (props.searchParams ?? Promise.resolve({} as SearchParams));
-  const tarih = typeof searchParams.tarih === "string" ? searchParams.tarih : null;
+  let searchParams: SearchParams = {};
+  try {
+    const raw = props?.searchParams;
+    searchParams = raw instanceof Promise ? await raw : (raw ?? {});
+  } catch {
+    searchParams = {};
+  }
+  const tarih = typeof searchParams?.tarih === "string" ? searchParams.tarih : null;
   const currentDate = parseDateParam(tarih);
 
   const weekDate = new Date(currentDate + "T12:00:00");
-  const [dailies, availableDates] = await Promise.all([
-    getAllDailyHoroscopes(weekDate),
-    getDailyHoroscopeAvailableDates(60),
-  ]);
+  let dailies: { zodiacId: string; text: string }[] = [];
+  let availableDates: string[] = [];
+  try {
+    const [d, a] = await Promise.all([
+      getAllDailyHoroscopes(weekDate),
+      getDailyHoroscopeAvailableDates(60),
+    ]);
+    dailies = Array.isArray(d) ? d : [];
+    availableDates = Array.isArray(a) ? a : [];
+  } catch {
+    dailies = [];
+    availableDates = [];
+  }
 
   const dbHoroscopes: Record<string, string> = {};
   dailies.forEach((h: { zodiacId: string; text: string }) => {

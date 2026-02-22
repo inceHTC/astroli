@@ -10,6 +10,7 @@ export const NAV_LINKS = [
   { href: "/unluler", label: "Ünlüler" },
   { href: "/uyumluluk", label: "Uyumluluk" },
   { href: "/birth-chart", label: "Doğum Haritası" },
+  { href: "/iletisim", label: "İletişim" },
 ] as const;
 
 /** Footer'da menü linklerine ek olarak gösterilecek linkler */

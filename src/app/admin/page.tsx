@@ -2,25 +2,34 @@ import Link from "next/link";
 import { ZODIAC_SIGNS } from "@/data/zodiac";
 import { SAMPLE_TEST } from "@/data/tests";
 import { prisma } from "@/lib/db/client";
-import { getDailyHoroscopeDatesCount } from "@/lib/db/repositories/horoscope";
+import { getDailyHoroscopeDatesCount, getWeeklyHoroscopeWeeksCount } from "@/lib/db/repositories/horoscope";
+import { getCosmicEnergyWeeksCount } from "@/lib/db/repositories/cosmicEnergy";
 
 export default async function AdminDashboard() {
   let articleCount = 0;
   let celebrityCount = 0;
   let dailyHoroscopeCount = 0;
+  let weeklyHoroscopeCount = 0;
+  let cosmicEnergyCount = 0;
   try {
     articleCount = await prisma.article.count();
     celebrityCount = await prisma.celebrity.count();
     dailyHoroscopeCount = await getDailyHoroscopeDatesCount();
+    weeklyHoroscopeCount = await getWeeklyHoroscopeWeeksCount();
+    cosmicEnergyCount = await getCosmicEnergyWeeksCount();
   } catch {
     articleCount = 0;
     celebrityCount = 0;
     dailyHoroscopeCount = 0;
+    weeklyHoroscopeCount = 0;
+    cosmicEnergyCount = 0;
   }
   const stats = [
     { label: "Aktif Test", value: "1", href: "/admin/tests" },
     { label: "Burç Sayfası", value: String(ZODIAC_SIGNS.length), href: "/admin/zodiac" },
     { label: "Günlük Burç", value: String(dailyHoroscopeCount), href: "/admin/horoscope/daily" },
+    { label: "Haftalık Burç", value: String(weeklyHoroscopeCount), href: "/admin/horoscope/weekly" },
+    { label: "Kozmik Enerji", value: String(cosmicEnergyCount), href: "/admin/cosmic-energy" },
     { label: "Dergi Makalesi", value: String(articleCount), href: "/admin/articles" },
     { label: "Ünlü", value: String(celebrityCount), href: "/admin/celebrities" },
   ];

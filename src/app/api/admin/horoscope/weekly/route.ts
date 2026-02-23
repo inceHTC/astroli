@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthFromCookie } from "@/lib/auth";
-import { getAllWeeklyHoroscopes, upsertWeeklyHoroscope } from "@/lib/db/repositories/horoscope";
+import { ensureZodiacSignsExist } from "@/lib/db/repositories/zodiac";
+import { getWeeklyHoroscopesForAdmin, upsertWeeklyHoroscope } from "@/lib/db/repositories/horoscope";
 
 export async function GET(request: NextRequest) {
   try {
@@ -11,12 +12,12 @@ export async function GET(request: NextRequest) {
 
     const searchParams = request.nextUrl.searchParams;
     const weekStartStr = searchParams.get("weekStart");
-    const weekEndStr = searchParams.get("weekEnd");
-    const date = weekStartStr ? new Date(weekStartStr) : new Date();
+    const date = weekStartStr || new Date().toISOString().slice(0, 10);
 
-    const horoscopes = await getAllWeeklyHoroscopes(date);
+    const horoscopes = await getWeeklyHoroscopesForAdmin(date);
+    const list = Array.isArray(horoscopes) ? horoscopes : [];
     return NextResponse.json(
-      horoscopes.map((h) => ({
+      list.map((h) => ({
         zodiacId: h.zodiacId,
         health: h.health,
         love: h.love,
@@ -71,6 +72,8 @@ export async function POST(request: NextRequest) {
 
     const weekStartDate = new Date(weekStart);
     const weekEndDate = new Date(weekEnd);
+
+    await ensureZodiacSignsExist();
 
     for (const h of horoscopes) {
       if (h.zodiacId) {

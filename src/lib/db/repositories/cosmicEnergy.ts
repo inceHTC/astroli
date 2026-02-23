@@ -69,6 +69,15 @@ export async function getCosmicEnergyAvailableWeeks(limit = 52): Promise<string[
   }
 }
 
+/** Admin dashboard: Haftalık kozmik enerji kayıt sayısı (kaç hafta için girilmiş). */
+export async function getCosmicEnergyWeeksCount(): Promise<number> {
+  try {
+    return await prisma.weeklyCosmicEnergy.count();
+  } catch {
+    return 0;
+  }
+}
+
 /** Haftalık kozmik enerji kaydı oluşturur veya günceller */
 export async function upsertCosmicEnergy(
   weekStart: Date,

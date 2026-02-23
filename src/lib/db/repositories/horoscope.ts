@@ -71,6 +71,19 @@ export async function getDailyHoroscopeDatesCount(): Promise<number> {
   }
 }
 
+/** Admin dashboard: Haftalık burç girilmiş hafta sayısı (kaç hafta için yorum var). */
+export async function getWeeklyHoroscopeWeeksCount(): Promise<number> {
+  try {
+    const result = await prisma.weeklyHoroscope.groupBy({
+      by: ["weekStart"],
+      _count: { weekStart: true },
+    });
+    return result.length;
+  } catch {
+    return 0;
+  }
+}
+
 /** Haftalık burç yorumunu hafta aralığına göre getir */
 export async function getWeeklyHoroscope(zodiacId: string, date: Date = new Date()) {
   const { start, end } = getWeekRange(date);
@@ -98,6 +111,35 @@ export async function getAllWeeklyHoroscopes(date: Date = new Date()) {
       orderBy: { zodiac: { id: "asc" } },
     });
   } catch {
+    return [];
+  }
+}
+
+/** Admin API: Haftalık yorumları Zodiac join olmadan getirir (FK/join hatası riski azalır). */
+export async function getWeeklyHoroscopesForAdmin(weekStart: Date | string) {
+  try {
+    const start = toWeekDateOnly(weekStart);
+    return prisma.weeklyHoroscope.findMany({
+      where: { weekStart: start },
+      select: {
+        zodiacId: true,
+        health: true,
+        love: true,
+        money: true,
+        work: true,
+        healthText: true,
+        loveText: true,
+        moneyText: true,
+        workText: true,
+        summary: true,
+        advice: true,
+        weekStart: true,
+        weekEnd: true,
+      },
+      orderBy: { zodiacId: "asc" },
+    });
+  } catch (e) {
+    console.error("getWeeklyHoroscopesForAdmin error:", e);
     return [];
   }
 }
@@ -139,11 +181,20 @@ export async function upsertDailyHoroscope(
   });
 }
 
+/** Hafta başı/sonu tarihlerini DATE (UTC gün) olarak normalize eder. */
+function toWeekDateOnly(date: Date | string): Date {
+  if (typeof date === "string") {
+    const [y, m, d] = date.split("-").map(Number);
+    return new Date(Date.UTC(y, (m ?? 1) - 1, d ?? 1));
+  }
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+}
+
 /** Haftalık burç yorumu oluştur veya güncelle */
 export async function upsertWeeklyHoroscope(
   zodiacId: string,
-  weekStart: Date,
-  weekEnd: Date,
+  weekStart: Date | string,
+  weekEnd: Date | string,
   data: {
     health: number;
     love: number;
@@ -157,11 +208,9 @@ export async function upsertWeeklyHoroscope(
     advice: string;
   }
 ) {
-  const start = new Date(weekStart);
-  start.setHours(0, 0, 0, 0);
-  const end = new Date(weekEnd);
-  end.setHours(23, 59, 59, 999);
-  
+  const start = toWeekDateOnly(weekStart);
+  const end = toWeekDateOnly(weekEnd);
+
   return prisma.weeklyHoroscope.upsert({
     where: {
       zodiacId_weekStart: {

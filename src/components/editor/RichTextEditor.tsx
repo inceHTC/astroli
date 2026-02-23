@@ -275,7 +275,10 @@ function EditorToolbar({ editor }: { editor: Editor }) {
   const button = (onClick: () => void, label: string, active?: boolean, icon?: string) => (
     <button
       type="button"
-      onClick={onClick}
+      onMouseDown={(e) => {
+        e.preventDefault();
+        onClick();
+      }}
       className={`rounded p-2 text-sm font-medium transition ${active ? "bg-gray-200 text-gray-900" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"}`}
       title={label}
     >

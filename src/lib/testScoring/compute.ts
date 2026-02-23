@@ -8,10 +8,12 @@ const EMPTY_TOTALS: Record<ProfileKey, number> = {
   water: 0,
 };
 
-function getScores(option: { scores?: OptionScores; weight?: Record<string, number> }): OptionScores | null {
+function getScores(option: { scores?: OptionScores | Record<string, number>; weight?: Record<string, number> }): OptionScores | null {
   if (option.scores && typeof option.scores === "object") {
     const s = option.scores as Record<string, number>;
-    if (PROFILE_KEYS.every((k) => typeof s[k] === "number")) return option.scores as OptionScores;
+    if (PROFILE_KEYS.every((k) => typeof s[k] === "number")) {
+      return { fire: s.fire ?? 0, earth: s.earth ?? 0, air: s.air ?? 0, water: s.water ?? 0 };
+    }
   }
   if (option.weight && typeof option.weight === "object") {
     const w = option.weight as Record<string, number>;
@@ -31,7 +33,7 @@ function getScores(option: { scores?: OptionScores; weight?: Record<string, numb
  * @param numQuestions soru sayısı (max puan = 2 * numQuestions)
  */
 export function computeScoring(
-  optionByQuestionId: Record<string, { id: string; text: string; scores?: OptionScores; weight?: Record<string, number> }>,
+  optionByQuestionId: Record<string, { id: string; text: string; scores?: OptionScores | Record<string, number>; weight?: Record<string, number> }>,
   numQuestions: number
 ): ScoringResult {
   const totals = { ...EMPTY_TOTALS };

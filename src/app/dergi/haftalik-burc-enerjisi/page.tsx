@@ -29,6 +29,15 @@ const ELEMENT_LABELS: Record<string, string> = {
   water: "Su",
 };
 
+const ELEMENT_SIGN_NAMES: Record<string, string> = {
+  fire: "Koç, Aslan, Yay",
+  earth: "Boğa, Başak, Oğlak",
+  air: "İkizler, Terazi, Kova",
+  water: "Yengeç, Akrep, Balık",
+};
+
+const ELEMENT_KEYS = ["fire", "earth", "air", "water"] as const;
+
 function thisWeekStart(): string {
   const { start } = getWeekRange(new Date());
   return format(start, "yyyy-MM-dd");
@@ -274,37 +283,26 @@ export default async function HaftalikKozmikEnerjiPage(props: PageProps) {
 
               <section>
                 <h2 className="editorial-h2 font-serif text-2xl font-semibold text-black mb-6">
-                  Burçlara Göre Genel Bakış
+                  Burçlara Göre Genel Bakış (element bazlı)
                 </h2>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {ZODIAC_SIGNS.map((sign) => {
-                    const colors = ELEMENT_COLORS[sign.element];
-                    const overview =
-                      overviewByElement?.[sign.element as keyof typeof overviewByElement] ?? "";
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {ELEMENT_KEYS.map((elementKey) => {
+                    const colors = ELEMENT_COLORS[elementKey];
+                    const overview = overviewByElement?.[elementKey] ?? "";
+                    const label = ELEMENT_LABELS[elementKey];
+                    const signNames = ELEMENT_SIGN_NAMES[elementKey];
                     return (
-                      <Link
-                        key={sign.id}
-                        href={`/burc/${sign.id}`}
-                        className={`rounded-lg border p-4 transition hover:shadow-md ${colors.bg} ${colors.border}`}
+                      <div
+                        key={elementKey}
+                        className={`rounded-xl border p-6 ${colors.bg} ${colors.border}`}
                       >
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="relative h-10 w-10 rounded-lg overflow-hidden bg-[#1A1C2B] flex-shrink-0">
-                            <Image
-                              src={sign.image}
-                              alt={sign.nameTr}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          <div>
-                            <h3 className="font-semibold text-black">{sign.nameTr}</h3>
-                            <p className="text-xs text-black/50">{sign.dates}</p>
-                          </div>
-                        </div>
-                        <p className="text-xs text-black/60 leading-relaxed">
+                        <h3 className="font-semibold text-black mb-1">
+                          {label} ({signNames})
+                        </h3>
+                        <p className="text-black/80 leading-relaxed whitespace-pre-line">
                           {overview || "—"}
                         </p>
-                      </Link>
+                      </div>
                     );
                   })}
                 </div>

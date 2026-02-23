@@ -1,3 +1,5 @@
+import { computeScoring } from "@/lib/testScoring";
+
 export type ElementKey = "fire" | "earth" | "air" | "water";
 
 export interface SubmitAnswer {
@@ -13,11 +15,19 @@ export interface SubmitResult {
   strengths: string[];
   shadowSide: string;
   elementData: Record<string, number>;
+  /** Yarı-profesyonel puanlama */
+  primaryProfile?: string;
+  secondaryProfile?: string;
+  isMixed?: boolean;
+  isBalanced?: boolean;
+  dominanceLevel?: "yüksek_baskın" | "baskın" | "dengeli";
 }
 
 export interface TestOption {
   id: string;
-  weights: unknown;
+  text?: string;
+  weights?: unknown;
+  scores?: Record<string, number>;
 }
 
 export interface TestQuestion {
@@ -47,55 +57,29 @@ export function computeResult(
   test: TestWithRelations,
   answers: SubmitAnswer[]
 ): SubmitResult | null {
-  const elementTotals: Record<string, number> = {
-    fire: 0,
-    earth: 0,
-    air: 0,
-    water: 0,
-  };
-
-  const optionMap = new Map<string, { weights: Record<string, number> }>();
-  for (const q of test.questions) {
-    for (const opt of q.options) {
-      const weights = opt.weights as Record<string, number>;
-      if (weights && typeof weights === "object") {
-        optionMap.set(opt.id, { weights });
-      }
-    }
-  }
-
+  const optionByQuestionId: Record<string, { id: string; text: string; scores?: Record<string, number>; weight?: Record<string, number> }> = {};
   for (const ans of answers) {
-    const opt = optionMap.get(ans.optionId);
+    const q = test.questions.find((x) => x.id === ans.questionId);
+    if (!q) continue;
+    const opt = q.options.find((o) => o.id === ans.optionId);
     if (!opt) continue;
-    for (const [elem, val] of Object.entries(opt.weights)) {
-      if (typeof val === "number" && elem in elementTotals) {
-        elementTotals[elem] += val;
-      }
-    }
+    const weights = opt.weights as Record<string, number> | undefined;
+    const scores = opt.scores as Record<string, number> | undefined;
+    optionByQuestionId[ans.questionId] = {
+      id: opt.id,
+      text: (opt as { text?: string }).text ?? "",
+      scores,
+      weight: weights && typeof weights === "object" ? weights : undefined,
+    };
   }
+  const scoring = computeScoring(optionByQuestionId, test.questions.length);
 
-  const sum = Object.values(elementTotals).reduce((a, b) => a + b, 0);
-  const elements: Record<string, number> = {};
-  for (const [k, v] of Object.entries(elementTotals)) {
-    elements[k] = sum > 0 ? Math.round((v / sum) * 100) : 0;
-  }
+  const primary = scoring.primaryProfile;
+  let template = test.results.find((r) => r.primaryKey === primary);
+  if (!template) template = test.results[0];
+  if (!template) return null;
 
-  const primary = (Object.entries(elements).sort((a, b) => b[1] - a[1])[0] ?? ["fire", 0])[0];
-  const primaryScore = elements[primary] ?? 0;
-
-  let template = test.results.find(
-    (r) => r.primaryKey === primary && primaryScore >= r.minScore && primaryScore <= r.maxScore
-  );
-  if (!template) {
-    template = test.results.find((r) => r.primaryKey === primary);
-  }
-  if (!template) {
-    template = test.results[0];
-  }
-  if (!template) {
-    return null;
-  }
-
+  const elements = scoring.percentages as Record<string, number>;
   const elementData = template.elementData as Record<string, number>;
   const strengths = Array.isArray(template.strengths) ? template.strengths : [];
   return {
@@ -106,6 +90,11 @@ export function computeResult(
     strengths,
     shadowSide: template.shadowSide ?? "",
     elementData: elementData && typeof elementData === "object" ? elementData : elements,
+    primaryProfile: scoring.primaryProfile,
+    secondaryProfile: scoring.secondaryProfile,
+    isMixed: scoring.isMixed,
+    isBalanced: scoring.isBalanced,
+    dominanceLevel: scoring.dominanceLevel,
   };
 }
 

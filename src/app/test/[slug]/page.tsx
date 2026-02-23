@@ -7,8 +7,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/layout/Container";
 import { TESTS } from "@/data/tests";
-import type { TestResult, PersonalityTest } from "@/data/tests";
+import type { TestResult, PersonalityTest, TestOption } from "@/data/tests";
 import { ShareCard } from "@/components/share/ShareCard";
+import { computeScoring, type ScoringResult } from "@/lib/testScoring";
 
 const CATEGORY_IMAGES: Record<string, string> = {
   love: "/tests/love.png",
@@ -25,40 +26,53 @@ const ELEMENT_NAMES: Record<string, string> = {
   water: "Su",
 };
 
+const DOMINANCE_LABELS: Record<string, string> = {
+  yüksek_baskın: "Yüksek baskın profil",
+  baskın: "Baskın profil",
+  dengeli: "Dengeli dağılım",
+};
+
+export interface TestPageResult {
+  scoring: ScoringResult;
+  primaryTemplate: TestResult;
+  secondaryTemplate: TestResult | null;
+  isBalanced: boolean;
+  isMixed: boolean;
+  elementBreakdown: Record<string, number>;
+}
+
 function calculateResult(
   test: PersonalityTest,
-  answers: Record<string, Record<string, number>>
-): TestResult & { elementBreakdown: Record<string, number> } {
-  const totals: Record<string, number> = {
-    fire: 0,
-    earth: 0,
-    air: 0,
-    water: 0,
-  };
-
-  for (const qAnswers of Object.values(answers)) {
-    for (const [elem, pts] of Object.entries(qAnswers)) {
-      totals[elem] += pts;
-    }
+  answers: Record<string, TestOption>
+): TestPageResult {
+  const optionByQuestionId: Record<string, { id: string; text: string; scores?: import("@/lib/testScoring").OptionScores; weight?: Record<string, number> }> = {};
+  for (const [qId, opt] of Object.entries(answers)) {
+    optionByQuestionId[qId] = {
+      id: opt.id,
+      text: opt.text,
+      scores: opt.scores,
+      weight: opt.weight,
+    };
   }
+  const scoring = computeScoring(optionByQuestionId, test.questions.length);
 
-  const sum = Object.values(totals).reduce((a, b) => a + b, 0);
+  const primaryTemplate =
+    test.resultTemplates.find((r) => r.id === scoring.primaryProfile) ?? test.resultTemplates[0];
+  const secondaryTemplate = scoring.isMixed
+    ? (test.resultTemplates.find((r) => r.id === scoring.secondaryProfile) ?? null)
+    : null;
 
   const elementBreakdown: Record<string, number> = {};
-  for (const [k, v] of Object.entries(totals)) {
-    elementBreakdown[k] = sum > 0 ? Math.round((v / sum) * 100) : 25;
+  for (const [k, v] of Object.entries(scoring.percentages)) {
+    elementBreakdown[k] = v;
   }
 
-  const primary = Object.entries(elementBreakdown).sort(
-    (a, b) => b[1] - a[1]
-  )[0][0];
-
-  const template =
-    test.resultTemplates.find((r) => r.id === primary) ??
-    test.resultTemplates[0];
-
   return {
-    ...template,
+    scoring,
+    primaryTemplate,
+    secondaryTemplate,
+    isBalanced: scoring.isBalanced,
+    isMixed: scoring.isMixed,
     elementBreakdown,
   };
 }
@@ -70,14 +84,9 @@ export default function TestPage() {
   const test = TESTS.find((t) => t.slug === slug);
 
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<
-    Record<string, Record<string, number>>
-  >({});
-  const [result, setResult] = useState<
-    (TestResult & { elementBreakdown: Record<string, number> }) | null
-  >(null);
+  const [answers, setAnswers] = useState<Record<string, TestOption>>({});
+  const [result, setResult] = useState<TestPageResult | null>(null);
 
-  // ================= TEST BULUNAMADI =================
   if (!test) {
     return (
       <div className="bg-[#F7F8FC] min-h-screen py-16">
@@ -94,20 +103,13 @@ export default function TestPage() {
     );
   }
 
-  const image =
-    CATEGORY_IMAGES[test.category] ?? "/tests/default.png";
-
+  const image = CATEGORY_IMAGES[test.category] ?? "/tests/default.png";
   const question = test.questions[step];
   const progress = ((step + 1) / test.questions.length) * 100;
 
-  const handleAnswer = (weight: Record<string, number>) => {
-    const newAnswers = {
-      ...answers,
-      [question.id]: weight,
-    };
-
+  const handleAnswer = (option: TestOption) => {
+    const newAnswers = { ...answers, [question.id]: option };
     setAnswers(newAnswers);
-
     if (step + 1 < test.questions.length) {
       setStep(step + 1);
     } else {
@@ -115,48 +117,99 @@ export default function TestPage() {
     }
   };
 
-  // ================= RESULT SCREEN =================
   if (result) {
+    const { scoring, primaryTemplate, secondaryTemplate, isBalanced, isMixed, elementBreakdown } = result;
+    const pt = primaryTemplate.profileText;
+    const displayTitle = isBalanced
+      ? "Dengeli profil"
+      : isMixed && secondaryTemplate
+        ? `${primaryTemplate.title} + ${secondaryTemplate.title}`
+        : primaryTemplate.title;
+    const displaySubtitle = primaryTemplate.subtitle;
+
     return (
       <div className="bg-[#F7F8FC] pb-28 pt-20">
         <Container size="md">
-        
-
-          {/* Sonuç kartı: başlık → açıklama → element → güçlü yanlar → gölge */}
-          <div className="rounded-2xl bg-[#11121A] text-white p-6 shadow-lg sm:p-8 ">
-            <h1 className="text-xl font-semibold sm:text-2xl">
-              {result.title}
-            </h1>
-            {result.subtitle && (
-              <p className="mt-1 text-sm text-[#5B3FFF] sm:text-base">{result.subtitle}</p>
+          <div className="rounded-2xl bg-[#11121A] text-white p-6 shadow-lg sm:p-8">
+            <h1 className="text-xl font-semibold sm:text-2xl">{displayTitle}</h1>
+            {displaySubtitle && (
+              <p className="mt-1 text-sm text-[#5B3FFF] sm:text-base">{displaySubtitle}</p>
+            )}
+            {isMixed && secondaryTemplate && (
+              <p className="mt-2 text-sm text-gray-400">
+                Birincil: {primaryTemplate.title} · İkincil: {secondaryTemplate.title}
+              </p>
+            )}
+            {isBalanced && (
+              <p className="mt-2 text-sm text-gray-400">
+                Dört elemente de benzer puan; dengeli bir dağılım görülüyor.
+              </p>
             )}
 
-            <p className="mt-5 text-gray-300 leading-relaxed text-sm sm:text-base">
-              {result.description}
-            </p>
+            {/* Baskınlık etiketi */}
+            <div className="mt-4">
+              <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-gray-300">
+                {DOMINANCE_LABELS[scoring.dominanceLevel] ?? scoring.dominanceLevel}
+              </span>
+            </div>
 
+            {/* % dağılım grafiği (çubuk) */}
             <div className="mt-6">
               <p className="text-xs font-medium uppercase tracking-wider text-gray-500 sm:text-sm">
-                Element dağılımın
+                Profil dağılımı
               </p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {Object.entries(result.elementBreakdown).map(([elem, pct]) => (
-                  <span
-                    key={elem}
-                    className="rounded-full border border-[#5B3FFF]/30 bg-[#5B3FFF]/10 px-3 py-1 text-xs text-[#8C7BFF] sm:px-4 sm:py-1.5 sm:text-sm"
-                  >
-                    {ELEMENT_NAMES[elem]}: %{pct}
-                  </span>
+              <div className="mt-3 space-y-2">
+                {scoring.sorted.map(({ profile, percent }) => (
+                  <div key={profile} className="flex items-center gap-3">
+                    <span className="w-16 text-xs text-gray-400">{ELEMENT_NAMES[profile]}</span>
+                    <div className="flex-1 h-3 rounded-full bg-white/10 overflow-hidden">
+                      <div
+                        className="h-full rounded-full bg-[#5B3FFF] transition-all duration-500"
+                        style={{ width: `${Math.max(percent, 2)}%` }}
+                      />
+                    </div>
+                    <span className="w-10 text-right text-xs text-gray-400">%{percent}</span>
+                  </div>
                 ))}
               </div>
             </div>
 
+            {/* 5 parça metin veya tek açıklama */}
+            {pt ? (
+              <div className="mt-6 space-y-4 text-gray-300 text-sm sm:text-base">
+                <section>
+                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Davranış eğilimi</p>
+                  <p className="leading-relaxed">{pt.behaviorTendency}</p>
+                </section>
+                <section>
+                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Stres tepkisi</p>
+                  <p className="leading-relaxed">{pt.stressResponse}</p>
+                </section>
+                <section>
+                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Güçlü yön</p>
+                  <p className="leading-relaxed">{pt.strength}</p>
+                </section>
+                <section>
+                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Risk alanı</p>
+                  <p className="leading-relaxed">{pt.riskArea}</p>
+                </section>
+                <section>
+                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Gelişim önerisi</p>
+                  <p className="leading-relaxed">{pt.developmentSuggestion}</p>
+                </section>
+              </div>
+            ) : (
+              <p className="mt-5 text-gray-300 leading-relaxed text-sm sm:text-base">
+                {primaryTemplate.description}
+              </p>
+            )}
+
             <div className="mt-6">
               <p className="text-xs font-medium uppercase tracking-wider text-gray-500 sm:text-sm">
-                Güçlü yanların
+                Güçlü yanlar
               </p>
               <ul className="mt-2 space-y-1.5 text-gray-300 text-sm sm:text-base">
-                {result.strengths.map((s) => (
+                {primaryTemplate.strengths.map((s) => (
                   <li key={s} className="flex items-center gap-2">
                     <span className="text-[#5B3FFF]">✦</span> {s}
                   </li>
@@ -165,56 +218,46 @@ export default function TestPage() {
             </div>
 
             <div className="mt-6 rounded-xl bg-[#1A1C2B] p-4 sm:p-5">
-              <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
-                Gölge yan
-              </p>
-              <p className="mt-2 text-gray-300 text-sm sm:text-base">{result.shadowSide}</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-gray-500">Gölge yan</p>
+              <p className="mt-2 text-gray-300 text-sm sm:text-base">{primaryTemplate.shadowSide}</p>
             </div>
           </div>
 
-          
-
           <div className="mt-8">
             <ShareCard
-              title={result.title}
-              subtitle={result.subtitle}
+              title={displayTitle}
+              subtitle={displaySubtitle}
               type="test"
-              elementBreakdown={result.elementBreakdown}
+              elementBreakdown={elementBreakdown}
             />
           </div>
 
-
-<div className="mt-8 flex flex-col gap-3 max-w-md mx-auto">
-  <Button
-    variant="outline"
-    onClick={() => {
-      setStep(0);
-      setAnswers({});
-      setResult(null);
-    }}
-    fullWidth
-  >
-    Tekrar çöz
-  </Button>
-
-  <Link href="/testler" className="w-full">
-    <Button variant="secondary" fullWidth>
-      Başka test dene
-    </Button>
-  </Link>
-</div>
-
+          <div className="mt-8 flex flex-col gap-3 max-w-md mx-auto">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setStep(0);
+                setAnswers({});
+                setResult(null);
+              }}
+              fullWidth
+            >
+              Tekrar çöz
+            </Button>
+            <Link href="/testler" className="w-full">
+              <Button variant="secondary" fullWidth>
+                Başka test dene
+              </Button>
+            </Link>
+          </div>
         </Container>
       </div>
     );
   }
 
-  // ================= QUESTION SCREEN =================
   return (
     <div className="bg-[#F7F8FC] pb-28 pt-8">
       <Container size="sm">
-
-        {/* TEST KAPAK */}
         <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-2xl">
           <Image
             src={image}
@@ -235,7 +278,6 @@ export default function TestPage() {
           <p className="text-sm text-[#444]">
             Soru {step + 1} / {test.questions.length}
           </p>
-
           <div className="mt-2 h-2 w-full rounded-full bg-gray-200 overflow-hidden">
             <div
               className="h-full bg-[#5B3FFF] transition-all duration-500"
@@ -252,14 +294,13 @@ export default function TestPage() {
           {question.options.map((opt) => (
             <button
               key={opt.id}
-              onClick={() => handleAnswer(opt.weight)}
+              onClick={() => handleAnswer(opt)}
               className="w-full rounded-2xl border border-gray-200 bg-white p-5 text-left text-black transition-all hover:border-[#5B3FFF]/50 hover:shadow-md active:scale-[0.99]"
             >
               {opt.text}
             </button>
           ))}
         </div>
-
       </Container>
     </div>
   );

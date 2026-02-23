@@ -178,23 +178,23 @@ export default function TestPage() {
             {pt ? (
               <div className="mt-6 space-y-4 text-gray-300 text-sm sm:text-base">
                 <section>
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Davranış eğilimi</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-1">Davranış eğilimi</p>
                   <p className="leading-relaxed">{pt.behaviorTendency}</p>
                 </section>
                 <section>
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Stres tepkisi</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-1">Stres tepkisi</p>
                   <p className="leading-relaxed">{pt.stressResponse}</p>
                 </section>
                 <section>
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Güçlü yön</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-1">Güçlü yön</p>
                   <p className="leading-relaxed">{pt.strength}</p>
                 </section>
                 <section>
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Risk alanı</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-1">Risk alanı</p>
                   <p className="leading-relaxed">{pt.riskArea}</p>
                 </section>
                 <section>
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Gelişim önerisi</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-1">Gelişim önerisi</p>
                   <p className="leading-relaxed">{pt.developmentSuggestion}</p>
                 </section>
               </div>
@@ -223,14 +223,7 @@ export default function TestPage() {
             </div>
           </div>
 
-          <div className="mt-8">
-            <ShareCard
-              title={displayTitle}
-              subtitle={displaySubtitle}
-              type="test"
-              elementBreakdown={elementBreakdown}
-            />
-          </div>
+     
 
           <div className="mt-8 flex flex-col gap-3 max-w-md mx-auto">
             <Button

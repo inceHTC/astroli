@@ -27,11 +27,11 @@ export function weightToScores(weight: Record<string, number>): OptionScores {
   if (entries.length === 0) return s;
   if (entries.length === 1) {
     const [k, v] = entries[0];
-    if (k in s) (s as Record<string, number>)[k] = v >= 2 ? 2 : 1;
+    if (k in s) (s as unknown as Record<string, number>)[k] = v >= 2 ? 2 : 1;
     return s;
   }
-  entries.slice(0, 2).forEach(([k, v]) => {
-    if (k in s) (s as Record<string, number>)[k] = 1;
+  entries.slice(0, 2).forEach(([k]) => {
+    if (k in s) (s as unknown as Record<string, number>)[k] = 1;
   });
   return s;
 }

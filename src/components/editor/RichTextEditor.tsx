@@ -78,12 +78,57 @@ function plainTextToListHtml(text: string): string {
   return `<ul>${lis}</ul>`;
 }
 
+/** Metni satırlara böler; ardışık madde satırlarını <ul><li>, diğerlerini <p> yapar. Karışık içerik (ChatGPT vb.) için. */
+function mixedTextToHtml(text: string): string {
+  const lines = text.split(/\r?\n/);
+  const blocks: string[] = [];
+  let listBuffer: string[] = [];
+
+  function flushList() {
+    if (listBuffer.length >= 2) {
+      const lis = listBuffer.map((t) => `<li>${escapeHtml(t)}</li>`).join("");
+      blocks.push(`<ul>${lis}</ul>`);
+    } else if (listBuffer.length === 1) {
+      blocks.push(`<p>${escapeHtml(listBuffer[0])}</p>`);
+    }
+    listBuffer = [];
+  }
+
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) {
+      flushList();
+      continue;
+    }
+    if (isListLikeLine(line)) {
+      listBuffer.push(parseListLine(line));
+    } else {
+      flushList();
+      blocks.push(`<p>${escapeHtml(line)}</p>`);
+    }
+  }
+  flushList();
+  return blocks.join("");
+}
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+/** HTML'i satır koruyarak düz metne çevirir (yapıştırma kaynağında liste <p>• X</p> olmayabilir). */
+function htmlToPlainLines(html: string): string {
+  const withNewlines = html
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/p>/gi, "\n")
+    .replace(/<\/div>/gi, "\n")
+    .replace(/<\/li>/gi, "\n")
+    .replace(/<li[^>]*>/gi, "\n");
+  const text = withNewlines.replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"');
+  return text.replace(/\n{2,}/g, "\n").trim();
 }
 
 /** HTML'deki paragraf/div madde satırlarını gerçek <ul><li> listesine çevirir. */
@@ -153,22 +198,47 @@ export function RichTextEditor({
         if (!ed || !event.clipboardData) return false;
         const html = event.clipboardData.getData("text/html");
         const text = event.clipboardData.getData("text/plain");
-        let listHtml = "";
-        if (html && html.trim()) {
+        let insertHtml = "";
+
+        if (text && text.trim()) {
+          const lines = text.split(/\r?\n/).map((l) => l.trim());
+          let consecutiveListCount = 0;
+          for (const line of lines) {
+            if (isListLikeLine(line)) consecutiveListCount++;
+            else consecutiveListCount = 0;
+            if (consecutiveListCount >= 2) break;
+          }
+          if (consecutiveListCount >= 2) {
+            insertHtml = mixedTextToHtml(text);
+          }
+        }
+
+        if (!insertHtml && html && html.trim()) {
           let out = html;
           if (/class="[^"]*Mso|<\/?w:|<\/?o:/i.test(out)) out = cleanWordHtml(out);
           out = normalizePastedHtml(out);
           out = convertListLikeBlocksToLists(out);
-          if (/<ul[\s>]/.test(out) && /<li[\s>]/.test(out)) listHtml = out;
+          if (/<ul[\s>]/.test(out) && /<li[\s>]/.test(out)) insertHtml = out;
+          if (!insertHtml) {
+            const fromHtml = htmlToPlainLines(html);
+            const lines = fromHtml.split(/\n/).map((l) => l.trim());
+            let run = 0;
+            for (const line of lines) {
+              if (isListLikeLine(line)) run++;
+              else run = 0;
+              if (run >= 2) break;
+            }
+            if (run >= 2) insertHtml = mixedTextToHtml(fromHtml);
+          }
         }
-        if (!listHtml && text && text.trim()) {
+        if (!insertHtml && text && text.trim()) {
           const lines = text.split(/\r?\n/).filter((l) => l.trim());
           const listLikeCount = lines.filter((l) => isListLikeLine(l)).length;
-          if (listLikeCount >= 2) listHtml = plainTextToListHtml(text);
+          if (listLikeCount >= 2) insertHtml = plainTextToListHtml(text);
         }
-        if (listHtml) {
+        if (insertHtml) {
           event.preventDefault();
-          ed.chain().focus().insertContent(listHtml).run();
+          ed.chain().focus().insertContent(insertHtml).run();
           return true;
         }
         return false;
@@ -202,13 +272,14 @@ export function RichTextEditor({
 }
 
 function EditorToolbar({ editor }: { editor: Editor }) {
-  const button = (onClick: () => void, label: string, active?: boolean) => (
+  const button = (onClick: () => void, label: string, active?: boolean, icon?: string) => (
     <button
       type="button"
       onClick={onClick}
       className={`rounded p-2 text-sm font-medium transition ${active ? "bg-gray-200 text-gray-900" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"}`}
       title={label}
     >
+      {icon && <span className="mr-1.5 text-base leading-none">{icon}</span>}
       {label}
     </button>
   );
@@ -232,9 +303,9 @@ function EditorToolbar({ editor }: { editor: Editor }) {
       {button(() => editor.chain().focus().toggleHeading({ level: 1 }).run(), "H1", editor.isActive("heading", { level: 1 }))}
       {button(() => editor.chain().focus().toggleHeading({ level: 2 }).run(), "H2", editor.isActive("heading", { level: 2 }))}
       {button(() => editor.chain().focus().toggleHeading({ level: 3 }).run(), "H3", editor.isActive("heading", { level: 3 }))}
-      <span className="mx-1 h-5 w-px bg-gray-300" />
-      {button(() => editor.chain().focus().toggleBulletList().run(), "Liste", editor.isActive("bulletList"))}
-      {button(() => editor.chain().focus().toggleOrderedList().run(), "Numara", editor.isActive("orderedList"))}
+      <span className="mx-1 h-5 w-px bg-gray-300" aria-hidden />
+      {button(() => editor.chain().focus().toggleBulletList().run(), "Madde işareti", editor.isActive("bulletList"), "•")}
+      {button(() => editor.chain().focus().toggleOrderedList().run(), "Numaralı liste", editor.isActive("orderedList"), "1.")}
       {button(() => editor.chain().focus().toggleBlockquote().run(), "Alıntı", editor.isActive("blockquote"))}
       {button(() => editor.chain().focus().toggleCodeBlock().run(), "Kod", editor.isActive("codeBlock"))}
       {button(() => editor.chain().focus().setHorizontalRule().run(), "Çizgi", false)}

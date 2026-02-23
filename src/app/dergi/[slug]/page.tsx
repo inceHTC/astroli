@@ -69,7 +69,7 @@ export default async function DergiArticlePage({
       <article className="editorial-article mx-auto max-w-4xl px-6 py-28">
         <Link
           href="/dergi"
-          className="text-sm text-black/40 transition hover:text-black"
+          className="text-sm text-black/50 transition hover:text-black"
         >
           ← Dergi
         </Link>
@@ -109,6 +109,7 @@ export default async function DergiArticlePage({
             <CelebrityMentions celebrities={celebrities}>
               <ArticleRenderer content={article.content} sanitized={safeHtml} />
             </CelebrityMentions>
+                 
             <ArticleShare title={article.title} slug={slug} baseUrl={baseUrl} />
           </div>
           {toc.length > 0 && (
@@ -121,7 +122,16 @@ export default async function DergiArticlePage({
         {related.length > 0 && (
           <RelatedArticles articles={related} className="mt-20" />
         )}
+<br /><br />
+        <Link
+          href="/dergi"
+          className="text-sm text-black/50 transition hover:text-black "
+        >
+          ← Dergiye dön
+        </Link>
       </article>
+
+    
     </div>
   );
 }

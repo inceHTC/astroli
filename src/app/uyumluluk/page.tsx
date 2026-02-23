@@ -7,6 +7,11 @@ import { Container } from "@/components/layout/Container";
 import { calculateSunSign } from "@/lib/astrology";
 import { ZODIAC_SIGNS, ELEMENT_LABELS, type Element } from "@/data/zodiac";
 
+function getTodayLocalYYYYMMDD(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 const ELEMENT_COMPAT: Record<Element, Record<Element, number>> = {
   fire: { fire: 80, earth: 60, air: 90, water: 40 },
   earth: { fire: 60, earth: 85, air: 50, water: 75 },
@@ -45,6 +50,7 @@ function getCompatibilityScore(
 export default function UyumlulukPage() {
   const [date1, setDate1] = useState("");
   const [date2, setDate2] = useState("");
+  const [error, setError] = useState("");
   const [result, setResult] = useState<{
     sign1: (typeof ZODIAC_SIGNS)[0];
     sign2: (typeof ZODIAC_SIGNS)[0];
@@ -53,7 +59,13 @@ export default function UyumlulukPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     if (!date1 || !date2) return;
+    const maxDate = getTodayLocalYYYYMMDD();
+    if (date1 > maxDate || date2 > maxDate) {
+      setError("Doğum tarihleri bugün veya geçmiş bir tarih olmalıdır.");
+      return;
+    }
 
     const [, m1, d1] = date1.split("-").map(Number);
     const [, m2, d2] = date2.split("-").map(Number);
@@ -96,22 +108,27 @@ export default function UyumlulukPage() {
         <Container size="sm">
           <form onSubmit={handleSubmit} className="rounded-2xl bg-white border border-gray-200 p-8 shadow-sm">
             <div className="space-y-6">
+              {error && (
+                <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>
+              )}
               <div>
-                <label className="block text-sm font-medium text-black">İlk Kişi</label>
+                <label className="block text-sm font-medium text-black">İlk Kişi (doğum tarihi)</label>
                 <input
                   type="date"
                   value={date1}
                   onChange={(e) => setDate1(e.target.value)}
+                  max={getTodayLocalYYYYMMDD()}
                   className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-black focus:border-[#5B3FFF] focus:ring-1 focus:ring-[#5B3FFF]/30 outline-none"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-black">İkinci Kişi</label>
+                <label className="block text-sm font-medium text-black">İkinci Kişi (doğum tarihi)</label>
                 <input
                   type="date"
                   value={date2}
                   onChange={(e) => setDate2(e.target.value)}
+                  max={getTodayLocalYYYYMMDD()}
                   className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-black focus:border-[#5B3FFF] focus:ring-1 focus:ring-[#5B3FFF]/30 outline-none"
                   required
                 />

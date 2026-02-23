@@ -22,12 +22,9 @@ const TIME_RANGES = [
   { value: "20:00-24:00", label: "20:00–24:00 (Gece Yarısı)" },
 ];
 
-function getDefaultDate(): string {
+function getTodayLocalYYYYMMDD(): string {
   const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
 interface BirthFormProps {
@@ -42,7 +39,7 @@ interface LocationsResponse {
 
 export function BirthForm({ onSubmit, isLoading = false }: BirthFormProps) {
   const [fullName, setFullName] = useState("");
-  const [birthDate, setBirthDate] = useState(getDefaultDate());
+  const [birthDate, setBirthDate] = useState("");
   const [birthTime, setBirthTime] = useState(DEFAULT_TIME);
   const [timeRange, setTimeRange] = useState(TIME_RANGES[2].value);
   const [isApproximate, setIsApproximate] = useState(false);
@@ -50,6 +47,7 @@ export function BirthForm({ onSubmit, isLoading = false }: BirthFormProps) {
   const [district, setDistrict] = useState("");
   const [provinces, setProvinces] = useState<string[]>([]);
   const [districtsByProvince, setDistrictsByProvince] = useState<Record<string, string[]>>({});
+  const [dateError, setDateError] = useState("");
 
   useEffect(() => {
     fetch("/api/birth-chart")
@@ -71,9 +69,15 @@ export function BirthForm({ onSubmit, isLoading = false }: BirthFormProps) {
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
+      setDateError("");
       if (!fullName.trim() || !province || !district) return;
       if (!isApproximate && !birthTime) return;
       if (isApproximate && !timeRange) return;
+      const maxDate = getTodayLocalYYYYMMDD();
+      if (birthDate && birthDate > maxDate) {
+        setDateError("Doğum tarihi bugün veya geçmiş bir tarih olmalıdır.");
+        return;
+      }
 
       onSubmit({
         fullName: fullName.trim(),
@@ -107,6 +111,9 @@ export function BirthForm({ onSubmit, isLoading = false }: BirthFormProps) {
         />
       </div>
 
+      {dateError && (
+        <p className="text-sm text-red-400 bg-red-500/10 rounded-lg px-3 py-2">{dateError}</p>
+      )}
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="birth-date" className="mb-1.5 block text-sm font-medium text-white/90">
@@ -117,6 +124,7 @@ export function BirthForm({ onSubmit, isLoading = false }: BirthFormProps) {
             type="date"
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
+            max={getTodayLocalYYYYMMDD()}
             required
             className="w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-[#8C7BFF] focus:ring-2 focus:ring-[#8C7BFF]/30"
           />

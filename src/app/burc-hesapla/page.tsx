@@ -12,9 +12,15 @@ import {
 import { ZODIAC_SIGNS, ELEMENT_LABELS } from "@/data/zodiac";
 import { ShareCard } from "@/components/share/ShareCard";
 
+function getTodayLocalYYYYMMDD(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 export default function BurcHesaplaPage() {
   const [birthDate, setBirthDate] = useState("");
   const [birthTime, setBirthTime] = useState("12:00");
+  const [error, setError] = useState("");
   const [result, setResult] = useState<{
     sun: (typeof ZODIAC_SIGNS)[0];
     rising: (typeof ZODIAC_SIGNS)[0];
@@ -23,7 +29,13 @@ export default function BurcHesaplaPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     if (!birthDate) return;
+    const maxDate = getTodayLocalYYYYMMDD();
+    if (birthDate > maxDate) {
+      setError("Doğum tarihi bugün veya geçmiş bir tarih olmalıdır.");
+      return;
+    }
 
     const [year, month, day] = birthDate.split("-").map(Number);
     const [hour, minute] = birthTime.split(":").map(Number);
@@ -80,6 +92,9 @@ export default function BurcHesaplaPage() {
 
             <div className="space-y-6">
 
+              {error && (
+                <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>
+              )}
               <div>
                 <label className="block text-sm font-medium text-black">
                   Doğum Tarihi
@@ -88,9 +103,11 @@ export default function BurcHesaplaPage() {
                   type="date"
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
+                  max={getTodayLocalYYYYMMDD()}
                   className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-black focus:border-[#5B3FFF] focus:ring-1 focus:ring-[#5B3FFF]/30 outline-none"
                   required
                 />
+                <p className="mt-1 text-xs text-gray-500">Gelecek tarih seçilemez.</p>
               </div>
 
               <div>

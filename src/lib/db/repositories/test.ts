@@ -10,6 +10,44 @@ export async function getPublishedTests() {
   });
 }
 
+/** Admin: tüm testler (yayında olanlar dahil). */
+export async function listAllTestsForAdmin() {
+  return prisma.test.findMany({
+    orderBy: { updatedAt: "desc" },
+    include: {
+      _count: { select: { questions: true } },
+    },
+  });
+}
+
+export async function getTestBySlugForAdmin(slug: string) {
+  return prisma.test.findUnique({
+    where: { slug },
+  });
+}
+
+export async function createTest(data: {
+  slug: string;
+  title: string;
+  description: string;
+  duration: string;
+  image?: string | null;
+  category?: string | null;
+  published?: boolean;
+}) {
+  return prisma.test.create({
+    data: {
+      slug: data.slug,
+      title: data.title,
+      description: data.description,
+      duration: data.duration,
+      image: data.image ?? undefined,
+      category: data.category ?? undefined,
+      published: data.published ?? false,
+    },
+  });
+}
+
 export async function getTestBySlug(slug: string) {
   return prisma.test.findFirst({
     where: { slug, published: true },

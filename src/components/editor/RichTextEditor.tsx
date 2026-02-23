@@ -297,6 +297,27 @@ function EditorToolbar({ editor }: { editor: Editor }) {
     if (url) editor.chain().focus().setImage({ src: url }).run();
   };
 
+  const wrapSelectionInList = (tag: "ul" | "ol") => {
+    const { state } = editor;
+    let { from, to } = state.selection;
+    if (from === to) {
+      const $pos = state.selection.$from;
+      from = $pos.start();
+      to = $pos.end();
+    }
+    const text = state.doc.textBetween(from, to, "\n");
+    const lines = text.split(/\n/).map((l) => l.trim()).filter(Boolean);
+    const escape = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    if (lines.length === 0) {
+      const listHtml = tag === "ul" ? "<ul><li></li></ul>" : "<ol><li></li></ol>";
+      editor.chain().focus().insertContent(listHtml).run();
+      return;
+    }
+    const lis = lines.map((line) => `<li>${escape(line)}</li>`).join("");
+    const listHtml = tag === "ul" ? `<ul>${lis}</ul>` : `<ol>${lis}</ol>`;
+    editor.chain().deleteRange({ from, to }).insertContentAt(from, listHtml).focus().run();
+  };
+
   return (
     <div className="editor-toolbar flex-shrink-0 flex flex-wrap items-center gap-1 border-b border-gray-200 bg-gray-50/80 px-3 py-2">
       {button(() => editor.chain().focus().toggleBold().run(), "Kalın", editor.isActive("bold"))}
@@ -307,8 +328,8 @@ function EditorToolbar({ editor }: { editor: Editor }) {
       {button(() => editor.chain().focus().toggleHeading({ level: 2 }).run(), "H2", editor.isActive("heading", { level: 2 }))}
       {button(() => editor.chain().focus().toggleHeading({ level: 3 }).run(), "H3", editor.isActive("heading", { level: 3 }))}
       <span className="mx-1 h-5 w-px bg-gray-300" aria-hidden />
-      {button(() => editor.chain().focus().toggleBulletList().run(), "Madde işareti", editor.isActive("bulletList"), "•")}
-      {button(() => editor.chain().focus().toggleOrderedList().run(), "Numaralı liste", editor.isActive("orderedList"), "1.")}
+      {button(() => wrapSelectionInList("ul"), "Madde işareti", editor.isActive("bulletList"), "•")}
+      {button(() => wrapSelectionInList("ol"), "Numaralı liste", editor.isActive("orderedList"), "1.")}
       {button(() => editor.chain().focus().toggleBlockquote().run(), "Alıntı", editor.isActive("blockquote"))}
       {button(() => editor.chain().focus().toggleCodeBlock().run(), "Kod", editor.isActive("codeBlock"))}
       {button(() => editor.chain().focus().setHorizontalRule().run(), "Çizgi", false)}

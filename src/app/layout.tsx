@@ -27,8 +27,11 @@ export const metadata: Metadata = {
   
   metadataBase: new URL(getBaseUrl()),
   icons: {
-  icon: "/favicon.png",
-},
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    apple: "/favicon.png",
+  },
   title: {
     default: defaultTitle,
     template: `%s | ${siteName}`,

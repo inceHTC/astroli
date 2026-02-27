@@ -142,17 +142,17 @@ const ELEMENT_RESULTS: TestResult[] = [
       developmentSuggestion: "Duygusal anlara bilinçli yer açmak ve karar anlarında bedeni dinlemek faydalı olabilir.",
     }
   ),
-  elementResult(
+elementResult(
     "water",
     "Su Elementi",
     "Sezgisel & Derin",
     "Duygusal derinlik ve empati bu profilde sıklıkla görülür. İlişkilerde bağ ve anlam önemli olabilir; sanat ve semboller anlamlı gelebilir.",
-    ["Empati", "Sezgi", "Yaratıcılık", "Bağlılık", "Derinlik"],
+    ["Empati", "Sezgi", "Hayal Gücü", "Bağlılık", "Derinlik"],
     "Aşırı hassasiyet veya sınır koymakta zorlanma; geçmişe takılma riski.",
     {
       behaviorTendency: "Empati ve sezgi bu profilde sıklıkla öne çıkar. Derin bağlar ve anlam arayışı görülebilir.",
       stressResponse: "Stres altında içe dönme veya duyguları işleme eğilimi gözlenebilir.",
-      strength: "Empati, yaratıcılık ve bağlılık güçlü yanlar arasında sayılabilir.",
+      strength: "Empati, ilham ve bağlılık güçlü yanlar arasında sayılabilir.",
       riskArea: "Sınır koyamama veya duygusal yükün ağır gelmesi gelişim alanı olabilir.",
       developmentSuggestion: "Sınırları netleştirmek ve duygusal yükü paylaşmak dengeyi artırabilir.",
     }
@@ -311,8 +311,8 @@ export const COMMUNICATION_TEST: PersonalityTest = {
 const CAREER_RESULTS: TestResult[] = [
   elementResult("fire", "Girişimci Ruh", "Ateşin Kariyeri", "Liderlik ve risk senin doğanda. Yeni projeler, satış veya kendi işin sana uygun. Hızlı karar ve aksiyon isteyen ortamlar seni besler.", ["Liderlik", "Cesaret", "Enerji", "Girişimcilik", "Motivasyon"], "Sabırsızlık ve detaylara tahammülsüzlük; yanlış risk alabilirsin."),
   elementResult("earth", "İstikrarlı Profesyonel", "Toprağın Kariyeri", "Güvenilir, planlı ve sonuç odaklısın. Finans, operasyon veya proje yönetimi sana uygun. Uzun vadeli kariyer ve güvenli gelir önemli.", ["Sorumluluk", "Planlama", "Güvenilirlik", "Disiplin", "Sonuç"], "Değişime direnç ve aşırı riskten kaçınma."),
-  elementResult("air", "Fikir ve İletişim İnsanı", "Havanın Kariyeri", "Yaratıcılık, iletişim ve analiz güçlü. Pazarlama, medya, eğitim veya danışmanlık sana yakın. Esnek ve öğrenmeye açık ortamlar seni mutlu eder.", ["Yaratıcılık", "İletişim", "Analiz", "Uyum", "Öğrenme"], "Detay ve takip konusunda dağınıklık; kararsızlık."),
-  elementResult("water", "İnsan Odaklı ve Yaratıcı", "Suyun Kariyeri", "İnsanlara dokunan işler senin için anlamlı. Psikoloji, sanat, sağlık veya hizmet sektörü uygun. Anlam ve duygusal tatmin önemli.", ["Empati", "Yaratıcılık", "Sezgi", "İşbirliği", "Anlam"], "Sınır koyamama ve duygusal yük; tükenebilirsin."),
+  elementResult("air", "Fikir ve İletişim İnsanı", "Havanın Kariyeri", "Özgünlük, iletişim ve analiz gücün yüksek. Pazarlama, medya, eğitim veya danışmanlık sana yakın. Esnek ve öğrenmeye açık ortamlar seni mutlu eder.", ["Özgünlük", "İletişim", "Analiz", "Uyum", "Öğrenme"], "Detay ve takip konusunda dağınıklık; kararsızlık."),
+  elementResult("water", "İnsan Odaklı ve Vizyoner", "Suyun Kariyeri", "İnsanlara dokunan işler senin için anlamlı. Psikoloji, sanat, sağlık veya hizmet sektörü uygun. Anlam ve duygusal tatmin önemli.", ["Empati", "İlham", "Sezgi", "İşbirliği", "Anlam"], "Sınır koyamama ve duygusal yük; tükenebilirsin."),
 ];
 
 export const CAREER_TEST: PersonalityTest = {
@@ -324,11 +324,11 @@ export const CAREER_TEST: PersonalityTest = {
   questionCount: 10,
   category: "career",
   image: "/tests/career.png",
-  questions: [
+questions: [
     { id: "q1", text: "İş ortamında en rahat hissettiğin rol?", options: [{ id: "a", text: "Lider, karar verici", scores: el(2,0,0,0) }, { id: "b", text: "Planlayıcı, organize eden", scores: el(0,2,0,0) }, { id: "c", text: "Fikir üreten, iletişim", scores: el(0,0,2,0) }, { id: "d", text: "Takımı destekleyen, uyum sağlayan", scores: el(0,0,0,2) }] },
     { id: "q2", text: "Para harcarken genelde?", options: [{ id: "a", text: "Anlık keyif, cesur harcarım", scores: el(2,0,0,0) }, { id: "b", text: "Planlı, birikim yaparım", scores: el(0,2,0,0) }, { id: "c", text: "Denge ararım, bazen spontane", scores: el(0,0,2,0) }, { id: "d", text: "Değer verdiğim şeylere harcarım", scores: el(0,0,0,2) }] },
     { id: "q3", text: "Terfi / fırsat geldiğinde?", options: [{ id: "a", text: "Hemen kapar, risk alırım", scores: el(0,0,0,2) }, { id: "b", text: "Artıları eksileri değerlendiririm", scores: el(0,0,2,0) }, { id: "c", text: "Yeni deneyim olarak görürüm", scores: el(0,2,0,0) }, { id: "d", text: "Ekip ve ortam uyumuna bakarım", scores: el(2,0,0,0) }] },
-    { id: "q4", text: "En iyi çalıştığın ortam?", options: [{ id: "a", text: "Rekabetçi, hedefli", scores: el(2,0,0,0) }, { id: "b", text: "Düzenli, net kurallı", scores: el(0,2,0,0) }, { id: "c", text: "Esnek, yaratıcı", scores: el(0,0,2,0) }, { id: "d", text: "İşbirlikçi, sıcak", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "En iyi çalıştığın ortam?", options: [{ id: "a", text: "Rekabetçi, hedefli", scores: el(2,0,0,0) }, { id: "b", text: "Düzenli, net kurallı", scores: el(0,2,0,0) }, { id: "c", text: "Esnek, yenilikçi", scores: el(0,0,2,0) }, { id: "d", text: "İşbirlikçi, sıcak", scores: el(0,0,0,2) }] },
     { id: "q5", text: "Başarısızlık sonrası?", options: [{ id: "a", text: "Hemen yeni hedefe geçerim", scores: el(2,0,0,0) }, { id: "b", text: "Ders çıkarır, planı revize ederim", scores: el(0,2,0,0) }, { id: "c", text: "Analiz eder, farklı denerim", scores: el(0,0,2,0) }, { id: "d", text: "Duygusal toparlanır, tekrar denerim", scores: el(0,0,0,2) }] },
     { id: "q6", text: "Para senin için ne ifade eder?", options: [{ id: "a", text: "Özgürlük ve fırsat", scores: el(0,0,0,2) }, { id: "b", text: "Güvenlik ve istikrar", scores: el(0,0,2,0) }, { id: "c", text: "Seçenek ve deneyim", scores: el(0,2,0,0) }, { id: "d", text: "Güven ve huzur", scores: el(2,0,0,0) }] },
     { id: "q7", text: "Takımda en çok ne yaparsın?", options: [{ id: "a", text: "Yönlendirir, motive ederim", scores: el(2,0,0,0) }, { id: "b", text: "Görevleri dağıtır, takip ederim", scores: el(0,2,0,0) }, { id: "c", text: "Fikir üretir, sunarım", scores: el(0,0,2,0) }, { id: "d", text: "Uyum sağlar, destek veririm", scores: el(0,0,0,2) }] },
@@ -345,7 +345,7 @@ const STRESS_RESULTS: TestResult[] = [
   elementResult("fire", "Aksiyonla Başa Çıkma", "Ateşin Tepkisi", "Stres seni harekete geçirir. Spor, işe gömülme veya sorunu çözmek seni rahatlatır. Uzun süre pasif kalamazsın.", ["Enerji", "Çözüm odaklılık", "Cesaret", "Hız", "Liderlik"], "Öfke patlamaları ve sabırsızlık; bazen yıkıcı çıkışlar."),
   elementResult("earth", "Düzen ve Kontrolle Başa Çıkma", "Toprağın Tepkisi", "Rutin, plan ve kontrol seni sakinleştirir. Listeler, hedefler ve adım adım ilerleme stresi azaltır. Güvenli alan önemli.", ["Düzen", "Sabır", "Kontrol", "Dayanıklılık", "Planlama"], "Esneklik azlığı; kontrol kaybında daha çok stres."),
   elementResult("air", "Sohbet ve Analizle Başa Çıkma", "Havanın Tepkisi", "Konuşmak, yazmak veya mantıksal analiz seni rahatlatır. Distans alıp konuyu farklı açıdan görmek iyi gelir.", ["Mantık", "İletişim", "Esneklik", "Mizah", "Perspektif"], "Duyguları erteleyebilme; bazen yüzeysel kalma."),
-  elementResult("water", "İçe Dönerek ve Bağ Kurarak Başa Çıkma", "Suyun Tepkisi", "Yalnız zaman, doğa, sanat veya güvendiğin biriyle konuşmak seni toparlar. Duyguları hissetmek ve ifade etmek önemli.", ["Empati", "Sezgi", "İçe dönüş", "Bağ", "Yaratıcılık"], "Aşırı hassasiyet ve içe kapanma; tükenme riski."),
+  elementResult("water", "İçe Dönerek ve Bağ Kurarak Başa Çıkma", "Suyun Tepkisi", "Yalnız zaman, doğa, sanat veya güvendiğin biriyle konuşmak seni toparlar. Duyguları hissetmek ve ifade etmek önemli.", ["Empati", "Sezgi", "İçe dönüş", "Bağ", "Sanatsal İfade"], "Aşırı hassasiyet ve içe kapanma; tükenme riski."),
 ];
 
 export const STRESS_TEST: PersonalityTest = {
@@ -361,7 +361,7 @@ export const STRESS_TEST: PersonalityTest = {
     { id: "q1", text: "Stresli bir günde ilk yaptığın şey?", options: [{ id: "a", text: "Hareket ederim, spor veya yürüyüş", scores: el(2,0,0,0) }, { id: "b", text: "Liste yapar, planlarım", scores: el(0,2,0,0) }, { id: "c", text: "Birine anlatır veya yazarım", scores: el(0,0,2,0) }, { id: "d", text: "Sessiz bir yere çekilirim", scores: el(0,0,0,2) }] },
     { id: "q2", text: "Beklenmedik kötü haber alınca?", options: [{ id: "a", text: "Hemen ne yapacağımı düşünürüm", scores: el(2,0,0,0) }, { id: "b", text: "Sakin kalıp adımlar planlarım", scores: el(0,2,0,0) }, { id: "c", text: "Analiz eder, seçenekleri tartarım", scores: el(0,0,2,0) }, { id: "d", text: "Şok olur, zaman isterim", scores: el(0,0,0,2) }] },
     { id: "q3", text: "Uyku stresle nasıl etkilenir?", options: [{ id: "a", text: "Uyuyamıyorum, enerji patlaması", scores: el(0,0,0,2) }, { id: "b", text: "Rutin bozulunca zorlanırım", scores: el(0,0,2,0) }, { id: "c", text: "Kafam meşgul, düşünürüm", scores: el(0,2,0,0) }, { id: "d", text: "Kabusa benzer, duygusal", scores: el(2,0,0,0) }] },
-    { id: "q4", text: "En çok ne stres yaratır?", options: [{ id: "a", text: "Hareketsizlik ve belirsizlik", scores: el(2,0,0,0) }, { id: "b", text: "Düzensizlik ve güvensizlik", scores: el(0,2,0,0) }, { id: "c", text: "Kısıtlanma ve sıkıcılık", scores: el(0,0,2,0) }, { id: "d", text: "Çatışma ve reddedilme", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "En çok ne stres yapar?", options: [{ id: "a", text: "Hareketsizlik ve belirsizlik", scores: el(2,0,0,0) }, { id: "b", text: "Düzensizlik ve güvensizlik", scores: el(0,2,0,0) }, { id: "c", text: "Kısıtlanma ve sıkıcılık", scores: el(0,0,2,0) }, { id: "d", text: "Çatışma ve reddedilme", scores: el(0,0,0,2) }] },
     { id: "q5", text: "Sakinleşmek için ne yaparsın?", options: [{ id: "a", text: "Fiziksel aktivite", scores: el(2,0,0,0) }, { id: "b", text: "Düzen, temizlik, rutin", scores: el(0,2,0,0) }, { id: "c", text: "Sohbet, kitap, podcast", scores: el(0,0,2,0) }, { id: "d", text: "Müzik, banyo, yalnız zaman", scores: el(0,0,0,2) }] },
     { id: "q6", text: "Stres anında çevrene nasıl davranırsın?", options: [{ id: "a", text: "Sinirli veya sabırsız", scores: el(0,0,0,2) }, { id: "b", text: "Mesafeli, işe odaklı", scores: el(0,0,2,0) }, { id: "c", text: "Konuşkan veya dağınık", scores: el(0,2,0,0) }, { id: "d", text: "İçe kapanık veya ağlamaklı", scores: el(2,0,0,0) }] },
     { id: "q7", text: "Kontrolü kaybettiğinde?", options: [{ id: "a", text: "Hemen kontrolü almaya çalışırım", scores: el(2,0,0,0) }, { id: "b", text: "Küçük adımlarla toparlanırım", scores: el(0,2,0,0) }, { id: "c", text: "Perspektif değiştiririm", scores: el(0,0,2,0) }, { id: "d", text: "Duygularıma izin veririm", scores: el(0,0,0,2) }] },
@@ -444,7 +444,7 @@ const SHADOW_RESULTS: TestResult[] = [
   elementResult("fire", "Gölge Ateş", "Gizli Lider", "Baskı altında öfke veya sabırsızlık çıkabilir; ama aynı enerji seni dönüştürüp lider yapar. Gizli gücün: krizde harekete geçirme.", ["Dönüşüm", "Cesaret", "İlham", "Liderlik", "Enerji"], "Kontrol kaybında yıkıcı olma; ego ve öfke."),
   elementResult("earth", "Gölge Toprak", "Gizli Dayanıklılık", "Değişime kapalı veya inatçı görünebilirsin; ama aynı yapı dayanıklılık ve güven verir. Gizli gücün: her koşulda ayakta kalma.", ["Dayanıklılık", "Güven", "Sabır", "İstikrar", "Sorumluluk"], "Katılık ve duygusal soğukluk."),
   elementResult("air", "Gölge Hava", "Gizli Uyum", "Dağınık veya yüzeysel görünebilirsin; ama aynı zihin hızlı öğrenme ve uyum sağlar. Gizli gücün: her ortama uyum.", ["Uyum", "Öğrenme", "İletişim", "Esneklik", "Perspektif"], "Kararsızlık ve bağlanma korkusu."),
-  elementResult("water", "Gölge Su", "Gizli Sezgi", "Aşırı hassas veya kapalı görünebilirsin; ama aynı derinlik sezgi ve yaratıcılık verir. Gizli gücün: görünmeyeni hissetme.", ["Sezgi", "Yaratıcılık", "Empati", "Derinlik", "Dönüşüm"], "Aşırı duygusallık ve sınır kaybı."),
+  elementResult("water", "Gölge Su", "Gizli Sezgi", "Aşırı hassas veya kapalı görünebilirsin; ama aynı derinlik sezgi ve ilham verir. Gizli gücün: görünmeyeni hissetme.", ["Sezgi", "Hayal Gücü", "Empati", "Derinlik", "Dönüşüm"], "Aşırı duygusallık ve sınır kaybı."),
 ];
 
 export const SHADOW_TEST: PersonalityTest = {
@@ -477,7 +477,7 @@ const PRIORITY_RESULTS: TestResult[] = [
   elementResult("fire", "Hedef ve Macera", "Ateşin Önceliği", "Hayatta hedef, başarı ve heyecan seni motive eder. Durgunluk seni yorar; anlamı aksiyonda bulursun.", ["Hedef", "Macera", "Başarı", "Özgürlük", "İlham"], "Sürekli bir sonraki hedefe koşma; anı kaçırma."),
   elementResult("earth", "Güvenlik ve Aile", "Toprağın Önceliği", "Güvenlik, aile ve istikrar senin için merkezde. Uzun vadeli plan ve somut sonuçlar seni mutlu eder.", ["Güvenlik", "Aile", "İstikrar", "Sorumluluk", "Plan"], "Aşırı güvenlik arayışı; riskten kaçınma."),
   elementResult("air", "Öğrenme ve Özgürlük", "Havanın Önceliği", "Öğrenmek, keşfetmek ve özgür olmak seni besler. İlişkiler ve fikirler hayatına anlam katar.", ["Öğrenme", "Özgürlük", "İletişim", "Çeşitlilik", "Merak"], "Köksüzlük ve kararsızlık."),
-  elementResult("water", "Sevgi ve Anlam", "Suyun Önceliği", "Sevgi, anlam ve derin bağlar senin için öncelikli. İç dünya ve duygusal tatmin hayatına yön verir.", ["Sevgi", "Anlam", "Bağ", "Yaratıcılık", "İç dünya"], "Dış dünyadan kopma; aşırı içe dönüklük."),
+  elementResult("water", "Sevgi ve Anlam", "Suyun Önceliği", "Sevgi, anlam ve derin bağlar senin için öncelikli. İç dünya ve duygusal tatmin hayatına yön verir.", ["Sevgi", "Anlam", "Bağ", "Esin", "İç dünya"], "Dış dünyadan kopma; aşırı içe dönüklük."),
 ];
 
 export const PRIORITY_TEST: PersonalityTest = {
@@ -537,38 +537,40 @@ export const COMPATIBILITY_TEST: PersonalityTest = {
   resultTemplates: COMPATIBILITY_RESULTS,
 };
 
-/* ================= TEST 11: YARATICILIK VE SANAT (10 soru) ================= */
+/* ================= TEST 11:görsel VE SANAT (10 soru) ================= */
 
 const CREATIVITY_RESULTS: TestResult[] = [
-  elementResult("fire", "Tutkulu Yaratıcı", "Ateşin Sanatı", "Yaratıcılığın cesur ve enerjik. Büyük fikirler, dramatik ifade ve performans sana yakın. Sanatında tutku ve güç var; risk almayı seversin.", ["Cesaret", "Enerji", "Dramatik ifade", "Liderlik", "Tutku"], "Sabırsızlık ve aşırı ego; detayları atlayabilirsin."),
-  elementResult("earth", "Düzenli ve Somut Yaratıcı", "Toprağın Sanatı", "Yaratıcılığın pratik ve somut. El işi, mimari, tasarım veya planlı projeler sana uygun. Detay ve kalite önemli; eserlerin kalıcı olur.", ["Pratiklik", "Detay", "Kalite", "Sabır", "Somutluk"], "Esneklik azlığı ve riskten kaçınma; bazen sınırlı kalabilirsin."),
-  elementResult("air", "Fikir ve Konsept Yaratıcısı", "Havanın Sanatı", "Yaratıcılığın kavramsal ve zihinsel. Fikir üretmek, yazmak veya yenilikçi çözümler senin alanın. Çeşitlilik ve deney seni besler.", ["Fikir", "Yenilik", "İletişim", "Esneklik", "Kavram"], "Tamamlama zorluğu ve dağınıklık; bazen yüzeysel kalabilirsin."),
-  elementResult("water", "Duygusal ve Sezgisel Yaratıcı", "Suyun Sanatı", "Yaratıcılığın duygusal ve sezgisel. Müzik, şiir, görsel sanat veya iç dünyayı ifade etmek sana yakın. Sanatın derin ve anlamlı.", ["Sezgi", "Duygu", "Derinlik", "Empati", "Yaratıcılık"], "Aşırı hassasiyet ve içe kapanma; bazen tükenebilirsin."),
+  elementResult("fire", "Tutkulu Sanatçı", "Ateşin Sanatı", "Sanatsal ifaden cesur ve enerjik. Büyük fikirler, dramatik anlatım ve performans sana yakın. Eserlerinde tutku ve güç var; risk almayı seversin.", ["Cesaret", "Enerji", "Dramatik ifade", "Liderlik", "Tutku"], "Sabırsızlık ve aşırı ego; detayları atlayabilirsin."),
+  elementResult("earth", "Düzenli ve Somut Üretici", "Toprağın Sanatı", "Üretimlerin pratik ve somut. El işi, mimari, tasarım veya planlı projeler sana uygun. Detay ve kalite önemli; eserlerin kalıcı olur.", ["Pratiklik", "Detay", "Kalite", "Sabır", "Somutluk"], "Esneklik azlığı ve riskten kaçınma; bazen sınırlı kalabilirsin."),
+  elementResult("air", "Fikir ve Konsept Mimarı", "Havanın Sanatı", "Yaklaşımın kavramsal ve zihinsel. Fikir geliştirmek, yazmak veya yenilikçi çözümler senin alanın. Çeşitlilik ve deney seni besler.", ["Fikir", "Yenilik", "İletişim", "Esneklik", "Kavram"], "Tamamlama zorluğu ve dağınıklık; bazen yüzeysel kalabilirsin."),
+  elementResult("water", "Duygusal ve Sezgisel Zihin", "Suyun Sanatı", "İç dünyan oldukça duygusal ve sezgisel. Müzik, şiir, görsel sanat veya derin anlamları ifade etmek sana yakın. Sanatın etkileyici ve derin.", ["Sezgi", "Duygu", "Derinlik", "Empati", "Hayal Gücü"], "Aşırı hassasiyet ve içe kapanma; bazen tükenebilirsin."),
 ];
 
 export const CREATIVITY_TEST: PersonalityTest = {
   id: "creativity-art",
-  slug: "yaraticilik-sanat",
-  title: "Yaratıcılık ve Sanat Tarzın",
-  description: "Yaratıcı yönün nasıl? Hangi sanat formu sana uygun? Bu test yaratıcılık enerjini ve sanatsal ifade tarzını ortaya çıkarır.",
+  slug: "sanatsal-ifade-ve-tarzin",
+  title: "Sanatsal Vizyonun ve Tarzın",
+  description: "İlham dolu yönün nasıl? Hangi sanat formu sana uygun? Bu test içindeki üretim enerjisini ve sanatsal ifade tarzını ortaya çıkarır.",
   duration: "5–6 dk",
   questionCount: 10,
   category: "spiritual",
   image: "/tests/aura.png",
   questions: [
-    { id: "q1", text: "Yaratıcı projeye başlarken nasıl yaklaşırsın?", options: [{ id: "a", text: "Büyük fikirle başlar, enerjiyle ilerlerim", scores: el(2,0,0,0) }, { id: "b", text: "Plan yapar, adım adım ilerlerim", scores: el(0,2,0,0) }, { id: "c", text: "Fikirleri toplar, deneyerek ilerlerim", scores: el(0,0,2,0) }, { id: "d", text: "Hislerime güvenir, içimden geldiği gibi", scores: el(0,0,0,2) }] },
+    { id: "q1", text: "Yeni bir projeye başlarken nasıl yaklaşırsın?", options: [{ id: "a", text: "Büyük fikirle başlar, enerjiyle ilerlerim", scores: el(2,0,0,0) }, { id: "b", text: "Plan yapar, adım adım ilerlerim", scores: el(0,2,0,0) }, { id: "c", text: "Fikirleri toplar, deneyerek ilerlerim", scores: el(0,0,2,0) }, { id: "d", text: "Hislerime güvenir, içimden geldiği gibi", scores: el(0,0,0,2) }] },
     { id: "q2", text: "En çok hangi sanat formu ilgini çeker?", options: [{ id: "a", text: "Performans, tiyatro, dans", scores: el(2,0,0,0) }, { id: "b", text: "El işi, mimari, tasarım", scores: el(0,2,0,0) }, { id: "c", text: "Yazı, konsept, yenilik", scores: el(0,0,2,0) }, { id: "d", text: "Müzik, şiir, görsel sanat", scores: el(0,0,0,2) }] },
-    { id: "q3", text: "Yaratıcılıkta en çok ne seni besler?", options: [{ id: "a", text: "Heyecan ve risk", scores: el(0,0,0,2) }, { id: "b", text: "Malzeme ve teknik", scores: el(0,0,2,0) }, { id: "c", text: "Fikir ve kavram", scores: el(0,2,0,0) }, { id: "d", text: "Duygu ve sezgi", scores: el(2,0,0,0) }] },
-    { id: "q4", text: "Yaratıcı tıkanıklıkta ne yaparsın?", options: [{ id: "a", text: "Farklı bir şeye geçer, enerji ararım", scores: el(2,0,0,0) }, { id: "b", text: "Tekniğe döner, pratik yaparım", scores: el(0,2,0,0) }, { id: "c", text: "Araştırır, ilham ararım", scores: el(0,0,2,0) }, { id: "d", text: "İçime döner, duyguları dinlerim", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "İlham noktasında en çok ne seni besler?", options: [{ id: "a", text: "Heyecan ve risk", scores: el(0,0,0,2) }, { id: "b", text: "Malzeme ve teknik", scores: el(0,0,2,0) }, { id: "c", text: "Fikir ve kavram", scores: el(0,2,0,0) }, { id: "d", text: "Duygu ve sezgi", scores: el(2,0,0,0) }] },
+    { id: "q4", text: "Zihinsel bir tıkanıklık yaşadığında ne yaparsın?", options: [{ id: "a", text: "Farklı bir şeye geçer, enerji ararım", scores: el(2,0,0,0) }, { id: "b", text: "Tekniğe döner, pratik yaparım", scores: el(0,2,0,0) }, { id: "c", text: "Araştırır, yeni ufuklar ararım", scores: el(0,0,2,0) }, { id: "d", text: "İçime döner, duyguları dinlerim", scores: el(0,0,0,2) }] },
     { id: "q5", text: "Eserini paylaşırken nasıl hissedersin?", options: [{ id: "a", text: "Gururlu, performans isterim", scores: el(2,0,0,0) }, { id: "b", text: "Güvenli, kaliteyi gösteririm", scores: el(0,2,0,0) }, { id: "c", text: "Meraklı, geri bildirim isterim", scores: el(0,0,2,0) }, { id: "d", text: "Kırılgan, samimiyet ararım", scores: el(0,0,0,2) }] },
-    { id: "q6", text: "Yaratıcılıkta en güçlü yönün?", options: [{ id: "a", text: "Cesaret ve orijinallik", scores: el(0,0,0,2) }, { id: "b", text: "Teknik ve detay", scores: el(0,0,2,0) }, { id: "c", text: "Fikir ve yenilik", scores: el(0,2,0,0) }, { id: "d", text: "Duygu ve derinlik", scores: el(2,0,0,0) }] },
+    { id: "q6", text: "Sanatsal süreçte en güçlü yönün?", options: [{ id: "a", text: "Cesaret ve orijinallik", scores: el(0,0,0,2) }, { id: "b", text: "Teknik ve detay", scores: el(0,0,2,0) }, { id: "c", text: "Fikir ve yenilik", scores: el(0,2,0,0) }, { id: "d", text: "Duygu ve derinlik", scores: el(2,0,0,0) }] },
     { id: "q7", text: "Eleştiri aldığında?", options: [{ id: "a", text: "Savunur, kendi yoluma giderim", scores: el(2,0,0,0) }, { id: "b", text: "Mantıklı olanı değerlendiririm", scores: el(0,2,0,0) }, { id: "c", text: "Tartışır, farklı bakış alırım", scores: el(0,0,2,0) }, { id: "d", text: "İncinirim ama içselleştiririm", scores: el(0,0,0,2) }] },
-    { id: "q8", text: "Yaratıcı işbirliğinde rolün?", options: [{ id: "a", text: "Lider, vizyon sunarım", scores: el(2,0,0,0) }, { id: "b", text: "Organize eder, uygularım", scores: el(0,2,0,0) }, { id: "c", text: "Fikir üretir, tartışırım", scores: el(0,0,2,0) }, { id: "d", text: "Uyum sağlar, duygusal destek veririm", scores: el(0,0,0,2) }] },
-    { id: "q9", text: "Yaratıcılık senin için ne ifade eder?", options: [{ id: "a", text: "Özgürlük ve kendini ifade", scores: el(0,0,0,2) }, { id: "b", text: "Somut sonuç ve kalite", scores: el(0,0,2,0) }, { id: "c", text: "Keşif ve öğrenme", scores: el(0,2,0,0) }, { id: "d", text: "Duygusal ifade ve anlam", scores: el(2,0,0,0) }] },
-    { id: "q10", text: "Yaratıcı projeyi tamamlarken?", options: [{ id: "a", text: "Hızlı bitirir, yeniye geçerim", scores: el(2,0,0,0) }, { id: "b", text: "Detayları bitirir, mükemmelleştiririm", scores: el(0,2,0,0) }, { id: "c", text: "Gerekirse revize eder, geliştiririm", scores: el(0,0,2,0) }, { id: "d", text: "Duygusal olarak bağlanır, zor bırakırım", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Ortak bir çalışmada rolün?", options: [{ id: "a", text: "Lider, vizyon sunarım", scores: el(2,0,0,0) }, { id: "b", text: "Organize eder, uygularım", scores: el(0,2,0,0) }, { id: "c", text: "Fikir üretir, tartışırım", scores: el(0,0,2,0) }, { id: "d", text: "Uyum sağlar, duygusal destek veririm", scores: el(0,0,0,2) }] },
+    { id: "q9", text: "Özgün ifade senin için ne anlam taşır?", options: [{ id: "a", text: "Özgürlük ve kendini yansıtma", scores: el(0,0,0,2) }, { id: "b", text: "Somut sonuç ve kalite", scores: el(0,0,2,0) }, { id: "c", text: "Keşif ve öğrenme", scores: el(0,2,0,0) }, { id: "d", text: "Duygusal bağ ve anlam", scores: el(2,0,0,0) }] },
+    { id: "q10", text: "Bir projeyi tamamlarken?", options: [{ id: "a", text: "Hızlı bitirir, yeniye geçerim", scores: el(2,0,0,0) }, { id: "b", text: "Detayları bitirir, mükemmelleştiririm", scores: el(0,2,0,0) }, { id: "c", text: "Gerekirse revize eder, geliştiririm", scores: el(0,0,2,0) }, { id: "d", text: "Duygusal olarak bağlanır, zor bırakırım", scores: el(0,0,0,2) }] },
   ],
   resultTemplates: CREATIVITY_RESULTS,
 };
+
+
 
 /* ================= TEST 12: SAĞLIK VE WELLNESS (10 soru) ================= */
 
@@ -630,7 +632,7 @@ export const FINANCE_TEST: PersonalityTest = {
     { id: "q6", text: "Para kaybı yaşayınca?", options: [{ id: "a", text: "Hemen yeni fırsat ararım", scores: el(0,0,0,2) }, { id: "b", text: "Ders çıkarır, daha temkinli olurum", scores: el(0,0,2,0) }, { id: "c", text: "Analiz eder, strateji değiştiririm", scores: el(0,2,0,0) }, { id: "d", text: "Duygusal olarak etkilenirim", scores: el(2,0,0,0) }] },
     { id: "q7", text: "Para senin için ne ifade eder?", options: [{ id: "a", text: "Özgürlük ve fırsat", scores: el(2,0,0,0) }, { id: "b", text: "Güvenlik ve istikrar", scores: el(0,2,0,0) }, { id: "c", text: "Seçenek ve deneyim", scores: el(0,0,2,0) }, { id: "d", text: "Güven ve huzur", scores: el(0,0,0,2) }] },
     { id: "q8", text: "Bütçe yönetiminde?", options: [{ id: "a", text: "Genel plan, esnek", scores: el(2,0,0,0) }, { id: "b", text: "Detaylı takip, disiplinli", scores: el(0,2,0,0) }, { id: "c", text: "Kategorize, analiz ederim", scores: el(0,0,2,0) }, { id: "d", text: "Temel ihtiyaçlar, duygusal denge", scores: el(0,0,0,2) }] },
-    { id: "q9", text: "Para kazanmak için?", options: [{ id: "a", text: "Risk alır, girişimcilik", scores: el(0,0,0,2) }, { id: "b", text: "İstikrarlı gelir, güvenli iş", scores: el(0,0,2,0) }, { id: "c", text: "Çeşitli kaynak, esneklik", scores: el(0,2,0,0) }, { id: "d", text: "Anlamlı iş, değer yaratma", scores: el(2,0,0,0) }] },
+    { id: "q9", text: "Para kazanmak için?", options: [{ id: "a", text: "Risk alır, girişimcilik", scores: el(0,0,0,2) }, { id: "b", text: "İstikrarlı gelir, güvenli iş", scores: el(0,0,2,0) }, { id: "c", text: "Çeşitli kaynak, esneklik", scores: el(0,2,0,0) }, { id: "d", text: "Anlamlı iş, değer katma", scores: el(2,0,0,0) }] },
     { id: "q10", text: "Finansal hedefin?", options: [{ id: "a", text: "Büyük başarı ve özgürlük", scores: el(2,0,0,0) }, { id: "b", text: "Güvenli emeklilik ve istikrar", scores: el(0,2,0,0) }, { id: "c", text: "Esneklik ve çeşitlilik", scores: el(0,0,2,0) }, { id: "d", text: "Aile güvenliği ve huzur", scores: el(0,0,0,2) }] },
   ],
   resultTemplates: FINANCE_RESULTS,
@@ -693,7 +695,7 @@ export const SPIRITUALITY_TEST: PersonalityTest = {
     { id: "q3", text: "Ruhsal arayışta ne yaparsın?", options: [{ id: "a", text: "Liderlik eder, ilham veririm", scores: el(0,0,0,2) }, { id: "b", text: "Geleneği takip ederim", scores: el(0,0,2,0) }, { id: "c", text: "Araştırır, öğrenirim", scores: el(0,2,0,0) }, { id: "d", text: "İçime döner, hissederim", scores: el(2,0,0,0) }] },
     { id: "q4", text: "Doğa ile bağın?", options: [{ id: "a", text: "Aktif, spor ve macera", scores: el(2,0,0,0) }, { id: "b", text: "Bahçe, toprak, köklü", scores: el(0,2,0,0) }, { id: "c", text: "Gözlem ve keşif", scores: el(0,0,2,0) }, { id: "d", text: "Derin bağ ve sessizlik", scores: el(0,0,0,2) }] },
     { id: "q5", text: "Meditasyon / dua pratiğin?", options: [{ id: "a", text: "Aktif, hareketli meditasyon", scores: el(2,0,0,0) }, { id: "b", text: "Düzenli, ritüel odaklı", scores: el(0,2,0,0) }, { id: "c", text: "Esnek, çeşitli teknikler", scores: el(0,0,2,0) }, { id: "d", text: "Derin, sessiz ve içsel", scores: el(0,0,0,2) }] },
-    { id: "q6", text: "Ruhsal krizde nasıl toparlanırsın?", options: [{ id: "a", text: "Harekete geçer, dönüşüm yaratırım", scores: el(0,0,0,2) }, { id: "b", text: "Rutine döner, köklere bağlanırım", scores: el(0,0,2,0) }, { id: "c", text: "Öğrenir, perspektif değiştiririm", scores: el(0,2,0,0) }, { id: "d", text: "İçime döner, duyguları işlerim", scores: el(2,0,0,0) }] },
+    { id: "q6", text: "Ruhsal krizde nasıl toparlanırsın?", options: [{ id: "a", text: "Harekete geçer, dönüşüm sağlarım", scores: el(0,0,0,2) }, { id: "b", text: "Rutine döner, köklere bağlanırım", scores: el(0,0,2,0) }, { id: "c", text: "Öğrenir, perspektif değiştiririm", scores: el(0,2,0,0) }, { id: "d", text: "İçime döner, duyguları işlerim", scores: el(2,0,0,0) }] },
     { id: "q7", text: "Maneviyat ve günlük hayat?", options: [{ id: "a", text: "Aksiyonla birleştiririm", scores: el(2,0,0,0) }, { id: "b", text: "Rutin ve ritüelle entegre", scores: el(0,2,0,0) }, { id: "c", text: "Felsefe ve düşünceyle", scores: el(0,0,2,0) }, { id: "d", text: "Duygu ve sezgiyle", scores: el(0,0,0,2) }] },
     { id: "q8", text: "Ruhsal toplulukta rolün?", options: [{ id: "a", text: "Lider ve ilham veren", scores: el(2,0,0,0) }, { id: "b", text: "Güvenilir ve istikrarlı", scores: el(0,2,0,0) }, { id: "c", text: "Öğrenci ve soru soran", scores: el(0,0,2,0) }, { id: "d", text: "Empatik ve bağ kuran", scores: el(0,0,0,2) }] },
     { id: "q9", text: "İçsel yolculukta hedefin?", options: [{ id: "a", text: "Dönüşüm ve liderlik", scores: el(0,0,0,2) }, { id: "b", text: "Kök ve istikrar", scores: el(0,0,2,0) }, { id: "c", text: "Keşif ve öğrenme", scores: el(0,2,0,0) }, { id: "d", text: "Derinlik ve bağ", scores: el(2,0,0,0) }] },
@@ -708,7 +710,7 @@ const CAREER_PATH_RESULTS: TestResult[] = [
   elementResult("fire", "Girişimci ve Lider Yol", "Ateşin Kariyeri", "Kariyerinde liderlik ve girişimcilik ön planda. Kendi işin veya yönetim pozisyonları sana uygun. Hızlı ilerleme ve görünürlük seni motive eder.", ["Liderlik", "Girişimcilik", "Cesaret", "Hız", "Başarı"], "Sabırsızlık ve aşırı risk; detayları atlayabilirsin."),
   elementResult("earth", "İstikrarlı ve Güvenli Yol", "Toprağın Kariyeri", "Kariyerinde güvenlik ve istikrar önemli. Uzun vadeli planlama ve adım adım ilerleme senin tarzın. Finans, operasyon veya proje yönetimi sana uygun.", ["İstikrar", "Planlama", "Güvenilirlik", "Disiplin", "Uzun vadeli düşünce"], "Değişime direnç ve fırsat kaçırma; bazen yavaş ilerleyebilirsin."),
   elementResult("air", "Yenilikçi ve Esnek Yol", "Havanın Kariyeri", "Kariyerinde öğrenme ve çeşitlilik önemli. Teknoloji, pazarlama, eğitim veya danışmanlık sana yakın. Esnek ve dinamik ortamlar seni besler.", ["Yenilik", "Öğrenme", "Esneklik", "İletişim", "Çeşitlilik"], "Kararsızlık ve köksüzlük; bazen odaklanma zorluğu."),
-  elementResult("water", "Anlamlı ve İnsan Odaklı Yol", "Suyun Kariyeri", "Kariyerinde anlam ve insanlara dokunmak önemli. Psikoloji, sağlık, sanat veya hizmet sektörü sana uygun. Duygusal tatmin ve derinlik seni mutlu eder.", ["Anlam", "Empati", "Yaratıcılık", "İnsan odaklılık", "Derinlik"], "Sınır koyamama ve tükenme; bazen duygusal yük ağır gelebilir."),
+  elementResult("water", "Anlamlı ve İnsan Odaklı Yol", "Suyun Kariyeri", "Kariyerinde anlam ve insanlara dokunmak önemli. Psikoloji, sağlık, sanat veya hizmet sektörü sana uygun. Duygusal tatmin ve derinlik seni mutlu eder.", ["Anlam", "Empati", "Özgün İfade", "İnsan odaklılık", "Derinlik"], "Sınır koyamama ve tükenme; bazen duygusal yük ağır gelebilir."),
 ];
 
 export const CAREER_PATH_TEST: PersonalityTest = {
@@ -722,7 +724,7 @@ export const CAREER_PATH_TEST: PersonalityTest = {
   image: "/tests/career.png",
   questions: [
     { id: "q1", text: "Kariyerinde en çok ne seni motive eder?", options: [{ id: "a", text: "Liderlik ve başarı", scores: el(2,0,0,0) }, { id: "b", text: "Güvenlik ve istikrar", scores: el(0,2,0,0) }, { id: "c", text: "Öğrenme ve yenilik", scores: el(0,0,2,0) }, { id: "d", text: "Anlam ve insanlara dokunmak", scores: el(0,0,0,2) }] },
-    { id: "q2", text: "İdeal iş ortamın nasıl olur?", options: [{ id: "a", text: "Rekabetçi, hızlı, hedef odaklı", scores: el(2,0,0,0) }, { id: "b", text: "Düzenli, güvenli, planlı", scores: el(0,2,0,0) }, { id: "c", text: "Esnek, yaratıcı, çeşitli", scores: el(0,0,2,0) }, { id: "d", text: "İşbirlikçi, anlamlı, destekleyici", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "İdeal iş ortamın nasıl olur?", options: [{ id: "a", text: "Rekabetçi, hızlı, hedef odaklı", scores: el(2,0,0,0) }, { id: "b", text: "Düzenli, güvenli, planlı", scores: el(0,2,0,0) }, { id: "c", text: "Esnek, özgün, çeşitli", scores: el(0,0,2,0) }, { id: "d", text: "İşbirlikçi, anlamlı, destekleyici", scores: el(0,0,0,2) }] },
     { id: "q3", text: "Kariyer hedefin nedir?", options: [{ id: "a", text: "CEO, girişimci veya üst yönetim", scores: el(0,0,0,2) }, { id: "b", text: "Uzman, müdür veya güvenli pozisyon", scores: el(0,0,2,0) }, { id: "c", text: "Serbest çalışan veya çeşitli projeler", scores: el(0,2,0,0) }, { id: "d", text: "Anlamlı iş, danışman veya mentor", scores: el(2,0,0,0) }] },
     { id: "q4", text: "İş değiştirme kararı?", options: [{ id: "a", text: "Daha iyi fırsat varsa cesurca geçerim", scores: el(2,0,0,0) }, { id: "b", text: "Güvenli geçiş, net koşullar", scores: el(0,2,0,0) }, { id: "c", text: "Yeni deneyim, merak", scores: el(0,0,2,0) }, { id: "d", text: "Değer ve anlam uyumu", scores: el(0,0,0,2) }] },
     { id: "q5", text: "Başarısızlık sonrası?", options: [{ id: "a", text: "Hemen yeni hedefe geçerim", scores: el(2,0,0,0) }, { id: "b", text: "Ders çıkarır, planı revize ederim", scores: el(0,2,0,0) }, { id: "c", text: "Analiz eder, farklı denerim", scores: el(0,0,2,0) }, { id: "d", text: "Duygusal toparlanır, tekrar denerim", scores: el(0,0,0,2) }] },
@@ -734,7 +736,6 @@ export const CAREER_PATH_TEST: PersonalityTest = {
   ],
   resultTemplates: CAREER_PATH_RESULTS,
 };
-
 /* ================= TEST 17: LİDERLİK STİLİN (10 soru) ================= */
 
 const LEADERSHIP_RESULTS: TestResult[] = [
@@ -807,9 +808,8 @@ const WORK_VALUES_RESULTS: TestResult[] = [
   elementResult("fire", "Başarı ve Özgürlük Odaklı", "Ateşin Değerleri", "İşte başarı, tanınma ve özgürlük senin için önemli. Liderlik, rekabet ve hedef odaklılık seni motive eder.", ["Başarı", "Özgürlük", "Liderlik", "Rekabet", "Hedef"], "Ego ve sabırsızlık; bazen başkalarını göz ardı edebilirsin."),
   elementResult("earth", "Güvenlik ve İstikrar Odaklı", "Toprağın Değerleri", "İşte güvenlik, istikrar ve güvenilirlik senin için önemli. Uzun vadeli plan, sadakat ve sorumluluk seni mutlu eder.", ["Güvenlik", "İstikrar", "Sadakat", "Sorumluluk", "Plan"], "Değişime direnç ve riskten kaçınma; bazen kısıtlayıcı olabilirsin."),
   elementResult("air", "Öğrenme ve Özgürlük Odaklı", "Havanın Değerleri", "İşte öğrenme, özgürlük ve yenilik senin için önemli. Çeşitlilik, esneklik ve zihinsel tatmin seni besler.", ["Öğrenme", "Özgürlük", "Yenilik", "Esneklik", "Çeşitlilik"], "Kararsızlık ve bağlanma korkusu; bazen köksüz olabilirsin."),
-  elementResult("water", "Anlam ve Bağ Odaklı", "Suyun Değerleri", "İşte anlam, bağ ve duygusal tatmin senin için önemli. İnsanlara dokunmak, yaratıcılık ve uyum seni mutlu eder.", ["Anlam", "Bağ", "Empati", "Yaratıcılık", "Uyum"], "Sınır koyamama ve duygusal yük; bazen tükenebilirsin."),
+  elementResult("water", "Anlam ve Bağ Odaklı", "Suyun Değerleri", "İşte anlam, bağ ve duygusal tatmin senin için önemli. İnsanlara dokunmak, sanatsal dışavurum ve uyum seni mutlu eder.", ["Anlam", "Bağ", "Empati", "İlham", "Uyum"], "Sınır koyamama ve duygusal yük; bazen tükenebilirsin."),
 ];
-
 export const WORK_VALUES_TEST: PersonalityTest = {
   id: "work-values",
   slug: "is-degerleri",
@@ -839,8 +839,8 @@ export const WORK_VALUES_TEST: PersonalityTest = {
 const CAREER_MATCH_RESULTS: TestResult[] = [
   elementResult("fire", "Liderlik ve Girişimcilik Meslekleri", "Ateşin Meslekleri", "Senin için uygun meslekler: CEO, girişimci, satış müdürü, spor antrenörü, asker, polis, itfaiyeci, avukat (dava), yönetim danışmanı. Liderlik ve aksiyon gerektiren alanlar sana yakın.", ["Liderlik", "Girişimcilik", "Rekabet", "Aksiyon", "Cesaret"], "Sabırsızlık ve detay eksikliği; rutin meslekler seni sıkar."),
   elementResult("earth", "İstikrar ve Uzmanlık Meslekleri", "Toprağın Meslekleri", "Senin için uygun meslekler: Muhasebeci, finans uzmanı, mimar, mühendis, doktor, hemşire, eczacı, proje yöneticisi, operasyon müdürü. Güvenilirlik ve uzmanlık gerektiren alanlar sana uygun.", ["Uzmanlık", "Güvenilirlik", "Planlama", "Disiplin", "İstikrar"], "Değişime direnç ve esneklik eksikliği; yenilikçi meslekler zorlayabilir."),
-  elementResult("air", "İletişim ve Yenilik Meslekleri", "Havanın Meslekleri", "Senin için uygun meslekler: Gazeteci, yazar, pazarlamacı, eğitmen, danışman, yazılım geliştirici, tasarımcı, iletişim uzmanı, araştırmacı. İletişim ve yenilik gerektiren alanlar sana yakın.", ["İletişim", "Yenilik", "Öğrenme", "Esneklik", "Yaratıcılık"], "Kararsızlık ve odaklanma zorluğu; tekrarlayan meslekler seni sıkar."),
-  elementResult("water", "İnsan ve Sanat Meslekleri", "Suyun Meslekleri", "Senin için uygun meslekler: Psikolog, terapist, hemşire, öğretmen, sanatçı, müzisyen, yazar, sosyal hizmet uzmanı, koç, mentor. İnsanlara dokunan ve anlamlı meslekler sana uygun.", ["Empati", "Yaratıcılık", "Anlam", "İnsan odaklılık", "Derinlik"], "Sınır koyamama ve tükenme riski; rekabetçi meslekler zorlayabilir."),
+  elementResult("air", "İletişim ve Yenilik Meslekleri", "Havanın Meslekleri", "Senin için uygun meslekler: Gazeteci, yazar, pazarlamacı, eğitmen, danışman, yazılım geliştirici, tasarımcı, iletişim uzmanı, araştırmacı. İletişim ve yenilik gerektiren alanlar sana yakın.", ["İletişim", "Yenilik", "Öğrenme", "Esneklik", "Özgünlük"], "Kararsızlık ve odaklanma zorluğu; tekrarlayan meslekler seni sıkar."),
+  elementResult("water", "İnsan ve Sanat Meslekleri", "Suyun Meslekleri", "Senin için uygun meslekler: Psikolog, terapist, hemşire, öğretmen, sanatçı, müzisyen, yazar, sosyal hizmet uzmanı, koç, mentor. İnsanlara dokunan ve anlamlı meslekler sana uygun.", ["Empati", "İlham", "Anlam", "İnsan odaklılık", "Derinlik"], "Sınır koyamama ve tükenme riski; rekabetçi meslekler zorlayabilir."),
 ];
 
 export const CAREER_MATCH_TEST: PersonalityTest = {
@@ -852,12 +852,12 @@ export const CAREER_MATCH_TEST: PersonalityTest = {
   questionCount: 10,
   category: "career",
   image: "/tests/career.png",
-  questions: [
+ questions: [
     { id: "q1", text: "En çok hangi tür işler ilgini çeker?", options: [{ id: "a", text: "Liderlik ve yönetim", scores: el(2,0,0,0) }, { id: "b", text: "Uzmanlık ve teknik", scores: el(0,2,0,0) }, { id: "c", text: "İletişim ve yenilik", scores: el(0,0,2,0) }, { id: "d", text: "İnsanlara yardım ve sanat", scores: el(0,0,0,2) }] },
     { id: "q2", text: "İdeal meslekte ne olmalı?", options: [{ id: "a", text: "Başarı ve görünürlük", scores: el(2,0,0,0) }, { id: "b", text: "Güvenlik ve istikrar", scores: el(0,2,0,0) }, { id: "c", text: "Öğrenme ve çeşitlilik", scores: el(0,0,2,0) }, { id: "d", text: "Anlam ve insanlara dokunmak", scores: el(0,0,0,2) }] },
     { id: "q3", text: "Hangi ortamda çalışmak istersin?", options: [{ id: "a", text: "Rekabetçi, hızlı, dinamik", scores: el(0,0,0,2) }, { id: "b", text: "Düzenli, güvenli, planlı", scores: el(0,0,2,0) }, { id: "c", text: "Yenilikçi, esnek, çeşitli", scores: el(0,2,0,0) }, { id: "d", text: "Destekleyici, anlamlı, uyumlu", scores: el(2,0,0,0) }] },
     { id: "q4", text: "Meslek seçerken önceliğin?", options: [{ id: "a", text: "Kazanç ve başarı potansiyeli", scores: el(2,0,0,0) }, { id: "b", text: "Güvenli gelir ve istikrar", scores: el(0,2,0,0) }, { id: "c", text: "Öğrenme ve gelişim fırsatı", scores: el(0,0,2,0) }, { id: "d", text: "Anlam ve değer uyumu", scores: el(0,0,0,2) }] },
-    { id: "q5", text: "Hangi alanda kendini güçlü hissedersin?", options: [{ id: "a", text: "Liderlik ve karar verme", scores: el(2,0,0,0) }, { id: "b", text: "Planlama ve organizasyon", scores: el(0,2,0,0) }, { id: "c", text: "Fikir üretme ve iletişim", scores: el(0,0,2,0) }, { id: "d", text: "Empati ve yaratıcılık", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Hangi alanda kendini güçlü hissedersin?", options: [{ id: "a", text: "Liderlik ve karar verme", scores: el(2,0,0,0) }, { id: "b", text: "Planlama ve organizasyon", scores: el(0,2,0,0) }, { id: "c", text: "Fikir üretme ve iletişim", scores: el(0,0,2,0) }, { id: "d", text: "Empati ve sezgisel ifade", scores: el(0,0,0,2) }] },
     { id: "q6", text: "Meslekte en çok ne seni yorar?", options: [{ id: "a", text: "Rutin ve yavaş ilerleme", scores: el(0,0,0,2) }, { id: "b", text: "Belirsizlik ve değişim", scores: el(0,0,2,0) }, { id: "c", text: "Tekrar ve sıkıcılık", scores: el(0,2,0,0) }, { id: "d", text: "Duygusuzluk ve rekabet", scores: el(2,0,0,0) }] },
     { id: "q7", text: "Meslek değiştirme konusunda?", options: [{ id: "a", text: "Açığım, yeni fırsatlar ararım", scores: el(2,0,0,0) }, { id: "b", text: "Temkinli, güvenli geçiş", scores: el(0,2,0,0) }, { id: "c", text: "Meraklı, denemeye açığım", scores: el(0,0,2,0) }, { id: "d", text: "Anlam varsa değiştirebilirim", scores: el(0,0,0,2) }] },
     { id: "q8", text: "Meslekte en çok ne seni mutlu eder?", options: [{ id: "a", text: "Başarı ve tanınma", scores: el(2,0,0,0) }, { id: "b", text: "Güvenlik ve düzen", scores: el(0,2,0,0) }, { id: "c", text: "Yenilik ve öğrenme", scores: el(0,0,2,0) }, { id: "d", text: "İnsanlara yardım ve anlam", scores: el(0,0,0,2) }] },

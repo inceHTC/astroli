@@ -84,6 +84,24 @@ export async function getWeeklyHoroscopeWeeksCount(): Promise<number> {
   }
 }
 
+/** Arşiv için: Haftalık yorum girilmiş hafta başlangıç tarihlerini (en yeniden eskiye) döner. */
+export async function getWeeklyHoroscopeAvailableWeeks(limit = 60): Promise<string[]> {
+  try {
+    const rows = await prisma.weeklyHoroscope.findMany({
+      select: { weekStart: true },
+      orderBy: { weekStart: "desc" },
+      distinct: ["weekStart"],
+      take: limit,
+    });
+    return rows
+      .map((r) => r.weekStart)
+      .filter(Boolean)
+      .map((d) => d.toISOString().slice(0, 10));
+  } catch {
+    return [];
+  }
+}
+
 /** Haftalık burç yorumunu hafta aralığına göre getir */
 export async function getWeeklyHoroscope(zodiacId: string, date: Date = new Date()) {
   const { start, end } = getWeekRange(date);

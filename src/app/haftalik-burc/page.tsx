@@ -3,10 +3,14 @@ import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { ZODIAC_SIGNS } from "@/data/zodiac";
 import { getWeekRange, WEEKLY_CONTENT } from "@/data/weeklyHoroscope";
-import { getAllWeeklyHoroscopes } from "@/lib/db/repositories/horoscope";
+import {
+  getAllWeeklyHoroscopes,
+  getWeeklyHoroscopeAvailableWeeks,
+} from "@/lib/db/repositories/horoscope";
 import type { ZodiacSign } from "@/data/zodiac";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
+import { WeeklyHoroscopeToolbar } from "@/components/horoscope/WeeklyHoroscopeToolbar";
 
 const ELEMENT_COLORS: Record<string, string> = {
   fire: "border-red-200 bg-red-50/30",
@@ -21,6 +25,19 @@ const CATEGORY_ORDER: { key: "love" | "work" | "money" | "health"; label: string
   { key: "money", label: "Para" },
   { key: "health", label: "Sağlık" },
 ];
+
+type SearchParams = Record<string, string | string[] | undefined>;
+type PageProps = { searchParams?: Promise<SearchParams> | SearchParams };
+
+function weekStartStrFromDate(date: Date): string {
+  const { start } = getWeekRange(date);
+  return start.toISOString().slice(0, 10);
+}
+
+function parseWeekParam(hafta: string | null, fallbackWeekStart: string): string {
+  if (!hafta || !/^\d{4}-\d{2}-\d{2}$/.test(hafta)) return fallbackWeekStart;
+  return hafta;
+}
 
 function StarRating({ value }: { value: number }) {
   return (
@@ -43,8 +60,20 @@ export const metadata = {
     "Bu hafta 12 burç için sağlık, aşk, para ve iş alanlarında genel değerlendirme; olasılıklar ve farkındalık üzerine haftalık rehber.",
 };
 
-export default async function HaftalikBurcPage() {
-  const { start, end } = getWeekRange(new Date());
+export default async function HaftalikBurcPage(props: PageProps) {
+  let searchParams: SearchParams = {};
+  try {
+    const raw = props?.searchParams;
+    searchParams = raw instanceof Promise ? await raw : (raw ?? {});
+  } catch {
+    searchParams = {};
+  }
+
+  const todayWeekStartStr = weekStartStrFromDate(new Date());
+  const haftaParam = typeof searchParams?.hafta === "string" ? searchParams.hafta : null;
+  const currentWeekStartStr = parseWeekParam(haftaParam, todayWeekStartStr);
+  const baseDate = new Date(currentWeekStartStr + "T12:00:00");
+  const { start, end } = getWeekRange(baseDate);
 
   type WeeklyEntry = {
     health: number;
@@ -60,8 +89,14 @@ export default async function HaftalikBurcPage() {
   };
 
   const dbHoroscopes: Record<string, WeeklyEntry> = {};
+  let availableWeeks: string[] = [];
   try {
-    const weeklies = await getAllWeeklyHoroscopes(new Date());
+    const [weeklies, weeks] = await Promise.all([
+      getAllWeeklyHoroscopes(baseDate),
+      getWeeklyHoroscopeAvailableWeeks(60),
+    ]);
+    availableWeeks = Array.isArray(weeks) ? weeks : [];
+
     weeklies.forEach((h) => {
       const row = h as unknown as {
         zodiacId: string;
@@ -90,7 +125,8 @@ export default async function HaftalikBurcPage() {
       };
     });
   } catch {
-    // Database hatası varsa static data kullanılacak
+    // Database hatası varsa static data ve boş arşiv kullanılacak
+    availableWeeks = [];
   }
 
   return (
@@ -108,12 +144,40 @@ export default async function HaftalikBurcPage() {
             <p className="mt-3 text-sm font-medium text-[#5B3FFF]">
               {format(start, "d MMMM", { locale: tr })} – {format(end, "d MMMM yyyy", { locale: tr })}
             </p>
+            <p className="mt-2 text-sm text-[#555]">
+              Geçmiş haftaları arşivden seçebilirsiniz.
+            </p>
           </div>
+        </Container>
+      </section>
+
+      <section className="mt-8">
+        <Container size="lg">
+          <WeeklyHoroscopeToolbar
+            currentWeekStart={currentWeekStartStr}
+            availableWeeks={availableWeeks}
+            currentWeekOfToday={todayWeekStartStr}
+          />
         </Container>
       </section>
 
       <section className="mt-12">
         <Container size="lg">
+          {currentWeekStartStr !== todayWeekStartStr && (
+            <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50/80 p-4 text-center">
+              <p className="text-gray-700">Bu yorum geçmiş haftaya aittir.</p>
+              <p className="mt-1 text-sm text-gray-600">
+                Güncel hafta için{" "}
+                <Link
+                  href="/haftalik-burc"
+                  className="font-semibold text-[#5B3FFF] underline hover:no-underline"
+                >
+                  buraya tıklayın
+                </Link>
+                .
+              </p>
+            </div>
+          )}
           <div className="space-y-10">
             {ZODIAC_SIGNS.map((sign) => {
               const fromDb = dbHoroscopes[sign.id];

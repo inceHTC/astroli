@@ -221,7 +221,142 @@ export default async function HomePage() {
   </Container>
 </section>
 
+
+      
+      {/* FEATURED – Üç kart: Kozmik Enerji / Bugünün Burcu / Retro Merkezi */}
+      <section className="mt-24">
+        <Container size="lg">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="min-w-0">
+
+                 <div className="min-w-0">
+            <Link href="/retro" className="block h-full">
+              <div className="rounded-2xl bg-white p-8 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#5B3FFF]/30 transition h-full flex flex-col">
+                <h2 className="mb-4 text-2xl font-semibold text-black">
+                  Retro Merkezi
+                </h2>
+                <p className="text-[#444] leading-relaxed flex-1">
+                  Merkür, Venüs, Mars ve Satürn retrolarını takvim, kişisel analiz ve karar desteğiyle takip et. Korku değil, farkındalık.
+                </p>
+                <span className="mt-6 inline-block text-[#5B3FFF] font-medium">
+                  Retro Merkezi&apos;ne git →
+                </span>
+              </div>
+            </Link>
+            </div>
+
+          
+            </div>
+
+            {featuredZodiac && (
+              <div className="min-w-0">
+              <Link href={`/burc/${featuredZodiac.id}`} className="block h-full">
+                <div className="h-full rounded-2xl bg-[#11121A] p-8 text-white hover:shadow-lg transition">
+                  <h2 className="mb-6 text-2xl font-semibold">
+                    Bugünün Burcu
+                  </h2>
+
+                  <div className="flex items-center gap-6">
+                    <div className="relative h-24 w-24 overflow-hidden rounded-2xl bg-[#1A1C2B]">
+                      <Image
+                        src={`/zodiac/${featuredZodiac.id}.png`}
+                        alt={featuredZodiac.nameTr}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold">
+                        {featuredZodiac.nameTr}
+                      </h3>
+                      <p className="mt-1 text-gray-400">
+                        {featuredZodiac.dates}
+                      </p>
+                      <span className="mt-3 inline-block rounded-full bg-[#5B3FFF]/20 px-3 py-1 text-xs text-[#5B3FFF]">
+                        {ELEMENT_LABELS[featuredZodiac.element]}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+              </div>
+            )}
+           
+             <div className="h-full rounded-2xl bg-white p-8 shadow-sm border border-gray-200">
+              <h2 className="mb-4 text-2xl font-semibold text-black">
+                Haftalık Kozmik Enerji
+              </h2>
+              <p className="text-[#444] leading-relaxed">
+                Bu hafta Merkür retrosu sona eriyor. İletişimde netlik artacak.
+                Özellikle toprak burçları için verimli bir dönem.
+              </p>
+              <Link
+                href="/dergi/haftalik-burc-enerjisi"
+                className="mt-6 inline-block text-[#5B3FFF] font-medium hover:underline"
+              >
+                Devamını oku →
+              </Link>
+            </div>
+         
+
+          </div>
+        </Container>
+      </section>
+
      
+{/* ================= DOĞUM HARİTASI CTA ================= */}
+<section className="mt-28">
+  <Container size="lg">
+    <div className="relative overflow-hidden rounded-3xl bg-[#11121A] text-white p-10 lg:p-14">
+
+      {/* Glow */}
+      <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-[#5B3FFF]/30 blur-3xl" />
+
+      <div className="relative grid items-center gap-10 lg:grid-cols-2">
+
+        {/* TEXT */}
+        <div>
+          <h2 className="text-3xl sm:text-4xl font-bold">
+            Doğum Haritanı
+            <br />
+            Detaylı Analiz Et
+          </h2>
+
+          <p className="mt-6 text-gray-300 leading-relaxed">
+            Sadece güneş burcun değil.
+            Yükselen, ay burcu ve gezegen yerleşimlerinle
+            gerçek karakter analizini keşfet.
+          </p>
+
+          <Link
+            href="/birth-chart"
+            className="mt-8 inline-block rounded-xl bg-[#5B3FFF] px-6 py-3 font-medium hover:bg-[#3E2BCB] transition"
+          >
+            Haritayı Hesapla
+          </Link>
+        </div>
+
+        {/* IMAGE */}
+        <div className="relative">
+          <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-2xl shadow-xl">
+            <Image
+              src="/dogum.png"
+              alt="Doğum Haritası"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </Container>
+</section>
+
+
+
+
 {/* POPULAR TESTS */}
 <section className="mt-24">
   <Container size="lg">
@@ -339,136 +474,7 @@ export default async function HomePage() {
 </section>
 
 
-{/* ================= DOĞUM HARİTASI CTA ================= */}
-<section className="mt-28">
-  <Container size="lg">
-    <div className="relative overflow-hidden rounded-3xl bg-[#11121A] text-white p-10 lg:p-14">
 
-      {/* Glow */}
-      <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-[#5B3FFF]/30 blur-3xl" />
-
-      <div className="relative grid items-center gap-10 lg:grid-cols-2">
-
-        {/* TEXT */}
-        <div>
-          <h2 className="text-3xl sm:text-4xl font-bold">
-            Doğum Haritanı
-            <br />
-            Detaylı Analiz Et
-          </h2>
-
-          <p className="mt-6 text-gray-300 leading-relaxed">
-            Sadece güneş burcun değil.
-            Yükselen, ay burcu ve gezegen yerleşimlerinle
-            gerçek karakter analizini keşfet.
-          </p>
-
-          <Link
-            href="/birth-chart"
-            className="mt-8 inline-block rounded-xl bg-[#5B3FFF] px-6 py-3 font-medium hover:bg-[#3E2BCB] transition"
-          >
-            Haritayı Hesapla
-          </Link>
-        </div>
-
-        {/* IMAGE */}
-        <div className="relative">
-          <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-2xl shadow-xl">
-            <Image
-              src="/dogum.png"
-              alt="Doğum Haritası"
-              fill
-              className="object-cover"
-            />
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </Container>
-</section>
-
-
-      {/* FEATURED – Üç kart: Kozmik Enerji / Bugünün Burcu / Retro Merkezi */}
-      <section className="mt-24">
-        <Container size="lg">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="min-w-0">
-
-                 <div className="min-w-0">
-            <Link href="/retro" className="block h-full">
-              <div className="rounded-2xl bg-white p-8 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#5B3FFF]/30 transition h-full flex flex-col">
-                <h2 className="mb-4 text-2xl font-semibold text-black">
-                  Retro Merkezi
-                </h2>
-                <p className="text-[#444] leading-relaxed flex-1">
-                  Merkür, Venüs, Mars ve Satürn retrolarını takvim, kişisel analiz ve karar desteğiyle takip et. Korku değil, farkındalık.
-                </p>
-                <span className="mt-6 inline-block text-[#5B3FFF] font-medium">
-                  Retro Merkezi&apos;ne git →
-                </span>
-              </div>
-            </Link>
-            </div>
-
-          
-            </div>
-
-            {featuredZodiac && (
-              <div className="min-w-0">
-              <Link href={`/burc/${featuredZodiac.id}`} className="block h-full">
-                <div className="h-full rounded-2xl bg-[#11121A] p-8 text-white hover:shadow-lg transition">
-                  <h2 className="mb-6 text-2xl font-semibold">
-                    Bugünün Burcu
-                  </h2>
-
-                  <div className="flex items-center gap-6">
-                    <div className="relative h-24 w-24 overflow-hidden rounded-2xl bg-[#1A1C2B]">
-                      <Image
-                        src={`/zodiac/${featuredZodiac.id}.png`}
-                        alt={featuredZodiac.nameTr}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-
-                    <div>
-                      <h3 className="text-xl font-semibold">
-                        {featuredZodiac.nameTr}
-                      </h3>
-                      <p className="mt-1 text-gray-400">
-                        {featuredZodiac.dates}
-                      </p>
-                      <span className="mt-3 inline-block rounded-full bg-[#5B3FFF]/20 px-3 py-1 text-xs text-[#5B3FFF]">
-                        {ELEMENT_LABELS[featuredZodiac.element]}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-              </div>
-            )}
-           
-             <div className="h-full rounded-2xl bg-white p-8 shadow-sm border border-gray-200">
-              <h2 className="mb-4 text-2xl font-semibold text-black">
-                Haftalık Kozmik Enerji
-              </h2>
-              <p className="text-[#444] leading-relaxed">
-                Bu hafta Merkür retrosu sona eriyor. İletişimde netlik artacak.
-                Özellikle toprak burçları için verimli bir dönem.
-              </p>
-              <Link
-                href="/dergi/haftalik-burc-enerjisi"
-                className="mt-6 inline-block text-[#5B3FFF] font-medium hover:underline"
-              >
-                Devamını oku →
-              </Link>
-            </div>
-         
-
-          </div>
-        </Container>
-      </section>
 
     </div>
   );

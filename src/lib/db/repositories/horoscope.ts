@@ -43,8 +43,25 @@ export async function getDailyHoroscopesForAdmin(date: Date | string) {
   }
 }
 
-/** Arşiv için: Yorum girilmiş tarihleri (en yeniden eskiye) döner. */
+/** Arşiv için (public): Bugün ve öncesi için yorum girilmiş tarihleri (en yeniden eskiye) döner. */
 export async function getDailyHoroscopeAvailableDates(limit = 60): Promise<string[]> {
+  try {
+    const today = toDateOnly(new Date());
+    const rows = await prisma.dailyHoroscope.findMany({
+      select: { date: true },
+      where: { date: { lte: today } },
+      orderBy: { date: "desc" },
+      distinct: ["date"],
+      take: limit,
+    });
+    return rows.map((r) => r.date.toISOString().slice(0, 10));
+  } catch {
+    return [];
+  }
+}
+
+/** Admin listesi için: Geçmiş/gelecek tüm günlük yorum tarihlerini döner. */
+export async function getDailyHoroscopeDatesForAdmin(limit = 365): Promise<string[]> {
   try {
     const rows = await prisma.dailyHoroscope.findMany({
       select: { date: true },
@@ -84,8 +101,28 @@ export async function getWeeklyHoroscopeWeeksCount(): Promise<number> {
   }
 }
 
-/** Arşiv için: Haftalık yorum girilmiş hafta başlangıç tarihlerini (en yeniden eskiye) döner. */
+/** Arşiv için (public): Bugünün haftası ve öncesi için yorum girilmiş hafta başlangıç tarihlerini (en yeniden eskiye) döner. */
 export async function getWeeklyHoroscopeAvailableWeeks(limit = 60): Promise<string[]> {
+  try {
+    const todayWeekStart = toWeekDateOnly(new Date());
+    const rows = await prisma.weeklyHoroscope.findMany({
+      select: { weekStart: true },
+      where: { weekStart: { lte: todayWeekStart } },
+      orderBy: { weekStart: "desc" },
+      distinct: ["weekStart"],
+      take: limit,
+    });
+    return rows
+      .map((r) => r.weekStart)
+      .filter(Boolean)
+      .map((d) => d.toISOString().slice(0, 10));
+  } catch {
+    return [];
+  }
+}
+
+/** Admin listesi için: Geçmiş/gelecek tüm haftalık yorum haftalarını döner. */
+export async function getWeeklyHoroscopeWeeksForAdmin(limit = 104): Promise<string[]> {
   try {
     const rows = await prisma.weeklyHoroscope.findMany({
       select: { weekStart: true },
@@ -199,6 +236,15 @@ export async function upsertDailyHoroscope(
   });
 }
 
+/** Admin: Belirli bir tarih için tüm günlük yorum kayıtlarını siler. */
+export async function deleteDailyHoroscopesByDate(date: Date | string): Promise<number> {
+  const dateOnly = toDateOnly(date);
+  const result = await prisma.dailyHoroscope.deleteMany({
+    where: { date: dateOnly },
+  });
+  return result.count;
+}
+
 /** Hafta başı/sonu tarihlerini DATE (UTC gün) olarak normalize eder. */
 function toWeekDateOnly(date: Date | string): Date {
   if (typeof date === "string") {
@@ -266,4 +312,15 @@ export async function upsertWeeklyHoroscope(
       advice: data.advice,
     },
   });
+}
+
+/** Admin: Belirli bir hafta başlangıcı için tüm haftalık yorum kayıtlarını siler. */
+export async function deleteWeeklyHoroscopesByWeekStart(
+  weekStart: Date | string
+): Promise<number> {
+  const start = toWeekDateOnly(weekStart);
+  const result = await prisma.weeklyHoroscope.deleteMany({
+    where: { weekStart: start },
+  });
+  return result.count;
 }

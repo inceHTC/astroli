@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { ZODIAC_SIGNS } from "@/data/zodiac";
 import { getWeekRange } from "@/data/weeklyHoroscope";
 import { format } from "date-fns";
@@ -37,7 +38,12 @@ type WeeklyHoroscopeEntry = {
 };
 
 export function WeeklyHoroscopeClient() {
+  const searchParams = useSearchParams();
   const [selectedWeek, setSelectedWeek] = useState(() => {
+    const fromUrl = searchParams.get("weekStart");
+    if (fromUrl && /^\d{4}-\d{2}-\d{2}$/.test(fromUrl)) {
+      return fromUrl;
+    }
     const { start } = getWeekRange(new Date());
     return format(start, "yyyy-MM-dd");
   });

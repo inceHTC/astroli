@@ -36,7 +36,8 @@ function weekStartStrFromDate(date: Date): string {
 
 function parseWeekParam(hafta: string | null, fallbackWeekStart: string): string {
   if (!hafta || !/^\d{4}-\d{2}-\d{2}$/.test(hafta)) return fallbackWeekStart;
-  return hafta;
+  // Gelecek haftayı gösterme isteği olursa, bugünün haftasına sabitlenir
+  return hafta > fallbackWeekStart ? fallbackWeekStart : hafta;
 }
 
 function StarRating({ value }: { value: number }) {

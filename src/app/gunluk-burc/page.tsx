@@ -19,8 +19,10 @@ function todayStr(): string {
 }
 
 function parseDateParam(tarih: string | null): string {
-  if (!tarih || !/^\d{4}-\d{2}-\d{2}$/.test(tarih)) return todayStr();
-  return tarih;
+  const today = todayStr();
+  if (!tarih || !/^\d{4}-\d{2}-\d{2}$/.test(tarih)) return today;
+  // Gelecek tarih istenirse, bugüne sabitlenir (kullanıcı yarının yorumunu erken göremez)
+  return tarih > today ? today : tarih;
 }
 
 export const metadata = {

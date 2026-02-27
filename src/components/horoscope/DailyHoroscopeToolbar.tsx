@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useTransition } from "react";
 
@@ -36,7 +37,11 @@ export function DailyHoroscopeToolbar({
   );
 
   const showToday = currentDate !== todayStr;
-  const label = currentDate === todayStr ? "Bugün" : DATE_FMT.format(new Date(currentDate + "T12:00:00"));
+  const label =
+    currentDate === todayStr
+      ? "Bugün"
+      : DATE_FMT.format(new Date(currentDate + "T12:00:00"));
+  const visibleDates = availableDates.slice(0, 7);
 
   return (
     <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-[#E5E7EB] bg-white p-4 shadow-sm">
@@ -65,11 +70,23 @@ export function DailyHoroscopeToolbar({
         <span className="text-sm font-medium text-gray-600">Görüntülenen:</span>
         <span className="text-sm font-semibold text-black">{label}</span>
       </div>
-      {availableDates.length > 0 && (
+      {visibleDates.length > 0 && (
         <div className="w-full border-t border-gray-100 pt-4 mt-2">
-          <p className="mb-2 text-sm font-medium text-gray-700">Arşiv – Geçmiş günlük yorumlar</p>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <p className="text-sm font-medium text-gray-700">
+              Arşiv – Son günler
+            </p>
+            {availableDates.length > visibleDates.length && (
+              <Link
+                href="/gunluk-burc/arsiv"
+                className="ml-auto text-xs font-medium text-[#5B3FFF] hover:underline"
+              >
+                Tüm arşivi gör
+              </Link>
+            )}
+          </div>
           <div className="flex flex-wrap gap-2">
-            {availableDates.map((d) => {
+            {visibleDates.map((d) => {
               const isActive = d === currentDate;
               return (
                 <button

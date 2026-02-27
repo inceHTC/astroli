@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useTransition } from "react";
 
@@ -44,6 +45,7 @@ export function WeeklyHoroscopeToolbar({
 
   const showThisWeek = currentWeekStart !== currentWeekOfToday;
   const label = formatWeekRangeLabel(currentWeekStart);
+  const visibleWeeks = availableWeeks.slice(0, 8);
 
   return (
     <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-[#E5E7EB] bg-white p-4 shadow-sm">
@@ -64,13 +66,23 @@ export function WeeklyHoroscopeToolbar({
         )}
       </div>
 
-      {availableWeeks.length > 0 && (
+      {visibleWeeks.length > 0 && (
         <div className="w-full border-t border-gray-100 pt-4 mt-2">
-          <p className="mb-2 text-sm font-medium text-gray-700">
-            Arşiv – Geçmiş haftalık yorumlar
-          </p>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <p className="text-sm font-medium text-gray-700">
+              Arşiv – Son haftalar
+            </p>
+            {availableWeeks.length > visibleWeeks.length && (
+              <Link
+                href="/haftalik-burc/arsiv"
+                className="ml-auto text-xs font-medium text-[#5B3FFF] hover:underline"
+              >
+                Tüm arşivi gör
+              </Link>
+            )}
+          </div>
           <div className="flex flex-wrap gap-2">
-            {availableWeeks.map((weekStart) => {
+            {visibleWeeks.map((weekStart) => {
               const isActive = weekStart === currentWeekStart;
               return (
                 <button

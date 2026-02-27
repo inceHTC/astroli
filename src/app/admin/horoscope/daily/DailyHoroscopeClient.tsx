@@ -1,12 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { ZODIAC_SIGNS } from "@/data/zodiac";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
 
 export function DailyHoroscopeClient() {
+  const searchParams = useSearchParams();
   const [selectedDate, setSelectedDate] = useState(() => {
+    const fromUrl = searchParams.get("date");
+    if (fromUrl && /^\d{4}-\d{2}-\d{2}$/.test(fromUrl)) {
+      return fromUrl;
+    }
     const today = new Date();
     return format(today, "yyyy-MM-dd");
   });

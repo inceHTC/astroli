@@ -65,10 +65,7 @@ export default async function GunlukBurcArsivPage() {
             <p className="mt-4 text-base sm:text-lg text-[#444]">
               Geçmiş günlere ait günlük burç yorumlarını buradan seçebilirsiniz.
             </p>
-            <p className="mt-2 text-sm text-[#666]">
-              Bir tarihi tıkladığınızda, ilgili günün yorumları ana günlük burç
-              sayfasında açılır.
-            </p>
+           
           </div>
         </Container>
       </section>

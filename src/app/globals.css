@@ -246,10 +246,7 @@
   0%, 100% { opacity: 0.08; transform: scale(0.8); }
   50% { opacity: 0.75; transform: scale(1.6); }
 }
-@keyframes astroli-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
+
 @keyframes astroli-rotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

@@ -267,35 +267,6 @@ export default function HomePage() {
         />
       </section>
 
-      {/* ══════════════ ZODIAC TICKER ══════════════ */}
-      <div
-        className="relative overflow-hidden py-4"
-        style={{
-          borderTop: "1px solid rgba(123,94,255,0.12)",
-          borderBottom: "1px solid rgba(123,94,255,0.12)",
-          background: "linear-gradient(90deg, rgba(123,94,255,0.06), rgba(212,168,83,0.04), rgba(123,94,255,0.06))",
-        }}
-      >
-        <div
-          className="flex items-center"
-          style={{ animation: "astroli-marquee 70s linear infinite", width: "max-content" }}
-        >
-          {[...ZODIAC_SIGNS, ...ZODIAC_SIGNS].map((sign, i) => (
-            <div key={i} className="flex items-center gap-2 whitespace-nowrap" style={{ margin: "0 1.5rem" }}>
-              <span style={{ color: "var(--violet)", fontSize: 18, lineHeight: 1 }}>{sign.symbol}</span>
-              <span
-                className="font-semibold uppercase"
-                style={{ fontSize: 11, letterSpacing: "0.13em", color: "var(--text-3)" }}
-              >
-                {sign.nameTr}
-              </span>
-              <span className="text-xs" style={{ color: "var(--text-4)" }}>{sign.dates}</span>
-              <span className="text-xs" style={{ color: "rgba(123,94,255,0.30)", margin: "0 1rem" }}>✦</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* ══════════════ HIZLI ERİŞİM ══════════════ */}
       <section className="py-24" style={{ background: "var(--bg-2)" }}>
         <Container size="lg">

@@ -1560,9 +1560,169 @@ export const FRIENDSHIP_TEST: PersonalityTest = {
   resultTemplates: FRIENDSHIP_RESULTS,
 };
 
-/* ================= EXPORT ALL (31 TEST) ================= */
+/* ================= TEST 32: AURA RENGİN NE? ================= */
+
+const AURA_RESULTS: TestResult[] = [
+  elementResult("fire", "Kırmızı & Turuncu Aura", "Yakıcı Enerji", "Aura'n yoğun, dikkat çekici ve ısıtıcı. Odaya girdiğinde enerji değişiyor — insanlar bunu hissediyor. Tutku ve hareket senin frekansın; hayatı tam hızda yaşıyorsun. Kırmızı aura güç ve cesaret taşırken, turuncu yaratıcılık ve neşe yayıyor.", ["Karizmatik varlık", "Güçlü enerji yayma", "Doğal liderlik", "İlham verme"], "Bazen enerjin etrafındakileri bunaltabilir — herkeste aynı ateş yok."),
+  elementResult("earth", "Yeşil Aura", "İyileştirici Enerji", "Aura'n sakin, besleyici ve güvenli. İnsanlar yanındayken neden bu kadar rahat hissettiklerini tam açıklayamıyor — çünkü yeşil aura iyileştirir, büyütür, güven verir. Doğayla, büyümeyle ve şefkatle titreşiyorsun.", ["Şefkat ve empati", "Güven ortamı yaratma", "İyileştirici varlık", "Sabır"], "Hep veren taraf olunca kendi enerjini yenilemek zor kalabilir."),
+  elementResult("air", "Sarı & Beyaz Aura", "Işık Enerjisi", "Aura'n parlak, açık ve özgür titreşimli. Etrafındakilere bir hafiflik getiriyorsun — konuşmalar renkleniyor, merak uyanıyor. Sarı aura zeka ve neşeyle titreşirken, beyaz aura netlik ve özgürlük taşıyor.", ["Aydınlatıcı enerji", "Entelektüel çekim", "Özgürlük titreşimi", "Neşe yayma"], "Zaman zaman yüzeyde kalma ve derinleşmeme riski var."),
+  elementResult("water", "Mavi & Mor Aura", "Mistik Enerji", "Aura'n derin, sezgisel ve gizemli. İnsanlar sana açılıyor ama tam neden olduğunu bilmiyor — çünkü mavi aura güven ve derinlik taşıyor, mor aura ise sezgi ve ruhsal bağlantı. Sen bu dünyada ama başka bir frekansta titreşiyorsun.", ["Güçlü sezgi", "Derin empati", "Ruhsal bağlantı", "Gizemli çekim"], "Duygu yoğunluğu zaman zaman seni yorabiliyor."),
+];
+
+export const AURA_TEST: PersonalityTest = {
+  id: "aura-rengin",
+  slug: "aura-rengin",
+  title: "Aura Rengin Ne?",
+  description: "Her insanın çevresinde görünmez bir enerji alanı var. 8 soruyla senin aura rengini ve enerjini keşfet.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "spiritual",
+  image: "/tests/aura.png",
+  questions: [
+    { id: "q1", text: "Bir odaya girdiğinde insanlar seni nasıl hisseder?", options: [{ id: "a", text: "Enerji değişir, ortam canlanır", scores: el(2,0,0,0) }, { id: "b", text: "Rahatlar, güvende hisseder", scores: el(0,2,0,0) }, { id: "c", text: "Merak uyandırırım, konuşmak isterler", scores: el(0,0,2,0) }, { id: "d", text: "Derin bir huzur ya da ağırlık hisseder", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Sabah uyandığında ilk hissin?", options: [{ id: "a", text: "Harekete geçmek istiyorum hemen", scores: el(2,0,0,0) }, { id: "b", text: "Güne hazırım, düzenli başlamak istiyorum", scores: el(0,2,0,0) }, { id: "c", text: "Aklım zaten düşüncelere başladı", scores: el(0,0,2,0) }, { id: "d", text: "Hala rüyalarla iç içeyim biraz", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Arkadaşların sana ne için gelir?", options: [{ id: "a", text: "Motivasyon ve enerji için", scores: el(2,0,0,0) }, { id: "b", text: "Destek ve tavsiye için", scores: el(0,2,0,0) }, { id: "c", text: "Farklı bir bakış açısı için", scores: el(0,0,2,0) }, { id: "d", text: "Anlaşılmak ve dinlenmek için", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Müzik dinlerken nasılsın?", options: [{ id: "a", text: "Hareket etmek, dans etmek isterim", scores: el(2,0,0,0) }, { id: "b", text: "Rahatlarım, ortama uyum sağlarım", scores: el(0,2,0,0) }, { id: "c", text: "Sözleri dinler, anlam ararım", scores: el(0,0,2,0) }, { id: "d", text: "Duyguların içine dalarım", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Yorulduğunda ne seni en çok iyileştirir?", options: [{ id: "a", text: "Hareket, spor ya da yürüyüş", scores: el(2,0,0,0) }, { id: "b", text: "Düzeni korumak, iyi yemek, uyku", scores: el(0,2,0,0) }, { id: "c", text: "Podcast, kitap ya da yeni bir şey öğrenmek", scores: el(0,0,2,0) }, { id: "d", text: "Müzik, yalnızlık, içe dönmek", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Kalabalık bir partide neredesin?", options: [{ id: "a", text: "Ortanın tam merkezinde", scores: el(2,0,0,0) }, { id: "b", text: "Güvendiğim insanlarla konuşuyorum", scores: el(0,2,0,0) }, { id: "c", text: "Herkesle kısa sohbet, ilgi çekici konular", scores: el(0,0,2,0) }, { id: "d", text: "Sakin bir köşede, gerçekten bağlanacağım biriyle", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Seni en iyi anlatan renk aralığı?", options: [{ id: "a", text: "Kırmızı, turuncu, ateş tonları", scores: el(2,0,0,0) }, { id: "b", text: "Yeşil, toprak, doğal tonlar", scores: el(0,2,0,0) }, { id: "c", text: "Beyaz, açık mavi, gümüş", scores: el(0,0,2,0) }, { id: "d", text: "Koyu mavi, mor, indigo", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Hayatta seni en çok besleyen?", options: [{ id: "a", text: "Hedefler, yarışmak ve kazanmak", scores: el(2,0,0,0) }, { id: "b", text: "İstikrar, güvenlik ve sevdiklerim", scores: el(0,2,0,0) }, { id: "c", text: "Öğrenmek, keşfetmek ve özgürlük", scores: el(0,0,2,0) }, { id: "d", text: "Derin bağlar, anlam ve duygusal derinlik", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: AURA_RESULTS,
+};
+
+/* ================= TEST 33: HANGİ ESTETİK SENİN? ================= */
+
+const AESTHETIC_RESULTS: TestResult[] = [
+  elementResult("fire", "Y2K & Bold Estetik", "Parlak, İddialı, Trend", "Renk, cesaret ve dikkat çekmek senin dünyan. Y2K estetiğinin parlak metalikleri, bold moda seçimleri ve 'ben buradayım' enerjisi tam sana göre. Trend olana değil, trendin tam ortasında olmaya yöneliyorsun — ve bu sana yakışıyor.", ["Cesur seçimler", "Trend öncülüğü", "Enerjik görünüm", "Dikkat çekici stil"], "Her şeyin çok hızlı geçtiği bir estetikte derinliği bulmak zor olabiliyor."),
+  elementResult("earth", "Cottagecore & Dark Academia", "Kitaplar, Doğa, Zaman", "Eski kitapların kokusu, sonbahar ormanları, mumlar ve vintage kadifeler. Cottagecore'un sıcaklığı ile Dark Academia'nın entelektüel derinliği iç içe geçmiş bir dünyan var. Zamansız olan seni çekiyor — trendle değil, anlamla ilgileniyorsun.", ["Derin estetik duygu", "Doğayla bağ", "Entelektüel atmosfer", "Zamansız seçimler"], "Bazen dışarıda olup bitenlerden kopuk kalma riski var."),
+  elementResult("air", "Minimalist & Clean Estetik", "Az ama Anlamlı", "Beyaz duvarlar, sade çizgiler, gereksiz hiçbir şey. Minimalizm senin için bir felsefe — az ama iyi, temiz ama canlı. Her nesne bir amaca hizmet ediyor. Zihin de, ortam da, stil de berrak ve özgür.", ["Net görünüm", "Amaçlı seçimler", "Rahatlatıcı sadelik", "Özgür hissettiren çevre"], "Bazen çok steril bir ortam duygusal derinliği zorlaştırabilir."),
+  elementResult("water", "Mystical & Celestial Estetik", "Gece Gökyüzü, Ay ve Derin Renkler", "Galaksiler, ay evreleri, kadife dokular ve derin renkler. Gizemli olan seni çekiyor — görünür değil, hissedilen bir estetik bu. Duvarındaki harita yıldız haritası, playlist'inde ambient ve şiirsel sözler var. Sen bu dünyada ama başka bir boyutla temas halinde.", ["Mistik derinlik", "Sembolik düşünme", "Atmosfer yaratma", "Ruhsal estetik duygu"], "Çok içe dönük bir dünya dışarıyla bağlantıyı zorlaştırabilir."),
+];
+
+export const AESTHETIC_TEST: PersonalityTest = {
+  id: "estetik-tarzin",
+  slug: "estetik-tarzin",
+  title: "Hangi Estetik Senin?",
+  description: "Y2K mi, Dark Academia mı, Minimalist mi, Celestial mi? 8 soruyla senin dünyana en çok uyan estetiği bul.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "personality",
+  image: "/tests/personality.png",
+  questions: [
+    { id: "q1", text: "İdeal çalışma ortamın hangisi?", options: [{ id: "a", text: "Hareketli kafe, renkli, enerjik", scores: el(2,0,0,0) }, { id: "b", text: "Ahşap masa, doğal ışık, bitki", scores: el(0,2,0,0) }, { id: "c", text: "Tamamen sade, temiz bir masa", scores: el(0,0,2,0) }, { id: "d", text: "Gece lambası, mum, loş ışık", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Telefonunun duvar kağıdı genelde nasıl?", options: [{ id: "a", text: "Renkli, iddialı, dikkat çekici", scores: el(2,0,0,0) }, { id: "b", text: "Doğa, bitki ya da retro fotoğraf", scores: el(0,2,0,0) }, { id: "c", text: "Sade, neredeyse beyaz", scores: el(0,0,2,0) }, { id: "d", text: "Gece gökyüzü, ay, galaksi", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Favori zaman dilimin?", options: [{ id: "a", text: "Akşamüstü — şehrin en hareketli saati", scores: el(2,0,0,0) }, { id: "b", text: "Sabah erken — güneş ve huzur", scores: el(0,2,0,0) }, { id: "c", text: "Günün tazesinde — verimli saatler", scores: el(0,0,2,0) }, { id: "d", text: "Gece — dünyanın uyuduğu saatler", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Playlist'inde ne baskın?", options: [{ id: "a", text: "Pop, hip-hop, trend şeyler", scores: el(2,0,0,0) }, { id: "b", text: "Klasikler, folk, vintage ses", scores: el(0,2,0,0) }, { id: "c", text: "Instrumental, minimal, ambient", scores: el(0,0,2,0) }, { id: "d", text: "Şiirsel sözler, indie, dark", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Favori stil/kıyafet tercihin?", options: [{ id: "a", text: "İddialı, renkli, trend parçalar", scores: el(2,0,0,0) }, { id: "b", text: "Vintage, katmanlı, sıcak dokular", scores: el(0,2,0,0) }, { id: "c", text: "Monochrome, minimal, sade", scores: el(0,0,2,0) }, { id: "d", text: "Derin renkler, kadife, gizemli", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Eve döndüğünde ilk ne yaparsın?", options: [{ id: "a", text: "Müziği aç, enerjini boşalt", scores: el(2,0,0,0) }, { id: "b", text: "Bir şeyler ye, düzenli rutin yap", scores: el(0,2,0,0) }, { id: "c", text: "Temizle, düzenle, sıfırla", scores: el(0,0,2,0) }, { id: "d", text: "Işıkları kıs, mum yak, müzik aç", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Sosyal medyada ne tür içerikleri takip edersin?", options: [{ id: "a", text: "Trendsetterlar, moda, influencer", scores: el(2,0,0,0) }, { id: "b", text: "Bitki, doğa, DIY, tarif", scores: el(0,2,0,0) }, { id: "c", text: "Minimal tasarım, productivity, sanat", scores: el(0,0,2,0) }, { id: "d", text: "Astroloji, mistik, sanat, şiir", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Seni en çok heyecanlandıran keşif?", options: [{ id: "a", text: "Yeni trend, yeni kafe, yeni etkinlik", scores: el(2,0,0,0) }, { id: "b", text: "Eski kitap dükkanı, vintage pazar", scores: el(0,2,0,0) }, { id: "c", text: "Yeni bir fikir ya da farklı bakış açısı", scores: el(0,0,2,0) }, { id: "d", text: "Gece gökyüzü, gizli anlam, eski müzik", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: AESTHETIC_RESULTS,
+};
+
+/* ================= TEST 34: RUHUN KAÇ YAŞINDA? ================= */
+
+const SOUL_AGE_RESULTS: TestResult[] = [
+  elementResult("fire", "Genç Ruh", "18–25 Yaş Ruhu", "Ruhun taze, korkusuz ve meraklı. Dünyayı hâlâ büyük bir oyun alanı olarak görüyorsun — ve bu seni canlı tutuyor. Deneyim değil heves, temkinlilik değil cesaret senin frekansın. Genç ruhlar en yaratıcı ve en özgür ruhlar.", ["Korku tanımayan enerji", "Saf merak", "Anı yaşamak", "Yeniye açıklık"], "Acelesi olan genç ruh, bazen sabırsızlıkla fırsat kaçırabilir."),
+  elementResult("earth", "Olgun Ruh", "30–45 Yaş Ruhu", "Ruhun deneyimli, sakin ve yerleşik. Hayatın büyük sorularını çoktan sordun — bazılarına cevap buldun, bazıları hâlâ açık ve bunu kabullenebildin. İstikrar ve derinlik senin için anlam taşıyor. Olgun ruhlar en güvenilir ve en sağlam ruhlar.", ["Deneyimden gelen bilgelik", "İstikrar", "Derin bağlar", "Hayatı sindirmiş olmak"], "Bazen değişime direnç ve rutine bağlılık gelişimi yavaşlatabilir."),
+  elementResult("air", "Genç Yetişkin Ruh", "25–35 Yaş Ruhu", "Ruhun büyüyor, keşfediyor ve dönüşüyor. Ne tamamen bağlandın ne de tamamen özgürsün — tam da o güzel arafta. Soru sormaktan, öğrenmekten ve farklı bakış açılarını denemekten besleniyorsun.", ["Büyüme isteği", "Entelektüel merak", "Dengeli yaklaşım", "Öğrenmeye açıklık"], "Çok fazla seçenek arasında kalmak bazen yön kaybına neden olabiliyor."),
+  elementResult("water", "Eski Ruh", "50+ Yaş Ruhu", "Ruhun bu dünyaya yabancı değil — defalarca gelmiş gibi hissettiriyor. Çoğu insanın görmediği şeyleri görüyorsun, hissettikleri şeyleri kelimeye dökmeden anlıyorsun. Eski ruhlar en derin, en sezgisel ve en mistik ruhlar.", ["Derin sezgi", "Zamansız bilgelik", "Güçlü empati", "Anlam arayışı"], "Bu dünyaya tam uyum sağlamak zaman zaman yorucu gelebilir."),
+];
+
+export const SOUL_AGE_TEST: PersonalityTest = {
+  id: "ruh-yasin",
+  slug: "ruh-yasin",
+  title: "Ruhun Kaç Yaşında?",
+  description: "Beden yaşın kaç olursa olsun ruhunun yaşı bambaşka. 8 soruyla ruhunun hangi evrede olduğunu keşfet.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "spiritual",
+  image: "/tests/aura.png",
+  questions: [
+    { id: "q1", text: "Sabah alarm çaldığında ne yaparsın?", options: [{ id: "a", text: "Hemen atlarım, günü kaçırmak istemem", scores: el(2,0,0,0) }, { id: "b", text: "Yavaş kalkarım, acelem yok", scores: el(0,2,0,0) }, { id: "c", text: "Aklım zaten uyumadan önce çalışmaya başladı", scores: el(0,0,2,0) }, { id: "d", text: "İstemeden gözlerim açılır, biraz daha uyumak isterdim", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Büyük bir hata yapınca ne olur?", options: [{ id: "a", text: "Ders çıkarırım, hızla devam ederim", scores: el(2,0,0,0) }, { id: "b", text: "Analiz eder, bir dahaki için plan yaparım", scores: el(0,2,0,0) }, { id: "c", text: "Farklı senaryoları düşünür, öğrenmeye çalışırım", scores: el(0,0,2,0) }, { id: "d", text: "Uzun süre içimde taşırım — derinden hissederim", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Çoğu insanla ilişkin nasıl?", options: [{ id: "a", text: "Kolay anlaşırım, geniş çevrem var", scores: el(2,0,0,0) }, { id: "b", text: "Seçiciyim ama bağlandığımda derin olur", scores: el(0,2,0,0) }, { id: "c", text: "Fikir alışverişi yapmayı severim", scores: el(0,0,2,0) }, { id: "d", text: "Az insanla, çok derin bağlar kuruyorum", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Gelecek hakkında nasıl hissediyorsun?", options: [{ id: "a", text: "Heyecan verici! Neler olacak bilinmez", scores: el(2,0,0,0) }, { id: "b", text: "Hazırlıklı olunursa yönetilebilir", scores: el(0,2,0,0) }, { id: "c", text: "Merak ediyorum ama aşırı endişelenmiyorum", scores: el(0,0,2,0) }, { id: "d", text: "Gelecek gelir — hayat büyük bir döngü", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Enerji kaynağın ne?", options: [{ id: "a", text: "İnsanlar, etkinlikler ve hareket", scores: el(2,0,0,0) }, { id: "b", text: "Rutinler ve güvenli ortam", scores: el(0,2,0,0) }, { id: "c", text: "Yeni fikirler ve öğrenme", scores: el(0,0,2,0) }, { id: "d", text: "Sessizlik ve yalnızlık", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Çocukluğundan hâlâ taşıdığın his?", options: [{ id: "a", text: "Merak ve serbestlik", scores: el(2,0,0,0) }, { id: "b", text: "Güvenlik ihtiyacı", scores: el(0,2,0,0) }, { id: "c", text: "Soru sormak, anlamak istemek", scores: el(0,0,2,0) }, { id: "d", text: "Biraz yalnızlık ve farklılık hissi", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Yaş hakkında ne düşünüyorsun?", options: [{ id: "a", text: "Hiç önemli değil — ruh genç kaldıkça tamam", scores: el(2,0,0,0) }, { id: "b", text: "Deneyim önemli, yaşla gelir", scores: el(0,2,0,0) }, { id: "c", text: "Bilgi önemli, yaşla doğru orantılı değil", scores: el(0,0,2,0) }, { id: "d", text: "Ruhun yaşı bedenin yaşından çok farklı olabilir", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Sana ruhunun kaç yaşında olduğunu sorsalar ne dersin?", options: [{ id: "a", text: "Çok genç hissediyorum", scores: el(2,0,0,0) }, { id: "b", text: "Yaşıma göre makul, olgunlaştım", scores: el(0,2,0,0) }, { id: "c", text: "Zihinsel olarak sürekli meşgulüm, durmak yok", scores: el(0,0,2,0) }, { id: "d", text: "Ruhum çok eski — bazen yoruyor", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: SOUL_AGE_RESULTS,
+};
+
+/* ================= TEST 35: İÇ SESİN NE DİYOR? ================= */
+
+const INNER_VOICE_RESULTS: TestResult[] = [
+  elementResult("fire", "Motive Edici İç Ses", "\"Yapabilirsin, hadi!\"", "Kafanın içindeki ses bir antrenör gibi — cesaretlendiren, harekete geçiren, 'devam et' diyen. Zor anlarda bile iç sesin seni bırakmıyor. Bu büyük bir güç; ama bazen o ses o kadar yüksek ki yorgunluğunu fark etmen gecikebilir.", ["Güçlü iç motivasyon", "Kendine inanç", "Hızla toparlanma", "Harekete geçme gücü"], "İç sesin zaman zaman sınırlarını görmezden gelmeni sağlayabilir."),
+  elementResult("earth", "Pratik İç Ses", "\"Adım adım, sağlam git\"", "Kafanın içindeki ses bir mimar gibi — planlar, kontrol eder, 'bunu daha iyi yapabilirdin' der. Eleştirel ama yapıcı. Seni ileri götüren bu ses, ama çok sert konuştuğunda kendine karşı katı olabiliyorsun.", ["Detay farkındalığı", "Öz disiplin", "Güçlü özeleştiri", "Sürekli gelişim isteği"], "İç sesin bazen çok katı ve mükemmeliyetçi olabilir."),
+  elementResult("air", "Analitik İç Ses", "\"Düşün, mantıklı bak\"", "Kafanın içindeki ses bir dedektif gibi — sorgular, analiz eder, 'neden böyle oldu?' diye sorar. Duygulardan önce anlam arıyorsun. Bu zihin berraklığı güçlü; ama bazen aşırı düşünmek ve analiz felci sana engel olabiliyor.", ["Zihin berraklığı", "Problem çözme", "Nesnel bakış", "Derin analiz"], "Çok fazla analiz bazen hareketi engelleyebilir."),
+  elementResult("water", "Duygusal İç Ses", "\"Hissediyorum, anlıyorum\"", "Kafanın içindeki ses bir şair gibi — hisseder, derinleşir, 'bu beni nasıl etkiliyor?' diye sorar. Duygular senin için hem pusula hem yük. Bu derin his kapasitesi büyük bir güç — ama yoğun anlarda kendini bunalmış hissedebiliyorsun.", ["Derin duygusal zeka", "Güçlü empati", "Sezgisel anlayış", "Kendini tanıma"], "Duygular çok yoğunlaşınca nesnel karar almak güçleşiyor."),
+];
+
+export const INNER_VOICE_TEST: PersonalityTest = {
+  id: "ic-sesin",
+  slug: "ic-sesin",
+  title: "İç Sesin Ne Diyor?",
+  description: "Herkesin kafasında bir iç ses var. Seninki seni motive mi eder, eleştirir mi, analiz mi yapar? 8 soruyla öğren.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "psychology",
+  image: "/tests/mind.png",
+  questions: [
+    { id: "q1", text: "Zor bir karar öncesi kafanda ne döner?", options: [{ id: "a", text: "\"Atlıyorum, sonra hallederim\"", scores: el(2,0,0,0) }, { id: "b", text: "\"Artısını eksisini sayalım\"", scores: el(0,2,0,0) }, { id: "c", text: "\"Tüm senaryoları düşüneyim\"", scores: el(0,0,2,0) }, { id: "d", text: "\"İçim ne diyor?\"", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Başarılı olduğunda kendine ne dersin?", options: [{ id: "a", text: "\"Evet! Devam!\"", scores: el(2,0,0,0) }, { id: "b", text: "\"Doğru yaptım, beklenendi\"", scores: el(0,2,0,0) }, { id: "c", text: "\"Anladım artık nasıl çalışıyor\"", scores: el(0,0,2,0) }, { id: "d", text: "\"Hak ediyordum, iyi ki oldu\"", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Bir şey yolunda gitmediğinde ilk tepkin?", options: [{ id: "a", text: "\"Bir yol bulurum, sorun değil\"", scores: el(2,0,0,0) }, { id: "b", text: "\"Nerede hata yaptım?\"", scores: el(0,2,0,0) }, { id: "c", text: "\"Neden olduğunu anlamak istiyorum\"", scores: el(0,0,2,0) }, { id: "d", text: "\"Çok üzüldüm, bunu hissetmem lazım\"", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Birine kızdığında kafanda ilk ne geçer?", options: [{ id: "a", text: "\"Hemen söylemeliyim\"", scores: el(2,0,0,0) }, { id: "b", text: "\"Sakin ol, söze bak\"", scores: el(0,2,0,0) }, { id: "c", text: "\"Haklı mı haksız mı diye değerlendiriyorum\"", scores: el(0,0,2,0) }, { id: "d", text: "\"İçim yanıyor ama üzmek istemiyorum\"", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Sabah aynaya bakınca iç sesin ne der?", options: [{ id: "a", text: "\"Hazırım, gelsin\"", scores: el(2,0,0,0) }, { id: "b", text: "\"Güne hazır mıyım?\"", scores: el(0,2,0,0) }, { id: "c", text: "\"Bugün ne yapacağım?\"", scores: el(0,0,2,0) }, { id: "d", text: "\"Nasıl hissediyorum?\"", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Sıkıldığında iç sesin ne der?", options: [{ id: "a", text: "\"Bir şeyler yap, harekete geç\"", scores: el(2,0,0,0) }, { id: "b", text: "\"Liste yap, yapılacaklar var\"", scores: el(0,2,0,0) }, { id: "c", text: "\"Yeni bir şey öğren ya da keşfet\"", scores: el(0,0,2,0) }, { id: "d", text: "\"Film izle, müzik dinle, içine bak\"", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Başarısız olduğunda kendine nasıl davranırsın?", options: [{ id: "a", text: "\"Olmadı, ama devam — bir dahaki\"", scores: el(2,0,0,0) }, { id: "b", text: "\"Neyi daha iyi yapabilirdim?\"", scores: el(0,2,0,0) }, { id: "c", text: "\"Sistematik analiz — nerede hata var?\"", scores: el(0,0,2,0) }, { id: "d", text: "\"Çok üzüldüm, toparlanmam biraz zaman alır\"", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Yatmadan önce kafanda neler döner?", options: [{ id: "a", text: "\"Yarın ne yapacağım?\"", scores: el(2,0,0,0) }, { id: "b", text: "\"Bugün her şeyi yaptım mı?\"", scores: el(0,2,0,0) }, { id: "c", text: "Düşünceler, sorular, fikirler…", scores: el(0,0,2,0) }, { id: "d", text: "Bugünün duyguları, anlar, hisler…", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: INNER_VOICE_RESULTS,
+};
+
+/* ================= TEST 36: STRES ANINDA KAÇIŞ BİÇİMİN NE? ================= */
+
+const ESCAPE_RESULTS: TestResult[] = [
+  elementResult("fire", "Hareket & Aksiyon", "Bedenin Çözümü Biliyor", "Stres gelince bedenin devreye giriyor — koşarsın, temizlersin, bir projeye atılırsın. Hareketsiz kalmak seni daha da sıkıştırıyor. Bu aktif kaçış biçimi çok sağlıklı; enerjiyi vücuttan geçirip boşaltıyorsun.", ["Bedensel farkındalık", "Aktif stres boşaltma", "Hızlı toparlanma", "Verimliliğe dönüşen enerji"], "Bazen durmak ve hissetmek yerine sürekli hareket etmek duyguları erteleyebilir."),
+  elementResult("earth", "Rutin & Konfor", "Düzen Seni İyileştiriyor", "Stres gelince güvenli alana dönüyorsun — iyi yemek, uyku, düzen. Rutin senin için terapi. Karmaşa içinde bile bir düzen noktası buluyorsun ve oradan iyileşiyorsun. Bu kaçış biçimi sağlam ve sürdürülebilir.", ["Kendi kendine bakım", "Düzeni yeniden kurma", "Rutin gücü", "Zemine dönme"], "Bazen konfor alanı dışına çıkması gereken bir şeyi kaçırmak olabilir."),
+  elementResult("air", "Kaçış & Keşif", "Aklın Yeni Bir Kapı Açıyor", "Stres gelince aklını meşgul ediyorsun — dizi, podcast, yeni bir şey öğrenmek. Zihni başka yere çekmek senin stres vanaslın. Bu kaçış biçimi yaratıcı ve besleyici; merak seni iyileştiriyor.", ["Merak yoluyla iyileşme", "Zihinsel esneklik", "İçerik seçiciliği", "Yeni ilgi alanı açma"], "Bazen duyguları işlemek yerine aklı meşgul etmek bastırmaya dönebilir."),
+  elementResult("water", "İçe Çekilme", "Sessizlik Seni Topluyor", "Stres gelince içine çekiliyorsun — müzik, loş ışık, yalnızlık. Duyguları serbest bırakmak senin iyileşme biçimin. Ağlamak, günlük yazmak, hissetmek — bunlar senin için güçtür, zayıflık değil.", ["Duygusal zeka", "Kendini tanıma", "Derinlemesine işleme", "Sessizliği kullanma gücü"], "Çok uzun süre içe çekilmek yalnızlığı derinleştirebilir."),
+];
+
+export const ESCAPE_TEST: PersonalityTest = {
+  id: "kacis-bicimin",
+  slug: "kacis-bicimin",
+  title: "Stres Anında Kaçış Biçimin Ne?",
+  description: "Bunaldığında ne yapıyorsun — koşuyor musun, uyuyor musun, dizi mi izliyorsun? 8 soruyla stres tarzını öğren.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "psychology",
+  image: "/tests/mind.png",
+  questions: [
+    { id: "q1", text: "Çok stresli bir günün sonunda ilk ne yaparsın?", options: [{ id: "a", text: "Spor, hareket ya da hızlı yürüyüş", scores: el(2,0,0,0) }, { id: "b", text: "Ev yemeği ya da sevdiğim bir şey yerim", scores: el(0,2,0,0) }, { id: "c", text: "Dizi, podcast ya da yeni bir şeyle ilgilenirim", scores: el(0,0,2,0) }, { id: "d", text: "Müzik açar, yalnız kalırım", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Kafan çok dolduğunda ne işe yarar?", options: [{ id: "a", text: "Bedenini çalıştırmak", scores: el(2,0,0,0) }, { id: "b", text: "İyi bir uyku ya da düzeni geri getirmek", scores: el(0,2,0,0) }, { id: "c", text: "Aklını başka yöne çekmek", scores: el(0,0,2,0) }, { id: "d", text: "Duyguları serbest bırakmak", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Zor bir konuşmanın hemen ardından ne yaparsın?", options: [{ id: "a", text: "Bir aktiviteye atlarım, kafamı dağıtırım", scores: el(2,0,0,0) }, { id: "b", text: "Bir şeyler yer, eve döner, toparlanırım", scores: el(0,2,0,0) }, { id: "c", text: "Düşüncelerimi kafamda işlerim, belki yazarım", scores: el(0,0,2,0) }, { id: "d", text: "Ağlamak ya da müzikle duyguyu serbest bırakmak", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "\"Bunaldım\" hissi gelince ilk tepkin?", options: [{ id: "a", text: "Dışarı çıkar, hareket ederim", scores: el(2,0,0,0) }, { id: "b", text: "Listeye döker, düzeni kurarım", scores: el(0,2,0,0) }, { id: "c", text: "Dikkatimi dağıtacak bir içerik bulurum", scores: el(0,0,2,0) }, { id: "d", text: "Sessizliğe ihtiyacım var, yalnız kalırım", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Sosyal medyada stresli anında ne açarsın?", options: [{ id: "a", text: "Motivasyon, spor, aksiyon içerikleri", scores: el(2,0,0,0) }, { id: "b", text: "Tarif, düzen, konfor içerikleri", scores: el(0,2,0,0) }, { id: "c", text: "Belgesel, bilgi, ilgi çekici şeyler", scores: el(0,0,2,0) }, { id: "d", text: "Müzik, lofi, duygusal içerik", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Tatilde bile stres varsa ne yaparsın?", options: [{ id: "a", text: "Aktivite dolu program yaparım", scores: el(2,0,0,0) }, { id: "b", text: "Erken uyurum, yemek yerim", scores: el(0,2,0,0) }, { id: "c", text: "Kitap okur ya da yeni yer keşfederim", scores: el(0,0,2,0) }, { id: "d", text: "Sahilde ya da odamda yalnız vakit geçiririm", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Seni en çok rahatlatan ortam?", options: [{ id: "a", text: "Hareket halindeyken, dışarıda", scores: el(2,0,0,0) }, { id: "b", text: "Kendi evimde, düzenli ortamda", scores: el(0,2,0,0) }, { id: "c", text: "Yeni bir ortam, farklı atmosfer", scores: el(0,0,2,0) }, { id: "d", text: "Karanlık, sessiz, yalnız bir köşe", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Stres sonrası iyileşince ne dersin?", options: [{ id: "a", text: "\"Hareket ettim, geçti\"", scores: el(2,0,0,0) }, { id: "b", text: "\"Uyudum/yedim, düzeldim\"", scores: el(0,2,0,0) }, { id: "c", text: "\"Başka şeyle ilgilendim, geçti\"", scores: el(0,0,2,0) }, { id: "d", text: "\"Ağladım/dinledim, boşaldım\"", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: ESCAPE_RESULTS,
+};
+
+/* ================= EXPORT ALL (36 TEST) ================= */
 
 export const TESTS: PersonalityTest[] = [
+  AURA_TEST,
+  AESTHETIC_TEST,
+  SOUL_AGE_TEST,
+  INNER_VOICE_TEST,
+  ESCAPE_TEST,
   SOULMATE_TEST,
   PAST_LIFE_TEST,
   PLANET_TEST,

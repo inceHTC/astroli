@@ -1,8 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { ZODIAC_SIGNS, ELEMENT_CARD_CLASSES } from "@/data/zodiac";
 import type { Element, ZodiacSign } from "@/data/zodiac";
+import { getBaseUrl } from "@/lib/site-url";
 import { getWeekRange, WEEKLY_CONTENT } from "@/data/weeklyHoroscope";
 import {
   getAllWeeklyHoroscopes,
@@ -48,10 +50,11 @@ function StarRating({ value }: { value: number }) {
   );
 }
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Haftalık Burç Yorumu | Astroli",
   description:
     "Bu hafta 12 burç için sağlık, aşk, para ve iş alanlarında genel değerlendirme; olasılıklar ve farkındalık üzerine haftalık rehber.",
+  alternates: { canonical: `${getBaseUrl()}/haftalik-burc` },
 };
 
 export default async function HaftalikBurcPage(props: PageProps) {
@@ -126,7 +129,7 @@ export default async function HaftalikBurcPage(props: PageProps) {
   return (
     <div className="bg-[#070B12] pb-28">
       <section className="relative overflow-hidden bg-[#070B12]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
         <Container size="lg">
           <div className="pt-8">
             <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-[#7A8090] hover:text-[#EDE9DF] transition-colors">

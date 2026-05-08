@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/layout/Container";
@@ -6,6 +7,7 @@ import type { Element } from "@/data/zodiac";
 import { getAllDailyHoroscopes, getDailyHoroscopeAvailableDates } from "@/lib/db/repositories/horoscope";
 import { DailyHoroscopeToolbar } from "@/components/horoscope/DailyHoroscopeToolbar";
 import { Suspense } from "react";
+import { getBaseUrl } from "@/lib/site-url";
 
 function todayStr(): string {
   return new Date().toLocaleDateString("en-CA", { timeZone: "Europe/Istanbul" });
@@ -17,10 +19,11 @@ function parseDateParam(tarih: string | null): string {
   return tarih > today ? today : tarih;
 }
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Günlük Burç Yorumları | Astroli",
   description:
     "12 burcun günlük yorumları. Bugün burcunuz ne söylüyor? Genel rehber niteliğinde günlük burç değerlendirmeleri.",
+  alternates: { canonical: `${getBaseUrl()}/gunluk-burc` },
 };
 
 type SearchParams = Record<string, string | string[] | undefined>;
@@ -63,7 +66,7 @@ export default async function GunlukBurcPage(props: PageProps) {
   return (
     <div className="bg-[#070B12] pb-28">
       <section className="relative overflow-hidden bg-[#070B12]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
         <Container size="lg">
           <div className="pt-8">
             <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-[#EDE9DF]" style={{ color: "var(--text-4)" }}>

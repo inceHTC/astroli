@@ -27,6 +27,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: url("/retro"), lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: url("/retro/takvim"), lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
     { url: url("/retro/kisisel-analiz"), lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: url("/gunluk-burc/arsiv"), lastModified: new Date(), changeFrequency: "daily", priority: 0.6 },
+    { url: url("/haftalik-burc/arsiv"), lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
+    { url: url("/iletisim"), lastModified: new Date(), changeFrequency: "yearly", priority: 0.4 },
   ];
 
   const burcEntries: MetadataRoute.Sitemap = ZODIAC_SIGNS.map((sign) => ({

@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { ZODIAC_SIGNS, ELEMENT_LABELS } from "@/data/zodiac";
 import type { Element } from "@/data/zodiac";
+import { getBaseUrl } from "@/lib/site-url";
 
 const ELEMENT_BADGE: Record<string, string> = {
   fire:  "bg-orange-500/15 text-orange-400",
@@ -10,9 +12,10 @@ const ELEMENT_BADGE: Record<string, string> = {
   water: "bg-indigo-500/15 text-indigo-400",
 };
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Burçlar | Astroli",
   description: "12 burcun özellikleri, güçlü yönleri ve zayıf yönleri.",
+  alternates: { canonical: `${getBaseUrl()}/burclar` },
 };
 
 export default function BurclarPage() {

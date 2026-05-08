@@ -18,7 +18,9 @@
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\okury\\\\Desktop\\\\YAZILIM\\\\astroli\" -Force)",
       "Bash(npx tsx *)",
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\okury\\\\Desktop\\\\YAZILIM\\\\astroli\" -Directory)",
-      "Bash(Select-Object Name)"
+      "Bash(Select-Object Name)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\okury\\\\Desktop\\\\YAZILIM\\\\astroli\" -Recurse -Directory -Depth 2)",
+      "Bash(Select-Object -First 30)"
     ]
   }
 }

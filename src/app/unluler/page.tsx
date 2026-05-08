@@ -1,12 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { listCelebrities } from "@/lib/db/repositories/celebrity";
 import { CelebrityGrid } from "@/components/celebrity/CelebrityGrid";
 import { Container } from "@/components/layout/Container";
+import { getBaseUrl } from "@/lib/site-url";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Hangi Ünlü Hangi Burç? | Astroli",
   description:
     "Ünlülerin burçlarını keşfet. Oyuncular, müzisyenler, sporcular ve daha fazlası.",
+  alternates: { canonical: `${getBaseUrl()}/unluler` },
 };
 
 const CELEBRITY_LIST_LIMIT = 2000;

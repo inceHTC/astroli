@@ -14,7 +14,8 @@
     "db:remove-duplicate-celebrities": "tsx prisma/remove-duplicate-celebrities.ts",
     "db:add-100-celebrities": "tsx prisma/add-100-celebrities.ts",
     "db:add-100-celebrities-batch2": "tsx prisma/add-100-celebrities-batch2.ts",
-    "db:add-26-celebrities": "tsx prisma/add-26-celebrities.ts"
+    "db:add-26-celebrities": "tsx prisma/add-26-celebrities.ts",
+    "db:add-celebrities-new": "tsx prisma/add-celebrities-new.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

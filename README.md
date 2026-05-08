@@ -8,7 +8,7 @@ Modern, mobil öncelikli astroloji kişilik platformu.
 - **Kişilik Testleri** – Element keşif testi (veri tabanlı, ölçeklenebilir)
 - **Burç Uyumluluğu** – İki doğum tarihi ile uyum skoru
 - **Zodyak Kütüphanesi** – 12 burç için SEO optimize sayfalar
-- **Dergi** – Magazin tarzı içerikler
+
 - **Paylaşım Kartları** – 1080x1920 story formatında indirme/paylaşım
 
 ## Teknoloji

@@ -54,10 +54,10 @@ export default function BurcHesaplaPage() {
   };
 
   return (
-    <div className="bg-[#F7F8FC] pb-28">
+    <div className="bg-[#070B12] pb-28">
 
       {/* HERO */}
-      <section className="relative overflow-hidden bg-white">
+      <section className="relative overflow-hidden bg-[#070B12]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
 
         <Container size="md">
@@ -65,16 +65,16 @@ export default function BurcHesaplaPage() {
 
             <Link
               href="/"
-              className="mb-8 inline-block text-sm text-[#5B3FFF] hover:underline"
+              className="mb-8 inline-block text-sm text-[#D4AF72] hover:underline"
             >
               ← Ana sayfa
             </Link>
 
-            <h1 className="text-4xl sm:text-5xl font-bold text-black">
+            <h1 className="text-4xl sm:text-5xl font-bold text-[#EDE9DF]">
               Burç Hesaplayıcı
             </h1>
 
-            <p className="mt-4 text-[#444]">
+            <p className="mt-4 text-[#8494B2]">
               Doğum tarihini gir, güneş, yükselen ve ay burcunu öğren.
             </p>
 
@@ -87,16 +87,16 @@ export default function BurcHesaplaPage() {
         <Container size="sm">
           <form
             onSubmit={handleSubmit}
-            className="rounded-2xl bg-white border border-gray-200 p-8 shadow-sm"
+            className="rounded-2xl bg-[#0E1523] border border-white/[0.07] p-8 "
           >
 
             <div className="space-y-6">
 
               {error && (
-                <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>
+                <p className="text-sm text-red-400 bg-red-900/20 border border-red-500/20 rounded-lg px-3 py-2">{error}</p>
               )}
               <div>
-                <label className="block text-sm font-medium text-black">
+                <label className="block text-sm font-medium text-[#EDE9DF]">
                   Doğum Tarihi
                 </label>
                 <input
@@ -104,21 +104,21 @@ export default function BurcHesaplaPage() {
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
                   max={getTodayLocalYYYYMMDD()}
-                  className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-black focus:border-[#5B3FFF] focus:ring-1 focus:ring-[#5B3FFF]/30 outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
                   required
                 />
-                <p className="mt-1 text-xs text-gray-500">Gelecek tarih seçilemez.</p>
+                <p className="mt-1 text-xs text-[#6B7A99]">Gelecek tarih seçilemez.</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-black">
+                <label className="block text-sm font-medium text-[#EDE9DF]">
                   Doğum Saati (Yükselen için)
                 </label>
                 <input
                   type="time"
                   value={birthTime}
                   onChange={(e) => setBirthTime(e.target.value)}
-                  className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-black focus:border-[#5B3FFF] focus:ring-1 focus:ring-[#5B3FFF]/30 outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
                 />
               </div>
 
@@ -157,11 +157,11 @@ export default function BurcHesaplaPage() {
                       {sign.symbol}
                     </div>
 
-                    <p className="text-sm text-gray-400">{label} Burcu</p>
+                    <p className="text-sm text-[#6B7A99]">{label} Burcu</p>
                     <p className="mt-1 text-lg font-semibold">
                       {sign.nameTr}
                     </p>
-                    <p className="mt-1 text-xs text-gray-400">
+                    <p className="mt-1 text-xs text-[#6B7A99]">
                       {ELEMENT_LABELS[sign.element]}
                     </p>
                   </div>
@@ -175,7 +175,7 @@ export default function BurcHesaplaPage() {
         
               <Link
                 href="/burclar"
-                className="rounded-xl bg-[#5B3FFF] px-6 py-3 text-sm font-medium text-white hover:bg-[#4A2FDD] transition"
+                className="rounded-xl bg-[#D4AF72] px-6 py-3 text-sm font-medium text-white hover:bg-[#C9A96E] transition"
               >
                 Burcunun özelliklerini incele →
               </Link>

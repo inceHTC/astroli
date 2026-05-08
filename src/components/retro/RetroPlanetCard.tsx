@@ -3,40 +3,34 @@ import type { RetroPlanet, RetroEvent } from "@/lib/retro-data";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
 
-function getPlanetMeta(planet: RetroPlanet) {
-  switch (planet) {
-    case "mercury":
-      return {
-        label: "Merkür",
-        color: "from-sky-400 via-purple-400 to-indigo-500",
-        description: "İletişim, veri akışı ve zihinsel tempo üzerinde farkındalık.",
-      };
-    case "venus":
-      return {
-        label: "Venüs",
-        color: "from-rose-400 via-pink-400 to-purple-500",
-        description: "İlişkiler, öz-değer algısı ve estetikle ilgili yumuşak bir reset.",
-      };
-    case "mars":
-      return {
-        label: "Mars",
-        color: "from-orange-400 via-red-400 to-rose-500",
-        description: "Enerji, motivasyon ve eylem biçimlerinde yeniden kalibrasyon.",
-      };
-    case "saturn":
-      return {
-        label: "Satürn",
-        color: "from-slate-300 via-blue-300 to-indigo-400",
-        description: "Sorumluluklar, sınırlar ve uzun vadeli yapıların testi.",
-      };
-    default:
-      return {
-        label: "Retro",
-        color: "from-slate-400 via-slate-300 to-slate-500",
-        description: "",
-      };
-  }
-}
+const PLANET_META: Record<RetroPlanet, {
+  label: string; symbol: string; color: string; accent: string; glow: string; desc: string;
+}> = {
+  mercury: {
+    label: "Merkür", symbol: "☿",
+    color: "border-sky-500/30 hover:border-sky-400/50",
+    accent: "text-sky-400", glow: "bg-sky-500/8",
+    desc: "İletişim, veri akışı ve zihinsel tempo.",
+  },
+  venus: {
+    label: "Venüs", symbol: "♀",
+    color: "border-rose-500/30 hover:border-rose-400/50",
+    accent: "text-rose-400", glow: "bg-rose-500/8",
+    desc: "İlişkiler, öz-değer ve zevk alanları.",
+  },
+  mars: {
+    label: "Mars", symbol: "♂",
+    color: "border-orange-500/30 hover:border-orange-400/50",
+    accent: "text-orange-400", glow: "bg-orange-500/8",
+    desc: "Enerji, motivasyon ve eylem biçimleri.",
+  },
+  saturn: {
+    label: "Satürn", symbol: "♄",
+    color: "border-indigo-500/30 hover:border-indigo-400/50",
+    accent: "text-indigo-400", glow: "bg-indigo-500/8",
+    desc: "Sorumluluklar, sınırlar ve uzun vadeli yapılar.",
+  },
+};
 
 interface RetroPlanetCardProps {
   planet: RetroPlanet;
@@ -44,56 +38,52 @@ interface RetroPlanetCardProps {
 }
 
 export function RetroPlanetCard({ planet, nextEvent }: RetroPlanetCardProps) {
-  const meta = getPlanetMeta(planet);
+  const meta = PLANET_META[planet];
 
   return (
     <Link
       href={`/retro/${planet}`}
-      className="group relative flex flex-col overflow-hidden rounded-3xl border-2 border-gray-200 bg-white p-5 text-gray-900 shadow-md transition hover:border-purple-300 hover:shadow-lg"
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-[#0E1523] p-6 transition-all duration-200 ${meta.color}`}
     >
-      <div className="flex items-baseline justify-between gap-3">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.26em] text-gray-500">
+      {/* arka plan glow */}
+      <div className={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${meta.glow}`} />
+
+      <div className="relative flex items-start justify-between gap-4">
+        <div className="flex-1">
+          <p className={`text-xs font-semibold uppercase tracking-[0.22em] ${meta.accent}`}>
             {meta.label} Retrosu
           </p>
-          <p className="mt-2 text-sm text-gray-700 leading-relaxed">{meta.description}</p>
+          <p className="mt-2 text-sm leading-relaxed text-[#C4C0BA]">
+            {meta.desc}
+          </p>
         </div>
-        <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gray-50 border-2 border-gray-200">
-          <span
-            className={`inline-block h-7 w-7 rounded-full bg-gradient-to-br ${meta.color}`}
-          />
+        <span className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04] text-3xl ${meta.accent}`}>
+          {meta.symbol}
         </span>
       </div>
 
       {nextEvent && (
-        <div className="relative mt-4 rounded-2xl border-2 border-gray-200 bg-gray-50 p-3 text-[11px]">
-          <p className="mb-1 font-semibold text-gray-800">Yaklaşan dönem</p>
-          <p className="text-gray-600">
+        <div className="relative mt-4 rounded-xl border border-white/[0.06] bg-white/[0.03] p-3 text-[11px]">
+          <p className="mb-1 font-semibold text-[#EDE9DF]">Yaklaşan dönem</p>
+          <p className="text-[#7A8090]">
             {format(new Date(nextEvent.startDate), "d MMM", { locale: tr })} –{" "}
             {format(new Date(nextEvent.endDate), "d MMM yyyy", { locale: tr })}
           </p>
-          <p className="mt-1 text-gray-500">
-            Psikolojik odak:{" "}
-            <span className="text-gray-700 font-medium">
+          <p className="mt-1 text-[#7A8090]">
+            Odak:{" "}
+            <span className="text-[#C4C0BA] font-medium">
               {nextEvent.psychologicalFocus.split(".")[0]}.
             </span>
           </p>
         </div>
       )}
 
-      <div className="relative mt-4 flex items-center justify-between text-[11px] text-gray-600">
-        <span className="inline-flex items-center gap-1.5 font-medium">
-          <span className="h-2 w-2 rounded-full bg-emerald-500" />
-          Kişisel checklist & karar analizi
-        </span>
-        <span className="inline-flex items-center gap-1 text-gray-700 font-semibold">
-          İncele
-          <span className="translate-y-[1px] transition group-hover:translate-x-0.5">
-            ↗
-          </span>
+      <div className="relative mt-4 flex items-center justify-between text-[11px]">
+        <span className="text-[#7A8090]">Checklist & karar analizi</span>
+        <span className={`font-semibold transition-transform group-hover:translate-x-0.5 ${meta.accent}`}>
+          İncele →
         </span>
       </div>
     </Link>
   );
 }
-

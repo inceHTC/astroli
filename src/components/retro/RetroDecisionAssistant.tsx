@@ -12,149 +12,122 @@ function getDecisionCopy(category: DecisionCategory) {
   switch (category) {
     case "is":
       return {
-        title: "Yeni iş / sözleşme kararı",
-        buttonText: '"Yeni sözleşme imzalayacağım" için öneri üret',
-        exampleText: '"Yeni sözleşme imzalayacağım"',
+        title: "Yeni is / sozlesme karari",
+        buttonText: "Sozlesme kararim icin oneri uret",
+        exampleText: "Yeni sozlesme imzalayacagim",
         suggestions: [
-          "Sözleşmeyi yüksek sesle kendine oku; anlamadığın her maddeyi netleştirmek için zaman isteyebilirsin.",
-          "Kararı bugün vermek zorunda olup olmadığını sor; bir gece düşünmek çoğu zaman zihni berraklaştırır.",
-          "İşin sadece maddi tarafına değil, psikolojik yüküne ve günlük ritmine de odaklanmaya çalış.",
+          "Sozlesmeyi yuksek sesle kendine oku; anlamadigin her maddeyi netlestirmek icin zaman isteyebilirsin.",
+          "Karari bugun vermek zorunda olup olmadigini sor; bir gece dusunmek cogu zaman zihni berraklastirir.",
+          "Isin sadece maddi tarafina degil, psikolojik yukune ve gunluk ritmine de odaklanmaya calis.",
         ],
-        tone: "Merkür retrosu, imza atmayı yasaklamaz; sadece detayları otomatik pilota almadan, daha bilinçli okuman için tempoyu yavaşlatır.",
+        tone: "Merkur retrosu imza atmayi yasaklamaz; sadece detaylari otomatik pilota almadan, daha bilincli okuman icin tempoyu yavaslatiir.",
       };
     case "iliski":
       return {
-        title: "İlişkiyle ilgili karar",
-        buttonText: '"İlişkimle ilgili karar vereceğim" için öneri üret',
-        exampleText: '"İlişkimle ilgili karar vereceğim"',
+        title: "Iliskiyle ilgili karar",
+        buttonText: "Iliski kararim icin oneri uret",
+        exampleText: "Iliskimle ilgili karar verecegim",
         suggestions: [
-          "Tek bir tartışma üzerinden değil, tekrar eden döngüler üzerinden karar vermeye çalış.",
-          "Duygularını yazıya dök; yazarken hangi cümlelerde sıkıştığını fark etmek önemli ipuçları verir.",
-          "Keskin karar vermeden önce, ihtiyaç ve sınırlarını sakin bir anda açıkça ifade etmeyi dene.",
+          "Tek bir tartisma uzerinden degil, tekrar eden donguler uzerinden karar vermeye calis.",
+          "Duygularini yaziya dok; hangi cumlelerde sikindigini fark etmek onemli ipuclari verir.",
+          "Keskin karar vermeden once, ihtiyac ve sinirlarini sakin bir anda acikca ifade etmeyi dene.",
         ],
-        tone: "Retro, ilişkini bitirmen ya da tutunman gerektiğini söylemez; sadece neye gerçekten ihtiyaç duyduğunu daha net görmen için alan açar.",
+        tone: "Retro, iliskini bitirmen ya da tutunman gerektigini soylemez; neye gercekten ihtiyac duyduigunu daha net gormen icin alan acar.",
       };
     case "estetik":
       return {
-        title: "Estetik / görünüm değişimi",
-        buttonText: '"Görünümümü değiştireceğim" için öneri üret',
-        exampleText: '"Görünümümü değiştireceğim"',
+        title: "Estetik / gorunum degisimi",
+        buttonText: "Gorunum degisimim icin oneri uret",
+        exampleText: "Gorunumumu degistirecegim",
         suggestions: [
-          "Kökten değişiklik yerine, önce küçük ve geri döndürülebilir adımlarla hislerini test edebilirsin.",
-          "Uzun süredir istediğin bir değişiklikse, referans görsellerle beklentini netleştirmek iyi bir ara adım olabilir.",
-          "Kararı sadece dış onay için değil, bedeninle kurduğun ilişki üzerinden de değerlendirmeye çalış.",
+          "Kokten degisiklik yerine once kucuk ve geri donulebilir adimlarla hislerini test edebilirsin.",
+          "Uzun suredir istedigin bir degisiklikse, referans gorseller ile beklentini netlestirmek iyi bir ara adim olabilir.",
+          "Karari sadece dis onay icin degil, bedeninle kurdugun iliski uzerinden de degerlendirmeye calis.",
         ],
-        tone: "Bu dönem, bedenini değiştirmemelisin demek yerine; öz-değer algın, benlik imgen ve dış onay ihtiyacın arasındaki dengeyi görmeni destekler.",
+        tone: "Bu donem bedenini degistirmemelisin demekten ziyade; oz-deger algin ve dis onay ihtiyacin arasindaki dengeyi gormen icin alan acar.",
       };
     case "yatirim":
       return {
-        title: "Yatırım / finansal karar",
-        buttonText: '"Yatırım kararı vereceğim" için öneri üret',
-        exampleText: '"Yatırım kararı vereceğim"',
+        title: "Yatirim / finansal karar",
+        buttonText: "Finansal kararim icin oneri uret",
+        exampleText: "Yatirim karari verecegim",
         suggestions: [
-          "Kaybetmeyi göze alabileceğin miktarı netleştir; bu sınır, sağlıklı risk algısı için çıpa görevi görebilir.",
-          "Tek kaynaktan değil, farklı bakış açılarından bilgi toplayarak kararını yapılandır.",
-          "Kısa vadeli heyecan yerine, uzun vadeli dayanıklılık senaryosu yazmaya çalış.",
+          "Kaybetmeyi goze alabilecegini netlestir; bu sinir saglikli risk algisi icin cipa gorevi gorur.",
+          "Tek kaynaktan degil, farkli bakis acilarindan bilgi toplayarak kararini yapilandir.",
+          "Kisa vadeli heyecan yerine, uzun vadeli dayaniklilik senaryosu yazmaya calis.",
         ],
-        tone: "Retro enerjisi, seni yatırımdan vazgeçirmekten çok; risk algını, sabrını ve beklentilerini daha gerçekçi görmeni amaçlayan bir yavaşlatma tuşu gibi düşünülebilir.",
-      };
-    default:
-      return {
-        title: "",
-        buttonText: "Öneri üret",
-        exampleText: "",
-        suggestions: [],
-        tone: "",
+        tone: "Retro enerjisi seni yatirimdan vazgecirmekten cok; risk algin, sabrini ve beklentilerini daha gercekci gormen icin bir yavaslama tusu gibi calisir.",
       };
   }
 }
 
-export function RetroDecisionAssistant({
-  planetName,
-}: RetroDecisionAssistantProps) {
+export function RetroDecisionAssistant({ planetName }: RetroDecisionAssistantProps) {
   const [category, setCategory] = useState<DecisionCategory>("is");
   const [visible, setVisible] = useState(false);
 
   const copy = getDecisionCopy(category);
 
-  const handleGenerate = () => {
-    setVisible(true);
-  };
-
   return (
-    <section className="relative overflow-hidden rounded-3xl border-2 border-gray-200 bg-white p-6 shadow-lg sm:p-7">
-      <div className="space-y-4">
+    <section className="rounded-2xl border border-white/[0.07] bg-[#0E1523] p-6 sm:p-7">
+      <div className="space-y-5">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#A78BFA]">
             Karar analizi
           </p>
-          <h2 className="mt-1 bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-600 bg-clip-text text-xl font-semibold text-transparent sm:text-2xl">
-            {planetName.replace(/\s+Retrosu$/, "")} retrosunda kararını nasıl destekleyebilirsin?
+          <h2 className="mt-1 text-xl font-bold text-[#EDE9DF] sm:text-2xl">
+            {planetName.replace(/\s+Retrosu$/, "")} retrosunda kararini nasil destekleyebilirsin?
           </h2>
-          <p className="mt-1 text-xs text-gray-600 leading-relaxed">
-            Amaç, seni durdurmak değil;{" "}
-            <span className="font-semibold text-gray-800">
-              kararını daha sakin, şeffaf ve psikolojik olarak sağlıklı hale
-              getirmek
-            </span>
-            .
+          <p className="mt-1 text-xs leading-relaxed text-[#7A8090]">
+            Amac seni durdurmak degil;{" "}
+            <span className="text-[#C4C0BA]">
+              kararini daha sakin ve psikolojik olarak saglikli hale getirmek
+            </span>.
           </p>
         </div>
 
-        <div className="grid gap-3 text-xs sm:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-          <div className="space-y-2">
-            <p className="text-[11px] font-semibold text-gray-700">
-              Şu an hangi alanda karar vermek üzeresin?
+        <div className="grid gap-4 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+          <div className="space-y-3">
+            <p className="text-xs font-semibold text-[#7A8090]">
+              Su an hangi alanda karar vermek uzeresin?
             </p>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <DecisionPill
-                label="Yeni sözleşme / iş"
-                active={category === "is"}
-                onClick={() => setCategory("is")}
-              />
-              <DecisionPill
-                label="İlişki kararı"
-                active={category === "iliski"}
-                onClick={() => setCategory("iliski")}
-              />
-              <DecisionPill
-                label="Estetik / görünüm"
-                active={category === "estetik"}
-                onClick={() => setCategory("estetik")}
-              />
-              <DecisionPill
-                label="Yatırım / finans"
-                active={category === "yatirim"}
-                onClick={() => setCategory("yatirim")}
-              />
+            <div className="grid grid-cols-2 gap-2">
+              {(["is", "iliski", "estetik", "yatirim"] as DecisionCategory[]).map((cat) => {
+                const labels: Record<DecisionCategory, string> = {
+                  is: "Yeni sozlesme / is",
+                  iliski: "Iliski karari",
+                  estetik: "Estetik / gorunum",
+                  yatirim: "Yatirim / finans",
+                };
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => { setCategory(cat); setVisible(false); }}
+                    className={`flex items-center justify-between rounded-xl border px-3 py-2 text-[11px] font-medium transition ${
+                      category === cat
+                        ? "border-[#A78BFA]/30 bg-[#A78BFA]/10 text-[#A78BFA]"
+                        : "border-white/[0.07] bg-white/[0.02] text-[#7A8090] hover:border-white/[0.12] hover:text-[#C4C0BA]"
+                    }`}
+                    aria-pressed={category === cat}
+                  >
+                    <span>{labels[cat]}</span>
+                    <span className={`h-1.5 w-1.5 rounded-full ${category === cat ? "bg-[#A78BFA]" : "bg-white/[0.15]"}`} />
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          <div className="flex flex-col justify-between gap-3 rounded-2xl border-2 border-gray-200 bg-gray-50 p-3 text-[11px]">
-            <p className="text-[11px] text-gray-600 leading-relaxed">
-              {copy.exampleText ? (
-                <>
-                  {copy.exampleText} gibi net bir cümleyle niyetini belirle;
-                  ardından{" "}
-                  <span className="font-semibold text-gray-800">
-                    temkinli ama yasaklayıcı olmayan
-                  </span>{" "}
-                  önerileri gör.
-                </>
-              ) : (
-                <>
-                  Net bir cümleyle niyetini belirle; ardından{" "}
-                  <span className="font-semibold text-gray-800">
-                    temkinli ama yasaklayıcı olmayan
-                  </span>{" "}
-                  önerileri gör.
-                </>
-              )}
+          <div className="flex flex-col justify-between gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-[11px]">
+            <p className="leading-relaxed text-[#7A8090]">
+              Net bir cümleyle niyetini belirle, ardından{" "}
+              <span className="text-[#C4C0BA]">temkinli ama yasaklayici olmayan</span>{" "}
+              onerileri gor.
             </p>
             <button
               type="button"
-              onClick={handleGenerate}
-              className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-600 px-3 py-2 text-[11px] font-semibold text-white shadow-md transition hover:translate-y-0.5 hover:shadow-lg"
+              onClick={() => setVisible(true)}
+              className="inline-flex items-center justify-center rounded-full bg-[#5C44D0] px-4 py-2 text-[11px] font-semibold text-white transition hover:bg-[#4934B8]"
             >
               {copy.buttonText}
             </button>
@@ -162,27 +135,26 @@ export function RetroDecisionAssistant({
         </div>
 
         {visible && (
-          <div className="relative mt-2 space-y-3 rounded-2xl border-2 border-gray-200 bg-gray-50 p-3 text-[13px]">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gray-500">
+          <div className="space-y-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-sm">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#A78BFA]">
               Analiz · {copy.title}
             </p>
-            <ul className="space-y-1.5 text-gray-700 leading-relaxed">
+            <ul className="space-y-2 leading-relaxed text-[#C4C0BA]">
               {copy.suggestions.map((item) => (
                 <li key={item} className="flex gap-2">
-                  <span className="mt-[6px] h-1.5 w-1.5 rounded-full bg-purple-500 flex-shrink-0" />
+                  <span className="mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#A78BFA]" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-1 rounded-2xl border-2 border-purple-200 bg-purple-50 p-3 text-[12px] leading-relaxed text-purple-800">
+            <p className="rounded-xl border border-[#A78BFA]/15 bg-[#A78BFA]/6 p-3 text-[12px] leading-relaxed text-[#C4C0BA]">
               {copy.tone}
             </p>
-            <p className="text-[10px] text-gray-500">
-              Bu içerik, kararını senin yerine vermez;{" "}
-              <span className="font-medium text-gray-700">
-                sadece bilişsel yükünü azaltan bir perspektif sunar
-              </span>
-              .
+            <p className="text-[10px] text-[#7A8090]">
+              Bu icerik kararini senin yerine vermez;{" "}
+              <span className="text-[#C4C0BA]">
+                sadece bilissel yukunu azaltan bir perspektif sunar
+              </span>.
             </p>
           </div>
         )}
@@ -190,32 +162,3 @@ export function RetroDecisionAssistant({
     </section>
   );
 }
-
-interface DecisionPillProps {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}
-
-function DecisionPill({ label, active, onClick }: DecisionPillProps) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`flex items-center justify-between rounded-2xl border-2 px-3 py-1.5 text-[11px] font-medium transition ${
-        active
-          ? "border-purple-400 bg-purple-100 text-purple-700 shadow-sm"
-          : "border-gray-300 bg-white text-gray-700 hover:border-purple-300 hover:bg-purple-50"
-      }`}
-      aria-pressed={active}
-    >
-      <span>{label}</span>
-      <span
-        className={`h-1.5 w-1.5 rounded-full ${
-          active ? "bg-emerald-500" : "bg-gray-400"
-        }`}
-      />
-    </button>
-  );
-}
-

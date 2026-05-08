@@ -138,7 +138,7 @@ export function BirthForm({ onSubmit, isLoading = false }: BirthFormProps) {
               type="checkbox"
               checked={isApproximate}
               onChange={(e) => setIsApproximate(e.target.checked)}
-              className="rounded border-white/30 bg-white/5 text-[#8C7BFF] focus:ring-[#8C7BFF]"
+              className="rounded border-white/30 bg-white/5 text-[#D4AF72] focus:ring-[#8C7BFF]"
             />
             Doğum saatimi bilmiyorum
           </label>
@@ -214,7 +214,7 @@ export function BirthForm({ onSubmit, isLoading = false }: BirthFormProps) {
       <button
   type="submit"
   disabled={isLoading}
-  className="mt-2 rounded-xl bg-[#5B3FFF] px-6 py-3.5 font-medium text-white shadow-[0_0_20px_rgba(91,63,255,0.4)] transition hover:bg-[#3E2BCB] hover:shadow-[0_0_28px_rgba(91,63,255,0.5)] disabled:opacity-60"
+  className="mt-2 rounded-xl bg-[#D4AF72] px-6 py-3.5 font-medium text-white shadow-[0_0_20px_rgba(91,63,255,0.4)] transition hover:bg-[#C9A96E] hover:shadow-[0_0_28px_rgba(91,63,255,0.5)] disabled:opacity-60"
 >
   {isLoading ? "Hesaplanıyor…" : "Haritayı Hesapla"}
 </button>

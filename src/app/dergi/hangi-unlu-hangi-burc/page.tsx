@@ -61,8 +61,8 @@ function CategoryCard({
   items: { name: string; sign: string }[];
 }) {
   return (
-    <div className="rounded-2xl bg-white p-6 shadow-sm border border-gray-200 hover:shadow-lg transition">
-      <h2 className="text-lg font-semibold text-black">{title}</h2>
+    <div className="rounded-2xl bg-[#0E1523] p-6 border border-white/[0.10] hover:shadow-lg transition">
+      <h2 className="text-lg font-semibold text-[#EDE9DF]">{title}</h2>
       <div className="mt-4 h-px w-full bg-gray-200" />
 
       <ul className="mt-4 space-y-3">
@@ -71,10 +71,10 @@ function CategoryCard({
             key={item.name}
             className="flex items-center justify-between text-sm"
           >
-            <span className="text-black font-medium hover:text-[#5B3FFF] transition">
+            <span className="text-[#EDE9DF] font-medium hover:text-[#D4AF72] transition">
               {item.name}
             </span>
-            <span className="rounded-full bg-[#5B3FFF]/10 px-3 py-1 text-xs font-medium text-[#5B3FFF]">
+            <span className="rounded-full bg-[#D4AF72]/10 px-3 py-1 text-xs font-medium text-[#D4AF72]">
               {item.sign}
             </span>
           </li>
@@ -86,14 +86,14 @@ function CategoryCard({
 
 export default function UnluBurcPage() {
   return (
-    <div className="bg-[#F7F8FC] pb-28">
+    <div className="bg-[#070B12] pb-28">
       {/* HERO */}
-      <section className="bg-white py-20 text-center border-b border-gray-200">
+      <section className="bg-[#070B12] py-20 text-center border-b border-gray-200">
         <Container size="md">
-          <h1 className="text-4xl sm:text-5xl font-bold text-black">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#EDE9DF]">
             Hangi Ünlü Hangi Burç?
           </h1>
-          <p className="mt-4 text-[#444] max-w-2xl mx-auto">
+          <p className="mt-4 text-[#8494B2] max-w-2xl mx-auto">
             Sevdiğin oyuncuların, futbolcuların, müzisyenlerin ve
             siyasetçilerin burçlarını keşfet. Bakalım favori ünlün
             seninle aynı burç mu?
@@ -118,7 +118,7 @@ export default function UnluBurcPage() {
     <div className="mt-16 flex justify-center">
       <Link
         href="/dergi"
-        className="text-sm font-medium text-[#5B3FFF] hover:underline"
+        className="text-sm font-medium text-[#D4AF72] hover:underline"
       >
         ← Dergiye Dön
       </Link>

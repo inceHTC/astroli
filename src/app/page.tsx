@@ -1,480 +1,359 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/layout/Container";
 import { ZODIAC_SIGNS } from "@/data/zodiac";
 import { TESTS } from "@/data/tests";
-import { getFeaturedArticles } from "@/lib/getArticles";
 import Image from "next/image";
 
 const ELEMENT_LABELS: Record<string, string> = {
-  fire: "Ateş",
-  earth: "Toprak",
-  air: "Hava",
-  water: "Su",
+  fire: "Ateş", earth: "Toprak", air: "Hava", water: "Su",
+};
+const ELEMENT_BADGE: Record<string, string> = {
+  fire: "badge-fire", earth: "badge-earth", air: "badge-air", water: "badge-water",
 };
 
-const randomTests = [...TESTS]
-  .sort(() => 0.5 - Math.random())
-  .slice(0, 3);
-  
 function getCurrentZodiac() {
   const today = new Date();
   const month = today.getMonth() + 1;
   const day = today.getDate();
-
   return ZODIAC_SIGNS.find((sign) => {
     const { start, end } = sign.dateRange;
-
-    // Normal aralık
     if (start.month < end.month) {
-      return (
-        (month === start.month && day >= start.day) ||
+      return (month === start.month && day >= start.day) ||
         (month === end.month && day <= end.day) ||
-        (month > start.month && month < end.month)
-      );
+        (month > start.month && month < end.month);
     }
-
-    // Yıl atlayan aralık (Oğlak)
-    return (
-      (month === start.month && day >= start.day) ||
+    return (month === start.month && day >= start.day) ||
       (month === end.month && day <= end.day) ||
-      month > start.month ||
-      month < end.month
-    );
+      month > start.month || month < end.month;
   });
 }
 
-export default async function HomePage() {
+export default function HomePage() {
   const featuredZodiac = getCurrentZodiac();
-  const featuredArticles = await getFeaturedArticles(6);
 
   return (
-    <div className="bg-[#F7F8FC] pb-28">
+    <div style={{ background: "var(--bg)" }}>
 
-{/* HERO */}
-<section className="relative overflow-hidden bg-[#0F1020] text-white">
+      {/* HERO */}
+      <section className="relative overflow-hidden" style={{ background: "var(--bg)" }}>
 
-  {/* Arka plan katmanlı glow */}
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,rgba(91,63,255,0.25),transparent_60%)]" />
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_80%,rgba(120,80,255,0.15),transparent_70%)]" />
-
-  <Container size="lg">
-    <div className="relative grid items-center gap-16 py-28 lg:grid-cols-2">
-
-      {/* SOL */}
-      <div>
-        <p className="mb-6 inline-block rounded-full border border-[#5B3FFF]/40 bg-[#5B3FFF]/10 px-4 py-1 text-sm text-[#8C7BFF]">
-          ✦ Astroli ile Kendini Keşfet
-        </p>
-
-        <h1 className="text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
-          Burcunu Öğren,
-          <br />
-          <span className="bg-gradient-to-r from-[#6C5BFF] to-indigo-400 bg-clip-text text-transparent">
-            Kişiliğini Keşfet
-          </span>
-        </h1>
-
-        <p className="mt-6 max-w-xl text-lg text-gray-300">
-          Doğum tarihini gir, güneş, yükselen ve ay burcunu anında öğren.
-          Eğlenceli ve modern testlerle kendini daha yakından tanı.
-        </p>
-
-        {/* CTA */}
-        <div className="mt-10 flex flex-wrap gap-4">
-          <Link href="/burc-hesapla">
-            <Button
-              size="lg"
-              className="bg-[#5B3FFF] hover:bg-[#4A32E0] shadow-lg shadow-[#5B3FFF]/40 transition-all duration-300 hover:scale-[1.03]"
-            >
-              Burcunu Öğren
-            </Button>
-          </Link>
-
-          <Link
-            href="/testler"
-            className="rounded-xl border border-white/20 bg-white/5 px-6 py-3 backdrop-blur hover:bg-white/10 transition"
-          >
-            Testleri Keşfet →
-          </Link>
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[600px] w-[900px] rounded-full"
+            style={{ background: "radial-gradient(ellipse, rgba(123,94,255,0.18) 0%, transparent 70%)" }} />
+          <div className="absolute top-20 right-0 h-[400px] w-[500px]"
+            style={{ background: "radial-gradient(ellipse at right, rgba(212,168,83,0.07) 0%, transparent 65%)" }} />
+          <div className="absolute bottom-0 left-0 h-[300px] w-[400px]"
+            style={{ background: "radial-gradient(ellipse at left bottom, rgba(123,94,255,0.1) 0%, transparent 65%)" }} />
         </div>
-      </div>
 
-{/* SAĞ */}
-<div className="relative mt-12 lg:mt-0">
+        <div className="absolute bottom-0 left-0 right-0 h-px"
+          style={{ background: "linear-gradient(90deg, transparent, rgba(123,94,255,0.3) 30%, rgba(212,168,83,0.2) 70%, transparent)" }} />
 
-  <div className="-mx-4 sm:-mx-6 lg:mx-0 lg:w-[125%] lg:-mr-32">
-    <Image
-      src="/hero4.png"
-      alt="Astroli Hero"
-      width={1600}
-      height={1100}
-      priority
-      className="w-full h-auto object-cover"
-    />
-  </div>
-
-  {/* Fade sadece desktop */}
-  <div className="hidden lg:block pointer-events-none absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-[#0F1020] to-transparent" />
-
-</div>
-
-
-
-    </div>
-  </Container>
-</section>
-
-{/* ================= DÖRT KART: GÜNLÜK / HAFTALIK / ÜNLÜLER / MESLEKLER ================= */}
-<section className="mt-24">
-  <Container size="lg">
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    
-
-      {/* 1. Günlük burç yorumları */}
-      <Link
-        href="/gunluk-burc"
-        className="group block rounded-2xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition"
-      >
-        <div className="relative h-40 w-full overflow-hidden sm:h-44 bg-gradient-to-br from-[#5B3FFF]/10 to-[#5B3FFF]/5">
-           <div className="relative h-40 w-full overflow-hidden sm:h-44">
-          <Image
-            src="/gunluk.png"
-            alt="Hangi ünlü hangi burç?"
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, 33vw"
-          />
-        </div>
-        </div>
-        <div className="p-4">
-          <h2 className="text-lg font-semibold text-black">Günlük Burç Yorumları</h2>
-          <p className="mt-1 text-sm text-gray-500">Bugün burcun ne söylüyor? →</p>
-        </div>
-      </Link>
-
-      {/* 2. Haftalık burç yorumu */}
-      <Link
-        href="/haftalik-burc"
-        className="group block rounded-2xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition"
-      >
-        <div className="relative h-40 w-full overflow-hidden sm:h-44 bg-gradient-to-br from-amber-100 to-orange-50">
-           <div className="relative h-40 w-full overflow-hidden sm:h-44">
-          <Image
-            src="/haftalik.png"
-            alt="Hangi ünlü hangi burç?"
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, 33vw"
-          />
-        </div>
-        </div>
-        <div className="p-4">
-          <h2 className="text-lg font-semibold text-black">Haftalık Burç Yorumu</h2>
-          <p className="mt-1 text-sm text-gray-500">Bu hafta sağlık, aşk, para, iş →</p>
-        </div>
-      </Link>
-
-  {/* 3. Burçlara Göre Meslekler */}
-      <Link
-        href="/burclar/meslekler"
-        className="group block rounded-2xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition"
-      >
-       <div className="relative h-40 w-full overflow-hidden sm:h-44">
-          <Image
-            src="/meslek.png"
-            alt="Hangi ünlü hangi burç?"
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, 33vw"
-          />
-        </div>
-        <div className="p-4">
-          <h2 className="text-lg font-semibold text-black">Burçlara Göre Meslekler</h2>
-          <p className="mt-1 text-sm text-gray-500">Burcuna uygun kariyeri keşfet →</p>
-        </div>
-      </Link>
-      
-        {/* 4. Hangi Ünlü Hangi Burç */}
-      <Link
-        href="/unluler"
-        className="group block rounded-2xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition"
-      >
-        <div className="relative h-40 w-full overflow-hidden sm:h-44">
-          <Image
-            src="/dergi/unlu.png"
-            alt="Hangi ünlü hangi burç?"
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, 33vw"
-          />
-        </div>
-        <div className="p-4">
-          <h2 className="text-lg font-semibold text-black">Hangi Ünlü Hangi Burç?</h2>
-          <p className="mt-1 text-sm text-gray-500">Ünlülerin burçlarını keşfet →</p>
-        </div>
-      </Link>
-
-    
-    </div>
-  </Container>
-</section>
-
-
-      
-      {/* FEATURED – Üç kart: Kozmik Enerji / Bugünün Burcu / Retro Merkezi */}
-      <section className="mt-24">
         <Container size="lg">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="min-w-0">
+          <div className="relative grid items-center gap-12 py-24 lg:grid-cols-2 lg:py-32">
 
-                 <div className="min-w-0">
-            <Link href="/retro" className="block h-full">
-              <div className="rounded-2xl bg-white p-8 shadow-sm border border-gray-200 hover:shadow-lg hover:border-[#5B3FFF]/30 transition h-full flex flex-col">
-                <h2 className="mb-4 text-2xl font-semibold text-black">
-                  Retro Merkezi
-                </h2>
-                <p className="text-[#444] leading-relaxed flex-1">
-                  Merkür, Venüs, Mars ve Satürn retrolarını takvim, kişisel analiz ve karar desteğiyle takip et. Korku değil, farkındalık.
-                </p>
-                <span className="mt-6 inline-block text-[#5B3FFF] font-medium">
-                  Retro Merkezi&apos;ne git →
-                </span>
+            <div className="relative z-10">
+              <div className="eyebrow mb-6">
+                <span style={{ color: "var(--gold)" }}>✦</span>
+                <span>Premium Astroloji Platformu</span>
               </div>
-            </Link>
-            </div>
 
-          
-            </div>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl">
+                Burcunu
+                <br />
+                <span className="gradient-text">Öğren,</span>
+                <br />
+                Kişiliğini
+                <br />
+                <span className="gradient-text">Keşfet</span>
+              </h1>
 
-            {featuredZodiac && (
-              <div className="min-w-0">
-              <Link href={`/burc/${featuredZodiac.id}`} className="block h-full">
-                <div className="h-full rounded-2xl bg-[#11121A] p-8 text-white hover:shadow-lg transition">
-                  <h2 className="mb-6 text-2xl font-semibold">
-                    Bugünün Burcu
-                  </h2>
-
-                  <div className="flex items-center gap-6">
-                    <div className="relative h-24 w-24 overflow-hidden rounded-2xl bg-[#1A1C2B]">
-                      <Image
-                        src={`/zodiac/${featuredZodiac.id}.png`}
-                        alt={featuredZodiac.nameTr}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-
-                    <div>
-                      <h3 className="text-xl font-semibold">
-                        {featuredZodiac.nameTr}
-                      </h3>
-                      <p className="mt-1 text-gray-400">
-                        {featuredZodiac.dates}
-                      </p>
-                      <span className="mt-3 inline-block rounded-full bg-[#5B3FFF]/20 px-3 py-1 text-xs text-[#5B3FFF]">
-                        {ELEMENT_LABELS[featuredZodiac.element]}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-              </div>
-            )}
-           
-             <div className="h-full rounded-2xl bg-white p-8 shadow-sm border border-gray-200">
-              <h2 className="mb-4 text-2xl font-semibold text-black">
-                Haftalık Kozmik Enerji
-              </h2>
-              <p className="text-[#444] leading-relaxed">
-                Bu hafta Merkür retrosu sona eriyor. İletişimde netlik artacak.
-                Özellikle toprak burçları için verimli bir dönem.
+              <p className="mt-7 max-w-sm text-base leading-relaxed" style={{ color: "var(--text-3)" }}>
+                Doğum tarihini gir, güneş, yükselen ve ay burcunu anında öğren.
+                Doğum haritası ve kişilik testleriyle kendini derinlemesine tanı.
               </p>
-              <Link
-                href="/dergi/haftalik-burc-enerjisi"
-                className="mt-6 inline-block text-[#5B3FFF] font-medium hover:underline"
-              >
-                Devamını oku →
-              </Link>
+
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link href="/burc-hesapla" className="btn btn-violet">
+                  Burcunu Hesapla →
+                </Link>
+                <Link href="/birth-chart" className="btn btn-ghost">
+                  Doğum Haritası
+                </Link>
+              </div>
+
+              <div className="mt-12 flex gap-8 pt-8"
+                style={{ borderTop: "1px solid var(--border)" }}>
+                {[
+                  { n: "12", l: "Burç Analizi" },
+                  { n: "10+", l: "Kişilik Testi" },
+                  { n: "Günlük", l: "Yorum" },
+                ].map((s) => (
+                  <div key={s.l}>
+                    <p className="text-2xl font-bold" style={{ fontFamily: "var(--font-serif)" }}>{s.n}</p>
+                    <p className="mt-1 text-xs" style={{ color: "var(--text-3)" }}>{s.l}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-         
+
+            <div className="relative">
+              <div className="-mx-4 sm:-mx-6 lg:mx-0 lg:w-[115%] lg:-mr-20">
+                <Image
+                  src="/hero4.png"
+                  alt="Astroli"
+                  width={1600}
+                  height={1100}
+                  priority
+                  className="w-full h-auto"
+                />
+              </div>
+              <div className="hidden lg:block pointer-events-none absolute inset-y-0 left-0 w-28"
+                style={{ background: "linear-gradient(to right, var(--bg), transparent)" }} />
+            </div>
 
           </div>
         </Container>
       </section>
 
-     
-{/* ================= DOĞUM HARİTASI CTA ================= */}
-<section className="mt-28">
-  <Container size="lg">
-    <div className="relative overflow-hidden rounded-3xl bg-[#11121A] text-white p-10 lg:p-14">
+      {/* HIZLI ERİŞİM */}
+      <section className="py-20" style={{ background: "var(--bg-2)" }}>
+        <Container size="lg">
 
-      {/* Glow */}
-      <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-[#5B3FFF]/30 blur-3xl" />
-
-      <div className="relative grid items-center gap-10 lg:grid-cols-2">
-
-        {/* TEXT */}
-        <div>
-          <h2 className="text-3xl sm:text-4xl font-bold">
-            Doğum Haritanı
-            <br />
-            Detaylı Analiz Et
-          </h2>
-
-          <p className="mt-6 text-gray-300 leading-relaxed">
-            Sadece güneş burcun değil.
-            Yükselen, ay burcu ve gezegen yerleşimlerinle
-            gerçek karakter analizini keşfet.
-          </p>
-
-          <Link
-            href="/birth-chart"
-            className="mt-8 inline-block rounded-xl bg-[#5B3FFF] px-6 py-3 font-medium hover:bg-[#3E2BCB] transition"
-          >
-            Haritayı Hesapla
-          </Link>
-        </div>
-
-        {/* IMAGE */}
-        <div className="relative">
-          <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-2xl shadow-xl">
-            <Image
-              src="/dogum.png"
-              alt="Doğum Haritası"
-              fill
-              className="object-cover"
-            />
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="eyebrow mb-3">Keşfet</p>
+              <h2 className="text-3xl sm:text-4xl">Nereye Gitmek İstersin?</h2>
+            </div>
           </div>
-        </div>
 
-      </div>
-    </div>
-  </Container>
-</section>
-
-
-
-
-{/* POPULAR TESTS */}
-<section className="mt-24">
-  <Container size="lg">
-    <div className="flex items-center justify-between mb-8">
-      <h2 className="text-2xl font-semibold text-black sm:text-3xl">
-        Popüler Kişilik Testleri
-      </h2>
-
-      <Link
-        href="/testler"
-        className="text-sm font-medium text-[#5B3FFF] hover:underline"
-      >
-        Tümünü Gör →
-      </Link>
-    </div>
-
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-     {TESTS.slice(0, 3).map((test) => (
-    <Link key={test.id} href={`/test/${test.slug}`}>
-    <Card className="bg-white hover:shadow-lg transition overflow-hidden group">
-      
-      {/* Görsel */}
-      <div className="relative h-48 w-full overflow-hidden">
-        <Image
-          src={test.image}
-          alt={test.title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-
-      {/* İçerik */}
-      <div className="p-6">
-        <h2 className="text-lg font-semibold text-black mb-2">
-          {test.title}
-        </h2>
-
-        <p className="text-sm text-gray-500 line-clamp-2 mb-4">
-          {test.description}
-        </p>
-
-        <p className="text-sm text-[#5B3FFF] font-medium">
-          {test.duration}
-        </p>
-      </div>
-
-    </Card>
-  </Link>
-))}
-
-    </div>
-     </Container>
-</section>
-
-
-
-
-{/* ================= DERGİ SECTION – Öne çıkan makaleler ================= */}
-<section className="mt-24">
-  <Container size="lg">
-    <div className="flex items-center justify-between mb-8">
-      <h2 className="text-2xl font-semibold text-black sm:text-3xl">
-        Dergiden Öne Çıkanlar
-      </h2>
-      <Link href="/dergi" className="text-sm font-medium text-[#5B3FFF] hover:underline">
-        Tümünü Gör →
-      </Link>
-    </div>
-    {featuredArticles.length === 0 ? (
-      <div className="rounded-2xl border border-dashed border-gray-200 bg-white/50 py-12 text-center text-gray-500">
-        Öne çıkan makale henüz yok. Dergi sayfasından tüm makalelere ulaşabilirsiniz.
-      </div>
-    ) : (
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {featuredArticles.map((article) => (
-          <Link
-            key={article.id}
-            href={`/dergi/${article.slug}`}
-            className="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition block"
-          >
-            <div className="relative h-48 w-full overflow-hidden bg-gray-100">
-              {article.image ? (
-                <Image
-                  src={article.image}
-                  alt={article.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-              ) : (
-                <div className="flex h-full items-center justify-center text-gray-400 text-sm">
-                  {article.tag}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { href: "/gunluk-burc", src: "/gunluk.png", title: "Günlük Burç", desc: "Bugün burcun ne söylüyor?" },
+              { href: "/haftalik-burc", src: "/haftalik.png", title: "Haftalık Yorum", desc: "Sağlık, aşk, para, iş" },
+              { href: "/burclar/meslekler", src: "/meslek.png", title: "Kariyer & Meslek", desc: "Burcuna uygun yol" },
+              { href: "/unluler", src: "/dergi/unlu.png", title: "Ünlü Burçları", desc: "Kim hangi burçtan?" },
+            ].map((item) => (
+              <Link key={item.href} href={item.href} className="group block">
+                <div className="glass rounded-2xl overflow-hidden">
+                  <div className="relative h-44 overflow-hidden">
+                    <Image
+                      src={item.src}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="25vw"
+                    />
+                    <div className="absolute inset-0"
+                      style={{ background: "linear-gradient(to top, rgba(5,4,15,0.7) 0%, transparent 60%)" }} />
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-base font-semibold" style={{ fontFamily: "var(--font-serif)" }}>
+                      {item.title}
+                    </h3>
+                    <p className="mt-1 text-xs" style={{ color: "var(--text-3)" }}>
+                      {item.desc} →
+                    </p>
+                  </div>
                 </div>
-              )}
+              </Link>
+            ))}
+          </div>
+
+        </Container>
+      </section>
+
+      {/* BU HAFTA KOZMOSTA */}
+      <section className="py-24" style={{ background: "var(--bg)" }}>
+        <Container size="lg">
+
+          <div className="mb-12">
+            <p className="eyebrow mb-3">Bu Hafta</p>
+            <h2 className="text-3xl sm:text-4xl">Kozmosta Neler Var?</h2>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+            <Link href="/retro" className="group block">
+              <div className="glass h-full rounded-2xl p-7 flex flex-col min-h-[260px]">
+                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl text-xl"
+                  style={{ background: "var(--violet-soft)", border: "1px solid var(--violet-border)" }}>
+                  ☿
+                </div>
+                <h3 className="text-xl mb-3">Retro Merkezi</h3>
+                <p className="text-sm leading-relaxed flex-1" style={{ color: "var(--text-3)" }}>
+                  Merkür, Venüs, Mars ve Satürn retrolarını takvim, kişisel analiz
+                  ve karar desteğiyle takip et.
+                </p>
+                <span className="mt-6 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all duration-200"
+                  style={{ color: "var(--violet)" }}>
+                  Retroları Takip Et →
+                </span>
+              </div>
+            </Link>
+
+            {featuredZodiac && (
+              <Link href={`/burc/${featuredZodiac.id}`} className="group block">
+                <div className="h-full rounded-2xl p-7 flex flex-col min-h-[260px] transition-all duration-300 hover:-translate-y-1"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(123,94,255,0.12) 0%, rgba(123,94,255,0.05) 100%)",
+                    border: "1px solid var(--violet-border)",
+                    borderRadius: "var(--r-lg)",
+                  }}>
+                  <p className="eyebrow mb-5">Bugünün Burcu</p>
+
+                  <div className="flex items-center gap-5 flex-1">
+                    <div className="relative h-20 w-20 flex-shrink-0 rounded-2xl overflow-hidden"
+                      style={{ border: "1px solid var(--border-2)", background: "rgba(0,0,0,0.3)" }}>
+                      <Image src={featuredZodiac.image} alt={featuredZodiac.nameTr} fill className="object-cover" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl">{featuredZodiac.nameTr}</h3>
+                      <p className="mt-1.5 text-xs" style={{ color: "var(--text-3)" }}>{featuredZodiac.dates}</p>
+                      <span className={`badge mt-3 ${ELEMENT_BADGE[featuredZodiac.element] ?? "badge-air"}`}>
+                        {ELEMENT_LABELS[featuredZodiac.element]}
+                      </span>
+                    </div>
+                  </div>
+
+                  <span className="mt-6 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all duration-200"
+                    style={{ color: "var(--violet)" }}>
+                    Detaylı Analiz →
+                  </span>
+                </div>
+              </Link>
+            )}
+
+            <Link href="/burclar" className="group block">
+              <div className="glass h-full rounded-2xl p-7 flex flex-col min-h-[260px]"
+                style={{
+                  background: "linear-gradient(135deg, rgba(212,168,83,0.09) 0%, rgba(212,168,83,0.03) 100%)",
+                  border: "1px solid var(--gold-border)",
+                }}>
+                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl text-xl"
+                  style={{ background: "var(--gold-soft)", border: "1px solid var(--gold-border)" }}>
+                  ♈
+                </div>
+                <h3 className="text-xl mb-3">12 Zodyak Burcu</h3>
+                <p className="text-sm leading-relaxed flex-1" style={{ color: "var(--text-3)" }}>
+                  Element enerjileri, güçlü ve zayıf yönler, aşk ve kariyer rehberi.
+                  Burcunu seç, derinlemesine tanı.
+                </p>
+                <span className="mt-6 text-sm font-semibold flex items-center gap-2 group-hover:gap-3 transition-all duration-200"
+                  style={{ color: "var(--gold)" }}>
+                  Tüm Burçlara Bak →
+                </span>
+              </div>
+            </Link>
+
+          </div>
+        </Container>
+      </section>
+
+      {/* DOĞUM HARİTASI CTA */}
+      <section className="py-6">
+        <Container size="lg">
+          <div className="relative overflow-hidden rounded-3xl"
+            style={{ background: "linear-gradient(135deg, #0D0B24 0%, #150E35 50%, #0A0820 100%)" }}>
+
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute -top-32 -right-32 h-[500px] w-[500px] rounded-full"
+                style={{ background: "radial-gradient(circle, rgba(123,94,255,0.2) 0%, transparent 65%)" }} />
+              <div className="absolute -bottom-20 -left-20 h-[300px] w-[300px] rounded-full"
+                style={{ background: "radial-gradient(circle, rgba(212,168,83,0.1) 0%, transparent 65%)" }} />
+              <div className="absolute inset-0 rounded-3xl"
+                style={{ border: "1px solid rgba(123,94,255,0.2)" }} />
             </div>
-            <div className="p-6">
-              <span className="text-xs font-medium uppercase tracking-wider text-[#5B3FFF]">
-                {article.tag}
-              </span>
-              <h3 className="mt-1 font-semibold text-black line-clamp-2">
-                {article.title}
-              </h3>
-              <p className="mt-2 text-sm text-gray-500 line-clamp-2">
-                {article.excerpt || article.title}
-              </p>
-              {article.readTime != null && (
-                <p className="mt-3 text-xs text-gray-400">{article.readTime} dk okuma</p>
-              )}
+
+            <div className="relative grid items-center gap-10 p-10 lg:grid-cols-2 lg:p-16">
+
+              <div>
+                <p className="eyebrow mb-5">Kişisel Harita</p>
+                <h2 className="text-4xl sm:text-5xl">
+                  Doğum Haritanı
+                  <br />
+                  <span className="gold-text">Detaylı Analiz Et</span>
+                </h2>
+                <p className="mt-6 leading-relaxed" style={{ color: "var(--text-3)" }}>
+                  Sadece güneş burcun değil. Yükselen, ay burcu ve
+                  tüm gezegen yerleşimlerinle gerçek karakter analizini keşfet.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <Link href="/birth-chart" className="btn btn-gold">
+                    Haritayı Hesapla →
+                  </Link>
+                  <Link href="/uyumluluk" className="btn btn-ghost">
+                    Uyumluluk Testi
+                  </Link>
+                </div>
+              </div>
+
+              <div className="relative mx-auto w-full max-w-xs lg:max-w-sm">
+                <div className="relative aspect-square rounded-2xl overflow-hidden"
+                  style={{ boxShadow: "0 32px 80px rgba(0,0,0,0.6)" }}>
+                  <Image src="/dogum.png" alt="Doğum Haritası" fill className="object-cover" />
+                </div>
+              </div>
+
             </div>
-          </Link>
-        ))}
-      </div>
-    )}
-  </Container>
-</section>
+          </div>
+        </Container>
+      </section>
 
+      {/* KİŞİLİK TESTLERİ */}
+      <section className="py-24" style={{ background: "var(--bg-2)" }}>
+        <Container size="lg">
 
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <p className="eyebrow mb-3">Testler</p>
+              <h2 className="text-3xl sm:text-4xl">Popüler Kişilik Testleri</h2>
+            </div>
+            <Link href="/testler" className="text-sm font-semibold flex items-center gap-1.5 hover:gap-3 transition-all duration-200"
+              style={{ color: "var(--violet)" }}>
+              Tümünü Gör →
+            </Link>
+          </div>
 
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {TESTS.slice(0, 3).map((test) => (
+              <Link key={test.id} href={`/test/${test.slug}`} className="group block">
+                <div className="glass rounded-2xl overflow-hidden">
+
+                  <div className="relative h-52 overflow-hidden">
+                    <Image src={test.image} alt={test.title} fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div className="absolute inset-0"
+                      style={{ background: "linear-gradient(to top, rgba(5,4,15,0.75) 0%, transparent 55%)" }} />
+                    <div className="absolute bottom-4 left-5">
+                      <span className="eyebrow" style={{ color: "var(--gold)" }}>
+                        {test.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-5">
+                    <h3 className="text-base mb-2">{test.title}</h3>
+                    <p className="text-sm line-clamp-2 leading-relaxed mb-4" style={{ color: "var(--text-3)" }}>
+                      {test.description}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs" style={{ color: "var(--text-4)" }}>
+                        ⏱ {test.duration}
+                      </span>
+                      <span className="text-xs font-semibold" style={{ color: "var(--violet)" }}>
+                        Başla →
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+              </Link>
+            ))}
+          </div>
+
+        </Container>
+      </section>
 
     </div>
   );

@@ -1,23 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/layout/Container";
-import { ZODIAC_SIGNS } from "@/data/zodiac";
+import { ZODIAC_SIGNS, ELEMENT_CARD_CLASSES } from "@/data/zodiac";
+import type { Element, ZodiacSign } from "@/data/zodiac";
 import { getWeekRange, WEEKLY_CONTENT } from "@/data/weeklyHoroscope";
 import {
   getAllWeeklyHoroscopes,
   getWeeklyHoroscopeAvailableWeeks,
 } from "@/lib/db/repositories/horoscope";
-import type { ZodiacSign } from "@/data/zodiac";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
 import { WeeklyHoroscopeToolbar } from "@/components/horoscope/WeeklyHoroscopeToolbar";
-
-const ELEMENT_COLORS: Record<string, string> = {
-  fire: "border-red-200 bg-red-50/30",
-  earth: "border-emerald-200 bg-emerald-50/30",
-  air: "border-violet-200 bg-violet-50/30",
-  water: "border-blue-200 bg-blue-50/30",
-};
 
 const CATEGORY_ORDER: { key: "love" | "work" | "money" | "health"; label: string }[] = [
   { key: "love", label: "Aşk" },
@@ -131,18 +124,18 @@ export default async function HaftalikBurcPage(props: PageProps) {
   }
 
   return (
-    <div className="bg-[#F7F8FC] pb-28">
-      <section className="relative overflow-hidden bg-white">
+    <div className="bg-[#070B12] pb-28">
+      <section className="relative overflow-hidden bg-[#070B12]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
         <Container size="lg">
           <div className="relative py-16 text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-bold text-black">
+            <h1 className="text-4xl sm:text-5xl font-bold text-[#1A1714]">
               Haftalık Burç Yorumu
             </h1>
-            <p className="mt-4 text-lg text-[#444]">
+            <p className="mt-4 text-lg text-[#6E6660]">
               Bu hafta burcunuz için sağlık, aşk, para ve iş alanlarında genel bir rehber. Olasılıklar ve farkındalık üzerine yorumlar.
             </p>
-            <p className="mt-3 text-sm font-medium text-[#5B3FFF]">
+            <p className="mt-3 text-sm font-medium text-[#5C44D0]">
               {format(start, "d MMMM", { locale: tr })} – {format(end, "d MMMM yyyy", { locale: tr })}
             </p>
             <p className="mt-2 text-sm text-[#555]">
@@ -165,13 +158,13 @@ export default async function HaftalikBurcPage(props: PageProps) {
       <section className="mt-12">
         <Container size="lg">
           {currentWeekStartStr !== todayWeekStartStr && (
-            <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50/80 p-4 text-center">
-              <p className="text-gray-700">Bu yorum geçmiş haftaya aittir.</p>
-              <p className="mt-1 text-sm text-gray-600">
+            <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-900/20 p-4 text-center">
+              <p className="text-[#6E6660]">Bu yorum geçmiş haftaya aittir.</p>
+              <p className="mt-1 text-sm text-[#6E6660]">
                 Güncel hafta için{" "}
                 <Link
                   href="/haftalik-burc"
-                  className="font-semibold text-[#5B3FFF] underline hover:no-underline"
+                  className="font-semibold text-[#5C44D0] underline hover:no-underline"
                 >
                   buraya tıklayın
                 </Link>
@@ -197,15 +190,15 @@ export default async function HaftalikBurcPage(props: PageProps) {
                     summary: fallback.summary,
                     advice: fallback.advice,
                   };
-              const colorClass = ELEMENT_COLORS[sign.element] ?? "border-gray-200 bg-gray-50/30";
+              const el = ELEMENT_CARD_CLASSES[sign.element as Element];
               return (
                 <article
                   key={sign.id}
-                  className={`rounded-2xl border p-6 sm:p-8 bg-white ${colorClass}`}
+                  className={`rounded-2xl border p-6 sm:p-8 bg-[#F9F5EF] ${el.border}`}
                 >
                   <div className="flex flex-wrap items-center gap-4 mb-6">
-                    <Link href={`/burc/${sign.id}`} className="flex items-center gap-3">
-                      <div className="relative h-16 w-16 rounded-xl overflow-hidden bg-[#1A1C2B] flex-shrink-0">
+                    <Link href={`/burc/${sign.id}`} className="flex items-center gap-3 group">
+                      <div className="relative h-16 w-16 rounded-xl overflow-hidden bg-[#EDE8DF] flex-shrink-0">
                         <Image
                           src={sign.image}
                           alt={sign.nameTr}
@@ -214,39 +207,41 @@ export default async function HaftalikBurcPage(props: PageProps) {
                         />
                       </div>
                       <div>
-                        <h2 className="text-2xl font-semibold text-black">{sign.nameTr}</h2>
-                        <p className="text-sm text-gray-500">{sign.dates}</p>
+                        <h2 className="text-2xl font-semibold text-[#1A1714] group-hover:text-[#5C44D0] transition-colors">{sign.nameTr}</h2>
+                        <p className="text-sm text-[#6E6660]">{sign.dates}</p>
                       </div>
                     </Link>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-5">
                     <div>
-                      <h3 className="text-sm font-semibold text-gray-700 mb-2">Genel Değerlendirme</h3>
-                      <p className="text-gray-700 leading-relaxed">{content.summary}</p>
+                      <h3 className="text-xs font-semibold uppercase tracking-widest text-[#5C44D0] mb-2">Genel Değerlendirme</h3>
+                      <p className="text-[#3D3830] leading-relaxed text-sm">{content.summary}</p>
                     </div>
 
-                    {CATEGORY_ORDER.map(({ key, label }) => {
-                      const text =
-                        key === "love"
-                          ? content.loveText
-                          : key === "work"
-                            ? content.workText
-                            : key === "money"
-                              ? content.moneyText
-                              : content.healthText;
-                      return (
-                        <div key={key} className="flex flex-wrap items-baseline gap-2">
-                          <span className="text-sm font-semibold text-gray-700">{label}:</span>
-                          {text && <span className="text-gray-700">{text}</span>}
-                          <StarRating value={content[key]} />
-                        </div>
-                      );
-                    })}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {CATEGORY_ORDER.map(({ key, label }) => {
+                        const text =
+                          key === "love"
+                            ? content.loveText
+                            : key === "work"
+                              ? content.workText
+                              : key === "money"
+                                ? content.moneyText
+                                : content.healthText;
+                        return (
+                          <div key={key} className="rounded-xl bg-black/[0.03] border border-black/[0.06] p-3 flex flex-col gap-1.5">
+                            <span className="text-xs font-semibold uppercase tracking-wider text-[#5C44D0]">{label}</span>
+                            <StarRating value={content[key]} />
+                            {text && <span className="text-xs text-[#44403C] leading-relaxed mt-0.5">{text}</span>}
+                          </div>
+                        );
+                      })}
+                    </div>
 
-                    <div className="rounded-xl bg-white/80 p-4 border border-gray-100 mt-4">
-                      <h3 className="text-sm font-semibold text-gray-700 mb-2">Tavsiye</h3>
-                      <p className="text-gray-700 leading-relaxed">{content.advice}</p>
+                    <div className="rounded-xl bg-[#5C44D0]/[0.06] p-4 border border-[#5C44D0]/20 mt-2">
+                      <h3 className="text-xs font-semibold uppercase tracking-widest text-[#5C44D0] mb-2">Tavsiye</h3>
+                      <p className="text-[#3D3830] leading-relaxed text-sm">{content.advice}</p>
                     </div>
                   </div>
                 </article>

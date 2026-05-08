@@ -39,15 +39,15 @@ export default function IletisimPage() {
   }
 
   return (
-    <div className="bg-[#F7F8FC] min-h-screen pb-28">
-      <section className="relative overflow-hidden bg-white">
+    <div className="bg-[#070B12] min-h-screen pb-28">
+      <section className="relative overflow-hidden bg-[#070B12]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
         <Container size="md">
           <div className="relative py-16 text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold text-black">
+            <h1 className="text-4xl sm:text-5xl font-bold text-[#EDE9DF]">
               İletişim
             </h1>
-            <p className="mt-4 text-lg text-[#444]">
+            <p className="mt-4 text-lg text-[#8494B2]">
               Sorularınız veya önerileriniz için aşağıdaki formu kullanabilirsiniz. En kısa sürede size dönüş yapacağız.
             </p>
           </div>
@@ -57,14 +57,14 @@ export default function IletisimPage() {
       <section className="mt-12">
         <Container size="sm">
           {sent ? (
-            <div className="rounded-2xl border border-emerald-200 bg-emerald-50/80 p-8 text-center">
-              <p className="text-lg font-medium text-emerald-800">
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-900/20 p-8 text-center">
+              <p className="text-lg font-medium text-emerald-400">
                 Mesajınız alındı. En kısa sürede size dönüş yapacağız.
               </p>
               <button
                 type="button"
                 onClick={() => setSent(false)}
-                className="mt-4 text-sm font-medium text-[#5B3FFF] hover:underline"
+                className="mt-4 text-sm font-medium text-[#D4AF72] hover:underline"
               >
                 Yeni mesaj gönder
               </button>
@@ -72,11 +72,11 @@ export default function IletisimPage() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm"
+              className="rounded-2xl border border-white/[0.10] bg-[#0E1523] p-8 "
             >
               <div className="space-y-6">
                 <div>
-                  <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="contact-name" className="block text-sm font-medium text-[#8494B2]">
                     Adınız
                   </label>
                   <input
@@ -85,12 +85,12 @@ export default function IletisimPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 focus:border-[#5B3FFF] focus:ring-1 focus:ring-[#5B3FFF]/30 outline-none"
+                    className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
                     placeholder="Adınız Soyadınız"
                   />
                 </div>
                 <div>
-                  <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="contact-email" className="block text-sm font-medium text-[#8494B2]">
                     E-posta
                   </label>
                   <input
@@ -99,12 +99,12 @@ export default function IletisimPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 focus:border-[#5B3FFF] focus:ring-1 focus:ring-[#5B3FFF]/30 outline-none"
+                    className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
                     placeholder="ornek@email.com"
                   />
                 </div>
                 <div>
-                  <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="contact-message" className="block text-sm font-medium text-[#8494B2]">
                     Mesajınız
                   </label>
                   <textarea
@@ -113,17 +113,17 @@ export default function IletisimPage() {
                     onChange={(e) => setMessage(e.target.value)}
                     required
                     rows={5}
-                    className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 focus:border-[#5B3FFF] focus:ring-1 focus:ring-[#5B3FFF]/30 outline-none resize-y"
+                    className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none resize-y"
                     placeholder="Mesajınızı yazın..."
                   />
                 </div>
                 {error && (
-                  <p className="text-sm text-red-600">{error}</p>
+                  <p className="text-sm text-red-400">{error}</p>
                 )}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full rounded-xl bg-[#5B3FFF] px-4 py-3 text-sm font-medium text-white hover:bg-[#4A2FDD] transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full rounded-xl bg-[#D4AF72] px-4 py-3 text-sm font-medium text-white hover:bg-[#C9A96E] transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? "Gönderiliyor…" : "Gönder"}
                 </button>
@@ -131,8 +131,8 @@ export default function IletisimPage() {
             </form>
           )}
 
-          <p className="mt-6 text-center text-sm text-gray-500">
-            <Link href="/" className="text-[#5B3FFF] hover:underline">
+          <p className="mt-6 text-center text-sm text-[#6B7A99]">
+            <Link href="/" className="text-[#D4AF72] hover:underline">
               ← Ana sayfaya dön
             </Link>
           </p>

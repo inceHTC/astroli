@@ -22,13 +22,13 @@ export default async function UnlulerPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-[#F7F8FC] pb-28">
-      <section className="border-b border-gray-200 bg-white py-16">
+    <div className="min-h-screen bg-[#070B12] pb-28">
+      <section className="border-b border-gray-200 bg-[#070B12] py-16">
         <Container size="lg">
-          <h1 className="text-4xl font-bold text-black sm:text-5xl">
+          <h1 className="text-4xl font-bold text-[#EDE9DF] sm:text-5xl">
             Hangi Ünlü Hangi Burç?
           </h1>
-          <p className="mt-4 max-w-2xl text-gray-600">
+          <p className="mt-4 max-w-2xl text-[#8494B2]">
             İsim veya meslek yazarak arama yapabilirsiniz. 
           </p>
         </Container>

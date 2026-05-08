@@ -48,15 +48,15 @@ export default async function HaftalikBurcArsivPage() {
   });
 
   return (
-    <div className="bg-[#F7F8FC] pb-24">
-      <section className="relative overflow-hidden bg-white">
+    <div className="bg-[#070B12] pb-24">
+      <section className="relative overflow-hidden bg-[#070B12]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
         <Container size="lg">
           <div className="relative py-14 text-center max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-black">
+            <h1 className="text-3xl sm:text-4xl font-bold text-[#EDE9DF]">
               Haftalık Burç Arşivi
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-[#444]">
+            <p className="mt-4 text-base sm:text-lg text-[#8494B2]">
               Geçmiş haftalara ait haftalık burç yorumlarını buradan
               seçebilirsiniz.
             </p>
@@ -71,8 +71,8 @@ export default async function HaftalikBurcArsivPage() {
       <section className="mt-8">
         <Container size="lg">
           {availableWeeks.length === 0 ? (
-            <div className="rounded-2xl border border-gray-200 bg-white p-10 text-center">
-              <p className="text-gray-600">
+            <div className="rounded-2xl border border-white/[0.10] bg-[#0E1523] p-10 text-center">
+              <p className="text-[#8494B2]">
                 Henüz arşivde gösterilecek bir haftalık burç kaydı bulunmuyor.
               </p>
             </div>
@@ -82,16 +82,16 @@ export default async function HaftalikBurcArsivPage() {
                 .sort(([a], [b]) => b - a)
                 .map(([year, weeks]) => (
                   <div key={year} className="space-y-3">
-                    <h2 className="text-xl font-semibold text-black">
+                    <h2 className="text-xl font-semibold text-[#EDE9DF]">
                       {year}
                     </h2>
-                    <div className="rounded-2xl border border-gray-100 bg-white p-4">
+                    <div className="rounded-2xl border border-white/[0.07] bg-[#0E1523] p-4">
                       <div className="flex flex-wrap gap-2">
                         {weeks.map(({ weekStart, label }) => (
                           <Link
                             key={weekStart}
                             href={`/haftalik-burc?hafta=${weekStart}`}
-                            className="rounded-lg bg-gray-100 px-3 py-1.5 text-sm text-gray-800 hover:bg-gray-200"
+                            className="rounded-lg bg-gray-100 px-3 py-1.5 text-sm text-[#EDE9DF] hover:bg-gray-200"
                           >
                             {label}
                           </Link>

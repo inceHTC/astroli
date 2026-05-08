@@ -17,13 +17,13 @@ export default async function BurcPage({
   }
 
   return (
-    <div className="bg-[#F7F8FC] min-h-screen py-20">
+    <div className="bg-[#070B12] min-h-screen py-20">
       <div className="max-w-3xl mx-auto px-6">
         <ZodiacCard zodiac={zodiac} />
         <p className="mt-8 text-center">
           <Link
             href="/burclar"
-            className="text-[#5B3FFF] font-medium hover:underline"
+            className="text-[#D4AF72] font-medium hover:underline"
           >
             ← Tüm burçlara dön
           </Link>

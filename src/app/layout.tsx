@@ -139,7 +139,7 @@ export default async function RootLayout({
       className={`${outfit.variable} ${playfair.variable}`}
       data-scroll-behavior="smooth"
     >
-      <body className="min-h-screen antialiased bg-white text-black font-sans">
+      <body className="min-h-screen antialiased bg-[#070B12] text-[#EDE9DF] font-sans">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

@@ -151,18 +151,29 @@ const CAREER_DATA: CareerItem[] = [
   },
 ];
 
+const TAGS = [
+  { id: "lider", label: "Lider" },
+  { id: "yaratıcı", label: "Yaratıcı" },
+  { id: "analitik", label: "Analitik" },
+  { id: "iletişim", label: "İletişim" },
+  { id: "istikrar", label: "İstikrar" },
+  { id: "finans", label: "Finans" },
+  { id: "empati", label: "Empati" },
+  { id: "enerjik", label: "Enerjik" },
+];
+
 function CareerCard({ item }: { item: CareerItem }) {
   return (
-    <div className="rounded-2xl bg-white p-6 shadow-sm border border-gray-200 hover:shadow-lg transition">
-      <h2 className="text-lg font-semibold text-black">
+    <div className="rounded-2xl bg-[#0E1523] p-6 border border-white/[0.08] hover:border-[#5C44D0]/40 transition">
+      <h2 className="text-lg font-semibold text-[#EDE9DF]">
         {item.sign} Burcu
       </h2>
 
       <div className="mt-4">
-        <p className="text-sm font-medium text-[#5B3FFF]">
-          ⭐ Uygun Meslekler
+        <p className="text-sm font-semibold text-[#A78BFA]">
+          Uygun Meslekler
         </p>
-        <ul className="mt-2 space-y-1 text-sm text-gray-700">
+        <ul className="mt-2 space-y-1 text-sm text-[#C4C0BA]">
           {item.best.map((job) => (
             <li key={job}>• {job}</li>
           ))}
@@ -170,10 +181,10 @@ function CareerCard({ item }: { item: CareerItem }) {
       </div>
 
       <div className="mt-4">
-        <p className="text-sm font-medium text-red-500">
-          ⚠️ Uzak Durmalı
+        <p className="text-sm font-semibold text-rose-400">
+          Uzak Durmalı
         </p>
-        <ul className="mt-2 space-y-1 text-sm text-gray-600">
+        <ul className="mt-2 space-y-1 text-sm text-[#C4C0BA]">
           {item.avoid.map((job) => (
             <li key={job}>• {job}</li>
           ))}
@@ -192,35 +203,30 @@ export default function MesleklerPage() {
     return CAREER_DATA.filter((item) => {
       const matchSearch =
         item.sign.toLowerCase().includes(search.toLowerCase()) ||
-        item.best.some((job) =>
-          job.toLowerCase().includes(search.toLowerCase())
-        );
-
-      const matchFilter = filter
-        ? item.tags.includes(filter)
-        : true;
-
+        item.best.some((job) => job.toLowerCase().includes(search.toLowerCase()));
+      const matchFilter = filter ? item.tags.includes(filter) : true;
       return matchSearch && matchFilter;
     });
   }, [search, filter]);
 
   const handleMiniTest = () => {
-    const random = CAREER_DATA.sort(() => 0.5 - Math.random()).slice(0, 3);
+    const random = [...CAREER_DATA].sort(() => 0.5 - Math.random()).slice(0, 3);
     setMiniResult(random.map((r) => r.best[0]));
   };
 
   return (
-    <div className="bg-[#F7F8FC] pb-28">
+    <div className="bg-[#070B12] pb-28">
       {/* HERO */}
-      <section className="bg-white py-20 text-center border-b border-gray-200">
+      <section className="relative bg-[#070B12] py-20 border-b border-white/[0.06]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
         <Container size="md">
-          <Link href="/burclar" className="inline-block text-sm text-[#5B3FFF] hover:underline mb-6">
+          <Link href="/burclar" className="inline-block text-sm text-[#A78BFA] hover:text-[#EDE9DF] transition mb-6">
             ← Burçlar
           </Link>
-          <h1 className="text-4xl font-bold text-black">
+          <h1 className="text-4xl font-bold text-[#EDE9DF]">
             Burçlara Göre Meslekler
           </h1>
-          <p className="mt-4 text-[#444]">
+          <p className="mt-4 text-[#C4C0BA]">
             Ara, filtrele ve burcuna en uygun kariyeri keşfet.
           </p>
         </Container>
@@ -235,27 +241,17 @@ export default function MesleklerPage() {
               placeholder="Meslek veya burç ara..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full md:w-1/2 rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#5B3FFF]/40"
+              className="w-full md:w-1/2 rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-sm text-[#EDE9DF] placeholder-[#7A8090] focus:outline-none focus:ring-2 focus:ring-[#5C44D0]/40"
             />
-
             <div className="flex gap-2 flex-wrap">
-              {[
-                { id: "lider", label: "Lider" },
-                { id: "yaratıcı", label: "Yaratıcı" },
-                { id: "analitik", label: "Analitik" },
-                { id: "iletişim", label: "İletişim" },
-                { id: "istikrar", label: "İstikrar" },
-                { id: "finans", label: "Finans" },
-                { id: "empati", label: "Empati" },
-                { id: "enerjik", label: "Enerjik" },
-              ].map(({ id, label }) => (
+              {TAGS.map(({ id, label }) => (
                 <button
                   key={id}
                   onClick={() => setFilter(filter === id ? null : id)}
                   className={`rounded-full px-4 py-2 text-xs font-medium transition ${
                     filter === id
-                      ? "bg-[#5B3FFF] text-white"
-                      : "bg-white border border-gray-200 text-black"
+                      ? "bg-[#5C44D0] text-white shadow-lg shadow-[#5C44D0]/25"
+                      : "bg-[#0E1523] border border-white/[0.08] text-[#C4C0BA] hover:border-[#5C44D0]/40 hover:text-[#EDE9DF]"
                   }`}
                 >
                   {label}
@@ -269,7 +265,7 @@ export default function MesleklerPage() {
       {/* GRID */}
       <section className="mt-12">
         <Container size="lg">
-          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {filteredData.map((item) => (
               <CareerCard key={item.sign} item={item} />
             ))}
@@ -280,22 +276,18 @@ export default function MesleklerPage() {
       {/* MINI TEST */}
       <section className="mt-20">
         <Container size="md">
-          <div className="rounded-2xl bg-white p-8 shadow border text-center">
-            <h2 className="text-2xl font-semibold text-black">
+          <div className="rounded-2xl bg-[#0E1523] p-8 border border-white/[0.07] text-center">
+            <h2 className="text-2xl font-semibold text-[#EDE9DF]">
               Sana En Uygun 3 Meslek
             </h2>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 text-[#C4C0BA]">
               Rastgele öneri al ve enerjini keşfet.
             </p>
-
             <div className="mt-6">
-              <Button onClick={handleMiniTest}>
-                Meslek Öner
-              </Button>
+              <Button onClick={handleMiniTest}>Meslek Öner</Button>
             </div>
-
             {miniResult.length > 0 && (
-              <div className="mt-6 space-y-2 text-[#5B3FFF] font-medium">
+              <div className="mt-6 space-y-2 text-[#A78BFA] font-medium">
                 {miniResult.map((m, i) => (
                   <p key={i}>• {m}</p>
                 ))}

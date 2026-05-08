@@ -54,15 +54,15 @@ export default async function GunlukBurcArsivPage() {
   const grouped = groupByYearMonth(availableDates);
 
   return (
-    <div className="bg-[#F7F8FC] pb-24">
-      <section className="relative overflow-hidden bg-white">
+    <div className="bg-[#070B12] pb-24">
+      <section className="relative overflow-hidden bg-[#070B12]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
         <Container size="lg">
           <div className="relative py-14 text-center max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-black">
+            <h1 className="text-3xl sm:text-4xl font-bold text-[#EDE9DF]">
               Günlük Burç Arşivi
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-[#444]">
+            <p className="mt-4 text-base sm:text-lg text-[#8494B2]">
               Geçmiş günlere ait günlük burç yorumlarını buradan seçebilirsiniz.
             </p>
            
@@ -73,8 +73,8 @@ export default async function GunlukBurcArsivPage() {
       <section className="mt-8">
         <Container size="lg">
           {availableDates.length === 0 ? (
-            <div className="rounded-2xl border border-gray-200 bg-white p-10 text-center">
-              <p className="text-gray-600">
+            <div className="rounded-2xl border border-white/[0.10] bg-[#0E1523] p-10 text-center">
+              <p className="text-[#8494B2]">
                 Henüz arşivde gösterilecek bir günlük burç kaydı bulunmuyor.
               </p>
             </div>
@@ -84,7 +84,7 @@ export default async function GunlukBurcArsivPage() {
                 .sort(([a], [b]) => b - a)
                 .map(([year, months]) => (
                   <div key={year} className="space-y-4">
-                    <h2 className="text-xl font-semibold text-black">{year}</h2>
+                    <h2 className="text-xl font-semibold text-[#EDE9DF]">{year}</h2>
                     <div className="space-y-3">
                       {Array.from(months.entries())
                         .sort(([a], [b]) => b - a)
@@ -96,9 +96,9 @@ export default async function GunlukBurcArsivPage() {
                             locale: tr,
                           });
                           return (
-                            <div key={month} className="rounded-2xl border border-gray-100 bg-white p-4">
+                            <div key={month} className="rounded-2xl border border-white/[0.07] bg-[#0E1523] p-4">
                               <div className="flex items-center justify-between mb-3">
-                                <h3 className="text-sm font-semibold text-gray-800">
+                                <h3 className="text-sm font-semibold text-[#EDE9DF]">
                                   {monthLabel}
                                 </h3>
                               </div>
@@ -107,7 +107,7 @@ export default async function GunlukBurcArsivPage() {
                                   <Link
                                     key={d}
                                     href={`/gunluk-burc?tarih=${d}`}
-                                    className="rounded-lg bg-gray-100 px-3 py-1.5 text-sm text-gray-800 hover:bg-gray-200"
+                                    className="rounded-lg bg-gray-100 px-3 py-1.5 text-sm text-[#EDE9DF] hover:bg-gray-200"
                                   >
                                     {DATE_FMT.format(
                                       new Date(d + "T12:00:00")

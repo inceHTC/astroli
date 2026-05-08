@@ -16,48 +16,39 @@ export function RetroFAQ({ planetName, faq, canonicalUrl }: RetroFAQProps) {
     mainEntity: faq.map((item) => ({
       "@type": "Question",
       name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
     })),
   };
 
   return (
-    <section className="relative mt-10 rounded-3xl border-2 border-gray-200 bg-white p-6 shadow-lg sm:p-7">
-      <div>
-        <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-500">
-          Sık sorulan sorular
-        </p>
-        <h2 className="mt-1 bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-600 bg-clip-text text-xl font-semibold text-transparent sm:text-2xl">
-          {planetName.replace(/\s+Retrosu$/, "")} retrosu hakkında merak edilenler
-        </h2>
-        <p className="mt-1 text-xs text-gray-600 leading-relaxed">
-          Bilimsel dengeyi ve psikolojik yaklaşımı koruyarak,{" "}
-          <span className="font-semibold text-gray-800">abartısız ve net yanıtlar</span>{" "}
-          sunuyoruz.
-        </p>
+    <section className="relative mt-8 rounded-2xl border border-white/[0.07] bg-[#0E1523] p-6 sm:p-7">
+      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#A78BFA]">
+        Sik sorulan sorular
+      </p>
+      <h2 className="mt-1 text-xl font-bold text-[#EDE9DF] sm:text-2xl">
+        {planetName.replace(/\s+Retrosu$/, "")} retrosu hakkinda merak edilenler
+      </h2>
+      <p className="mt-1 text-xs leading-relaxed text-[#7A8090]">
+        Bilimsel dengeyi ve psikolojik yaklasimi koruyarak,{" "}
+        <span className="text-[#C4C0BA]">abartisiz ve net yanitlar</span>.
+      </p>
 
-        <div className="mt-5 divide-y divide-gray-200">
-          {faq.map((item) => (
-            <details
-              key={item.question}
-              className="group py-3 text-sm"
-            >
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-3">
-                <span className="mr-6 text-left text-[13px] font-semibold text-gray-900 group-open:text-purple-700">
-                  {item.question}
-                </span>
-                <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full border-2 border-gray-300 bg-gray-50 text-[10px] font-semibold text-gray-600 transition group-open:border-purple-400 group-open:bg-purple-100 group-open:text-purple-700">
-                  +
-                </span>
-              </summary>
-              <p className="mt-2 pr-8 text-[13px] leading-relaxed text-gray-700">
-                {item.answer}
-              </p>
-            </details>
-          ))}
-        </div>
+      <div className="mt-5 divide-y divide-white/[0.05]">
+        {faq.map((item) => (
+          <details key={item.question} className="group py-4">
+            <summary className="flex cursor-pointer list-none items-start justify-between gap-3">
+              <span className="mr-4 text-left text-sm font-semibold text-[#C4C0BA] group-open:text-[#A78BFA] transition-colors">
+                {item.question}
+              </span>
+              <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full border border-white/[0.10] bg-white/[0.04] text-[11px] font-semibold text-[#7A8090] transition group-open:border-[#A78BFA]/30 group-open:text-[#A78BFA]">
+                +
+              </span>
+            </summary>
+            <p className="mt-3 pr-8 text-sm leading-relaxed text-[#C4C0BA]">
+              {item.answer}
+            </p>
+          </details>
+        ))}
       </div>
 
       <link rel="canonical" href={canonicalUrl} />
@@ -68,4 +59,3 @@ export function RetroFAQ({ planetName, faq, canonicalUrl }: RetroFAQProps) {
     </section>
   );
 }
-

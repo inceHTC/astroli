@@ -1,6 +1,3 @@
-// Astroli - Railway PostgreSQL
-// https://docs.railway.app/databases/postgresql
-
 generator client {
   provider = "prisma-client-js"
 }

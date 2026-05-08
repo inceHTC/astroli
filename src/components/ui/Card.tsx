@@ -9,20 +9,13 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     const base = "rounded-2xl transition-all duration-300";
 
     const variants = {
-      default:
-        "bg-white border border-gray-200 shadow-sm",
-      elevated:
-        "bg-[#11121A] border border-[#1A1C2B] text-white",
-      gradient:
-        "bg-white border border-gray-200 shadow-sm",
+      default:   "bg-[#0E1523] border border-white/[0.07]",
+      elevated:  "bg-[#111827] border border-white/[0.07] shadow-lg shadow-black/30",
+      gradient:  "bg-gradient-to-br from-[#0E1523] to-[#111827] border border-white/[0.07]",
     };
 
     return (
-      <div
-        ref={ref}
-        className={`${base} ${variants[variant]} ${className}`}
-        {...props}
-      >
+      <div ref={ref} className={`${base} ${variants[variant]} ${className}`} {...props}>
         {children}
       </div>
     );

@@ -66,27 +66,27 @@ export default async function UnlulerParamPage({
       image: c.image,
     }));
     return (
-      <div className="min-h-screen bg-[#F7F8FC] pb-28">
-        <section className="border-b border-gray-200 bg-white py-16">
+      <div className="min-h-screen bg-[#070B12] pb-28">
+        <section className="border-b border-gray-200 bg-[#070B12] py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <Link href="/unluler" className="text-sm text-[#5B3FFF] hover:underline">
+            <Link href="/unluler" className="text-sm text-[#D4AF72] hover:underline">
               ← Ünlüler
             </Link>
-            <h1 className="mt-4 text-4xl font-bold text-black sm:text-5xl">
+            <h1 className="mt-4 text-4xl font-bold text-[#EDE9DF] sm:text-5xl">
               {sign?.nameTr ?? param} Burcu Ünlüler
             </h1>
-            <p className="mt-4 text-gray-600">
+            <p className="mt-4 text-[#8494B2]">
               {sign?.nameTr ?? param} burcundaki ünlüler.
             </p>
           </div>
         </section>
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           {list.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-gray-200 bg-white py-12 text-center text-gray-500">
+            <div className="rounded-xl border border-dashed border-white/[0.15] bg-[#0E1523] py-12 text-center text-[#6B7A99]">
               Bu burç için henüz ünlü eklenmemiş.
             </div>
           ) : (
-            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+            <div className="overflow-hidden rounded-xl border border-white/[0.10] bg-[#0E1523]">
               <ul className="divide-y divide-gray-100">
                 {list.map((c) => {
                   const sign = ZODIAC_SIGNS.find((z) => z.id === c.zodiac);
@@ -97,8 +97,8 @@ export default async function UnlulerParamPage({
                         href={`/unluler/${c.slug}`}
                         className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 transition hover:bg-gray-50 sm:px-6"
                       >
-                        <span className="font-medium text-gray-900">{c.name}</span>
-                        <span className="text-sm text-gray-500">{c.job}</span>
+                        <span className="font-medium text-[#EDE9DF]">{c.name}</span>
+                        <span className="text-sm text-[#6B7A99]">{c.job}</span>
                         <span
                           className="rounded-full px-2.5 py-0.5 text-xs font-medium text-white"
                           style={{ backgroundColor: color }}
@@ -133,9 +133,9 @@ export default async function UnlulerParamPage({
   }));
 
   return (
-    <div className="min-h-screen bg-white pb-28">
+    <div className="min-h-screen bg-[#070B12] pb-28">
       <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-        <Link href="/unluler" className="text-sm text-gray-500 hover:text-black">
+        <Link href="/unluler" className="text-sm text-[#6B7A99] hover:text-[#EDE9DF]">
           ← Ünlüler
         </Link>
 
@@ -159,10 +159,10 @@ export default async function UnlulerParamPage({
         </div>
 
         <header className="mt-10">
-          <h1 className="font-serif text-4xl font-semibold tracking-tight text-black">
+          <h1 className="font-serif text-4xl font-semibold tracking-tight text-[#EDE9DF]">
             {celebrity.name}
           </h1>
-          <p className="mt-2 text-lg text-gray-600">{celebrity.job}</p>
+          <p className="mt-2 text-lg text-[#8494B2]">{celebrity.job}</p>
           <span
             className="mt-4 inline-block rounded-full px-4 py-1.5 text-sm font-medium text-white"
             style={{ backgroundColor: elementColor }}
@@ -172,7 +172,7 @@ export default async function UnlulerParamPage({
         </header>
 
         {celebrity.birthDate && (
-          <p className="mt-6 text-sm text-gray-500">
+          <p className="mt-6 text-sm text-[#6B7A99]">
             Doğum tarihi:{" "}
             {new Date(celebrity.birthDate).toLocaleDateString("tr-TR", {
               day: "numeric",
@@ -184,8 +184,8 @@ export default async function UnlulerParamPage({
 
         {celebrity.bio && (
           <div className="mt-8">
-            <h2 className="font-serif text-xl font-semibold text-black">Biyografi</h2>
-            <p className="mt-4 leading-relaxed text-gray-700 whitespace-pre-line">
+            <h2 className="font-serif text-xl font-semibold text-[#EDE9DF]">Biyografi</h2>
+            <p className="mt-4 leading-relaxed text-[#8494B2] whitespace-pre-line">
               {celebrity.bio}
             </p>
           </div>
@@ -193,18 +193,18 @@ export default async function UnlulerParamPage({
 
         {sameList.length > 0 && (
           <section className="mt-16 border-t border-gray-200 pt-12">
-            <h2 className="font-serif text-xl font-semibold text-black">
+            <h2 className="font-serif text-xl font-semibold text-[#EDE9DF]">
               Bu burcun diğer ünlüleri
             </h2>
-            <ul className="mt-4 divide-y divide-gray-100 rounded-xl border border-gray-200 bg-gray-50/50 overflow-hidden">
+            <ul className="mt-4 divide-y divide-gray-100 rounded-xl border border-white/[0.10] bg-gray-50/50 overflow-hidden">
               {sameList.map((c) => (
                 <li key={c.id}>
                   <Link
                     href={`/unluler/${c.slug}`}
                     className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 transition hover:bg-gray-100 sm:px-5"
                   >
-                    <span className="font-medium text-gray-900">{c.name}</span>
-                    <span className="text-sm text-gray-500">{c.job}</span>
+                    <span className="font-medium text-[#EDE9DF]">{c.name}</span>
+                    <span className="text-sm text-[#6B7A99]">{c.job}</span>
                   </Link>
                 </li>
               ))}

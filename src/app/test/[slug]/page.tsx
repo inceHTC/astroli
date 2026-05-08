@@ -89,12 +89,12 @@ export default function TestPage() {
 
   if (!test) {
     return (
-      <div className="bg-[#F7F8FC] min-h-screen py-16">
+      <div className="bg-[#070B12] min-h-screen py-16">
         <Container size="md" className="text-center">
-          <p className="text-[#444]">Test bulunamadı.</p>
+          <p className="text-[#8494B2]">Test bulunamadı.</p>
           <Link
             href="/testler"
-            className="mt-4 inline-block text-[#5B3FFF] hover:underline"
+            className="mt-4 inline-block text-[#D4AF72] hover:underline"
           >
             Testlere dön
           </Link>
@@ -128,20 +128,20 @@ export default function TestPage() {
     const displaySubtitle = primaryTemplate.subtitle;
 
     return (
-      <div className="bg-[#F7F8FC] pb-28 pt-20">
+      <div className="bg-[#070B12] pb-28 pt-20">
         <Container size="md">
           <div className="rounded-2xl bg-[#11121A] text-white p-6 shadow-lg sm:p-8">
             <h1 className="text-xl font-semibold sm:text-2xl">{displayTitle}</h1>
             {displaySubtitle && (
-              <p className="mt-1 text-sm text-[#5B3FFF] sm:text-base">{displaySubtitle}</p>
+              <p className="mt-1 text-sm text-[#D4AF72] sm:text-base">{displaySubtitle}</p>
             )}
             {isMixed && secondaryTemplate && (
-              <p className="mt-2 text-sm text-gray-400">
+              <p className="mt-2 text-sm text-[#6B7A99]">
                 Birincil: {primaryTemplate.title} · İkincil: {secondaryTemplate.title}
               </p>
             )}
             {isBalanced && (
-              <p className="mt-2 text-sm text-gray-400">
+              <p className="mt-2 text-sm text-[#6B7A99]">
                 Dört elemente de benzer puan; dengeli bir dağılım görülüyor.
               </p>
             )}
@@ -155,20 +155,20 @@ export default function TestPage() {
 
             {/* % dağılım grafiği (çubuk) */}
             <div className="mt-6">
-              <p className="text-xs font-medium uppercase tracking-wider text-gray-500 sm:text-sm">
+              <p className="text-xs font-medium uppercase tracking-wider text-[#6B7A99] sm:text-sm">
                 Profil dağılımı
               </p>
               <div className="mt-3 space-y-2">
                 {scoring.sorted.map(({ profile, percent }) => (
                   <div key={profile} className="flex items-center gap-3">
-                    <span className="w-16 text-xs text-gray-400">{ELEMENT_NAMES[profile]}</span>
+                    <span className="w-16 text-xs text-[#6B7A99]">{ELEMENT_NAMES[profile]}</span>
                     <div className="flex-1 h-3 rounded-full bg-white/10 overflow-hidden">
                       <div
-                        className="h-full rounded-full bg-[#5B3FFF] transition-all duration-500"
+                        className="h-full rounded-full bg-[#D4AF72] transition-all duration-500"
                         style={{ width: `${Math.max(percent, 2)}%` }}
                       />
                     </div>
-                    <span className="w-10 text-right text-xs text-gray-400">%{percent}</span>
+                    <span className="w-10 text-right text-xs text-[#6B7A99]">%{percent}</span>
                   </div>
                 ))}
               </div>
@@ -178,23 +178,23 @@ export default function TestPage() {
             {pt ? (
               <div className="mt-6 space-y-4 text-gray-300 text-sm sm:text-base">
                 <section>
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-1">Davranış eğilimi</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-[#6B7A99] mb-1">Davranış eğilimi</p>
                   <p className="leading-relaxed">{pt.behaviorTendency}</p>
                 </section>
                 <section>
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-1">Stres tepkisi</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-[#6B7A99] mb-1">Stres tepkisi</p>
                   <p className="leading-relaxed">{pt.stressResponse}</p>
                 </section>
                 <section>
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-1">Güçlü yön</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-[#6B7A99] mb-1">Güçlü yön</p>
                   <p className="leading-relaxed">{pt.strength}</p>
                 </section>
                 <section>
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-1">Risk alanı</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-[#6B7A99] mb-1">Risk alanı</p>
                   <p className="leading-relaxed">{pt.riskArea}</p>
                 </section>
                 <section>
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-1">Gelişim önerisi</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-[#6B7A99] mb-1">Gelişim önerisi</p>
                   <p className="leading-relaxed">{pt.developmentSuggestion}</p>
                 </section>
               </div>
@@ -205,20 +205,20 @@ export default function TestPage() {
             )}
 
             <div className="mt-6">
-              <p className="text-xs font-medium uppercase tracking-wider text-gray-500 sm:text-sm">
+              <p className="text-xs font-medium uppercase tracking-wider text-[#6B7A99] sm:text-sm">
                 Güçlü yanlar
               </p>
               <ul className="mt-2 space-y-1.5 text-gray-300 text-sm sm:text-base">
                 {primaryTemplate.strengths.map((s) => (
                   <li key={s} className="flex items-center gap-2">
-                    <span className="text-[#5B3FFF]">✦</span> {s}
+                    <span className="text-[#D4AF72]">✦</span> {s}
                   </li>
                 ))}
               </ul>
             </div>
 
             <div className="mt-6 rounded-xl bg-[#1A1C2B] p-4 sm:p-5">
-              <p className="text-xs font-medium uppercase tracking-wider text-gray-500">Gölge yan</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-[#6B7A99]">Gölge yan</p>
               <p className="mt-2 text-gray-300 text-sm sm:text-base">{primaryTemplate.shadowSide}</p>
             </div>
           </div>
@@ -249,7 +249,7 @@ export default function TestPage() {
   }
 
   return (
-    <div className="bg-[#F7F8FC] pb-28 pt-8">
+    <div className="bg-[#070B12] pb-28 pt-8">
       <Container size="sm">
         <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-2xl">
           <Image
@@ -262,24 +262,24 @@ export default function TestPage() {
 
         <Link
           href="/testler"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-[#5B3FFF] hover:underline"
+          className="mb-8 inline-flex items-center gap-2 text-sm text-[#D4AF72] hover:underline"
         >
           ← Testler
         </Link>
 
         <div className="mb-8">
-          <p className="text-sm text-[#444]">
+          <p className="text-sm text-[#8494B2]">
             Soru {step + 1} / {test.questions.length}
           </p>
           <div className="mt-2 h-2 w-full rounded-full bg-gray-200 overflow-hidden">
             <div
-              className="h-full bg-[#5B3FFF] transition-all duration-500"
+              className="h-full bg-[#D4AF72] transition-all duration-500"
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
 
-        <h2 className="text-xl sm:text-2xl font-semibold text-black">
+        <h2 className="text-xl sm:text-2xl font-semibold text-[#EDE9DF]">
           {question.text}
         </h2>
 
@@ -288,7 +288,7 @@ export default function TestPage() {
             <button
               key={opt.id}
               onClick={() => handleAnswer(opt)}
-              className="w-full rounded-2xl border border-gray-200 bg-white p-5 text-left text-black transition-all hover:border-[#5B3FFF]/50 hover:shadow-md active:scale-[0.99]"
+              className="w-full rounded-2xl border border-white/[0.10] bg-[#0E1523] p-5 text-left text-[#EDE9DF] transition-all hover:border-[#D4AF72]/50 hover:shadow-md active:scale-[0.99]"
             >
               {opt.text}
             </button>

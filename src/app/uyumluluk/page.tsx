@@ -86,18 +86,18 @@ export default function UyumlulukPage() {
   };
 
   return (
-    <div className="bg-[#F7F8FC] pb-28">
-      <section className="relative overflow-hidden bg-white">
+    <div className="bg-[#070B12] pb-28">
+      <section className="relative overflow-hidden bg-[#070B12]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
         <Container size="md">
           <div className="relative py-16 text-center">
-            <Link href="/" className="mb-8 inline-block text-sm text-[#5B3FFF] hover:underline">
+            <Link href="/" className="mb-8 inline-block text-sm text-[#D4AF72] hover:underline">
               ← Ana sayfa
             </Link>
-            <h1 className="text-4xl sm:text-5xl font-bold text-black">
+            <h1 className="text-4xl sm:text-5xl font-bold text-[#EDE9DF]">
               Burç Uyumluluğu
             </h1>
-            <p className="mt-4 text-[#444]">
+            <p className="mt-4 text-[#8494B2]">
               İki doğum tarihi gir, burç uyumunu keşfet.
             </p>
           </div>
@@ -106,30 +106,30 @@ export default function UyumlulukPage() {
 
       <section className="mt-12">
         <Container size="sm">
-          <form onSubmit={handleSubmit} className="rounded-2xl bg-white border border-gray-200 p-8 shadow-sm">
+          <form onSubmit={handleSubmit} className="rounded-2xl bg-[#0E1523] border border-white/[0.07] p-8 ">
             <div className="space-y-6">
               {error && (
-                <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>
+                <p className="text-sm text-red-400 bg-red-900/20 border border-red-500/20 rounded-lg px-3 py-2">{error}</p>
               )}
               <div>
-                <label className="block text-sm font-medium text-black">İlk Kişi (doğum tarihi)</label>
+                <label className="block text-sm font-medium text-[#EDE9DF]">İlk Kişi (doğum tarihi)</label>
                 <input
                   type="date"
                   value={date1}
                   onChange={(e) => setDate1(e.target.value)}
                   max={getTodayLocalYYYYMMDD()}
-                  className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-black focus:border-[#5B3FFF] focus:ring-1 focus:ring-[#5B3FFF]/30 outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-black">İkinci Kişi (doğum tarihi)</label>
+                <label className="block text-sm font-medium text-[#EDE9DF]">İkinci Kişi (doğum tarihi)</label>
                 <input
                   type="date"
                   value={date2}
                   onChange={(e) => setDate2(e.target.value)}
                   max={getTodayLocalYYYYMMDD()}
-                  className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-black focus:border-[#5B3FFF] focus:ring-1 focus:ring-[#5B3FFF]/30 outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
                   required
                 />
               </div>
@@ -147,17 +147,17 @@ export default function UyumlulukPage() {
             <div className="rounded-2xl bg-[#11121A] text-white p-10 shadow-lg">
               <div className="flex items-center justify-center gap-6">
                 <span className="text-5xl">{result.sign1.symbol}</span>
-                <span className="text-2xl text-gray-500">+</span>
+                <span className="text-2xl text-[#6B7A99]">+</span>
                 <span className="text-5xl">{result.sign2.symbol}</span>
               </div>
               <p className="mt-4 text-center font-semibold">
                 {result.sign1.nameTr} & {result.sign2.nameTr}
               </p>
               <div className="mt-8 text-center">
-                <p className="text-5xl font-bold text-[#5B3FFF] sm:text-6xl">
+                <p className="text-5xl font-bold text-[#D4AF72] sm:text-6xl">
                   %{result.compatibility.score}
                 </p>
-                <p className="mt-1 text-sm text-gray-400">Uyum Skoru</p>
+                <p className="mt-1 text-sm text-[#6B7A99]">Uyum Skoru</p>
               </div>
               <p className="mt-6 text-center text-gray-300 leading-relaxed">
                 {result.compatibility.description}
@@ -179,11 +179,11 @@ export default function UyumlulukPage() {
               </div>
               <div className="mt-8 flex justify-between rounded-xl bg-[#1A1C2B] p-5">
                 <div className="text-center">
-                  <p className="text-xs text-gray-500">Element</p>
+                  <p className="text-xs text-[#6B7A99]">Element</p>
                   <p className="mt-1 font-medium">{ELEMENT_LABELS[result.sign1.element]}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-xs text-gray-500">Element</p>
+                  <p className="text-xs text-[#6B7A99]">Element</p>
                   <p className="mt-1 font-medium">{ELEMENT_LABELS[result.sign2.element]}</p>
                 </div>
               </div>

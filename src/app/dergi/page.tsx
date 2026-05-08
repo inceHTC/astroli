@@ -7,14 +7,14 @@ export default async function DergiPage() {
   const articles = await getArticles();
 
   return (
-    <div className="bg-white pb-28">
+    <div className="bg-[#070B12] pb-28">
 
       <section className="py-20 text-center border-b border-gray-200">
         <Container size="md">
-          <h1 className="text-4xl sm:text-5xl font-bold text-black">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#EDE9DF]">
             Astroli Dergi
           </h1>
-          <p className="mt-4 text-gray-600">
+          <p className="mt-4 text-[#8494B2]">
             Astroloji, burçlar ve eğlenceli analizler.
           </p>
         </Container>
@@ -25,7 +25,7 @@ export default async function DergiPage() {
 
           {articles.map((article) => (
             <Link key={article.slug} href={`/dergi/${article.slug}`}>
-              <div className="group overflow-hidden rounded-2xl border border-gray-200 hover:shadow-xl transition">
+              <div className="group overflow-hidden rounded-2xl border border-white/[0.10] hover:shadow-xl transition">
 
                 <div className="relative h-56 w-full overflow-hidden bg-gray-100">
                   {article.image ? (
@@ -37,16 +37,16 @@ export default async function DergiPage() {
                       sizes="(max-width: 1024px) 50vw, 33vw"
                     />
                   ) : (
-                    <div className="flex h-full items-center justify-center text-gray-400 text-sm">Görsel yok</div>
+                    <div className="flex h-full items-center justify-center text-[#6B7A99] text-sm">Görsel yok</div>
                   )}
                 </div>
 
                 <div className="p-6">
-                  <span className="text-xs uppercase tracking-wider text-[#5B3FFF]">
+                  <span className="text-xs uppercase tracking-wider text-[#D4AF72]">
                     {article.tag}
                   </span>
 
-                  <h2 className="mt-3 text-lg font-semibold text-black">
+                  <h2 className="mt-3 text-lg font-semibold text-[#EDE9DF]">
                     {article.title}
                   </h2>
                 </div>

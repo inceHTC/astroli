@@ -24,7 +24,7 @@ export function GenderSection({ zodiac }: Props) {
             className={`px-6 py-2 rounded-lg text-sm font-medium transition ${
               active === "male"
                 ? "bg-[#2fa7f7] text-white shadow"
-                : "text-gray-600"
+                : "text-[#8494B2]"
             }`}
           >
             Erkek
@@ -35,7 +35,7 @@ export function GenderSection({ zodiac }: Props) {
             className={`px-6 py-2 rounded-lg text-sm font-medium transition ${
               active === "female"
                 ? "bg-[#d552c8fe] text-white shadow"
-                : "text-gray-600"
+                : "text-[#8494B2]"
             }`}
           >
             Kadın
@@ -51,23 +51,23 @@ export function GenderSection({ zodiac }: Props) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.3 }}
-          className="rounded-2xl bg-white border border-gray-200 p-8 shadow-sm"
+          className="rounded-2xl bg-[#0E1523] border border-white/[0.07] p-8 "
         >
-          <h2 className="text-2xl font-semibold text-black">
+          <h2 className="text-2xl font-semibold text-[#EDE9DF]">
             {active === "male"
               ? `Erkek ${zodiac.nameTr} Burcu`
               : `Kadın ${zodiac.nameTr} Burcu`}
           </h2>
 
-          <p className="mt-4 text-[#444] leading-relaxed">
+          <p className="mt-4 text-[#8494B2] leading-relaxed">
             {content.general}
           </p>
 
           <div className="mt-8 grid gap-8 md:grid-cols-2">
 
             <div>
-              <h3 className="font-medium text-black">Güçlü Yönler</h3>
-              <ul className="mt-3 space-y-2 text-[#444]">
+              <h3 className="font-medium text-[#EDE9DF]">Güçlü Yönler</h3>
+              <ul className="mt-3 space-y-2 text-[#8494B2]">
                 {content.strengths.map((item, i) => (
                   <li key={i}>✔ {item}</li>
                 ))}
@@ -75,8 +75,8 @@ export function GenderSection({ zodiac }: Props) {
             </div>
 
             <div>
-              <h3 className="font-medium text-black">Zayıf Yönler</h3>
-              <ul className="mt-3 space-y-2 text-[#444]">
+              <h3 className="font-medium text-[#EDE9DF]">Zayıf Yönler</h3>
+              <ul className="mt-3 space-y-2 text-[#8494B2]">
                 {content.weaknesses.map((item, i) => (
                   <li key={i}>• {item}</li>
                 ))}

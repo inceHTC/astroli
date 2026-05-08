@@ -8,15 +8,9 @@ interface RetroChecklistProps {
   items: string[];
 }
 
-export function RetroChecklist({
-  planetLabel,
-  planetKey,
-  items,
-}: RetroChecklistProps) {
+export function RetroChecklist({ planetLabel, planetKey, items }: RetroChecklistProps) {
   const storageKey = `astroli-retro-checklist-${planetKey}`;
-  const [checked, setChecked] = useState<boolean[]>(() =>
-    items.map(() => false),
-  );
+  const [checked, setChecked] = useState<boolean[]>(() => items.map(() => false));
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -24,77 +18,73 @@ export function RetroChecklist({
       const raw = window.localStorage.getItem(storageKey);
       if (raw) {
         const parsed = JSON.parse(raw) as boolean[];
-        if (Array.isArray(parsed) && parsed.length === items.length) {
-          setChecked(parsed);
-        }
+        if (Array.isArray(parsed) && parsed.length === items.length) setChecked(parsed);
       }
-    } catch {
-      // ignore
-    }
+    } catch { /* ignore */ }
   }, [storageKey, items.length]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    try {
-      window.localStorage.setItem(storageKey, JSON.stringify(checked));
-    } catch {
-      // ignore
-    }
+    try { window.localStorage.setItem(storageKey, JSON.stringify(checked)); } catch { /* ignore */ }
   }, [checked, storageKey]);
 
   const toggle = (index: number) => {
-    setChecked((prev) => {
-      const next = [...prev];
-      next[index] = !next[index];
-      return next;
-    });
+    setChecked((prev) => { const next = [...prev]; next[index] = !next[index]; return next; });
   };
-
-  const reset = () => {
-    setChecked(items.map(() => false));
-  };
+  const reset = () => setChecked(items.map(() => false));
+  const doneCount = checked.filter(Boolean).length;
 
   return (
-    <section className="relative overflow-hidden rounded-3xl border-2 border-gray-200 bg-white p-6 shadow-lg sm:p-7">
-      <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+    <section className="rounded-2xl border border-white/[0.07] bg-[#0E1523] p-6 sm:p-7">
+      <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#A78BFA]">
             Bu retroda odaklan
           </p>
-          <h2 className="mt-1 bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-600 bg-clip-text text-xl font-semibold text-transparent sm:text-2xl">
+          <h2 className="mt-1 text-xl font-bold text-[#EDE9DF] sm:text-2xl">
             {planetLabel} için kişisel checklist
           </h2>
-          <p className="mt-1 text-xs text-gray-600 leading-relaxed">
-            Tamamladığın adımlar, tarayıcında saklanır;{" "}
-            <span className="font-semibold text-gray-800">sadece sen görürsün</span>.
+          <p className="mt-1 text-xs leading-relaxed text-[#7A8090]">
+            Tamamladığın adımlar tarayıcında saklanır —{" "}
+            <span className="text-[#C4C0BA]">sadece sen görürsün</span>.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={reset}
-          className="rounded-2xl border-2 border-gray-300 bg-white px-3 py-1.5 text-[11px] font-medium text-gray-700 transition hover:border-purple-400 hover:bg-purple-50 hover:text-purple-700"
-        >
-          Listeyi sıfırla
-        </button>
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-semibold text-[#A78BFA]">
+            {doneCount}/{items.length}
+          </span>
+          <button
+            type="button"
+            onClick={reset}
+            className="rounded-full border border-white/[0.10] bg-white/[0.04] px-3 py-1.5 text-[11px] font-medium text-[#7A8090] transition hover:border-white/[0.20] hover:text-[#C4C0BA]"
+          >
+            Sıfırla
+          </button>
+        </div>
       </div>
 
-      <ul className="relative mt-2 space-y-2">
+      <div className="mb-3 h-1 w-full overflow-hidden rounded-full bg-white/[0.05]">
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-[#5C44D0] to-[#A78BFA] transition-all duration-500"
+          style={{ width: items.length ? `${(doneCount / items.length) * 100}%` : "0%" }}
+        />
+      </div>
+
+      <ul className="mt-4 space-y-2">
         {items.map((item, index) => (
           <li
             key={item}
-            className="group flex items-start gap-3 rounded-2xl border-2 border-gray-200 bg-gray-50 p-3 text-xs transition hover:border-purple-300 hover:bg-purple-50/30"
+            className="group flex items-start gap-3 rounded-xl border border-white/[0.05] bg-white/[0.02] p-3 transition hover:border-[#A78BFA]/25"
           >
             <button
               type="button"
               onClick={() => toggle(index)}
-              className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-xl border-2 border-gray-300 bg-white transition group-hover:border-purple-400"
+              className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-lg border border-white/[0.12] bg-white/[0.04] transition group-hover:border-[#A78BFA]/40"
               aria-pressed={checked[index]}
             >
               <span
-                className={`inline-flex h-4 w-4 items-center justify-center rounded-lg text-[11px] font-semibold transition ${
-                  checked[index]
-                    ? "scale-100 bg-gradient-to-br from-emerald-500 to-sky-500 text-white"
-                    : "scale-75 bg-transparent text-gray-400"
+                className={`inline-flex h-4 w-4 items-center justify-center rounded text-[10px] font-bold transition ${
+                  checked[index] ? "bg-emerald-500 text-white scale-100" : "scale-75 text-transparent"
                 }`}
               >
                 ✓
@@ -102,18 +92,16 @@ export function RetroChecklist({
             </button>
             <div className="space-y-0.5">
               <p
-                className={`leading-relaxed transition ${
-                  checked[index]
-                    ? "text-gray-500 line-through decoration-gray-400 decoration-2"
-                    : "text-gray-800 font-medium"
+                className={`text-sm leading-relaxed transition ${
+                  checked[index] ? "text-[#7A8090] line-through" : "font-medium text-[#C4C0BA]"
                 }`}
               >
                 {item}
               </p>
-              <p className="text-[10px] text-gray-500">
+              <p className="text-[10px] text-[#7A8090]">
                 {checked[index]
-                  ? "Tamamlandı · küçük ama sürdürülebilir adımlar ruh sağlığını destekler."
-                  : "Yavaş, küçük ve gerçekçi adımlar her zaman daha sürdürülebilirdir."}
+                  ? "Tamamlandı — küçük adımlar sürdürülebilir büyüme sağlar."
+                  : "Yavaş, küçük ve gerçekçi adımlar her zaman daha kalıcıdır."}
               </p>
             </div>
           </li>
@@ -122,4 +110,3 @@ export function RetroChecklist({
     </section>
   );
 }
-

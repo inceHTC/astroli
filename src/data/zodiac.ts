@@ -911,7 +911,19 @@ export const ELEMENT_LABELS: Record<Element, string> = {
 
 export const ELEMENT_COLORS: Record<Element, string> = {
   fire: "#f97316",
-  earth: "#84cc16",
+  earth: "#22c55e",
   air: "#38bdf8",
-  water: "#0ea5e9",
+  water: "#6366f1",
+};
+
+/** Krem kartlar (bg-[#F9F5EF]) üzerinde tutarlı element göstergesi */
+export const ELEMENT_CARD_CLASSES: Record<Element, {
+  border: string;
+  badge: string;
+  dot: string;
+}> = {
+  fire:  { border: "border-orange-500/40",  badge: "bg-orange-500/10 text-orange-600",  dot: "bg-orange-400"  },
+  earth: { border: "border-emerald-600/40", badge: "bg-emerald-500/10 text-emerald-700", dot: "bg-emerald-500" },
+  air:   { border: "border-sky-500/40",     badge: "bg-sky-500/10 text-sky-600",         dot: "bg-sky-400"     },
+  water: { border: "border-indigo-500/40",  badge: "bg-indigo-500/10 text-indigo-700",   dot: "bg-indigo-400"  },
 };

@@ -17,18 +17,27 @@ function getProgress(event: RetroEvent, now: Date) {
 
 function getPlanetLabel(planet: RetroEvent["planet"]) {
   switch (planet) {
-    case "mercury":
-      return "Merkür Retrosu";
-    case "venus":
-      return "Venüs Retrosu";
-    case "mars":
-      return "Mars Retrosu";
-    case "saturn":
-      return "Satürn Retrosu";
-    default:
-      return "Retro";
+    case "mercury": return "Merkür Retrosu";
+    case "venus":   return "Venüs Retrosu";
+    case "mars":    return "Mars Retrosu";
+    case "saturn":  return "Satürn Retrosu";
+    default:        return "Retro";
   }
 }
+
+const PLANET_ACCENT: Record<string, string> = {
+  mercury: "text-sky-400 bg-sky-500/10 border-sky-500/25",
+  venus:   "text-rose-400 bg-rose-500/10 border-rose-500/25",
+  mars:    "text-orange-400 bg-orange-500/10 border-orange-500/25",
+  saturn:  "text-indigo-400 bg-indigo-500/10 border-indigo-500/25",
+};
+
+const PLANET_BAR: Record<string, string> = {
+  mercury: "from-sky-500 to-sky-300",
+  venus:   "from-rose-500 to-rose-300",
+  mars:    "from-orange-500 to-orange-300",
+  saturn:  "from-indigo-500 to-indigo-300",
+};
 
 export function RetroCalendar() {
   const now = new Date();
@@ -36,151 +45,125 @@ export function RetroCalendar() {
   const upcoming = getUpcomingRetros(now);
 
   return (
-    <section className="relative rounded-3xl border-2 border-gray-200 bg-white p-6 shadow-lg sm:p-8">
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <section id="takvim" className="rounded-2xl border border-white/[0.07] bg-[#0E1523] p-6 sm:p-8">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-600 bg-clip-text text-xl font-semibold text-transparent sm:text-2xl">
-            Retro Takvimi
-          </h2>
-          <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-            Astrolojik takvimi korkuyla değil,{" "}
-            <span className="font-semibold text-gray-800">
-              planlama ve farkındalık
-            </span>{" "}
-            için kullan.
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#A78BFA]">
+            Retro takvimi
           </p>
+          <h2 className="mt-1 text-xl font-bold text-[#EDE9DF] sm:text-2xl">
+            2026 Retro Görünümü
+          </h2>
         </div>
-        <div className="inline-flex items-center gap-2 rounded-2xl border-2 border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs text-emerald-700 font-medium">
-          <span className="h-2 w-2 rounded-full bg-emerald-500" />
-          <span>
-            {format(now, "d MMMM yyyy, EEEE", {
-              locale: tr,
-            })}
-          </span>
+        <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/8 px-3 py-1.5 text-xs font-medium text-emerald-400">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+          {format(now, "d MMMM yyyy", { locale: tr })}
         </div>
       </div>
 
+      {/* Aktif retro */}
       {active && (
-        <div className="relative mb-6 rounded-2xl border-2 border-amber-300 bg-amber-50 p-4 text-xs shadow-md sm:flex sm:items-center sm:justify-between sm:gap-4">
-          <div className="flex items-center gap-3">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-amber-200 text-amber-900 text-lg">
-              ⚡
-            </span>
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-700">
-                Şu anda aktif retro
-              </p>
-              <p className="text-sm font-semibold text-gray-800">
-                {getPlanetLabel(active.planet)} ·{" "}
-                {format(new Date(active.startDate), "d MMM", { locale: tr })} –{" "}
-                {format(new Date(active.endDate), "d MMM yyyy", { locale: tr })}
-              </p>
+        <div className="mb-5 rounded-xl border border-amber-500/20 bg-amber-500/8 p-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-amber-500/20 bg-amber-500/10 text-base">
+                ⚡
+              </span>
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-400">
+                  Şu an aktif
+                </p>
+                <p className="text-sm font-semibold text-[#EDE9DF]">
+                  {getPlanetLabel(active.planet)}
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="mt-3 flex items-center gap-3 sm:mt-0">
-            <div className="h-2 w-32 overflow-hidden rounded-full bg-amber-200">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-400"
-                style={{ width: `${getProgress(active, now)}%` }}
-              />
-            </div>
-            <div className="text-right text-[11px] text-gray-700">
-              <p className="font-medium">Kalan gün</p>
-              <p className="text-sm font-bold text-gray-900">
+            <div className="text-right text-[11px]">
+              <p className="text-[#7A8090]">Kalan gün</p>
+              <p className="text-lg font-bold text-[#EDE9DF]">
                 {differenceInCalendarDays(new Date(active.endDate), now) + 1}
               </p>
             </div>
           </div>
+          <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-amber-500 to-yellow-300"
+              style={{ width: `${getProgress(active, now)}%` }}
+            />
+          </div>
         </div>
       )}
 
-      <div className="relative mt-2 space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
-          Yılın retro görünümü
-        </p>
+      {/* Tablo başlığı */}
+      <div className="hidden rounded-lg bg-white/[0.03] px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-[#7A8090] sm:grid sm:grid-cols-[1fr_1.4fr_0.7fr_1.2fr] sm:gap-3">
+        <span>Gezegen</span>
+        <span>Tarih aralığı</span>
+        <span>Durum</span>
+        <span>Odak</span>
+      </div>
 
-        <div className="hidden rounded-2xl border border-gray-200 bg-gray-50/60 p-3 text-[11px] text-gray-600 shadow-sm sm:grid sm:grid-cols-[minmax(110px,0.9fr)_minmax(150px,1.1fr)_minmax(90px,0.7fr)_minmax(130px,1.1fr)] sm:items-center sm:gap-3">
-          <span className="font-semibold text-gray-700">Gezegen</span>
-          <span className="font-semibold text-gray-700">Tarih aralığı</span>
-          <span className="font-semibold text-gray-700">Durum</span>
-          <span className="font-semibold text-gray-700">Psikolojik odak</span>
-        </div>
+      <div className="mt-2 space-y-2">
+        {upcoming.map((event) => {
+          const start = new Date(event.startDate);
+          const end = new Date(event.endDate);
+          const isCurrent = active?.id === event.id;
+          const daysToStart = differenceInCalendarDays(start, now);
+          const daysLeft = differenceInCalendarDays(end, now) + 1;
+          const accentCls = PLANET_ACCENT[event.planet] ?? "text-[#A78BFA] bg-[#A78BFA]/10 border-[#A78BFA]/25";
+          const barCls = PLANET_BAR[event.planet] ?? "from-[#5C44D0] to-[#A78BFA]";
 
-        <div className="space-y-2">
-          {upcoming.map((event) => {
-            const start = new Date(event.startDate);
-            const end = new Date(event.endDate);
-            const isCurrent = active?.id === event.id;
-            const daysToStart = differenceInCalendarDays(start, now);
-            const daysLeft = differenceInCalendarDays(end, now) + 1;
-
-            return (
-              <article
-                key={event.id}
-                className="rounded-2xl border border-gray-200 bg-white p-3 text-[11px] shadow-sm transition hover:border-purple-300 hover:shadow-md sm:grid sm:grid-cols-[minmax(110px,0.9fr)_minmax(150px,1.1fr)_minmax(90px,0.7fr)_minmax(130px,1.1fr)] sm:items-center sm:gap-3"
-              >
-                {/* Gezegen + mini progress */}
-                <div className="mb-2 sm:mb-0">
-                  <p className="text-xs font-semibold text-gray-800">
-                    {getPlanetLabel(event.planet)}
-                  </p>
-                  <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-gray-200">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-purple-400 via-indigo-400 to-sky-400"
-                      style={{ width: `${getProgress(event, now)}%` }}
-                    />
-                  </div>
+          return (
+            <div
+              key={event.id}
+              className="rounded-xl border border-white/[0.05] bg-white/[0.02] p-3 transition hover:border-white/[0.10] sm:grid sm:grid-cols-[1fr_1.4fr_0.7fr_1.2fr] sm:items-center sm:gap-3"
+            >
+              <div className="mb-2 sm:mb-0">
+                <p className="text-xs font-semibold text-[#EDE9DF]">
+                  {getPlanetLabel(event.planet)}
+                </p>
+                <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-white/[0.04]">
+                  <div
+                    className={`h-full rounded-full bg-gradient-to-r ${barCls}`}
+                    style={{ width: `${getProgress(event, now)}%` }}
+                  />
                 </div>
+              </div>
 
-                {/* Tarihler */}
-                <div className="mb-2 text-[11px] text-gray-600 sm:mb-0">
-                  <p>
-                    <span className="font-medium text-gray-700">Başlangıç:</span>{" "}
-                    {format(start, "d MMM yyyy, EEE", { locale: tr })}
-                  </p>
-                  <p>
-                    <span className="font-medium text-gray-700">Bitiş:</span>{" "}
-                    {format(end, "d MMM yyyy, EEE", { locale: tr })}
-                  </p>
-                </div>
+              <div className="mb-2 text-[11px] text-[#7A8090] sm:mb-0">
+                <p>
+                  <span className="text-[#C4C0BA]">Başlangıç:</span>{" "}
+                  {format(start, "d MMM yyyy, EEE", { locale: tr })}
+                </p>
+                <p>
+                  <span className="text-[#C4C0BA]">Bitiş:</span>{" "}
+                  {format(end, "d MMM yyyy, EEE", { locale: tr })}
+                </p>
+              </div>
 
-                {/* Durum etiketi */}
-                <div className="mb-2 flex items-center gap-2 sm:mb-0 sm:justify-start">
-                  <span
-                    className={`inline-flex rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                      isCurrent
-                        ? "bg-emerald-100 text-emerald-700"
-                        : daysToStart <= 7
-                        ? "bg-amber-100 text-amber-700"
-                        : "bg-gray-100 text-gray-600"
-                    }`}
-                  >
-                    {isCurrent
-                      ? `Aktif · ${daysLeft} gün kaldı`
-                      : daysToStart < 0
-                      ? "Yeni tamamlandı"
-                      : daysToStart === 0
-                      ? "Bugün başlıyor"
-                      : `${daysToStart} gün sonra`}
-                  </span>
-                </div>
+              <div className="mb-2 sm:mb-0">
+                <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium ${accentCls}`}>
+                  {isCurrent
+                    ? `Aktif · ${daysLeft} gün`
+                    : daysToStart < 0
+                    ? "Tamamlandı"
+                    : daysToStart === 0
+                    ? "Bugün"
+                    : `${daysToStart} gün sonra`}
+                </span>
+              </div>
 
-                {/* Psikolojik odak / tema */}
-                <div className="border-t border-dashed border-gray-200 pt-2 text-[11px] text-gray-600 sm:border-none sm:pt-0">
-                  <p className="font-medium text-gray-700">
-                    {event.psychologicalFocus.split(".")[0]}.
-                  </p>
-                  <p className="mt-0.5 text-[10px] text-gray-500">
-                    Odak temalar:{" "}
-                    {event.themes.slice(0, 2).join(" · ")}
-                  </p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+              <div className="border-t border-white/[0.04] pt-2 text-[11px] sm:border-none sm:pt-0">
+                <p className="font-medium text-[#C4C0BA]">
+                  {event.psychologicalFocus.split(".")[0]}.
+                </p>
+                <p className="mt-0.5 text-[10px] text-[#7A8090]">
+                  {event.themes.slice(0, 2).join(" · ")}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
 }
-

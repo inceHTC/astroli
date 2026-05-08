@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\okury\\\\Desktop\\\\YAZILIM\\\\astroli\" -Force | Select-Object Name, @{Name=\"Type\"; Expression={if\\($_.PSIsContainer\\) {\"Folder\"} else {\"File\"}}} | Format-Table -AutoSize)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\okury\\\\Desktop\\\\YAZILIM\\\\astroli\" -Force -File | Where-Object {$_.Name -match \"railway|docker|dockerfile\" -or $_.Name -eq \".env\" -or $_.Name -eq \".gitignore\" -or $_.Name -eq \"README.md\"})",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\okury\\\\Desktop\\\\YAZILIM\\\\astroli\" -Force | Where-Object {$_.Name -match \"railway|docker|\\\\.env|Dockerfile\"})",
+      "Bash(not exist *)",
+      "Bash(python -c ' *)",
+      "Bash(python3 -c ' *)",
+      "Read(//c/Users/okury/AppData/Roaming/Code/User/History/**)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\okury\\\\AppData\\\\Roaming\\\\Code\\\\User\\\\History\\\\-5f7f59b6\" | Sort-Object LastWriteTime | ForEach-Object { \"$\\($_.LastWriteTime\\) | $\\($_.Name\\)\" })"
+    ]
+  }
+}

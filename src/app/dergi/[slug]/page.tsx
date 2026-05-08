@@ -64,19 +64,19 @@ export default async function DergiArticlePage({
   safeHtml = replaceCelebrityMentions(safeHtml, celebrities);
 
   return (
-    <div className="bg-white text-black relative">
+    <div className="bg-[#070B12] text-[#EDE9DF] relative">
       <ArticleScrollProgress />
       <article className="editorial-article mx-auto max-w-4xl px-6 py-28">
         <Link
           href="/dergi"
-          className="text-sm text-black/50 transition hover:text-black"
+          className="text-sm text-[#EDE9DF]/50 transition hover:text-[#EDE9DF]"
         >
           ← Dergi
         </Link>
 
         <header className="mt-10 mb-12">
-          <div className="meta flex flex-wrap items-center gap-3 text-sm text-black/60">
-            <span className="uppercase tracking-wider text-[#5B3FFF]">
+          <div className="meta flex flex-wrap items-center gap-3 text-sm text-[#EDE9DF]/60">
+            <span className="uppercase tracking-wider text-[#D4AF72]">
               {article.tag}
             </span>
             {article.readTime != null && (
@@ -86,7 +86,7 @@ export default async function DergiArticlePage({
               {format(article.updatedAt, "d MMMM yyyy", { locale: tr })}
             </time>
           </div>
-          <h1 className="editorial-title mt-3 font-serif text-4xl leading-[1.15] tracking-tight font-semibold text-black md:text-5xl">
+          <h1 className="editorial-title mt-3 font-serif text-4xl leading-[1.15] tracking-tight font-semibold text-[#EDE9DF] md:text-5xl">
             {article.title}
           </h1>
         </header>
@@ -125,7 +125,7 @@ export default async function DergiArticlePage({
 <br /><br />
         <Link
           href="/dergi"
-          className="text-sm text-black/50 transition hover:text-black "
+          className="text-sm text-[#EDE9DF]/50 transition hover:text-[#EDE9DF] "
         >
           ← Dergiye dön
         </Link>

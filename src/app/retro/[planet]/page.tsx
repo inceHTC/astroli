@@ -78,7 +78,7 @@ function getFaq(planet: RetroPlanet) {
       {
         question: "Merkür retrosu gerçekten teknolojik arızaları artırır mı?",
         answer:
-          "Bu dönemde dikkat dağınıklığı ve acelecilik arttığı için, cihaz ve veri yönetiminde daha fazla hata yaşanabilir. Bunu doğrudan “gezegen yaptı” demektense; dikkat yönetimi ve planlama hatalarına işaret eden sembolik bir çerçeve olarak düşünebilirsin.",
+          "Bu dönemde dikkat dağınıklığı ve acelecilik arttığı için, cihaz ve veri yönetiminde daha fazla hata yaşanabilir. Bunu doğrudan 'gezegen yaptı' demektense; dikkat yönetimi ve planlama hatalarına işaret eden sembolik bir çerçeve olarak düşünebilirsin.",
       },
       {
         question: "Eski ilişkiler Merkür retrosunda neden geri döner?",
@@ -177,64 +177,61 @@ export default async function RetroPlanetPage({ params }: { params: Promise<Para
   const canonicalUrl = `${getBaseUrl()}/retro/${planet}`;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-purple-50/30 text-gray-900">
-      <main className="mx-auto max-w-5xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
-        <p className="mb-6">
+    <div className="min-h-screen bg-[#070B12]">
+      <main className="mx-auto max-w-5xl px-4 pb-20 pt-10 sm:px-6 lg:px-8">
+        <p className="mb-8">
           <Link
             href="/retro"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-purple-600"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#7A8090] transition hover:text-[#A78BFA]"
           >
             <span aria-hidden>←</span>
             Retro Merkezi&apos;ne dön
           </Link>
         </p>
-        <section className="relative overflow-hidden rounded-3xl border-2 border-gray-200 bg-white p-6 shadow-lg sm:p-8">
+
+        <section className="rounded-2xl border border-black/[0.07] bg-[#F9F5EF] p-6 sm:p-8">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.9fr)]">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-500">
-                Retro merkezi · {planetName}
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#5C44D0]">
+                Retro Merkezi · {planetName}
               </p>
-              <h1 className="mt-1 bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-600 bg-clip-text text-2xl font-semibold text-transparent sm:text-3xl">
+              <h1 className="mt-2 text-2xl font-bold text-[#1A1714] sm:text-3xl">
                 {explainer.title}
               </h1>
-              <p className="mt-3 text-sm text-gray-700 leading-relaxed">{explainer.heroBody}</p>
+              <p className="mt-4 text-sm leading-relaxed text-[#44403C]">{explainer.heroBody}</p>
 
-              <div className="mt-4 rounded-2xl border-2 border-gray-200 bg-gray-50 p-4 text-xs">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gray-500">
+              <div className="mt-5 rounded-xl border border-[#5C44D0]/15 bg-[#5C44D0]/5 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#5C44D0]">
                   Psikolojik yaklaşım
                 </p>
-                <p className="mt-1 leading-relaxed text-gray-700">
+                <p className="mt-2 text-sm leading-relaxed text-[#44403C]">
                   {explainer.psychology}
                 </p>
               </div>
             </div>
 
             {current && (
-              <aside className="space-y-3 rounded-3xl border-2 border-gray-200 bg-gray-50 p-4 text-xs">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gray-500">
+              <aside className="space-y-4 rounded-2xl border border-black/[0.06] bg-black/[0.02] p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#5C44D0]">
                   Yaklaşan / güncel dönem
                 </p>
-                <p className="text-sm font-semibold text-gray-900">
-                  {PLANET_LABELS[planet]}
-                </p>
-                <p className="text-[13px] text-gray-600">
+                <p className="text-sm font-semibold text-[#1A1714]">{PLANET_LABELS[planet]}</p>
+                <p className="text-xs text-[#6E6660]">
                   Odak temalar:{" "}
-                  {current.themes.slice(0, 3).join(" · ")}
+                  <span className="text-[#3D3830]">{current.themes.slice(0, 3).join(" · ")}</span>
                 </p>
-                <ul className="mt-2 space-y-1 text-[12px] text-gray-700">
+                <ul className="space-y-2">
                   {current.doList.slice(0, 2).map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <span className="mt-[5px] h-1.5 w-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
-                      <span>{item}</span>
+                    <li key={item} className="flex gap-2 text-xs text-[#44403C]">
+                      <span className="mt-[5px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400" />
+                      {item}
                     </li>
                   ))}
                 </ul>
-                <p className="mt-2 text-[11px] text-gray-500">
+                <p className="text-[11px] text-[#A09890]">
                   Bu bilgiler{" "}
-                  <span className="font-semibold text-gray-800">
-                    psikolojik farkındalık
-                  </span>{" "}
-                  amaçlıdır; kesin hüküm veya korku dili içermez.
+                  <span className="font-medium text-[#6E6660]">psikolojik farkındalık</span>{" "}
+                  amaçlıdır; kesin hüküm içermez.
                 </p>
               </aside>
             )}
@@ -242,29 +239,21 @@ export default async function RetroPlanetPage({ params }: { params: Promise<Para
         </section>
 
         {current && (
-          <div className="mt-8">
-            <RetroChecklist
-              planetLabel={planetName}
-              planetKey={planet}
-              items={current.doList}
-            />
+          <div className="mt-6">
+            <RetroChecklist planetLabel={planetName} planetKey={planet} items={current.doList} />
           </div>
         )}
 
-        <div className="mt-8">
+        <div className="mt-6">
           <RetroDecisionAssistant planetName={planetName} />
         </div>
 
-        <RetroFAQ
-          planetName={planetName}
-          faq={faq}
-          canonicalUrl={canonicalUrl}
-        />
+        <RetroFAQ planetName={planetName} faq={faq} canonicalUrl={canonicalUrl} />
 
-        <p className="mt-10 border-t border-gray-200 pt-6">
+        <p className="mt-10 border-t border-white/[0.07] pt-6">
           <Link
             href="/retro"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-purple-600"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#7A8090] transition hover:text-[#A78BFA]"
           >
             <span aria-hidden>←</span>
             Retro Merkezi&apos;ne dön

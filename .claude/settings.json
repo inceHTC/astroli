@@ -9,7 +9,13 @@
       "Bash(python -c ' *)",
       "Bash(python3 -c ' *)",
       "Read(//c/Users/okury/AppData/Roaming/Code/User/History/**)",
-      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\okury\\\\AppData\\\\Roaming\\\\Code\\\\User\\\\History\\\\-5f7f59b6\" | Sort-Object LastWriteTime | ForEach-Object { \"$\\($_.LastWriteTime\\) | $\\($_.Name\\)\" })"
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\okury\\\\AppData\\\\Roaming\\\\Code\\\\User\\\\History\\\\-5f7f59b6\" | Sort-Object LastWriteTime | ForEach-Object { \"$\\($_.LastWriteTime\\) | $\\($_.Name\\)\" })",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\okury\\\\Desktop\\\\YAZILIM\\\\astroli\" -Recurse -Filter \"*.ts\" -o Name)",
+      "Bash(Select-String -Pattern \"\\(admin|auth\\)\")",
+      "Bash(findstr /i \"admin\\\\|jwt\\\\|database\")",
+      "Bash(Get-Content .env)",
+      "Bash(Select-String -Pattern \"ADMIN|JWT|DATABASE\")",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\okury\\\\Desktop\\\\YAZILIM\\\\astroli\" -Force)"
     ]
   }
 }

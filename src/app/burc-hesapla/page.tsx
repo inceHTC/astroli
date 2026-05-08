@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -65,7 +65,7 @@ export default function BurcHesaplaPage() {
 
             <Link
               href="/"
-              className="mb-8 inline-block text-sm text-[#D4AF72] hover:underline"
+              className="mb-8 inline-block text-sm text-[#ffc552] hover:underline"
             >
               ← Ana sayfa
             </Link>
@@ -104,7 +104,7 @@ export default function BurcHesaplaPage() {
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
                   max={getTodayLocalYYYYMMDD()}
-                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#ffc552] focus:ring-1 focus:ring-[#ffc552]/20 outline-none"
                   required
                 />
                 <p className="mt-1 text-xs text-[#6B7A99]">Gelecek tarih seçilemez.</p>
@@ -118,7 +118,7 @@ export default function BurcHesaplaPage() {
                   type="time"
                   value={birthTime}
                   onChange={(e) => setBirthTime(e.target.value)}
-                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#ffc552] focus:ring-1 focus:ring-[#ffc552]/20 outline-none"
                 />
               </div>
 
@@ -175,7 +175,7 @@ export default function BurcHesaplaPage() {
         
               <Link
                 href="/burclar"
-                className="rounded-xl bg-[#D4AF72] px-6 py-3 text-sm font-medium text-white hover:bg-[#C9A96E] transition"
+                className="rounded-xl bg-[#ffc552] px-6 py-3 text-sm font-medium text-white hover:bg-[#ffd47a] transition"
               >
                 Burcunun özelliklerini incele →
               </Link>
@@ -187,3 +187,4 @@ export default function BurcHesaplaPage() {
     </div>
   );
 }
+

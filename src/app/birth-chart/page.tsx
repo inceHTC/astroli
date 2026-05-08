@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
@@ -79,7 +79,7 @@ export default function BirthChartPage() {
       />
 
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
-      <Link href="/" className="mb-8 inline-block text-sm text-[#D4AF72] hover:underline">
+      <Link href="/" className="mb-8 inline-block text-sm text-[#ffc552] hover:underline">
               ← Ana sayfa
             </Link>
 
@@ -182,7 +182,7 @@ export default function BirthChartPage() {
               <section className="flex justify-center">
                 <Link
                   href="/burclar"
-                  className="rounded-xl bg-[#D4AF72] px-6 py-3 text-sm font-medium text-white hover:bg-[#C9A96E] transition"
+                  className="rounded-xl bg-[#ffc552] px-6 py-3 text-sm font-medium text-white hover:bg-[#ffd47a] transition"
                 >
                   Burcunun özelliklerini incele →
                 </Link>
@@ -194,3 +194,4 @@ export default function BirthChartPage() {
     </div>
   );
 }
+

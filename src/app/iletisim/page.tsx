@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -64,7 +64,7 @@ export default function IletisimPage() {
               <button
                 type="button"
                 onClick={() => setSent(false)}
-                className="mt-4 text-sm font-medium text-[#D4AF72] hover:underline"
+                className="mt-4 text-sm font-medium text-[#ffc552] hover:underline"
               >
                 Yeni mesaj gönder
               </button>
@@ -85,7 +85,7 @@ export default function IletisimPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
+                    className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#ffc552] focus:ring-1 focus:ring-[#ffc552]/20 outline-none"
                     placeholder="Adınız Soyadınız"
                   />
                 </div>
@@ -99,7 +99,7 @@ export default function IletisimPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
+                    className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#ffc552] focus:ring-1 focus:ring-[#ffc552]/20 outline-none"
                     placeholder="ornek@email.com"
                   />
                 </div>
@@ -113,7 +113,7 @@ export default function IletisimPage() {
                     onChange={(e) => setMessage(e.target.value)}
                     required
                     rows={5}
-                    className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none resize-y"
+                    className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#ffc552] focus:ring-1 focus:ring-[#ffc552]/20 outline-none resize-y"
                     placeholder="Mesajınızı yazın..."
                   />
                 </div>
@@ -123,7 +123,7 @@ export default function IletisimPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full rounded-xl bg-[#D4AF72] px-4 py-3 text-sm font-medium text-white hover:bg-[#C9A96E] transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full rounded-xl bg-[#ffc552] px-4 py-3 text-sm font-medium text-white hover:bg-[#ffd47a] transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? "Gönderiliyor…" : "Gönder"}
                 </button>
@@ -132,7 +132,7 @@ export default function IletisimPage() {
           )}
 
           <p className="mt-6 text-center text-sm text-[#6B7A99]">
-            <Link href="/" className="text-[#D4AF72] hover:underline">
+            <Link href="/" className="text-[#ffc552] hover:underline">
               ← Ana sayfaya dön
             </Link>
           </p>
@@ -141,3 +141,4 @@ export default function IletisimPage() {
     </div>
   );
 }
+

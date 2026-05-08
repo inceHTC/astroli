@@ -23,7 +23,7 @@ export default async function BurcPage({
         <p className="mt-8 text-center">
           <Link
             href="/burclar"
-            className="text-[#D4AF72] font-medium hover:underline"
+            className="text-[#ffc552] font-medium hover:underline"
           >
             ← Tüm burçlara dön
           </Link>

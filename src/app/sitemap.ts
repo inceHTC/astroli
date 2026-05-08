@@ -2,7 +2,6 @@ import type { MetadataRoute } from "next";
 import { getBaseUrl } from "@/lib/site-url";
 import { ZODIAC_SIGNS } from "@/data/zodiac";
 import { TESTS } from "@/data/tests";
-import { listPublishedSlugs } from "@/lib/db/repositories/article";
 import { listCelebritySlugs } from "@/lib/db/repositories/celebrity";
 
 const RETRO_PLANETS = ["mercury", "venus", "mars", "saturn"] as const;
@@ -21,8 +20,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: url("/burclar/meslekler"), lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: url("/testler"), lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: url("/birth-chart"), lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: url("/dergi"), lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
-    { url: url("/dergi/haftalik-burc-enerjisi"), lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: url("/gunluk-burc"), lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
     { url: url("/haftalik-burc"), lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: url("/uyumluluk"), lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
@@ -52,19 +49,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
-
-  let dergiEntries: MetadataRoute.Sitemap = [];
-  try {
-    const articles = await listPublishedSlugs();
-    dergiEntries = articles.map((a) => ({
-      url: url(`/dergi/${a.slug}`),
-      lastModified: a.updatedAt,
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    }));
-  } catch {
-    // DB yoksa veya hata varsa sadece statik sitemap
-  }
 
   let unlulerEntries: MetadataRoute.Sitemap = [];
   try {
@@ -97,7 +81,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...burcEntries,
     ...testEntries,
     ...retroPlanetEntries,
-    ...dergiEntries,
     ...unlulerEntries,
   ];
 }

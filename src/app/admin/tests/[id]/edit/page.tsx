@@ -41,7 +41,7 @@ export default async function EditTestPage({
         </Link>
         <Link
           href="/admin/tests"
-          className="rounded-lg bg-[#d4af37] px-4 py-2 text-sm font-medium text-black hover:bg-[#e8c547]"
+          className="rounded-lg bg-[#ffc552] px-4 py-2 text-sm font-medium text-black hover:bg-[#ffd47a]"
         >
           Testlere dön
         </Link>

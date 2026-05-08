@@ -103,7 +103,6 @@ export async function POST(request: NextRequest) {
       overviewAir,
       overviewWater,
     });
-    revalidatePath("/dergi/haftalik-burc-enerjisi");
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("POST cosmic-energy error:", error);

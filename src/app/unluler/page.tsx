@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { listCelebrities } from "@/lib/db/repositories/celebrity";
 import { CelebrityGrid } from "@/components/celebrity/CelebrityGrid";
 import { Container } from "@/components/layout/Container";
@@ -25,6 +26,11 @@ export default async function UnlulerPage() {
     <div className="min-h-screen bg-[#070B12] pb-28">
       <section className="border-b border-gray-200 bg-[#070B12] py-16">
         <Container size="lg">
+          <div className="pt-8 pb-2">
+            <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-[#EDE9DF]" style={{ color: "var(--text-4)" }}>
+              ← Ana Sayfa
+            </Link>
+          </div>
           <h1 className="text-4xl font-bold text-[#EDE9DF] sm:text-5xl">
             Hangi Ünlü Hangi Burç?
           </h1>

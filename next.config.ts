@@ -5,8 +5,6 @@ const nextConfig: NextConfig = {
     return [
       { source: "/dogum-haritasi", destination: "/birth-chart", permanent: true },
       { source: "/unlular-hangi-gurc", destination: "/unluler", permanent: true },
-      { source: "/dergi/hangi-unlu-hangi-burc", destination: "/unluler", permanent: true },
-      { source: "/dergi", destination: "/", permanent: false },
     ];
   },
 };

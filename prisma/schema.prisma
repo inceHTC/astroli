@@ -74,7 +74,7 @@ model WeeklyHoroscope {
   @@index([weekStart, weekEnd])
 }
 
-// Haftalık kozmik enerji (dergi) – hafta bazlı tek kayıt
+// Haftalık kozmik enerji – hafta bazlı tek kayıt
 model WeeklyCosmicEnergy {
   id             String   @id @default(uuid())
   weekStart      DateTime @unique @db.Date
@@ -98,7 +98,7 @@ model WeeklyCosmicEnergy {
   @@index([weekStart])
 }
 
-// ========== DERGI (Editorial) ==========
+// ========== MAKALELER ==========
 model Article {
   id        String   @id @default(uuid())
   title     String

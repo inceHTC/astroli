@@ -106,7 +106,7 @@ export function ArticlesClient() {
                   </td>
                   <td className="px-5 py-3 text-right">
                     <Link
-                      href={`/dergi/${a?.slug ?? ""}`}
+                      href={`#`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mr-2 text-gray-500 hover:text-gray-700"

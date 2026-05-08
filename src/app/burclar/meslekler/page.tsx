@@ -165,12 +165,12 @@ const TAGS = [
 function CareerCard({ item }: { item: CareerItem }) {
   return (
     <div className="rounded-2xl bg-[#0E1523] p-6 border border-white/[0.08] hover:border-[#5C44D0]/40 transition">
-      <h2 className="text-lg font-semibold text-[#EDE9DF]">
+      <h2 className="text-lg font-semibold text-[#fafbfe]">
         {item.sign} Burcu
       </h2>
 
       <div className="mt-4">
-        <p className="text-sm font-semibold text-[#A78BFA]">
+        <p className="text-sm font-semibold text-[#c4ec74]">
           Uygun Meslekler
         </p>
         <ul className="mt-2 space-y-1 text-sm text-[#C4C0BA]">
@@ -181,7 +181,7 @@ function CareerCard({ item }: { item: CareerItem }) {
       </div>
 
       <div className="mt-4">
-        <p className="text-sm font-semibold text-rose-400">
+        <p className="text-sm font-semibold text-red-500">
           Uzak Durmalı
         </p>
         <ul className="mt-2 space-y-1 text-sm text-[#C4C0BA]">

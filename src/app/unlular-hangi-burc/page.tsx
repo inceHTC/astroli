@@ -1,4 +1,4 @@
-import { Container } from "@/components/layout/Container";
+﻿import { Container } from "@/components/layout/Container";
 
 export const metadata = {
   title: "Hangi Ünlü Hangi Burç? | Astroli",
@@ -71,10 +71,10 @@ function CategoryCard({
             key={item.name}
             className="flex items-center justify-between text-sm"
           >
-            <span className="text-[#EDE9DF] font-medium hover:text-[#D4AF72] transition">
+            <span className="text-[#EDE9DF] font-medium hover:text-[#ffc552] transition">
               {item.name}
             </span>
-            <span className="rounded-full bg-[#D4AF72]/10 px-3 py-1 text-xs font-medium text-[#D4AF72]">
+            <span className="rounded-full bg-[#ffc552]/10 px-3 py-1 text-xs font-medium text-[#ffc552]">
               {item.sign}
             </span>
           </li>
@@ -118,3 +118,4 @@ export default function UnluBurcPage() {
     </div>
   );
 }
+

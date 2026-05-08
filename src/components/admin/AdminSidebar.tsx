@@ -10,7 +10,6 @@ const SIDEBAR_LINKS = [
   { href: "/admin/horoscope/daily", label: "Günlük Burç", icon: "☀️" },
   { href: "/admin/horoscope/weekly", label: "Haftalık Burç", icon: "📅" },
   { href: "/admin/cosmic-energy", label: "Kozmik Enerji", icon: "☄" },
-  { href: "/admin/articles", label: "Dergi", icon: "◇" },
   { href: "/admin/celebrities", label: "Ünlüler", icon: "★" },
 ];
 
@@ -31,7 +30,7 @@ export function AdminSidebar() {
               href={link.href}
               className={`flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                 isActive
-                  ? "bg-[#d4af37]/10 text-[#d4af37]"
+                  ? "bg-[#ffc552]/10 text-[#ffc552]"
                   : "text-zinc-400 hover:bg-white/5 hover:text-white"
               }`}
             >

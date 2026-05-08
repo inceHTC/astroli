@@ -867,9 +867,713 @@ export const CAREER_MATCH_TEST: PersonalityTest = {
   resultTemplates: CAREER_MATCH_RESULTS,
 };
 
-/* ================= EXPORT ALL (20 TEST) ================= */
+/* ================= TEST 21: RUH EŞİN HANGİ BURÇTAN? ================= */
+
+const SOULMATE_RESULTS: TestResult[] = [
+  elementResult(
+    "fire",
+    "Ateş Burçları: Koç, Aslan veya Yay",
+    "Tutkulu & Özgür Ruh",
+    "Ruh eşin ateş grubu burcundan — yani Koç, Aslan ya da Yay enerjisini taşıyor. Bu kişi seni ilham veriyor, hayata karşı tutkunuzu birlikte büyütüyorsunuz. Duygular güçlü, bağlılık derin ama özgürlük ikisi için de vazgeçilmez. Birlikte dans ediyorsunuz, birbirini söndürmüyorsunuz.",
+    ["Tutku", "Özgürlük", "Macera", "Karşılıklı ilham", "Dürüstlük"],
+    "Zaman zaman iki ateş bir arada yoğunlaşabilir; sabır ve dinleme becerisi ilişkiyi dengeler.",
+    { behaviorTendency: "İlişkinizde yoğun enerji ve ortak hedefler ön planda. İkisi de harekete geçmeyi sever.", stressResponse: "Gerginlik anlarında direkt ve çabuk tepkiler gelebilir; bu aslında ilişkinin derinliğini gösteriyor.", strength: "Tutku, özgürlük ve birbirini ileri taşıma güçlü yanlar arasında.", riskArea: "Aşırı yarışmacılık veya bağımsızlık ihtiyacı zaman zaman çatışma yaratabilir.", developmentSuggestion: "Dinlemek ve ara sıra yavaşlamak ilişkiye derinlik katar." }
+  ),
+  elementResult(
+    "earth",
+    "Toprak Burçları: Boğa, Başak veya Oğlak",
+    "Güvenilir & Sadık Kalp",
+    "Ruh eşin toprak grubu burcundan — Boğa, Başak ya da Oğlak enerjisi taşıyor. Bu kişi sana güvenlik ve zemin veriyor. Aşkta söz değil, eylem dili konuşuyorsunuz. Zaman içinde derinleşen, sağlam temelli bir bağ bu. Küçük jestlerle büyük sevgiler.",
+    ["Güvenilirlik", "Sadakat", "Sabır", "Pratik sevgi", "Derin bağ"],
+    "Bazen rutine gömülebilirsiniz; yeni deneyimler ilişkiye taze hava katar.",
+    { behaviorTendency: "İlişkide güven ve devamlılık merkezde. Eyleme geçen sevgi dili konuşuyorsunuz.", stressResponse: "Zor dönemlerde sakin ve pratik yaklaşım ilişkiyi ayakta tutar.", strength: "Güvenilirlik, sabır ve derin bağ ilişkinin temeli.", riskArea: "Duygusal ifadeyi ertelemek veya değişime direnmek zaman zaman mesafe yaratabilir.", developmentSuggestion: "Arada bir rutin dışına çıkmak ilişkiyi tazeleyebilir." }
+  ),
+  elementResult(
+    "air",
+    "Hava Burçları: İkizler, Terazi veya Kova",
+    "Zeki & Büyüleyici Ruh",
+    "Ruh eşin hava grubu burcundan — İkizler, Terazi ya da Kova enerjisi taşıyor. Bu ilişkide zihinsel bağ çok güçlü. Saatlerce konuşabiliyorsunuz, birbirini anlıyorsunuz. Eşin seni düşündürüyor, hayrete düşürüyor. Sevginin yanında en iyi arkadaşsınız.",
+    ["Zihinsel bağ", "Esprili iletişim", "Özgürlük", "Eşit partnerlik", "Merak"],
+    "Duygusal derinliği ihmal etmemek gerekiyor; his dili de bazen söz ister.",
+    { behaviorTendency: "İlişkide iletişim ve ortak merak öne çıkar. Birbirinizin zihnine tutkunsunuz.", stressResponse: "Zor anlarda konuşmak ve analiz etmek ilişkiyi iyileştirir.", strength: "Zihinsel uyum, esprili dil ve özgürlüğe saygı güçlü yanlar.", riskArea: "Duygusal mesafe veya 'kafada kalma' zaman zaman ilişkiyi soyutlaştırabilir.", developmentSuggestion: "Duygular için de alan açmak bağı derinleştirir." }
+  ),
+  elementResult(
+    "water",
+    "Su Burçları: Yengeç, Akrep veya Balık",
+    "Derin & Ruhsal Bağ",
+    "Ruh eşin su grubu burcundan — Yengeç, Akrep ya da Balık enerjisi taşıyor. Bu bağ sözsüz anlaşmalarla dolu; bakışlarla, sessizlikle, his diliyle konuşuyorsunuz. Derin, dönüştürücü ve ruhsal bir aşk bu. Birbirinizi iyileştiriyorsunuz.",
+    ["Empati", "Derin bağ", "Sezgisel anlayış", "Duygusal derinlik", "Dönüşüm"],
+    "Sınırları korumak önemli; çok yoğun duygusal bağlar arada nefes alanı gerektirir.",
+    { behaviorTendency: "İlişkide duygusal derinlik ve sezgisel bağ merkezde. Söze ihtiyaç duymadan anlıyorsunuz.", stressResponse: "Zor dönemlerde birbirinize sarılmak ve hisleri paylaşmak iyileştirir.", strength: "Empati, derin bağ ve dönüştürücü aşk ilişkinin özü.", riskArea: "Duygusal yoğunluk bazen tükenme ya da sınır sorunlarına yol açabilir.", developmentSuggestion: "Hem bağ hem de kişisel alan ilişkiyi dengeler." }
+  ),
+];
+
+export const SOULMATE_TEST: PersonalityTest = {
+  id: "ruh-esin-burcu",
+  slug: "ruh-esin-burcu",
+  title: "Ruh Eşin Hangi Burçtan?",
+  description: "Aşkta seni tamamlayan ruh eşin hangi element grubundan geliyor? 8 soruyla iç sesin söylediğini keşfet.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "love",
+  image: "/tests/love.png",
+  questions: [
+    { id: "q1", text: "Hayal ettiğin romantik bir akşamı tarif et:", options: [{ id: "a", text: "Spontane bir sürpriz — konser, gece yürüyüşü, macera", scores: el(2,0,0,0) }, { id: "b", text: "Özenle hazırlanmış bir yemek, müzik ve dinginlik", scores: el(0,2,0,0) }, { id: "c", text: "Saatlerce konuştuğumuz bir kafe ya da sergi", scores: el(0,0,2,0) }, { id: "d", text: "Evde, mum ışığında sadece ikimiz", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Sevgilinde seni en çok çeken şey:", options: [{ id: "a", text: "Karizması, kendinden emin duruşu", scores: el(2,0,0,0) }, { id: "b", text: "Güvenilirliği ve tutarlılığı", scores: el(0,2,0,0) }, { id: "c", text: "Zekası ve esprili dili", scores: el(0,0,2,0) }, { id: "d", text: "Seni gerçekten dinleyip hissetmesi", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "İlişkide en önemli gördüğün şey:", options: [{ id: "a", text: "Tutku ve hayattan birlikte keyif almak", scores: el(2,0,0,0) }, { id: "b", text: "Sadakat ve uzun vadeli güvenlik", scores: el(0,2,0,0) }, { id: "c", text: "Zihinsel uyum ve dürüst iletişim", scores: el(0,0,2,0) }, { id: "d", text: "Duygusal derinlik ve ruhsal bağ", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Tartışma anında ne yaparsın?", options: [{ id: "a", text: "Direkt söylerim, çözüme odaklanırım", scores: el(2,0,0,0) }, { id: "b", text: "Sakin kalır, zamanla konuşurum", scores: el(0,2,0,0) }, { id: "c", text: "Her açıdan analiz ederim", scores: el(0,0,2,0) }, { id: "d", text: "Duygularımı paylaşır, empati kurarım", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "İlişkide seni en mutlu eden an:", options: [{ id: "a", text: "Birlikte yeni bir şey denediğimizde", scores: el(2,0,0,0) }, { id: "b", text: "Birlikte rutinimizi, projelerimizi kurduğumuzda", scores: el(0,2,0,0) }, { id: "c", text: "Saatlerce konuşup birbirimizi anladığımızda", scores: el(0,0,2,0) }, { id: "d", text: "Sadece huzurla yanında oturduğumda", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Aşkta en büyük korkun:", options: [{ id: "a", text: "Özgürlüğümü kaybetmek", scores: el(2,0,0,0) }, { id: "b", text: "İhanet veya güvensizlik", scores: el(0,2,0,0) }, { id: "c", text: "İletişim kopukluğu", scores: el(0,0,2,0) }, { id: "d", text: "Duygusal olarak yalnız kalmak", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Sevgilin için bir sürpriz yaparken:", options: [{ id: "a", text: "Büyük jestler — seyahat, konsert, beklenmedik plan", scores: el(2,0,0,0) }, { id: "b", text: "Özenle seçilmiş, anlamlı küçük hediyeler", scores: el(0,2,0,0) }, { id: "c", text: "Birlikte yeni bir şey keşfetmek", scores: el(0,0,2,0) }, { id: "d", text: "Kişisel, el yapımı, kalpten gelen bir şey", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Mükemmel ilişkiyi tek cümleyle tanımla:", options: [{ id: "a", text: "Her gün büyüyen, heyecanlı bir yolculuk", scores: el(2,0,0,0) }, { id: "b", text: "Güvenli bir yuva, sağlam bir ortak hayat", scores: el(0,2,0,0) }, { id: "c", text: "Birbirini zihinsel olarak besleyen eşit iki ruh", scores: el(0,0,2,0) }, { id: "d", text: "Söze gerek kalmadan anlayan, derin bir bağ", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: SOULMATE_RESULTS,
+};
+
+/* ================= TEST 22: BİR ÖNCEKİ YAŞAMINDA KİMDİN? ================= */
+
+const PAST_LIFE_RESULTS: TestResult[] = [
+  elementResult(
+    "fire",
+    "Komutan & Lider Arketipi",
+    "Tarihin Önünde Yürüyen",
+    "Kişiliğinde güçlü bir komutan ve lider arketipi var. Tarih boyunca bu enerjiyi taşıyan insanlar orduları yönetmiş, toplumları dönüştürmüş, cesaretiyle iz bırakmıştır. Sende de aynı irade ve liderlik içgüdüsü güçlü biçimde hissediliyor. Harekete geçmek, korumak ve önden gitmek senin doğan.",
+    ["Doğal liderlik", "Koruma içgüdüsü", "Cesaret", "Karizmatik etki", "İrade gücü"],
+    "Zaman zaman aşırı kontrol ya da sabırsızlık bu arketipin gölge yanı olabilir.",
+    { behaviorTendency: "Liderlik ve koruma içgüdüsü belirgin. İnsanları yönlendirme ve harekete geçirme eğilimi güçlü.", stressResponse: "Baskı altında liderlik refleksi devreye girer; sorunun üstüne gidersin.", strength: "Cesaret, irade ve insanları motive etme yeteneği güçlü yanların.", riskArea: "Aşırı kontrol veya 'tek doğru benim' eğilimi zaman zaman ortaya çıkabilir.", developmentSuggestion: "Başkalarına alan açmak ve dinlemek bu arketipin en önemli gelişim alanı." }
+  ),
+  elementResult(
+    "earth",
+    "Şifacı & Zanaatkâr Arketipi",
+    "Toprağın Koruyucusu",
+    "Kişiliğinde güçlü bir şifacı ve zanaatkâr arketipi var. Tarih boyunca bu enerjiyi taşıyan insanlar toplumları besleyen hekimler, ustalar ve çiftçiler olmuştur. Toprakla, üretimle ve hayatı sürdürmekle iç içe yaşamışlardır. Sende de aynı sabır, güvenilirlik ve pratik iyilik hali var.",
+    ["Şifa içgüdüsü", "Pratik zeka", "Sabır", "Üretkenlik", "Güvenilirlik"],
+    "Değişime karşı direniş veya rutine aşırı bağlılık bu arketipin gölge yanı olabilir.",
+    { behaviorTendency: "Pratik, üretken ve sabırlı yaklaşım belirgin.", stressResponse: "Zor anlarda plan yapma ve düzeni koruma güçlü tepkin.", strength: "Şifa yeteneği, sabır ve güvenilirlik öne çıkan güçlü yanlar.", riskArea: "Değişime direnç veya aşırı kontrolcülük zaman zaman blokaj yaratabilir.", developmentSuggestion: "Esneklik ve yeni deneyimlere açılmak bu arketipin önemli gelişim alanı." }
+  ),
+  elementResult(
+    "air",
+    "Bilge & Kâşif Arketipi",
+    "Düşüncenin Ustası",
+    "Kişiliğinde güçlü bir bilge ve kâşif arketipi var. Tarih boyunca bu enerjiyi taşıyan insanlar filozoflar, seyyahlar ve ilim insanları olmuştur. Fikirlerle, yolculuklarla ve keşiflerle var olmuşlardır. Sende de aynı merak, öğrenme tutkusu ve geniş perspektif hali var.",
+    ["Derin merak", "Evrensel bakış", "İletişim gücü", "Öğrenme tutkusu", "Bağlantı kurma"],
+    "Kararsızlık ya da bir yere kök salamamak bu arketipin gölge yanı olabilir.",
+    { behaviorTendency: "Öğrenme ve keşfetme temel dürtü. Fikirler ve bağlantılar besleyici.", stressResponse: "Zor anlarda analiz etmek ve anlam aramak güçlü tepkin.", strength: "Zeka, iletişim ve geniş perspektif güçlü yanların.", riskArea: "Kararsızlık veya hiçbir yere tam bağlanamamak zaman zaman ortaya çıkabilir.", developmentSuggestion: "Derin kök salmak ve uzun soluklu kalmak bu arketipin dersi." }
+  ),
+  elementResult(
+    "water",
+    "Bilge & Sezgisel Arketip",
+    "Duyguların Okuyucusu",
+    "Kişiliğinde güçlü bir bilge ve sezgisel arketip var. Tarih boyunca bu enerjiyi taşıyan insanlar toplumların ilim insanları, şifacıları ve rehberleri olmuştur. İnsanları dinleyip anlama, derin empati kurma ve iyileştirici bir etki bırakma bu arketipte güçlüdür. Sende de insanlar kolayca açılır; sezgilerinle yol bulursun.",
+    ["Güçlü sezgi", "Derin empati", "Şefkat", "İçsel bilgelik", "Şifa enerjisi"],
+    "Aşırı yük taşımak ve sınır koyamamak bu arketipin gölge yanı olabilir.",
+    { behaviorTendency: "Sezgi ve empati merkezi. İnsanların içini okuma eğilimi güçlü.", stressResponse: "Zor anlarda içe dönme ve sezgine güvenme güçlü tepkin.", strength: "İçsel bilgelik, empati ve sezgisel zeka güçlü yanların.", riskArea: "Başkalarının yükünü üstlenmek veya sınır koyamamak tükenmeye yol açabilir.", developmentSuggestion: "Kendi enerjini korumak ve net sınırlar koymak bu arketipin dersi." }
+  ),
+];
+
+export const PAST_LIFE_TEST: PersonalityTest = {
+  id: "onceki-yasam",
+  slug: "onceki-yasam",
+  title: "Hangi Tarihi Arketipe Sahipsin?",
+  description: "Bazı kişilikler tarih boyunca tekrar eder. 8 soruyla hangi tarihi karakter enerjisini taşıdığını keşfet.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "spiritual",
+  image: "/tests/aura.png",
+  questions: [
+    { id: "q1", text: "Tarihten hangi dönem seni en çok etkiler ya da ilgi çeker?", options: [{ id: "a", text: "Büyük imparatorluklar, savaşlar, kahramanlık destanları", scores: el(2,0,0,0) }, { id: "b", text: "El sanatları, köy hayatı, bereketli toprak", scores: el(0,2,0,0) }, { id: "c", text: "İslam altın çağı, keşifler, ilim ve kütüphaneler", scores: el(0,0,2,0) }, { id: "d", text: "Osmanlı dönemi, anadolu medeniyeti, şiir ve sanat", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Tanımadığın biriyle ilk karşılaşmada ne yaparsın?", options: [{ id: "a", text: "Hemen değerlendiririm — güvenilir mi, güçlü mü?", scores: el(2,0,0,0) }, { id: "b", text: "Gözlemlerim, zamanla güven inşa ederim", scores: el(0,2,0,0) }, { id: "c", text: "Zekasını ve konuşma biçimini fark ederim", scores: el(0,0,2,0) }, { id: "d", text: "Enerjisini ve niyetini sezgiyle hissederim", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Kendini en güçlü hissettiğin an:", options: [{ id: "a", text: "Başkalarını yönetirken veya korurken", scores: el(2,0,0,0) }, { id: "b", text: "Bir işi en iyi şekilde, sabırla tamamlarken", scores: el(0,2,0,0) }, { id: "c", text: "Yeni bir şey öğrenirken ya da anlatırken", scores: el(0,0,2,0) }, { id: "d", text: "Birini dinleyip iyileştirirken", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Başkalarına nasıl yardım edersin?", options: [{ id: "a", text: "Onları koruyarak ve harekete geçirerek", scores: el(2,0,0,0) }, { id: "b", text: "Somut destek ve pratik çözümlerle", scores: el(0,2,0,0) }, { id: "c", text: "Bilgi ve doğru strateji paylaşarak", scores: el(0,0,2,0) }, { id: "d", text: "Dinleyerek, derin anlayış ve şefkatle", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Hangi alanda kendin için ilerlemek istersin?", options: [{ id: "a", text: "Liderlik ve etki alanımı büyütmek", scores: el(2,0,0,0) }, { id: "b", text: "Bir alanda ustalaşmak ve güvenilir olmak", scores: el(0,2,0,0) }, { id: "c", text: "Bilgi ve keşif — öğrenmek, paylaşmak", scores: el(0,0,2,0) }, { id: "d", text: "İnsanlarla derin bağ kurmak ve anlam üretmek", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "İçgüdüsel olarak nerede ait hissedersin?", options: [{ id: "a", text: "Bir ordunun ya da büyük bir hareketin önünde", scores: el(2,0,0,0) }, { id: "b", text: "Bereketli topraklara, el emeğine, üretime", scores: el(0,2,0,0) }, { id: "c", text: "Büyük kütüphanelerde ya da yolculuklarda", scores: el(0,0,2,0) }, { id: "d", text: "Su kenarında, doğanın sessizliğinde ya da insanların arasında", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Hayatta seni motive eden şey:", options: [{ id: "a", text: "Büyük bir amaca hizmet ve etki bırakmak", scores: el(2,0,0,0) }, { id: "b", text: "Güvenli bir yurt kurmak ve üreterek var olmak", scores: el(0,2,0,0) }, { id: "c", text: "Bilgiyi artırmak ve aktarmak", scores: el(0,0,2,0) }, { id: "d", text: "İnsanları anlamak ve onların hayatına dokunmak", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Bazen açıklayamadığın güçlü bir içgüdü ya da his yaşıyor musun?", options: [{ id: "a", text: "Evet — özellikle kriz ve liderlik anlarında", scores: el(2,0,0,0) }, { id: "b", text: "Evet — elle üretirken ve pratik çözümlerde", scores: el(0,2,0,0) }, { id: "c", text: "Evet — okurken, seyahat ederken, öğrenirken", scores: el(0,0,2,0) }, { id: "d", text: "Evet — insanları okuduğumda ve derin dinleme anlarında", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: PAST_LIFE_RESULTS,
+};
+
+/* ================= TEST 23: HANGİ GEZEGEN SENİ YÖNETİYOR? ================= */
+
+const PLANET_RESULTS: TestResult[] = [
+  elementResult(
+    "fire",
+    "Mars Senin Gezegenin",
+    "Savaşçının & Tutkununun Gezegeni",
+    "Seni yöneten gezegen Mars — güç, eylem ve tutku gezegeni. İçinde sürekli bir ateş yanıyor; hareketsizlik sana yabancı. Zorluklar seni yormuyor, aksine uyandırıyor. Mars enerjisiyle donatılmış biri olarak hayatı tam gaz yaşıyorsun. Enerji kaynağın: meydan okumalar ve kazanma hissi.",
+    ["Güçlü irade", "Harekete geçme hızı", "Rekabet gücü", "Cesaret", "Enerji"],
+    "Sabırsızlık ve aşırı ısrar Mars'ın gölge yanı — zaman zaman dinlemek ve yavaşlamak iyileştirir.",
+    { behaviorTendency: "Eylem ve güç önce gelir. Harekete geçmek için işaret beklemeye ihtiyaç duymuyorsun.", stressResponse: "Stres altında savaş moduna geçme ve soruna direkt müdahale etme eğilimi.", strength: "İrade, cesaret ve yoğun enerji güçlü yanların.", riskArea: "Sabırsızlık ve zorla çözme refleksi bazen ilişkileri zorlayabilir.", developmentSuggestion: "Dinleme ve dinginlik Mars enerjisini tamamlayan güçlü becerilerdir." }
+  ),
+  elementResult(
+    "earth",
+    "Satürn Senin Gezegenin",
+    "Zamanın Efendisi & Ödülün Gezegeni",
+    "Seni yöneten gezegen Satürn — disiplin, zaman ve ödül gezegeni. Her şeyi inşa ediyorsun, sabırla, adım adım. Satürn insanları zorlar ama en sonunda herkesten çok ödüllendirir. Sen bunu içgüdüsel olarak biliyorsun. Kısa yolları değil, kalıcı olanı seçiyorsun.",
+    ["Disiplin", "Sabır", "Uzun vadeli vizyon", "Güvenilirlik", "Derin irade"],
+    "Katılık ve değişime direnç Satürn'ün gölgesi — bazen esneklik güçtür.",
+    { behaviorTendency: "Yapı kurma ve uzun soluklu planlama doğal eğilimin.", stressResponse: "Stres altında düzeni ve rutini koruma refleksi güçlü.", strength: "Disiplin, sabır ve uzun vadeli inşa etme kapasitesi öne çıkıyor.", riskArea: "Aşırı katılık veya mükemmeliyetçilik bazen ilerlemeyi yavaşlatabilir.", developmentSuggestion: "Esneklik ve kendine merhamet Satürn enerjisini dengeliyor." }
+  ),
+  elementResult(
+    "air",
+    "Merkür Senin Gezegenin",
+    "Düşüncenin & İletişimin Gezegeni",
+    "Seni yöneten gezegen Merkür — zeka, iletişim ve hız gezegeni. Zihnin durmaksızın çalışıyor; bağlantılar kuruyorsun, kalıpları görüyorsun. Kelimeler senin silahın, fikirler senin oyun alanın. Merkür insanları öğrenmeye ve anlatmaya iter — sen ikisini de seviyorsun.",
+    ["Keskin zeka", "İletişim gücü", "Hızlı bağlantı kurma", "Adaptasyon", "Analiz"],
+    "Karar vermekte zorlanmak ve kararsızlık Merkür'ün gölgesi — bazen düşünmeyi bırakıp hissetmek lazım.",
+    { behaviorTendency: "Zihinde yaşama ve sürekli bağlantı arama doğal eğilimin.", stressResponse: "Stres altında analiz etme ve konuyu mantıksal çerçeveye oturtma güçlü tepkin.", strength: "Zeka, iletişim ve hızlı adaptasyon güçlü yanların.", riskArea: "Aşırı düşünme veya karar verme güçlüğü zaman zaman ortaya çıkabilir.", developmentSuggestion: "Sezgilere ve duygu diline alan açmak Merkür enerjisini tamamlıyor." }
+  ),
+  elementResult(
+    "water",
+    "Ay & Neptün Senin Gezegenin",
+    "Ruhun & Sezginin Gezegenleri",
+    "Seni yöneten gezegenler Ay ve Neptün — ruh, sezgi ve derinlik gezegenleri. Gördüğünden fazlasını hissediyorsun; kelimelerden önce enerji geliyor. Ay döngüleriyle titreşiyorsun, Neptün'ün mistik diliyle konuşuyorsun. Sezgin, doğanın en güçlü navigasyon sistemlerinden biri.",
+    ["Güçlü sezgi", "Duygusal zeka", "Empati", "Mistik anlayış", "Ruhsal bağ"],
+    "Sınır koyamamak ve başkalarının enerjisini çok taşımak Ay/Neptün'ün gölgesi.",
+    { behaviorTendency: "Sezgi ve duygusal okuma birincil navigasyon aracın.", stressResponse: "Stres altında içe dönme, dinginlik arama ve sezgine güvenme güçlü tepkin.", strength: "Empati, sezgisel zeka ve derin anlama kapasitesi güçlü yanların.", riskArea: "Aşırı yük taşıma veya sınır koyamamak zamanla tüketebilir.", developmentSuggestion: "Kendi enerjini korumak ve net sınırlar kurmak dengeyi sağlıyor." }
+  ),
+];
+
+export const PLANET_TEST: PersonalityTest = {
+  id: "gezegen-enerjin",
+  slug: "gezegen-enerjin",
+  title: "Hangi Gezegen Seni Yönetiyor?",
+  description: "Astrolojide her ruhun bir gezegeni var. 8 soruyla seni asıl yönlendiren gezegeni keşfet.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "spiritual",
+  image: "/tests/aura.png",
+  questions: [
+    { id: "q1", text: "Sabah kalktığında ilk ne yaparsın?", options: [{ id: "a", text: "Harekete geç — egzersiz, plan, aksiyon", scores: el(2,0,0,0) }, { id: "b", text: "Günü listele, öncelikleri belirle", scores: el(0,2,0,0) }, { id: "c", text: "Haberlere bak, mesajları oku, zihnini uyandır", scores: el(0,0,2,0) }, { id: "d", text: "Rüyanı düşün, nasıl hissettiğine bak", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Bir hedefe ulaşmak için nasıl ilerlersin?", options: [{ id: "a", text: "Direkt, hızlı, cesurca — engeller durduramaz", scores: el(2,0,0,0) }, { id: "b", text: "Adım adım, sistemli ve disiplinle", scores: el(0,2,0,0) }, { id: "c", text: "Strateji kur, bilgi topla, ağ genişlet", scores: el(0,0,2,0) }, { id: "d", text: "Sezgine güven, doğru an gelince hissedeceğini bilirsin", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Güç deyince aklına ilk ne gelir?", options: [{ id: "a", text: "Fiziksel enerji ve irade gücü", scores: el(2,0,0,0) }, { id: "b", text: "Sabır ve zamanın verdiği güç", scores: el(0,2,0,0) }, { id: "c", text: "Zeka ve doğru bilgiye erişim", scores: el(0,0,2,0) }, { id: "d", text: "Duygusal güç ve sezgi", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Enerji aldığın şey:", options: [{ id: "a", text: "Rekabet ve zorlukları aşmak", scores: el(2,0,0,0) }, { id: "b", text: "Tamamlanmış bir görev ve sağlam düzen", scores: el(0,2,0,0) }, { id: "c", text: "Yeni bilgi ve hızlı fikir alışverişi", scores: el(0,0,2,0) }, { id: "d", text: "Derin bağlar ve anlamlı sessizlikler", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Anlaşmazlıkta ne yaparsın?", options: [{ id: "a", text: "Direkt ve hızlı tepki veririm, çözüme geçerim", scores: el(2,0,0,0) }, { id: "b", text: "Sessiz kalır, zamanla çözerim", scores: el(0,2,0,0) }, { id: "c", text: "Mantıklı argüman sunar, analiz ederim", scores: el(0,0,2,0) }, { id: "d", text: "Duyguları önce anlamaya çalışırım", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Zaman zaman en çok ne zorlar seni?", options: [{ id: "a", text: "Yavaşlamak ve sabır göstermek", scores: el(2,0,0,0) }, { id: "b", text: "Değişime ve belirsizliğe uyum sağlamak", scores: el(0,2,0,0) }, { id: "c", text: "Duyguları ifade etmek", scores: el(0,0,2,0) }, { id: "d", text: "'Hayır' demek ve sınır koymak", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Bir lider olsan nasıl yönetirdin?", options: [{ id: "a", text: "Önden giderek, ilham vererek", scores: el(2,0,0,0) }, { id: "b", text: "Sistemi kurarak ve güvenilir olarak", scores: el(0,2,0,0) }, { id: "c", text: "Bilgi ve stratejiyle yönlendirerek", scores: el(0,0,2,0) }, { id: "d", text: "Empatiyle güven inşa ederek", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Hayatta seni en çok tatmin eden şey:", options: [{ id: "a", text: "Zorluğu aşmak ve kazanmak", scores: el(2,0,0,0) }, { id: "b", text: "Uzun vadede sağlam bir şey inşa etmek", scores: el(0,2,0,0) }, { id: "c", text: "Yeni fikirleri keşfetmek ve paylaşmak", scores: el(0,0,2,0) }, { id: "d", text: "Derin bir bağ ve gerçek anlam bulmak", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: PLANET_RESULTS,
+};
+
+/* ================= TEST 24: 2026'DA SENİ NE BEKLİYOR? ================= */
+
+const ENERGY_2025_RESULTS: TestResult[] = [
+  elementResult(
+    "fire",
+    "Cesaret & Yeni Kimlik Yılı",
+    "Satürn + Neptün Koç'ta: Yeniden Doğuş",
+    "2026'da gökyüzünde ender görülen bir buluşma yaşanıyor: hem Satürn hem de Neptün Koç burcuna giriyor. Bu iki gezegen son birlikte Koç'tayken 1861-1862 yıllarıydı — yani yüz yılda bir görülen bir enerji. Satürn Koç'ta yeni bir 29 yıllık cesaret döngüsü başlatıyor: kim olduğunu ve ne istediğini yeniden inşa etme vakti. Neptün ise eski kimliği eritiyor — sana ait olmayan rolleri, başkalarının beklentilerini bırakmak bu yılın asıl işi. Ateş enerjisi taşıyanlar için 2026, 'gerçek ben'e dönüşün başlangıç noktası.",
+    ["Kimlik yenilenmesi", "Satürn cesareti", "Rol bırakma", "Özgün yol", "Güç geri dönüşü"],
+    "Bu kadar büyük bir dönüşüm anında acele etmek köklerin yerleşmesini engelleyebilir — yavaş ama derin ilerlemek kazandırır.",
+    { behaviorTendency: "2026 harekete geçme ve dönüşüm enerjisiyle dolu. Uzun süredir beklenen adımlar için zaman.", stressResponse: "Baskı altında daha da hızlanma ve ilerleme isteği artabilir.", strength: "Cesaret, irade ve dönüşme kapasitesi 2026'nın güçlü yanları.", riskArea: "Aşırı hız veya sabırsızlık önemli detayları atlayabilir.", developmentSuggestion: "Hızlanırken dinlenmek ve değerlendirmek 2026 yolculuğunu güçlendiriyor." }
+  ),
+  elementResult(
+    "earth",
+    "Kök & Bolluk Yılı",
+    "Jüpiter Yengeç'te: Ev, Aile ve Derin Güvenlik",
+    "2026'da Jüpiter Yengeç burcuna geçiyor — ve bu hareket toprak enerjisi taşıyanlar için özellikle güçlü bir mesaj içeriyor. Jüpiter genişleme ve bereket gezegenidir; Yengeç ise ev, aile, duygusal güvenlik ve köktür. Bu buluşma finansal temeli sağlamlaştırıyor; yuva kavramı — ister fiziksel ev ister aidiyet hissi — 2026'da senin için merkeze geliyor. Yıllardır inşa ettiğin şeyler bu yıl meyve veriyor. Aynı zamanda Satürn'ün Koç'a girişi kişisel sorumluluğu hatırlatıyor: güvenliği başkasından değil, kendi sağlam adımlarından almak 2026'nın dersi.",
+    ["Duygusal güvenlik", "Yuva inşası", "Jüpiter bereketi", "Aile bağları", "Uzun vadeli büyüme"],
+    "Değişen enerjiye direnmek 2026'nın açtığı kapıları kapatabilir — kök salmak donup kalmak değil, derinleşmektir.",
+    { behaviorTendency: "2026 sağlam temeller ve somut büyüme enerjisi taşıyor.", stressResponse: "Belirsizlik anlarında plan ve rutin tutunma noktası.", strength: "Sabır, tutarlılık ve uzun vadeli inşa kapasitesi 2026'nın güçlü yanları.", riskArea: "Aşırı ihtiyatlılık veya kaçırılan fırsatlar dikkat edilmesi gereken alan.", developmentSuggestion: "Zaman zaman hesaplı risk almak 2026 yolculuğunu hızlandırıyor." }
+  ),
+  elementResult(
+    "air",
+    "Devrim & Kolektif Uyanış Yılı",
+    "Plüton Kova'da: Sistemler Çözülüyor, Özgürlük Doğuyor",
+    "2026'da Plüton Kova'daki yolculuğunu derinleştiriyor — ve bu, hava enerjisi taşıyanlar için en güçlü rezonansı yaratıyor. Plüton bir neslin dönüşüm noktasını gösterir; Kova ise kolektif bilinç, özgürlük, teknoloji ve insanlığın geleceğidir. 2026'da eski sistemler — hem dışarıda hem içinde — sarsılmaya devam ediyor. Hava enerjisi taşıyanlar bu dalgayı en erken hisseden, ona anlam verenler. Senin için 2026, başkalarının sana çizdiği sınırları aşma, gerçekten kendi düşüncenle düşünme ve kolektif dönüşümün bir parçası olma yılı. Satürn'ün Koç'a girişi ise bu özgürlük arzusunu disiplinle dengelemeyi hatırlatıyor.",
+    ["Kolektif dönüşüm", "Özgür düşünce", "Sistem sorgulaması", "Yenilik", "Toplumsal etki"],
+    "Her şeyi sorgulamak enerjini dağıtabilir — neye evet neye hayır diyeceğini netleştirmek 2026'da güç verir.",
+    { behaviorTendency: "2026 yenilik ve özgürleşme enerjisi taşıyor. Kapılar açılıyor.", stressResponse: "Baskı altında yeni seçenekler arama ve ufku genişletme refleksi.", strength: "Adaptasyon, yenilik ve bağlantı kurma kapasitesi 2026'nın güçlü yanları.", riskArea: "Dağılmak veya bir türlü odaklanamamak dikkat gerektiriyor.", developmentSuggestion: "Birkaç önceliğe odaklanmak 2026 enerjisini katlar." }
+  ),
+  elementResult(
+    "water",
+    "Ruhsal Uyanış & Şifa Yılı",
+    "Neptün Koç'ta: Eski Benlik Eriyor, Gerçek Ruh Doğuyor",
+    "2026'da Neptün Koç burcuna geçiyor — ve bu geçiş su enerjisi taşıyanlar için en derin etkiyi yaratıyor. Neptün mistisizm, ruhsal algı ve şifa gezegenidir; Koç ise 'ben kimim?' sorusunun burcudur. Bu iki enerji bir araya gelince gerçekleşen şey, eski ve artık sana ait olmayan bir 'ben'in yavaşça erimesidir. Sana dayatılan roller, taşıdığın ama senin olmayan ağırlıklar 2026'da yüzeye çıkıyor. Su enerjisi taşıyanlar için bu yıl derin bir duygusal temizlik, şifa ve gerçek benliğe dönüş anlamına geliyor. Aynı zamanda Jüpiter'in Yengeç'teki hareketi duygusal bağları ve anlam aramasını besliyor — bu yıl içsel büyüme dışsal büyümenin önüne geçiyor.",
+    ["Ruhsal uyanış", "Neptün şifası", "Duygusal temizlik", "Gerçek benlik", "Anlam derinliği"],
+    "Tüm bu derin enerji bazen yorucu gelebilir — sınırları net tutmak ve dinlenmek 2026'da en büyük güçtür.",
+    { behaviorTendency: "2026 derinleşme ve iyileşme enerjisiyle dolu.", stressResponse: "Zor anlarda içe dönme ve bağlantı arama güçlü tepki.", strength: "Empati, derin bağ kurma ve içsel güç 2026'nın güçlü yanları.", riskArea: "Aşırı içe kapanma veya hareketsizlik dikkat gerektiren alan.", developmentSuggestion: "Küçük dışsal adımlar 2026 içsel yolculuğunu tamamlıyor." }
+  ),
+];
+
+export const ENERGY_2025_TEST: PersonalityTest = {
+  id: "enerji-2025",
+  slug: "enerji-2025",
+  title: "2026'da Seni Ne Bekliyor?",
+  description: "Yıl enerjisi herkese farklı kapılar açıyor. 8 soruyla 2026'daki astrolojik enerjini ve senin için ne sakladığını öğren.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "spiritual",
+  image: "/tests/aura.png",
+  questions: [
+    { id: "q1", text: "2026'da en çok ne değişmesini istiyorsun?", options: [{ id: "a", text: "Kariyerim, başarılarım ve görünürlüğüm", scores: el(2,0,0,0) }, { id: "b", text: "Finansal istikrarım ve güvenliğim", scores: el(0,2,0,0) }, { id: "c", text: "Özgürlüğüm ve yeni fırsatlarım", scores: el(0,0,2,0) }, { id: "d", text: "İlişkilerim ve duygusal hayatım", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Şu an hayatında en güçlü hissettiğin alan:", options: [{ id: "a", text: "Motivasyonum ve hedeflerime bağlılığım", scores: el(2,0,0,0) }, { id: "b", text: "Planlama ve adım adım ilerleme gücüm", scores: el(0,2,0,0) }, { id: "c", text: "Yeni fikirler üretme ve bağlantı kurma", scores: el(0,0,2,0) }, { id: "d", text: "Duygusal derinliğim ve empati kapasitem", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "2026'da bırakmak istediğin şey:", options: [{ id: "a", text: "Başarısızlık korkusu", scores: el(2,0,0,0) }, { id: "b", text: "Değişime direnç", scores: el(0,2,0,0) }, { id: "c", text: "Kısıtlamalar ve sınırlar", scores: el(0,0,2,0) }, { id: "d", text: "Geçmişin duygusal yükleri", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Bu yıl seni en çok çeken tema:", options: [{ id: "a", text: "Kariyer atılımı ve tanınma", scores: el(2,0,0,0) }, { id: "b", text: "Finansal büyüme ve ev/yuva", scores: el(0,2,0,0) }, { id: "c", text: "Yeni ilişkiler, seyahat ve projeler", scores: el(0,0,2,0) }, { id: "d", text: "İçsel keşif ve anlamlı bağlar", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Yıl sonunda nasıl biri olmak istiyorsun?", options: [{ id: "a", text: "Daha güçlü, başarılı ve cesur", scores: el(2,0,0,0) }, { id: "b", text: "Daha istikrarlı, güvenli ve müreffeh", scores: el(0,2,0,0) }, { id: "c", text: "Daha özgür, bağlı ve yenilenmiş", scores: el(0,0,2,0) }, { id: "d", text: "Daha derin, şifalanmış ve sevgi dolu", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Şu an hayatında en eksik hissettiğin şey:", options: [{ id: "a", text: "Daha fazla eylem ve hız", scores: el(2,0,0,0) }, { id: "b", text: "Güvenlik ve sağlam bir zemin", scores: el(0,2,0,0) }, { id: "c", text: "Yenilik ve özgürlük", scores: el(0,0,2,0) }, { id: "d", text: "Anlam ve duygusal bağlantı", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "2026 için sana ilham veren cümle:", options: [{ id: "a", text: "\"Artık zamanı; cesaretini geri al.\"", scores: el(2,0,0,0) }, { id: "b", text: "\"Adım adım inşa et — gerisi gelir.\"", scores: el(0,2,0,0) }, { id: "c", text: "\"Merakını takip et, özgürce ilerle.\"", scores: el(0,0,2,0) }, { id: "d", text: "\"Kalbinin sesi seni doğru yere götürür.\"", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "2026'da hayatında en çok ne görmek isterdin?", options: [{ id: "a", text: "Büyük bir başarı veya dönüm noktası", scores: el(2,0,0,0) }, { id: "b", text: "Mali güven ve stabil bir yaşam", scores: el(0,2,0,0) }, { id: "c", text: "Heyecan verici yeni başlangıçlar", scores: el(0,0,2,0) }, { id: "d", text: "Derin bir aşk veya ruhsal büyüme", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: ENERGY_2025_RESULTS,
+};
+
+/* ================= TEST 25: HANGİ KOZMİK ARKETİPSİN? ================= */
+
+const TAROT_RESULTS: TestResult[] = [
+  elementResult(
+    "fire",
+    "Güneş Arketipi",
+    "Neşe, Zafer & Canlılık",
+    "Güneş arketipini taşıyorsun — en canlı ve en parlak enerji. Neşe, zafer ve canlılık senin alanın. Gittiğin her yere ışık götürüyorsun; insanlar yanında kendini daha iyi hissediyor. Güneş enerjisi engellerden geçmeyi, galip gelmeyi ve hayatı tam kucaklamayı simgeler.",
+    ["Neşe ve canlılık", "İyimserlik", "Zafer enerjisi", "İlham verme", "Güç ve özgüven"],
+    "Aşırı optimizm bazen gerçekçiliği gölgede bırakabilir — zaman zaman durup değerlendirmek gerekiyor.",
+    { behaviorTendency: "Canlılık ve neşe doğal halin. Etrafına enerji ve ilham yayıyorsun.", stressResponse: "Zor anlarda bile pozitif bakış açısı ve çözüm odaklılık güçlü tepkin.", strength: "Neşe, özgüven ve ilham verme kapasitesi güçlü yanların.", riskArea: "Aşırı iyimserlik veya zorluğu küçümseme bazen sürprizlerle karşılaştırabilir.", developmentSuggestion: "Realist bir bakışı iyimserlikle dengelemek Güneş enerjisini güçlendiriyor." }
+  ),
+  elementResult(
+    "earth",
+    "Bereket & Üretim Arketipi",
+    "Bolluk, Güç & Yaratıcılık",
+    "Bereket ve üretim arketipini taşıyorsun — bolluk, üretkenlik ve besleyici güç. Doğayla, yaşam döngüleriyle ve yaratıcılıkla iç içesin. Etrafındakileri besliyor, büyütüyor ve güçlendiriyorsun. Bu arketip her şeyin vaktinde filizlendiğini, toprağa atılan tohumların sonunda hasat verdiğini hatırlatır.",
+    ["Bolluk ve üretkenlik", "Besleyici güç", "Yaratıcılık", "Doğa ile uyum", "İstikrar"],
+    "Başkalarını beslerken kendi ihtiyaçlarını ihmal etmek bu arketipin gölgesi — önce kendin için de güç doldur.",
+    { behaviorTendency: "Üretme, besleyici olma ve güçlendirme doğal eğilimin.", stressResponse: "Zor anlarda somut adımlar atmak ve üretmek güçlü tepkin.", strength: "Bolluk, güvenilirlik ve besleyici enerji güçlü yanların.", riskArea: "Başkalarına aşırı odaklanıp kendini ihmal etmek tükenmeye yol açabilir.", developmentSuggestion: "Kendi ihtiyaçlarını önceliklendirmek bu arketipin enerjisini tamamlıyor." }
+  ),
+  elementResult(
+    "air",
+    "Usta & Stratejist Arketipi",
+    "Zeka, Beceri & Ustalık",
+    "Usta ve stratejist arketipini taşıyorsun — zeka, beceri ve üretkenlik gücü. Elindeki araçları mükemmel kullanıyorsun; fikirlerden somut sonuçlar yaratıyorsun. Bu arketip her şeyin mümkün olduğunu söyler — yeter ki odaklanasın ve bilgini eyleme dökesin. Senin için engeller birer çözülecek bulmaca.",
+    ["Zeka ve beceri", "Strateji", "Çözüm üretme", "Odaklanma gücü", "İletişim"],
+    "Dağılmak veya birden çok şeye odaklanmak bu arketipin gölgesi — tek bir şeyde derinleşmek gücü katlar.",
+    { behaviorTendency: "Zeka ve beceriyi somut sonuçlara dönüştürme doğal eğilimin.", stressResponse: "Zor anlarda strateji kurmak ve kaynakları mobilize etmek güçlü tepkin.", strength: "Zeka, iletişim ve dönüştürme kapasitesi güçlü yanların.", riskArea: "Aşırı dağılmak veya kararsızlık bu arketipin enerjisini zayıflatabilir.", developmentSuggestion: "Odaklanmak ve bir işi tamamlamak bu arketipin özüdür." }
+  ),
+  elementResult(
+    "water",
+    "Ay & Sezgi Arketipi",
+    "Sezgi, Derinlik & İç Bilgelik",
+    "Ay ve sezgi arketipini taşıyorsun — iç bilgelik, derinlik ve empati. Görünmeyeni hissediyorsun; yüzeyden çok derine iniyorsun. Bu arketip rüyaların, sezgilerin ve derin anlayışın zamanını simgeler. Karmaşık görünen şeylerde anlam buluyorsun; karanlık anlarda bile yolunu buluyorsun.",
+    ["Güçlü sezgi", "Derin empati", "İç bilgelik", "Duygusal zeka", "Anlam arama"],
+    "Belirsizlikte aşırı düşünmek veya sınır koyamamak bu arketipin gölgesi — kendi sezgine güven.",
+    { behaviorTendency: "Sezgi ve derinlik doğal navigasyon aracın. Görünmeyeni hissediyorsun.", stressResponse: "Zor anlarda içe dönme ve sezgine güvenme güçlü tepkin.", strength: "İç bilgelik, sezgisel zeka ve duygusal derinlik güçlü yanların.", riskArea: "Aşırı düşünme veya belirsizlikte kaybolmak zaman zaman zorluyor.", developmentSuggestion: "Sezgine güvenmek ve eyleme geçmek bu arketipin en güçlü hali." }
+  ),
+];
+
+export const TAROT_TEST: PersonalityTest = {
+  id: "tarot-kartin",
+  slug: "tarot-kartin",
+  title: "Hangi Kozmik Arketipsin?",
+  description: "Astrolojinin dört temel enerjisinden hangisi senin ruhunu en iyi yansıtıyor? 8 soruyla keşfet.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "spiritual",
+  image: "/tests/aura.png",
+  questions: [
+    { id: "q1", text: "Bir odaya girdiğinde insanlar seni nasıl fark eder?", options: [{ id: "a", text: "Enerjimle ve sıcaklığımla — atmosferi değiştiririm", scores: el(2,0,0,0) }, { id: "b", text: "Sakinliğim ve öz güvenimle", scores: el(0,2,0,0) }, { id: "c", text: "Zekam ve konuşmalarımla", scores: el(0,0,2,0) }, { id: "d", text: "Gizemimle — insanlar merak ediyor", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Zor bir dönemde ne seni ayakta tutar?", options: [{ id: "a", text: "Sonsuz iyimserliğim ve enerji kaynağım", scores: el(2,0,0,0) }, { id: "b", text: "Yaratma ve inşa etme gücüm", scores: el(0,2,0,0) }, { id: "c", text: "Çözüm bulma ve analiz etme becerim", scores: el(0,0,2,0) }, { id: "d", text: "İçsel bilgeliğim ve sezgilerim", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Başkalarına nasıl yardım edersin?", options: [{ id: "a", text: "Onlara ilham verip enerji katarım", scores: el(2,0,0,0) }, { id: "b", text: "Somut destek, güvenilir bakım sunarım", scores: el(0,2,0,0) }, { id: "c", text: "Doğru bilgi ve strateji paylaşırım", scores: el(0,0,2,0) }, { id: "d", text: "Sezgisel anlayış ve derin dinleme veririm", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "En mutlu hissettiğin ortam:", options: [{ id: "a", text: "Neşeli, canlı, güneşli yerler ve kalabalıklar", scores: el(2,0,0,0) }, { id: "b", text: "Doğa, bahçe, bereketli ve sakin mekanlar", scores: el(0,2,0,0) }, { id: "c", text: "Kafe, kütüphane, tartışma ve fikir ortamları", scores: el(0,0,2,0) }, { id: "d", text: "Yalnız mekanlar, gece, su kenarı, sessizlik", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Sana en sık atfedilen özellik:", options: [{ id: "a", text: "Neşeli ve enerjik", scores: el(2,0,0,0) }, { id: "b", text: "Güçlü ve besleyici", scores: el(0,2,0,0) }, { id: "c", text: "Zeki ve yetenekli", scores: el(0,0,2,0) }, { id: "d", text: "Gizemli ve sezgisel", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Seçim anında ne yaparsın?", options: [{ id: "a", text: "Kalbime ve tutkuma göre seçerim", scores: el(2,0,0,0) }, { id: "b", text: "Uzun vadeli faydayı düşünürüm", scores: el(0,2,0,0) }, { id: "c", text: "Her şeyi analiz eder, en mantıklısını seçerim", scores: el(0,0,2,0) }, { id: "d", text: "İçimdeki sese göre seçerim, açıklayamam ama bilirim", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Hayatta en çok değer verdiğin şey:", options: [{ id: "a", text: "Neşe ve anı yaşamak", scores: el(2,0,0,0) }, { id: "b", text: "Bolluk ve güvenlik", scores: el(0,2,0,0) }, { id: "c", text: "Bilgi ve özgürlük", scores: el(0,0,2,0) }, { id: "d", text: "Derin bağ ve anlam", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Ruhunu en iyi tanımlayan şey:", options: [{ id: "a", text: "Sönmeyen bir ışık — karanlığa savaş açıyorum", scores: el(2,0,0,0) }, { id: "b", text: "Verimli toprak — her tohum bende filizlenir", scores: el(0,2,0,0) }, { id: "c", text: "Keskin bir zihin — araçlarım elimde, gücüm odağımda", scores: el(0,0,2,0) }, { id: "d", text: "Derin bir okyanus — yüzey sakin, içte sonsuz", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: TAROT_RESULTS,
+};
+
+/* ================= TEST 26: ASTROLOJİK KARANLIK YANIN NE? ================= */
+
+const SHADOW_ASTRO_RESULTS: TestResult[] = [
+  elementResult(
+    "fire",
+    "Savaşan Gölge",
+    "Kontrol Edilemeyen Ateş",
+    "Karanlık yanın 'Savaşan Gölge' — kontrol edilemeyen ateş. Öfke anlarında veya güç kaybettiğinde içindeki savaşçı devreye giriyor ve bazen gerekenden fazlasını yakıyor. Bu gölge aslında güçlü bir koruma mekanizması; içindeki aslan savunmak için direnç gösteriyor. Ateşini fark etmek söndürmekten çok daha güçlü.",
+    ["Güçlü öfke farkındalığı", "Koruma içgüdüsü", "Dönüştürücü enerji", "İrade", "Direniş"],
+    "Gölgeyi bastırmak onu daha güçlü yapar — ateşi tanımak ve yönlendirmek gerçek dönüşüm.",
+    { behaviorTendency: "Tehdit veya güç kaybı anlarında savaş modu devreye giriyor.", stressResponse: "Baskı altında dışarıya yansıyan yoğun tepkiler olabilir.", strength: "Güçlü koruma içgüdüsü ve dönüştürücü enerji güçlü yanların.", riskArea: "Anlık öfke veya aşırı kontrol ihtiyacı ilişkileri zorlayabilir.", developmentSuggestion: "Öfkenin tetikleyicilerini fark etmek ve duraklamak gölgeyi dönüştürüyor." }
+  ),
+  elementResult(
+    "earth",
+    "Donmuş Gölge",
+    "Değişmez Katılık",
+    "Karanlık yanın 'Donmuş Gölge' — değişmez katılık ve içine kapanma. Zor anlarda içine çekiliyor, duvarlar örüyor, kimseyi içeri almıyorsun. Bu donma aslında derin bir güvenlik ihtiyacından geliyor; toprak, kendi içinde kalarak hayatta kalmayı öğretti. Duvarların koruduğunu biliyorsun ama bazen kim için inşa edildiği unutuluyor.",
+    ["Derin güvenlik ihtiyacı", "Sınır koyma kapasitesi", "Sabır", "Dayanıklılık", "İç güç"],
+    "Tamamen kapanmak bazen en çok ihtiyaç duyulan bağlantıyı engelliyor — küçük açılımlar dönüşüm başlatır.",
+    { behaviorTendency: "Tehdit veya kırılganlık anlarında içe çekilme ve duvar örme eğilimi.", stressResponse: "Baskı altında sessizleşme ve tamamen kontrol alma refleksi.", strength: "Dayanıklılık, sınır koruma ve iç güç güçlü yanların.", riskArea: "Aşırı kapanma veya bağlantı kesmek yalnızlığa yol açabilir.", developmentSuggestion: "Küçük kırılganlık anları seçmek donmuş gölgeyi çözüyor." }
+  ),
+  elementResult(
+    "air",
+    "Kayıp Gölge",
+    "Hiçbir Yere Bağlanamayan Ruh",
+    "Karanlık yanın 'Kayıp Gölge' — sürekli hareket eden, bir türlü kök salınamayan ruh. Duygular anlaşılamayacak kadar karmaşık hissettiriyor; çatışma yerine kaçmayı seçiyorsun. Bu gölge aslında özgürlüğün bedeli — hiçbir şeyle bütünleşmemek bazen en güvenli yer gibi geliyor. Ama kaçmak ve anlamak aynı şey değil.",
+    ["Özgürlük ihtiyacı", "Zihinsel esneklik", "Adaptasyon", "Bağımsızlık", "Hız"],
+    "Duygulardan kaçmak onları ortadan kaldırmıyor — durmak ve hissetmek kayıp gölgeyi dönüştürüyor.",
+    { behaviorTendency: "Duygusal yoğunluk veya çatışma anlarında uzaklaşma ve analiz etme eğilimi.", stressResponse: "Baskı altında kaçma, konuyu değiştirme veya kafaya takma refleksi.", strength: "Esneklik, adaptasyon ve hız güçlü yanların.", riskArea: "Kaçma veya duygusal mesafe zaman zaman bağlantıları zayıflatıyor.", developmentSuggestion: "Durmak, hissetmek ve kalmayı seçmek kayıp gölgeyi dönüştürüyor." }
+  ),
+  elementResult(
+    "water",
+    "Boğulan Gölge",
+    "Sınırsız Duygu Okyanusu",
+    "Karanlık yanın 'Boğulan Gölge' — sınırsız bir duygu okyanusu. Kendi duyguların ve başkalarının yükleri iç içe geçiyor; ne seninki ne onlarınki anlaşılamıyor. Boğulma hissi aslında derin empati kapasitesinin gölgesi — hisseden bir kalp, sınır olmadan tükenebilir. Okyanusun gücü kıyılarından geliyor.",
+    ["Derin empati", "Duygusal zeka", "Şifacı enerji", "Bağlantı kapasitesi", "Derinlik"],
+    "Başkasını taşımak için önce kendi içinde güçlü kalman gerekiyor — sınırlar empatiyi öldürmez, güçlendirir.",
+    { behaviorTendency: "Duygusal yoğunluk anlarında kendi ve başkasının hislerini birbirinden ayırt etme güçlüğü.", stressResponse: "Baskı altında içe çekilme, ağlama veya tükenme ihtimali.", strength: "Derin empati, şifacı enerji ve bağlantı kapasitesi güçlü yanların.", riskArea: "Aşırı yük taşıma veya sınır koyamamak duygusal tükenmeye yol açabilir.", developmentSuggestion: "Net sınırlar koymak empatiyi öldürmez — okyanusu güçlendirir." }
+  ),
+];
+
+export const SHADOW_ASTRO_TEST: PersonalityTest = {
+  id: "astrolojik-karanlik-yan",
+  slug: "astrolojik-karanlik-yan",
+  title: "Astrolojik Karanlık Yanın Ne?",
+  description: "Her burçta bir gölge yaşıyor. 8 soruyla astrolojik karanlık yanını keşfet — çünkü gölgeyi tanımak en büyük güç.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "psychology",
+  image: "/tests/mind.png",
+  questions: [
+    { id: "q1", text: "Kimse görmeseydi ne yapardın?", options: [{ id: "a", text: "Bir mücadeleye girerdim ya da hakkımı arardım", scores: el(2,0,0,0) }, { id: "b", text: "Olduğum yerde kalırdım, kimseyle uğraşmazdım", scores: el(0,2,0,0) }, { id: "c", text: "Ortamdan uzaklaşır, özgürce kaybolurdum", scores: el(0,0,2,0) }, { id: "d", text: "Ağlar ya da sadece hissederdim", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Öfkelendiğinde ne yaparsın?", options: [{ id: "a", text: "Patlayarak dışarı veririm — hemen tepki", scores: el(2,0,0,0) }, { id: "b", text: "İçime gömer, günlerce sessizce taşırım", scores: el(0,2,0,0) }, { id: "c", text: "Mantıkla çözmeye çalışır, mesafe koyarım", scores: el(0,0,2,0) }, { id: "d", text: "Üzülür ve içime kapanırım", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "En büyük korkun:", options: [{ id: "a", text: "Güçsüz ya da yetersiz görünmek", scores: el(2,0,0,0) }, { id: "b", text: "Her şeyi kaybetmek ya da güvensiz kalmak", scores: el(0,2,0,0) }, { id: "c", text: "Özgürlüğünü yitirmek ya da sıkışmak", scores: el(0,0,2,0) }, { id: "d", text: "Gerçekten ve tamamen yalnız kalmak", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Seni en çok ne tüketiyor?", options: [{ id: "a", text: "Hızlı ilerleyememek ve hareketsizlik", scores: el(2,0,0,0) }, { id: "b", text: "Hayatın benim kontrolüm dışında olması", scores: el(0,2,0,0) }, { id: "c", text: "Anlamadığım ya da bilemediğim şeyler", scores: el(0,0,2,0) }, { id: "d", text: "İnsanların duygusal ihtiyaçları", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Biri seni hayal kırıklığına uğratırsa:", options: [{ id: "a", text: "Kesip atarım — ikinci şans yok", scores: el(2,0,0,0) }, { id: "b", text: "İçim yanar ama yüzüme vurmamazlık ederim", scores: el(0,2,0,0) }, { id: "c", text: "Analiz eder, mesafe koyarım", scores: el(0,0,2,0) }, { id: "d", text: "Kendi payımı ararım — bir şeyi mi yanlış yaptım?", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Savunma mekanizman ne?", options: [{ id: "a", text: "Saldırıya geçerim ya da baskınlığımı gösteririm", scores: el(2,0,0,0) }, { id: "b", text: "Tamamen çekilirim, kapıyı kapatırım", scores: el(0,2,0,0) }, { id: "c", text: "Konuyu değiştirir ya da şakaya vururum", scores: el(0,0,2,0) }, { id: "d", text: "İnkar eder ya da yokmuş gibi davranırım", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "İçindeki en büyük çatışma:", options: [{ id: "a", text: "Harekete geçmek ile yavaşlamak arasında", scores: el(2,0,0,0) }, { id: "b", text: "Kontrolde kalmak ile bırakmak arasında", scores: el(0,2,0,0) }, { id: "c", text: "Bağlanmak ile özgür kalmak arasında", scores: el(0,0,2,0) }, { id: "d", text: "Sevmek ile kendini korumak arasında", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Sabah aynaya bakınca fark ettiğin his:", options: [{ id: "a", text: "\"Bugün de savaşacağım.\"", scores: el(2,0,0,0) }, { id: "b", text: "\"Bir gün daha atlatsam yeter.\"", scores: el(0,2,0,0) }, { id: "c", text: "\"Bugün ne öğrenebilir, nereye gidebilirim?\"", scores: el(0,0,2,0) }, { id: "d", text: "\"Bu dünyayla nasıl baş çıkabilirim?\"", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: SHADOW_ASTRO_RESULTS,
+};
+
+/* ================= TEST 27: AŞK DİLİN NE? ================= */
+
+const LOVE_LANG_RESULTS: TestResult[] = [
+  elementResult(
+    "fire",
+    "Sözler & Takdir",
+    "Aşkını Kelimelerle Yaşarsın",
+    "Aşk dilin sözler ve takdir. Sevdiğine söylenen doğru bir kelime, yazdığı kısa bir mesaj ya da verdiği samimi bir iltifat her şeyin önüne geçer. İçten sözler, 'ne kadar kıymetlisin' diyen bakışlar ve takdir anları sana sevginin en güçlü biçimi gibi gelir. Sessiz kalan sevgi seni içten içe yorar.",
+    ["Söze değer verme", "Takdir alma ihtiyacı", "Duygusal ifade", "Cesur iletişim", "Motivasyon"],
+    "Sözlere aşırı anlam yükleme ya da söylenmeyeni eksiklik gibi hissetmek zaman zaman zorluyor.",
+    { behaviorTendency: "Sözel iletişim ve takdir güçlü ihtiyaçlar arasında.", stressResponse: "İlişkide sessizlik ya da takdir eksikliği içten içe yoruyor.", strength: "Duygusal ifade ve sözle sevgi gösterme kapasitesi güçlü.", riskArea: "Her kelimeye anlam yükleme ya da eleştiriyi fazla büyütme bazen zorluyor.", developmentSuggestion: "Sözlerin yanı sıra eylemleri de fark etmek ilişkiyi zenginleştirir." }
+  ),
+  elementResult(
+    "earth",
+    "Eylemlerle Gösterilen Sevgi",
+    "Aşkını Yaparak Yaşarsın",
+    "Aşk dilin eylemler. Sevdiğine çay yapan, 'arabana benzin koydum' diyen, fark etmeden yardım eden biri seni derinden etkiler. Sözden çok iş dili konuşursun; sevgi göstergesi büyük jestler değil, küçük ama tutarlı eylemlerdir. 'Seni düşündüm' demek için bir iş yapmak en doğal ifaden.",
+    ["Pratik sevgi dili", "Tutarlı destek", "Güvenilir ortaklık", "Detaylara dikkat", "Sadakat"],
+    "Karşılıksız kalan eylemleri kişisel bir reddediş olarak okuma riski var — bazen sadece görmemişlerdir.",
+    { behaviorTendency: "Somut eylemler ve güvenilir destek temel sevgi dili.", stressResponse: "Karşılıksız kalan yardımlar zaman içinde birikip bunaltabilir.", strength: "Pratik destek, güvenilirlik ve tutarlı varlık güçlü yanlar.", riskArea: "Sözsüz hizmetin fark edilmemesi içten içe yorucu olabilir.", developmentSuggestion: "İhtiyaçlarını söylemek ve karşılıklılık beklemek sağlıklı bir adımdır." }
+  ),
+  elementResult(
+    "air",
+    "Kaliteli Zaman & Derin Sohbet",
+    "Aşkını Birlikte Olarak Yaşarsın",
+    "Aşk dilin kaliteli zaman ve derin sohbet. Telefonsuz, dikkatin tamamen sende olduğu anlar; saatlerce konuştuğunuz geceler; birlikte bir şeyler keşfetmek. Fiziksel olarak yanında ama 'uzak' biri seni bitiriyor. Gerçekten orada olmak, seni dinlemek — bunu verene çok güçlü bağlanıyorsun.",
+    ["Tam dikkat", "Derin sohbet", "Birlikte keşif", "Zihinsel uyum", "Kaliteli an"],
+    "Yalnız kalındığında ya da ilgi azaldığında hızla mesafe hissediyorsun — bu bazen fazla yorum yapılıyor.",
+    { behaviorTendency: "Tam dikkat ve kaliteli birliktelik en güçlü ihtiyaç.", stressResponse: "Dikkat dağınıklığı veya yüzeysel vakit geçirme bağı zayıflatıyor.", strength: "Derin sohbet kapasitesi, anlayışlı varlık ve bağ kurma gücü.", riskArea: "İlgi azaldığında bağın bittiğini düşünmek bazen erken sonuçlara yol açıyor.", developmentSuggestion: "Kaliteli zamanı talep etmeyi öğrenmek ilişkiyi güçlendiriyor." }
+  ),
+  elementResult(
+    "water",
+    "Fiziksel Yakınlık & Dokunuş",
+    "Aşkını Hissederek Yaşarsın",
+    "Aşk dilin fiziksel yakınlık ve dokunuş. Bir el tutma, omza atılan bir dokunuş, uzun bir sarılma — bunlar senin için bin kelime söylüyor. Bedensel yakınlık, güvende hissettiriyor ve bağı canlı tutuyor. Dokunuşsuz geçen günler seni duygusal olarak uzaklaştırıyor; bu küçük anlar ilişkinin can damarı.",
+    ["Fiziksel bağ", "Güven ve huzur", "Anlık bağlantı", "Şefkat", "Güvende hissetmek"],
+    "Fiziksel mesafeyi duygusal mesafeyle karıştırmak zaman zaman yanlış yorumlara yol açıyor.",
+    { behaviorTendency: "Fiziksel yakınlık ve dokunuş en güçlü bağlanma aracı.", stressResponse: "Dokunuş eksikliği çabuk yalnızlık ve mesafe hissettiriyor.", strength: "Şefkat, fiziksel bağ kurma ve güven ortamı yaratma güçlü yanlar.", riskArea: "Fiziksel mesafeyi duygusal mesafe olarak okumak yanlış anlaşılmalara yol açabilir.", developmentSuggestion: "İhtiyacını dile getirmek ve alternatif bağlanma biçimleri geliştirmek önemli." }
+  ),
+];
+
+export const LOVE_LANG_TEST: PersonalityTest = {
+  id: "ask-dili",
+  slug: "ask-dili",
+  title: "Aşk Dilin Ne?",
+  description: "Sevgini ve ilgiyi nasıl alırsın, nasıl verirsin? 8 soruyla ilişkideki gerçek aşk dilini keşfet.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "love",
+  image: "/tests/love.png",
+  questions: [
+    { id: "q1", text: "Sevgilinden seni en mutlu eden şey:", options: [{ id: "a", text: "Sana ne kadar kıymet verdiğini söylemesi", scores: el(2,0,0,0) }, { id: "b", text: "Seni düşünerek küçük bir şey yapması", scores: el(0,2,0,0) }, { id: "c", text: "Telefonu bırakıp tamamen sana odaklanması", scores: el(0,0,2,0) }, { id: "d", text: "Elini tutması ya da sıkıca sarılması", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Sevgilinden uzak kaldığında en çok ne özlüyorsun?", options: [{ id: "a", text: "Güzel mesajlarını ve ilgi dolu sözlerini", scores: el(2,0,0,0) }, { id: "b", text: "Sana yaptıklarını, seni düşünerek davranmasını", scores: el(0,2,0,0) }, { id: "c", text: "Birlikte geçirdiğiniz sakin ve özel anları", scores: el(0,0,2,0) }, { id: "d", text: "Fiziksel yakınlığı, sarılmaları, dokunuşları", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Sevgilinin seni en iyi anladığını hissettiren şey:", options: [{ id: "a", text: "Ne hissettiğini tam doğru kelimelerle ifade etmesi", scores: el(2,0,0,0) }, { id: "b", text: "Söylemeden ne ihtiyacın olduğunu anlayıp yapması", scores: el(0,2,0,0) }, { id: "c", text: "Seni gerçekten dinlemesi, tamamen orada olması", scores: el(0,0,2,0) }, { id: "d", text: "Yorgunken omzuna yaslanmana izin vermesi", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Kötü bir gün geçirince ne seni iyi eder?", options: [{ id: "a", text: "Güzel ve içten bir mesaj ya da telefon", scores: el(2,0,0,0) }, { id: "b", text: "Birinin gelip senin için bir şeyler yapması", scores: el(0,2,0,0) }, { id: "c", text: "Yanında sadece oturup konuşmak", scores: el(0,0,2,0) }, { id: "d", text: "Uzun bir sarılma", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Sevgilinden en çok ne canını sıkar?", options: [{ id: "a", text: "Seni takdir etmemesi, söylememesi", scores: el(2,0,0,0) }, { id: "b", text: "Söz verip yapmadıkları, ilgisiz kalması", scores: el(0,2,0,0) }, { id: "c", text: "Yanında ama aklı başka yerde olması", scores: el(0,0,2,0) }, { id: "d", text: "Soğuk davranması, mesafeli durması", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "İlişkide seni en iyi hissettiren an:", options: [{ id: "a", text: "İnandığını ve kıymetini bildiğini söylediğinde", scores: el(2,0,0,0) }, { id: "b", text: "Hayatını kolaylaştırmak için bir şey yaptığında", scores: el(0,2,0,0) }, { id: "c", text: "Sadece ikinizin olduğu, özel bir an yarattığında", scores: el(0,0,2,0) }, { id: "d", text: "Spontane bir şekilde yanına sokulup sarıldığında", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Sevgilini en iyi nasıl memnun edersin?", options: [{ id: "a", text: "İçten ve doğrudan iltifatlar, teşekkür ederim demek", scores: el(2,0,0,0) }, { id: "b", text: "Küçük ama anlamlı şeyler yapmak", scores: el(0,2,0,0) }, { id: "c", text: "Tamamen orada olmak, birlikte bir şeyler paylaşmak", scores: el(0,0,2,0) }, { id: "d", text: "Dokunmak, yakınlık kurmak, şefkat göstermek", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Bir ilişkide olmak sana ne hissettiriyor?", options: [{ id: "a", text: "Değerli ve görüldüğümü hissediyorum", scores: el(2,0,0,0) }, { id: "b", text: "Birinin benim için orada olduğunu hissediyorum", scores: el(0,2,0,0) }, { id: "c", text: "Yalnız olmadığımı ve anlaşıldığımı hissediyorum", scores: el(0,0,2,0) }, { id: "d", text: "Güvende ve huzurlu hissediyorum", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: LOVE_LANG_RESULTS,
+};
+
+/* ================= TEST 28: HANGİ MÜZİK ENERJİSİSİN? ================= */
+
+const MUSIC_RESULTS: TestResult[] = [
+  elementResult(
+    "fire",
+    "Rock & Hip-Hop Enerjisi",
+    "Ritim, Güç & İsyan",
+    "Müzik enerjin rock ve hip-hop. Bu müzikler senin iç dünyanın sesini çıkarıyor — güç, ritim, isyan ve bireysellik. Bir şarkı tutarsa tüm gün kafanda çalıyor; konserde ön sırada, kulaklıkla adımlarına güç katarak yürüyorsun. Müzik senin için salt dinleme değil, enerji şarjı.",
+    ["Enerji", "Güç", "Bireysellik", "Ritim", "Cesaret"],
+    "Sakin ve yavaş müziklerle bağlantı kurmak zor gelebilir — ama bazen dinginlik de bir güç.",
+    { behaviorTendency: "Enerjik, güçlü müzikler seni motive ediyor ve harekete geçiriyor.", stressResponse: "Stres anlarında güçlü ritimli müzikle boşalma eğilimi.", strength: "Enerji ve güç veren müziklerle yüksek motivasyon.", riskArea: "Duygusal müziklerden kaçmak bazen duyguları bastırmak anlamına gelebilir.", developmentSuggestion: "Zaman zaman sakin melodilerle de bağlantı kurmak iç dengeyi artırıyor." }
+  ),
+  elementResult(
+    "earth",
+    "Türk Müziği & Arabesk Enerjisi",
+    "Kök, Derinlik & Duygu",
+    "Müzik enerjin Türk sanat müziği, arabesk ve halk müziği. Bu sesler sende kök ve aidiyet hissi uyandırıyor. Bir şarkının sözü kalbine girdiğinde günlerce bırakmıyorsun. Müzik senin için gövdeye sinen bir şey — anı, yeri, duyguyu geri getiren bir zaman makinesi.",
+    ["Kök", "Derinlik", "Aidiyet", "Duygusal hafıza", "Anlam"],
+    "Yenilikçi müzik tarzlarına kapanmak zaman zaman keşiflerden mahrum bırakabilir.",
+    { behaviorTendency: "Kökü derin, anlamlı sözlü müzikler güçlü bağlantı noktası.", stressResponse: "Zor anlarda tanıdık şarkılara dönme ve onlarla sakinleşme eğilimi.", strength: "Müziği derin hissetme ve anlamla bağdaştırma kapasitesi.", riskArea: "Sadece bilinen müziklerde kalmak yeni deneyimleri engelleyebilir.", developmentSuggestion: "Yeni tarzlarla da buluşmak müzik dünyasını genişletiyor." }
+  ),
+  elementResult(
+    "air",
+    "Pop & Elektronik Enerjisi",
+    "Hareket, Yenilik & Özgürlük",
+    "Müzik enerjin pop ve elektronik. Nabzı tutan, trend olan, hareket ettiren müzikler senin dünyanda. Yeni çıkan bir şarkıyı ilk dinleyenlerden olmak enerji veriyor; liste güncel, kulak taze. Müzik senin için renk gibi — her gün farklı, her ortama göre değişen, özgür bir ifade aracı.",
+    ["Yenilik", "Hareket", "Özgürlük", "Güncellik", "Çeşitlilik"],
+    "Derinlikli, yavaş müziklerle sabırsızlanmak zaman zaman güzel anlara kapıyı kapatıyor.",
+    { behaviorTendency: "Güncel, enerjik ve çeşitli müzikler doğal tercih.", stressResponse: "Müziği hızlı değiştirerek ortama uyum sağlama eğilimi.", strength: "Geniş müzik perspektifi ve yeni şeylere açıklık.", riskArea: "Yüzeysel dinleme veya derine inmeden geçip gitme zaman zaman ortaya çıkabilir.", developmentSuggestion: "Tek bir albümü derinlemesine dinlemek yeni kapılar açıyor." }
+  ),
+  elementResult(
+    "water",
+    "R&B, Akustik & Soul Enerjisi",
+    "His, Duygu & Derinlik",
+    "Müzik enerjin R&B, akustik ve soul. Bu müzikler bir şeylere dokunuyor — kalbinin tam ortasına. Şarkıyı hissediyorsun, sadece duymuyor değil; sözleri içinde yankılanıyor, melodinin her nüansı sende bir şey uyandırıyor. Müzik senin için duygusal bir yolculuk; bazen ağlatıyor ama temizliyor.",
+    ["His derinliği", "Empati", "Duygusal rezonans", "Melankolik güzellik", "Anlam"],
+    "Müziğin duygusal ağırlığına fazla kapılmak bazen ruh halini etkileyebilir.",
+    { behaviorTendency: "Duygusal derinliği olan müzikler güçlü rezonans yaratıyor.", stressResponse: "Zor anlarda müzikle duygu işleme ve içe dönme eğilimi.", strength: "Müziği derin hissetme ve onunla empati kurma kapasitesi.", riskArea: "Melankolik müzikle uzun süre kalmak bazen ruh halini ağırlaştırıyor.", developmentSuggestion: "Hisli dinlemenin yanında bazen enerjik müziklerle dengelemek güçlendiriyor." }
+  ),
+];
+
+export const MUSIC_TEST: PersonalityTest = {
+  id: "muzik-enerjisi",
+  slug: "muzik-enerjisi",
+  title: "Hangi Müzik Enerjisisin?",
+  description: "Müzik sadece ses değil — seni anlatan bir dil. 8 soruyla ruhuna en çok dokunan müzik enerjisini keşfet.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "personality",
+  image: "/tests/personality.png",
+  questions: [
+    { id: "q1", text: "Sabah kalktığında kulaklığa ilk ne takarsın?", options: [{ id: "a", text: "Güçlü bir ritim — gün hazır, ben de hazırım", scores: el(2,0,0,0) }, { id: "b", text: "Tanıdık, bildik sevdiğim şarkılar", scores: el(0,2,0,0) }, { id: "c", text: "Günün havasına göre değişir, playlist'i karıştırırım", scores: el(0,0,2,0) }, { id: "d", text: "Hisli, sakin bir şey — günü yavaş açarım", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Stresli bir günde müzik sana ne yapıyor?", options: [{ id: "a", text: "Güçlendiriyor, enerjimi geri veriyor", scores: el(2,0,0,0) }, { id: "b", text: "Beni tanıdık bir yere götürüyor, sakinleşiyorum", scores: el(0,2,0,0) }, { id: "c", text: "Kafamı dağıtıyor, modumu değiştiriyor", scores: el(0,0,2,0) }, { id: "d", text: "Hislerimi işlemememi sağlıyor", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Arkadaşlarla araçtasın, müziği kim seçmeli?", options: [{ id: "a", text: "Ben — listemi zaten açık tutuyorum", scores: el(2,0,0,0) }, { id: "b", text: "Bilinen şeyler açılsın, herkes bilsin", scores: el(0,2,0,0) }, { id: "c", text: "Sırayla seçelim — herkesin tarzı olsun", scores: el(0,0,2,0) }, { id: "d", text: "Sakin bir şey açılsın, konuşabilelim", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Bir şarkıyı tekrar tekrar dinleme sebebin:", options: [{ id: "a", text: "Ritmi ve enerjisi beni yakıyor", scores: el(2,0,0,0) }, { id: "b", text: "Sözleri benim için yazılmış gibi geliyor", scores: el(0,2,0,0) }, { id: "c", text: "Kancası kafama yapışıyor, çıkaramıyorum", scores: el(0,0,2,0) }, { id: "d", text: "Melodisi içime işliyor, hissettiriyor", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Bir konser/etkinliğe gidiyorsun. Nasıl bir şey?", options: [{ id: "a", text: "Büyük sahne, güçlü ses, kalabalık ve enerji dolu", scores: el(2,0,0,0) }, { id: "b", text: "Samimi ve sıcak, birlikte söylenen şarkılar", scores: el(0,2,0,0) }, { id: "c", text: "Yeni bir isim, farklı bir sahne deneyimi", scores: el(0,0,2,0) }, { id: "d", text: "Küçük, mahrem, akustik bir ortam", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Sözleri anlasan da anlamasan da dinleyebilir misin?", options: [{ id: "a", text: "Evet — ritim ve enerji yeterliyse anlam aramam", scores: el(2,0,0,0) }, { id: "b", text: "Hayır — sözler ve anlam çok önemli benim için", scores: el(0,2,0,0) }, { id: "c", text: "Evet — melodinin akışı sürükleyebiliyor", scores: el(0,0,2,0) }, { id: "d", text: "Duygu varsa anlarım — dilden bağımsız", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Müzik listenin genel hali:", options: [{ id: "a", text: "Enerjik, güçlü, tempolu şeyler ağırlıkta", scores: el(2,0,0,0) }, { id: "b", text: "Yıllardır dinlediklerim, güvenilir klasiklerim", scores: el(0,2,0,0) }, { id: "c", text: "Çok çeşitli — her tarza bir şeyler var", scores: el(0,0,2,0) }, { id: "d", text: "Duygusal, sakin, hisli şeyler çoğunlukta", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Müzik olmadan hayat nasıl olurdu?", options: [{ id: "a", text: "Enerjisiz ve ilhamsız — dayanılmaz olurdu", scores: el(2,0,0,0) }, { id: "b", text: "Anlamsız — köküm kaybolurdu", scores: el(0,2,0,0) }, { id: "c", text: "Sıkıcı — renksiz bir dünya olurdu", scores: el(0,0,2,0) }, { id: "d", text: "Boş — duygularımı nereye koyacağımı bilemezdim", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: MUSIC_RESULTS,
+};
+
+/* ================= TEST 29: SOSYAL MEDYA KİŞİLİĞİN NE? ================= */
+
+const SOCIAL_MEDIA_RESULTS: TestResult[] = [
+  elementResult(
+    "fire",
+    "İçerik Üretici & Trend Belirleyici",
+    "Sahnedesin — Feed Sana Göre Şekilleniyor",
+    "Sosyal medyada içerik üretici ve trend belirleyici profildesin. Paylaşmak, göstermek ve etkilemek senin doğanın bir parçası. Takipçi sayısını değil, etkiyi önemsiyorsun; ama bir gönderinin yayılması da seni heyecanlandırıyor. Fikirlerin, tarzın ve bakış açın başkalarını harekete geçiriyor.",
+    ["İçerik üretme", "Etki yaratma", "Trend yakalaması", "Karizmatik paylaşım", "Görünürlük"],
+    "Beğeni ve etkileşim beklentisi zaman zaman özgün olmayı gölgeleyebilir.",
+    { behaviorTendency: "Paylaşmak ve etkilemek güçlü bir dürtü.", stressResponse: "Tepki gelmediğinde motivasyon düşebilir.", strength: "İçerik üretme, trend yakalaması ve etki yaratma kapasitesi.", riskArea: "Onay bağımlılığı veya performatiflik zaman zaman ortaya çıkabilir.", developmentSuggestion: "İçerik üretirken 'bunu ben sevdim mi?' sorusu dengeyi koruyor." }
+  ),
+  elementResult(
+    "earth",
+    "Seçici Takipçi & Kalite Odaklı",
+    "Az Ama Öz — Her Paylaşım Anlamlı",
+    "Sosyal medyada seçici ve kalite odaklı profildesin. Rastgele beğenmiyorsun, rastgele takip etmiyorsun. Paylaşımların az ama her biri bir şey söylüyor. Algoritmanın sürüklediği değil, kendi kurduğun bir dijital dünya bu. Gereksiz gürültüden uzak, anlamlı içeriklerle bir araya geliyorsun.",
+    ["Seçicilik", "Anlam arama", "Kalite", "Kontrollü paylaşım", "Güvenilirlik"],
+    "Sosyal medyada az görünmek bağlantı fırsatlarını daraltabiliyor — bazen biraz daha açılmak kazandırıyor.",
+    { behaviorTendency: "Az paylaş, dikkatli seç, anlamlı kal eğilimi.", stressResponse: "Gürültülü içerik anında ses kesilebilir veya takipten çıkılabilir.", strength: "Seçicilik, kalite odaklılık ve güvenilir dijital varlık.", riskArea: "Aşırı çekilme bazen izolasyona ya da kaçırılan fırsatlara yol açabilir.", developmentSuggestion: "Zaman zaman biraz daha görünür olmak yeni bağlantılar açıyor." }
+  ),
+  elementResult(
+    "air",
+    "Yorum & Paylaşım Yapan",
+    "Bağlantı Kuran & Fikir Yayan",
+    "Sosyal medyada bağlantı kurucu ve fikir yayan profildesin. İyi bir içerik gördüğünde paylaşmak, bir yorumla tartışmayı derinleştirmek, iki farklı insanı birbirine bağlamak sana doğal geliyor. Feed'in bir iletişim aracı; tüketmiyorsun, katılıyorsun. Fikirler seninle yayılıyor.",
+    ["Bağlantı kurma", "Fikir paylaşımı", "Yorum yapma", "Tartışma açma", "Bilgi yayma"],
+    "Her şeyi paylaşmak veya her tartışmaya girmek zaman içinde enerji tüketebilir.",
+    { behaviorTendency: "Bağlantı kurmak ve fikir yaymak güçlü bir eğilim.", stressResponse: "Sessiz kalmak zor — bir yorum veya paylaşım ihtiyacı hissediliyor.", strength: "Bağlantı kurma, tartışma açma ve ağ genişletme kapasitesi.", riskArea: "Her şeye yorum yapmak zaman zaman yorucu veya yanlış anlaşılmalara yol açabiliyor.", developmentSuggestion: "Bazen sadece okuyup geçmek enerjiyi koruyor." }
+  ),
+  elementResult(
+    "water",
+    "Gizli İzleyici & Derin Okuyucu",
+    "Görünmeden Her Şeyi Biliyorsun",
+    "Sosyal medyada gizli izleyici ve derin okuyucu profildesin. Paylaşmıyorsun ama her şeyi görüyorsun. Beğeni atmıyorsun ama etkileniyorsun. Bir içerik seni gerçekten doldurduğunda çok nadiren paylaşıyorsun — çünkü paylaşmak samimiyetin bozulması gibi geliyor. Dijital dünyayı derinden ama sessizce hissediyorsun.",
+    ["Derin okuma", "Seçici tepki", "Gözlem", "Gizlilik", "Duyarlılık"],
+    "Tamamen görünmez kalmak bazen iyi içeriklerin ya da insanların seni fark etmesini engelliyor.",
+    { behaviorTendency: "Gözlemlemek ve derinlemesine okumak tercih.", stressResponse: "Yoğun sosyal medya akışında ses kesmek veya çıkmak eğilimi.", strength: "Derin okuma, dikkatli gözlem ve seçici tepki kapasitesi.", riskArea: "Hiç görünmemek bazen fırsatları ve bağlantıları kaçırıyor.", developmentSuggestion: "Zaman zaman bir paylaşım ya da yorum seni doğru insanlarla buluşturabiliyor." }
+  ),
+];
+
+export const SOCIAL_MEDIA_TEST: PersonalityTest = {
+  id: "sosyal-medya-kisilik",
+  slug: "sosyal-medya-kisilik",
+  title: "Sosyal Medya Kişiliğin Ne?",
+  description: "Feed'ine bakınca kim olduğun belli oluyor. 8 soruyla dijital dünyadaki gerçek kişiliğini keşfet.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "personality",
+  image: "/tests/personality.png",
+  questions: [
+    { id: "q1", text: "Son 24 saatte sosyal medyada ne yaptın?", options: [{ id: "a", text: "Bir şeyler paylaştım ya da story koydum", scores: el(2,0,0,0) }, { id: "b", text: "Baktım, beğendim, ama pek bir şey yapmadım", scores: el(0,2,0,0) }, { id: "c", text: "Bir şeyleri paylaştım veya yorum yaptım", scores: el(0,0,2,0) }, { id: "d", text: "Scrollladım ama hiç etkileşime girmedim", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Sosyal medyada en çok ne yapıyorsun?", options: [{ id: "a", text: "İçerik üretmek ya da fikrimi paylaşmak", scores: el(2,0,0,0) }, { id: "b", text: "Belirli hesapları takip edip kaliteli içerik izlemek", scores: el(0,2,0,0) }, { id: "c", text: "Yorum yazmak, paylaşmak, haber takip etmek", scores: el(0,0,2,0) }, { id: "d", text: "Sadece izlemek, kimseye bildirmeden", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Çok beğendiğin bir içerikle ne yaparsın?", options: [{ id: "a", text: "Paylaşır ya da aynı konuda kendim bir şey yaparım", scores: el(2,0,0,0) }, { id: "b", text: "Beğenirim, belki kaydederim", scores: el(0,2,0,0) }, { id: "c", text: "Arkadaşlarıma atarım ya da yorum yaparım", scores: el(0,0,2,0) }, { id: "d", text: "İzlerim, içim dolar, ama bir şey yazmam", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Kaç hesabı takip ediyorsun yaklaşık?", options: [{ id: "a", text: "Çok — ne kadar fazla o kadar iyi", scores: el(2,0,0,0) }, { id: "b", text: "Az ve öz — gereksiz olanları temizledim", scores: el(0,2,0,0) }, { id: "c", text: "Orta — ama sürekli değişiyor", scores: el(0,0,2,0) }, { id: "d", text: "Az — sadece gerçekten sevdiklerimi", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Bir tartışma ya da haber gördüğünde:", options: [{ id: "a", text: "Fikir yazarım ya da story'ye çekerim", scores: el(2,0,0,0) }, { id: "b", text: "Okur, bir şey söylemem", scores: el(0,2,0,0) }, { id: "c", text: "Yorum yapar ya da arkadaşa iletirim", scores: el(0,0,2,0) }, { id: "d", text: "Okur, sindirir, içimde kalır", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Sosyal medyada en çok ne seni sinir eder?", options: [{ id: "a", text: "Beğeni gelmemesi ya da görmezden gelinmek", scores: el(2,0,0,0) }, { id: "b", text: "Kalitesiz, anlamsız içerik seli", scores: el(0,2,0,0) }, { id: "c", text: "Kimsenin gerçekten iletişim kurmaması", scores: el(0,0,2,0) }, { id: "d", text: "Sahtelik ve performans — herkes bir şey oynuyor", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Bir hafta sosyal medya kullanmasan ne hissedersin?", options: [{ id: "a", text: "Bir şeyleri kaçırdığımı ve görünmez olduğumu", scores: el(2,0,0,0) }, { id: "b", text: "Rahatlama — zaten çok fazla giriyordum", scores: el(0,2,0,0) }, { id: "c", text: "Kopukluk — haberleri ve insanları kaçırırım", scores: el(0,0,2,0) }, { id: "d", text: "Pek fark etmez — çoğu zaman izlesem de girmesem de", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Sosyal medya profillerin genel olarak:", options: [{ id: "a", text: "Aktif — düzenli paylaşım, tutarlı estetik", scores: el(2,0,0,0) }, { id: "b", text: "Temiz ve seçici — az ama anlamlı içerik", scores: el(0,2,0,0) }, { id: "c", text: "Etkileşim odaklı — yorum, repost, bağlantı", scores: el(0,0,2,0) }, { id: "d", text: "Neredeyse boş ya da gizli — kimse görmüyor", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: SOCIAL_MEDIA_RESULTS,
+};
+
+/* ================= TEST 30: BASKI ALTINDA NASILSIN? ================= */
+
+const PRESSURE_RESULTS: TestResult[] = [
+  elementResult(
+    "fire",
+    "Savaş Modu",
+    "Baskı Seni Yakıtıyor",
+    "Baskı altında savaş moduna geçiyorsun. Tehdit veya zorluk hissedince harekete geçme refleksin devreye giriyor. Savaşıyorsun, direniyor, çözüme atıyorsun. Bu mod seni birçok zorluğun içinden çıkaran güçlü bir içgüdü. Ama bazen gereksiz yere çok enerji harcayarak küçük şeyleri de büyük savaşlara dönüştürebiliyorsun.",
+    ["Hızlı aksiyon", "Kararlılık", "Direnç", "Koruma içgüdüsü", "Çözüm odaklılık"],
+    "Her şeyi savaşa çevirmek zaman içinde yorucu — bazen geri adım atmak da güçtür.",
+    { behaviorTendency: "Tehdit veya zorlukta harekete geçme ve savaşma refleksi güçlü.", stressResponse: "Baskı altında dışarıya yansıyan yoğun tepkiler ve hızlı aksiyon.", strength: "Hızlı karar verme, direniş ve çözüm odaklılık güçlü yanlar.", riskArea: "Her zorluğu büyük bir mücadele gibi hissetmek enerjini tüketiyor.", developmentSuggestion: "Hangi savaşları gerçekten vermek gerektiğini ayırt etmek güçlendiriyor." }
+  ),
+  elementResult(
+    "earth",
+    "Donma Modu",
+    "Baskı Seni Durduruyor",
+    "Baskı altında donma moduna geçiyorsun. Çok şey olunca veya zorlayıcı bir karar karşısında hareketsizleşebiliyor, geçiştirme moduna girebiliyorsun. Bu bazen gecikmeli ve içe dönerek tepki vermek anlamına geliyor. Aslında içinde çok şey yaşıyor — sadece dışarı çıkarmak zaman alıyor.",
+    ["İçe dönme", "İşlem süreci", "Sabır", "Derin düşünme", "Öz koruma"],
+    "Donup kalmak çözümü ertelediğinde sorunlar büyüyebilir — küçük bir adım dönüşümü başlatır.",
+    { behaviorTendency: "Yoğun baskı anlarında hareketsizleşme ve içe dönme eğilimi.", stressResponse: "Baskı altında sessizleşme ve bekleyerek geçiştirme refleksi.", strength: "Derin işleme kapasitesi ve sabırlı yaklaşım güçlü yanlar.", riskArea: "Çok uzun donup kalmak sorunu büyütebilir.", developmentSuggestion: "Küçük bir eylem — bir adım — donma modundan çıkışı başlatıyor." }
+  ),
+  elementResult(
+    "air",
+    "Kaçış & Analiz Modu",
+    "Baskı Seni Düşündürüyor",
+    "Baskı altında kaçış ve analiz moduna geçiyorsun. Zorlayıcı durumdan uzaklaşmak, konuyu değiştirmek ya da her şeyi mantıksal çerçeveye oturtmaya çalışmak güçlü tepkilerin. Analiz ederek mesafe koyuyorsun — bu bazen harika bir çözüm üretiyor, bazen ise hislerden kaçmanın bir yolu oluyor.",
+    ["Analiz", "Mesafe koyma", "Mantık", "Esneklik", "Kaçış kapısı"],
+    "Duygulardan kaçarak çözmeye çalışmak bazen sorunun özüne hiç inmemeyi getiriyor.",
+    { behaviorTendency: "Baskı altında mesafe koyma ve analiz etme refleksi güçlü.", stressResponse: "Konuyu değiştirme, mantıkla çözme ya da ortamdan uzaklaşma eğilimi.", strength: "Analiz etme, esneklik ve hızlı alternatif üretme kapasitesi.", riskArea: "Duygusal gerçeklerden kaçmak zaman zaman sorunun derinleşmesine yol açıyor.", developmentSuggestion: "Bir miktar durmak ve hissetmek analizi daha güçlü kılıyor." }
+  ),
+  elementResult(
+    "water",
+    "Uyum & İçe Çekilme Modu",
+    "Baskı Seni İçine Sürüklüyor",
+    "Baskı altında uyum ve içe çekilme moduna geçiyorsun. Çatışmadan kaçınmak, ortamı sakinleştirmek ya da sessizce içine çekilmek güçlü tepkilerin. Başkalarını üzmemek için kendi ihtiyaçlarını geri çekebiliyorsun. Bu derin şefkat kaynağından geliyor ama zaman zaman kendini kaybetmeye dönüşebilir.",
+    ["Uyum sağlama", "Şefkat", "Çatışmadan kaçınma", "Sezgi", "İçe dönme"],
+    "Sürekli uyum sağlamak ve kendininkini bastırmak zamanla büyük bir tükenmeye yol açıyor.",
+    { behaviorTendency: "Çatışmadan kaçınma ve ortama uyum sağlama eğilimi güçlü.", stressResponse: "Baskı altında sessizleşme, geri çekilme ve barış koruma refleksi.", strength: "Şefkat, uyum kapasitesi ve derin sezgi güçlü yanlar.", riskArea: "Kendi ihtiyaçlarını bastırmak uzun vadede tükenme getiriyor.", developmentSuggestion: "İhtiyaçlarını dile getirmek hem seni hem ilişkiyi güçlendiriyor." }
+  ),
+];
+
+export const PRESSURE_TEST: PersonalityTest = {
+  id: "baski-altinda",
+  slug: "baski-altinda",
+  title: "Baskı Altında Nasıl Birisin?",
+  description: "Zorlandığında, strese girdiğinde gerçek karakterin ortaya çıkıyor. 8 soruyla baskı altındaki modunu keşfet.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "psychology",
+  image: "/tests/mind.png",
+  questions: [
+    { id: "q1", text: "Beklenmedik kötü bir haberle karşılaştığında ilk tepkin:", options: [{ id: "a", text: "Ne yapabileceğimi bulmaya hemen başlarım", scores: el(2,0,0,0) }, { id: "b", text: "Donup kalır, ne yapacağımı bilemem", scores: el(0,2,0,0) }, { id: "c", text: "Aklımı toplar, mesafe koyarım", scores: el(0,0,2,0) }, { id: "d", text: "İçime çekilirim, kendimle baş başa kalmak isterim", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Biri seni eleştirince ne yaparsın?", options: [{ id: "a", text: "Hemen karşılık veririm — bence bu böyle değil", scores: el(2,0,0,0) }, { id: "b", text: "Bir şey söylemem ama içten içe çok taşırım", scores: el(0,2,0,0) }, { id: "c", text: "Mantıklı değerlendiririm — haklı mı?", scores: el(0,0,2,0) }, { id: "d", text: "Üzülür, kendimi küçük hissedebilirim", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "Çok iş birikiyor, son tarih yaklaşıyor:", options: [{ id: "a", text: "Kol sıvayıp savaşırım — biter bu", scores: el(2,0,0,0) }, { id: "b", text: "Nereden başlayacağımı bilemez, yerinde sayarım", scores: el(0,2,0,0) }, { id: "c", text: "Listeye dökerim, önceliklendiririm", scores: el(0,0,2,0) }, { id: "d", text: "Biriyle konuşmak isterim, destek ararım", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Biriyle anlaşmazlık yaşıyorsun:", options: [{ id: "a", text: "Direkt söylerim — kafama göre gider çözüme", scores: el(2,0,0,0) }, { id: "b", text: "Susar, uzaklaşırım — zamanla geçer", scores: el(0,2,0,0) }, { id: "c", text: "Analiz ederim — kimin haklı olduğunu anlamaya çalışırım", scores: el(0,0,2,0) }, { id: "d", text: "Barışı korumak için geri adım atarım", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Çok yorgunken bir istek daha geldi:", options: [{ id: "a", text: "İçten içe sinirlenirim ama yaparım", scores: el(2,0,0,0) }, { id: "b", text: "Hayır diyemez, donup kalırım", scores: el(0,2,0,0) }, { id: "c", text: "Ne zaman yapabileceğimi tartarım", scores: el(0,0,2,0) }, { id: "d", text: "Gönlüm yapmak ister ama içim parçalanır", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Sonucu değiştiremeyeceğin bir şeyle yüzleşince:", options: [{ id: "a", text: "Bir şekilde mücadele edebileceğim bir şey bulurum", scores: el(2,0,0,0) }, { id: "b", text: "Kabullenmek çok zaman alır, donabilirim", scores: el(0,2,0,0) }, { id: "c", text: "Mantıklı kabul ederim ama içim yavaş işler", scores: el(0,0,2,0) }, { id: "d", text: "Çok derinden hissederim, ağlamak gelir", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Sınavdan önce ya da önemli bir sunum öncesi nasılsın?", options: [{ id: "a", text: "Heyecanlı ve hazır — gelin bakalım", scores: el(2,0,0,0) }, { id: "b", text: "Donmuş — ne çalışabiliyor ne dinlenebiliyorum", scores: el(0,2,0,0) }, { id: "c", text: "Listeyi yapar, her şeyi kontrol ederim", scores: el(0,0,2,0) }, { id: "d", text: "Kaygılı ama bunları göstermemeye çalışırım", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Baskı dönemlerinde seni kim görür?", options: [{ id: "a", text: "Herkes — çünkü aktif, enerjik, harekete geçmiş haldeyim", scores: el(2,0,0,0) }, { id: "b", text: "Kimse — çekilir giderim", scores: el(0,2,0,0) }, { id: "c", text: "Birkaç kişi — strateji konuşmak için seçilmişler", scores: el(0,0,2,0) }, { id: "d", text: "Yakınlarım — onlarla güvenlik buluyorum", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: PRESSURE_RESULTS,
+};
+
+/* ================= TEST 31: ARKADAŞLIK TARZIN NE? ================= */
+
+const FRIENDSHIP_RESULTS: TestResult[] = [
+  elementResult(
+    "fire",
+    "Lider & Organize Eden Arkadaş",
+    "Sen Olmasaydın Grup Olmazdı",
+    "Arkadaş grubunda lider ve organize eden profildesin. Plan yapan, insanları bir araya getiren, 'ne zaman buluşacağız?' sorusuna ilk cevap veren sensin. Enerjin grubu canlı tutuyor. Arkadaşlıktan çok fedakarlık yapıyor, önden gidiyorsun. Bazen yoruluyorsun ama bu senin doğanın bir parçası.",
+    ["Liderlik", "Organize etme", "Buluşma kurma", "Enerji yayma", "Sadakat"],
+    "Her zaman önce sen organize edersen zamanla yük haline gelebilir — bazen başkasının plan yapmasına izin ver.",
+    { behaviorTendency: "Grubu organize etme ve önden gitme güçlü eğilim.", stressResponse: "Arkadaş grubunda gerilim olunca arabulucu veya yönlendirici olmak.", strength: "Liderlik, buluşturma ve güçlü grup bağı kurma kapasitesi.", riskArea: "Her zaman sen organize edersen zaman içinde yük hissedebilirsin.", developmentSuggestion: "Bazen geri çekilip başkasının önden gitmesine izin vermek dengeyi sağlar." }
+  ),
+  elementResult(
+    "earth",
+    "Güvenilir & Daima Hazır Arkadaş",
+    "Herkes Seninle Güvende Hisseder",
+    "Arkadaş grubunda güvenilir ve daima hazır profildesin. Herkes seni aradığında cevaplayansın; söz verdiğinde yapansın; en zor anda yanında olansın. Büyük jestler değil, küçük tutarlı anlar senin dünyan. İnsanlar seninle güvende hissediyor — bu derin bir güç.",
+    ["Güvenilirlik", "Sadakat", "Tutarlılık", "Sözünde durma", "Sabır"],
+    "Hep veren taraf olmak zaman içinde tükeniyor — bazen ihtiyacını söylemek de güç.",
+    { behaviorTendency: "Güvenilir, tutarlı ve her koşulda hazır olmak güçlü eğilim.", stressResponse: "Arkadaş ihtiyaç duyduğunda ilk koşan olmak doğal tepki.", strength: "Güvenilirlik, sadakat ve derin bağ kurma kapasitesi.", riskArea: "Hep alan değil hep veren taraf olmak zamanla tükenmeye yol açabiliyor.", developmentSuggestion: "İhtiyacını dile getirmek ve karşılıklılık beklemek sağlıklı bir adım." }
+  ),
+  elementResult(
+    "air",
+    "Eğlenceli & Bağlantı Kuran Arkadaş",
+    "Seninle Vakit Geçmek Hep İyi Hissettiriyor",
+    "Arkadaş grubunda eğlenceli ve bağlantı kurucu profildesin. İnsanları birbirine tanıştıran, her gruba uyum sağlayan, 'onu siz tanışıyor musunuz?' diyen sensin. Yanında vakit geçirmek hafif ve keyifli; konuşmalar renkli. Yalnız geçirilen zaman seni yeniliyor; sosyal olmak sana enerji veriyor.",
+    ["Bağlantı kurma", "Eğlence", "Uyum", "Geniş çevre", "Akıcı iletişim"],
+    "Çok geniş bir çevre bazen derinliği zorlaştırabiliyor — az ama derin bağlar da besleyici.",
+    { behaviorTendency: "İnsanları tanıştırmak, geniş çevre kurmak ve eğlenceyi getirmek güçlü eğilim.", stressResponse: "Sosyal ortamlarda enerji bulma ve atmosferi canlandırma refleksi.", strength: "Bağlantı kurma, uyum sağlama ve eğlence atmosferi yaratma kapasitesi.", riskArea: "Çok geniş çevre zaman zaman derinliği zorlaştırıyor.", developmentSuggestion: "Birkaç arkadaşla derin bağ kurmak sosyal dünyayı zenginleştiriyor." }
+  ),
+  elementResult(
+    "water",
+    "Dinleyen & Duygusal Destek Olan Arkadaş",
+    "Herkes Sana Açılıyor",
+    "Arkadaş grubunda dinleyen ve duygusal destek sunan profildesin. İnsanlar sana içlerini dökebiliyor — çünkü gerçekten dinliyorsun, yargılamıyorsun ve hissediyorsun. Arkadaşlıkta derinlik arıyorsun; yüzeysel buluşmalar seni tatmin etmiyor. Az ama çok derin arkadaşlıklara değer veriyorsun.",
+    ["Derin dinleme", "Empati", "Yargısız varlık", "Derin bağ", "Duygusal güven"],
+    "Herkesin yükünü taşımak zaman içinde seni tüketiyor — bazen kendi ihtiyacına dönmek gerekiyor.",
+    { behaviorTendency: "Dinlemek, empati kurmak ve duygusal destek olmak güçlü eğilim.", stressResponse: "Arkadaş sıkıntısında çözüme değil dinlemeye odaklanma.", strength: "Derin empati, yargısız dinleme ve güven ortamı yaratma kapasitesi.", riskArea: "Herkesin yükünü taşımak uzun vadede tükeniyor.", developmentSuggestion: "Kendi ihtiyaçlarını da paylaşmak ve destek almak ilişkiyi dengeler." }
+  ),
+];
+
+export const FRIENDSHIP_TEST: PersonalityTest = {
+  id: "arkadaslik-tarzi",
+  slug: "arkadaslik-tarzi",
+  title: "Arkadaşlık Tarzın Ne?",
+  description: "Arkadaşlıkta sen nasıl birisin? Koruyucu, güvenilir, eğlenceli mi? 8 soruyla arkadaşlık stilini keşfet.",
+  duration: "3–4 dk",
+  questionCount: 8,
+  category: "personality",
+  image: "/tests/personality.png",
+  questions: [
+    { id: "q1", text: "Arkadaş grubunda genellikle sen ne yaparsın?", options: [{ id: "a", text: "Plan kurar, buluşma organize ederim", scores: el(2,0,0,0) }, { id: "b", text: "Söyleneni yapar, güvenilir olmaya çalışırım", scores: el(0,2,0,0) }, { id: "c", text: "Eğlenceyi getiririm, herkesi birbirine bağlarım", scores: el(0,0,2,0) }, { id: "d", text: "Dinlerim, destek olurum", scores: el(0,0,0,2) }] },
+    { id: "q2", text: "Arkadaşın seni arayıp 'konuşmam lazım' dese:", options: [{ id: "a", text: "Ne oldu, nasıl çözeriz — hemen harekete geçerim", scores: el(2,0,0,0) }, { id: "b", text: "Ne gerekiyorsa yaparım, yanında olacağım", scores: el(0,2,0,0) }, { id: "c", text: "Buluşma ayarlar, dışarıya çıkarırım", scores: el(0,0,2,0) }, { id: "d", text: "Dinler, anlamaya çalışır, yargılamam", scores: el(0,0,0,2) }] },
+    { id: "q3", text: "İdeal arkadaşlık nasıl olur?", options: [{ id: "a", text: "Aktif, birlikte iş yapılan, ortak hedefli", scores: el(2,0,0,0) }, { id: "b", text: "Güvenilir, tutarlı, sözünde duran", scores: el(0,2,0,0) }, { id: "c", text: "Eğlenceli, yeni şeyler keşfeden, bağlantılı", scores: el(0,0,2,0) }, { id: "d", text: "Derin, içten, her şeyi konuşabileceğin", scores: el(0,0,0,2) }] },
+    { id: "q4", text: "Arkadaşlıkta seni en çok ne üzer?", options: [{ id: "a", text: "Planların bozulması veya ilgisizlik", scores: el(2,0,0,0) }, { id: "b", text: "Güvenin kırılması veya sözünde durulmaması", scores: el(0,2,0,0) }, { id: "c", text: "Monoton ve sıkıcı buluşmalar", scores: el(0,0,2,0) }, { id: "d", text: "Yüzeysel konuşmalar, gerçek anlamda bağlanılmaması", scores: el(0,0,0,2) }] },
+    { id: "q5", text: "Kaç yakın arkadaşın var?", options: [{ id: "a", text: "Geniş çevre — pek çok arkadaş grubum var", scores: el(2,0,0,0) }, { id: "b", text: "Belirli, güvenilir bir kaç kişi", scores: el(0,2,0,0) }, { id: "c", text: "Çok geniş — herkesle iyi geçiniyorum", scores: el(0,0,2,0) }, { id: "d", text: "Az ama çok derin bağım var", scores: el(0,0,0,2) }] },
+    { id: "q6", text: "Arkadaş grubunun seni tanımlaması:", options: [{ id: "a", text: "En çok plan yapan, organize eden", scores: el(2,0,0,0) }, { id: "b", text: "En güvenilir, sözünde duran", scores: el(0,2,0,0) }, { id: "c", text: "En eğlenceli, sosyal, herkesi tanıyan", scores: el(0,0,2,0) }, { id: "d", text: "En iyi dinleyen, içlerini döktükleri", scores: el(0,0,0,2) }] },
+    { id: "q7", text: "Uzun süredir görmediğin biri aradığında:", options: [{ id: "a", text: "Hemen buluşma kurar, plan yaparım", scores: el(2,0,0,0) }, { id: "b", text: "Önce konuşur, hazır olduğumda buluşurum", scores: el(0,2,0,0) }, { id: "c", text: "Seve seve kabul ederim — yeni hikayeler isterim", scores: el(0,0,2,0) }, { id: "d", text: "Nasıl olduğunu sormak için gözlerim dolar neredeyse", scores: el(0,0,0,2) }] },
+    { id: "q8", text: "Arkadaşlıkta en güzel an:", options: [{ id: "a", text: "Hep birlikte bir şey başarınca", scores: el(2,0,0,0) }, { id: "b", text: "Zor günde yanında olmak ya da yanımda olmak", scores: el(0,2,0,0) }, { id: "c", text: "Yeni insanlar tanıyıp anlar oluşturduğumuzda", scores: el(0,0,2,0) }, { id: "d", text: "Sabaha kadar konuştuğumuz, hiç bitmesini istemediğim anlar", scores: el(0,0,0,2) }] },
+  ],
+  resultTemplates: FRIENDSHIP_RESULTS,
+};
+
+/* ================= EXPORT ALL (31 TEST) ================= */
 
 export const TESTS: PersonalityTest[] = [
+  SOULMATE_TEST,
+  PAST_LIFE_TEST,
+  PLANET_TEST,
+  ENERGY_2025_TEST,
+  TAROT_TEST,
+  SHADOW_ASTRO_TEST,
+  LOVE_LANG_TEST,
+  MUSIC_TEST,
+  SOCIAL_MEDIA_TEST,
+  PRESSURE_TEST,
+  FRIENDSHIP_TEST,
   ELEMENT_DISCOVERY_TEST,
   LOVE_STYLE_TEST,
   COMMUNICATION_TEST,

@@ -128,17 +128,22 @@ export default async function HaftalikBurcPage(props: PageProps) {
       <section className="relative overflow-hidden bg-[#070B12]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
         <Container size="lg">
+          <div className="pt-8">
+            <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-[#7A8090] hover:text-[#EDE9DF] transition-colors">
+              ← Ana Sayfa
+            </Link>
+          </div>
           <div className="relative py-16 text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-bold text-[#1A1714]">
+            <h1 className="text-4xl sm:text-5xl font-bold text-[#EDE9DF]">
               Haftalık Burç Yorumu
             </h1>
-            <p className="mt-4 text-lg text-[#6E6660]">
+            <p className="mt-4 text-lg text-[#C4C0BA]">
               Bu hafta burcunuz için sağlık, aşk, para ve iş alanlarında genel bir rehber. Olasılıklar ve farkındalık üzerine yorumlar.
             </p>
-            <p className="mt-3 text-sm font-medium text-[#5C44D0]">
+            <p className="mt-3 text-sm font-medium text-[#A78BFA]">
               {format(start, "d MMMM", { locale: tr })} – {format(end, "d MMMM yyyy", { locale: tr })}
             </p>
-            <p className="mt-2 text-sm text-[#555]">
+            <p className="mt-2 text-sm text-[#7A8090]">
               Geçmiş haftaları arşivden seçebilirsiniz.
             </p>
           </div>

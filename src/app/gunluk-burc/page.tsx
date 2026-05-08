@@ -65,6 +65,11 @@ export default async function GunlukBurcPage(props: PageProps) {
       <section className="relative overflow-hidden bg-[#070B12]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
         <Container size="lg">
+          <div className="pt-8">
+            <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-[#EDE9DF]" style={{ color: "var(--text-4)" }}>
+              ← Ana Sayfa
+            </Link>
+          </div>
           <div className="relative py-16 text-center max-w-3xl mx-auto">
             <h1 className="text-4xl sm:text-5xl font-bold text-[#EDE9DF]">
               Günlük Burç Yorumları

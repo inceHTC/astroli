@@ -21,12 +21,12 @@ export function Footer() {
     <footer className="border-t border-white/[0.06] bg-[#040710]">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex flex-col gap-4 self-center sm:self-auto">
+          <div className="flex flex-col gap-4 self-start sm:self-auto">
             <Link href="/">
               <Image src="/logo1.png" alt="Astroli" width={120} height={25} priority className="h-14 w-auto" />
             </Link>
             <p className="max-w-[200px] text-xs leading-relaxed text-[#7A8090]">
-              Natal haritandan retrograd takibine, gokyuzunu Turkce oku.
+              Natal haritandan retrograd takibine, gökyüzünü oku.
             </p>
           </div>
 

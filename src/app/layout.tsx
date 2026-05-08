@@ -118,7 +118,7 @@ function getStructuredData() {
         inLanguage: "tr-TR",
         potentialAction: {
           "@type": "SearchAction",
-          target: { "@type": "EntryPoint", url: `${base}/dergi?q={search_term_string}` },
+          target: { "@type": "EntryPoint", url: `${base}/burclar?q={search_term_string}` },
           "query-input": "required name=search_term_string",
         },
       },

@@ -35,7 +35,7 @@ src/
 │   ├── burc-hesapla/
 │   ├── burc/[sign]/  # Burç detay sayfaları
 │   ├── burclar/
-│   ├── dergi/        # Magazine içerikleri
+│   ├
 │   ├── test/[slug]/  # Kişilik testleri
 │   ├── testler/
 │   └── uyumluluk/

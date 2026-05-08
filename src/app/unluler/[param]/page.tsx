@@ -69,7 +69,7 @@ export default async function UnlulerParamPage({
       <div className="min-h-screen bg-[#070B12] pb-28">
         <section className="border-b border-gray-200 bg-[#070B12] py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <Link href="/unluler" className="text-sm text-[#D4AF72] hover:underline">
+            <Link href="/unluler" className="text-sm text-[#ffc552] hover:underline">
               ← Ünlüler
             </Link>
             <h1 className="mt-4 text-4xl font-bold text-[#EDE9DF] sm:text-5xl">

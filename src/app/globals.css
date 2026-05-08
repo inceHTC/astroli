@@ -48,8 +48,8 @@
   --violet-soft:   rgba(123,94,255,0.12);
   --violet-border: rgba(123,94,255,0.22);
   --gold:          #ffc552;
-  --gold-soft:     rgba(212,168,83,0.10);
-  --gold-border:   rgba(212,168,83,0.22);
+  --gold-soft:     rgba(255,197,82,0.10);
+  --gold-border:   rgba(255,197,82,0.22);
   --text-3:        #C4C0BA;
   --text-4:        #7A8090;
   --border-2:      rgba(255,255,255,0.12);
@@ -186,7 +186,7 @@
 }
 
 .gold-text {
-  background: linear-gradient(90deg, #D4A853, #F0C878);
+  background: linear-gradient(90deg, #ffc552, #ffd47a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -220,11 +220,11 @@
   background: var(--gold);
   color: #0D0B1A;
   font-weight: 700;
-  box-shadow: 0 4px 20px rgba(212,168,83,0.25);
+  box-shadow: 0 4px 20px rgba(255,197,82,0.25);
 }
 .btn-gold:hover {
-  background: #E0B55A;
-  box-shadow: 0 8px 30px rgba(212,168,83,0.40);
+  background: #ffd47a;
+  box-shadow: 0 8px 30px rgba(255,197,82,0.40);
   transform: translateY(-2px);
 }
 
@@ -240,3 +240,25 @@
 .retro-scrollbar::-webkit-scrollbar-track { background: #0C1220; border-radius: 4px; }
 .retro-scrollbar::-webkit-scrollbar-thumb { background: #2A3555; border-radius: 4px; }
 .retro-scrollbar::-webkit-scrollbar-thumb:hover { background: #3A4570; }
+
+/* ── Homepage Animations ──────────────────────── */
+@keyframes astroli-twinkle {
+  0%, 100% { opacity: 0.08; transform: scale(0.8); }
+  50% { opacity: 0.75; transform: scale(1.6); }
+}
+@keyframes astroli-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes astroli-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes astroli-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes astroli-pulse-border {
+  0%, 100% { border-color: rgba(123,94,255,0.22); }
+  50% { border-color: rgba(123,94,255,0.55); box-shadow: 0 0 24px rgba(123,94,255,0.25); }
+}

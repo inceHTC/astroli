@@ -42,6 +42,12 @@ export default function RetroPage() {
 
       <main className="mx-auto max-w-6xl px-4 pb-28 sm:px-6 lg:px-8">
 
+        <div className="pt-8 pb-2">
+          <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-[#EDE9DF]" style={{ color: "var(--text-4)" }}>
+            ← Ana Sayfa
+          </Link>
+        </div>
+
         {/* Özellikler şeridi */}
         <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {FEATURES.map((f) => (

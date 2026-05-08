@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -91,7 +91,7 @@ export default function UyumlulukPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
         <Container size="md">
           <div className="relative py-16 text-center">
-            <Link href="/" className="mb-8 inline-block text-sm text-[#D4AF72] hover:underline">
+            <Link href="/" className="mb-8 inline-block text-sm text-[#ffc552] hover:underline">
               ← Ana sayfa
             </Link>
             <h1 className="text-4xl sm:text-5xl font-bold text-[#EDE9DF]">
@@ -118,7 +118,7 @@ export default function UyumlulukPage() {
                   value={date1}
                   onChange={(e) => setDate1(e.target.value)}
                   max={getTodayLocalYYYYMMDD()}
-                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#ffc552] focus:ring-1 focus:ring-[#ffc552]/20 outline-none"
                   required
                 />
               </div>
@@ -129,7 +129,7 @@ export default function UyumlulukPage() {
                   value={date2}
                   onChange={(e) => setDate2(e.target.value)}
                   max={getTodayLocalYYYYMMDD()}
-                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#D4AF72] focus:ring-1 focus:ring-[#D4AF72]/20 outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/[0.10] bg-[#0C1220] px-4 py-3 text-[#EDE9DF] focus:border-[#ffc552] focus:ring-1 focus:ring-[#ffc552]/20 outline-none"
                   required
                 />
               </div>
@@ -154,7 +154,7 @@ export default function UyumlulukPage() {
                 {result.sign1.nameTr} & {result.sign2.nameTr}
               </p>
               <div className="mt-8 text-center">
-                <p className="text-5xl font-bold text-[#D4AF72] sm:text-6xl">
+                <p className="text-5xl font-bold text-[#ffc552] sm:text-6xl">
                   %{result.compatibility.score}
                 </p>
                 <p className="mt-1 text-sm text-[#6B7A99]">Uyum Skoru</p>
@@ -194,3 +194,4 @@ export default function UyumlulukPage() {
     </div>
   );
 }
+

@@ -51,7 +51,7 @@ export function TestsClient() {
         <p className="text-sm text-zinc-500">{tests.length} test</p>
         <Link
           href="/admin/tests/new"
-          className="rounded-lg bg-[#d4af37] px-4 py-2 text-sm font-medium text-black hover:bg-[#e8c547]"
+          className="rounded-lg bg-[#ffc552] px-4 py-2 text-sm font-medium text-black hover:bg-[#ffd47a]"
         >
           Yeni test ekle
         </Link>
@@ -62,7 +62,7 @@ export function TestsClient() {
           <p className="text-zinc-500">Henüz test yok.</p>
           <Link
             href="/admin/tests/new"
-            className="mt-4 inline-block rounded-lg bg-[#d4af37] px-4 py-2 text-sm font-medium text-black hover:bg-[#e8c547]"
+            className="mt-4 inline-block rounded-lg bg-[#ffc552] px-4 py-2 text-sm font-medium text-black hover:bg-[#ffd47a]"
           >
             İlk testi ekle
           </Link>
@@ -78,7 +78,7 @@ export function TestsClient() {
                 <h3 className="font-semibold text-white">{t.title}</h3>
                 <p className="mt-1 text-sm text-zinc-500">{t.description}</p>
                 <div className="mt-3 flex gap-2">
-                  <span className="rounded-full bg-[#d4af37]/10 px-2 py-0.5 text-xs text-[#d4af37]">
+                  <span className="rounded-full bg-[#ffc552]/10 px-2 py-0.5 text-xs text-[#ffc552]">
                     {t.questionCount} soru
                   </span>
                   <span className="rounded-full bg-white/5 px-2 py-0.5 text-xs text-zinc-500">
@@ -105,7 +105,7 @@ export function TestsClient() {
                 </Link>
                 <Link
                   href={`/admin/tests/${t.id}/edit`}
-                  className="rounded-lg bg-[#d4af37] px-4 py-2 text-sm font-medium text-black hover:bg-[#e8c547]"
+                  className="rounded-lg bg-[#ffc552] px-4 py-2 text-sm font-medium text-black hover:bg-[#ffd47a]"
                 >
                   Düzenle
                 </Link>

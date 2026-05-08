@@ -30,7 +30,7 @@ export default async function AdminDashboard() {
     { label: "Günlük Burç", value: String(dailyHoroscopeCount), href: "/admin/horoscope/daily" },
     { label: "Haftalık Burç", value: String(weeklyHoroscopeCount), href: "/admin/horoscope/weekly" },
     { label: "Kozmik Enerji", value: String(cosmicEnergyCount), href: "/admin/cosmic-energy" },
-    { label: "Dergi Makalesi", value: String(articleCount), href: "/admin/articles" },
+    { label: "Makale", value: String(articleCount), href: "/admin/articles" },
     { label: "Ünlü", value: String(celebrityCount), href: "/admin/celebrities" },
   ];
 
@@ -46,9 +46,9 @@ export default async function AdminDashboard() {
       <div className="mt-10 grid gap-6 sm:grid-cols-3">
         {stats.map((stat) => (
           <Link key={stat.label} href={stat.href}>
-            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 transition-colors hover:border-[#d4af37]/20 hover:bg-white/[0.04]">
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 transition-colors hover:border-[#ffc552]/20 hover:bg-white/[0.04]">
               <p className="text-sm text-zinc-500">{stat.label}</p>
-              <p className="mt-2 font-display text-3xl font-semibold text-[#d4af37]">
+              <p className="mt-2 font-display text-3xl font-semibold text-[#ffc552]">
                 {stat.value}
               </p>
             </div>

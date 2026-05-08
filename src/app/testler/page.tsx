@@ -1,95 +1,62 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Card } from "@/components/ui/Card";
-import { Container } from "@/components/layout/Container";
+import type { Metadata } from "next";
 import { TESTS } from "@/data/tests";
+import { TestlerClient } from "./TestlerClient";
 
-export const metadata = {
-  title: "Kişilik Testleri | Astroli",
+export const metadata: Metadata = {
+  title: "Astroloji & Kişilik Testleri | Ruh Eşin, Tarot Kartın, Önceki Yaşamın | Astroli",
   description:
-    "Astroloji temalı kişilik testleri. Eğlenceli ama düşündüren testlerle kendini keşfet.",
-};
-
-const CATEGORY_IMAGES: Record<string, string> = {
-  love: "/tests/love.png",
-  career: "/tests/career.png",
-  psychology: "/tests/mind.png",
-  spiritual: "/tests/aura.png",
-  personality: "/tests/personality.png",
+    "Ruh eşin hangi burçtan? Tarot kartın hangisi? Önceki hayatında kimdin? 2025 enerjin ne? 26 ücretsiz astroloji kişilik testiyle kendinle yüzleş. Eğlenceli, paylaşılabilir ve gerçek.",
+  keywords: [
+    "astroloji testi",
+    "kişilik testi",
+    "burç testi",
+    "ruh eşi testi",
+    "tarot kartı testi",
+    "önceki yaşam testi",
+    "2025 burç yorumu",
+    "element testi",
+    "hangi burçsun",
+    "burç uyumu testi",
+  ],
+  openGraph: {
+    title: "Astroloji & Kişilik Testleri | Astroli",
+    description: `${TESTS.length} ücretsiz astroloji testi — Ruh eşin, tarot kartın, önceki yaşamın ve 2025 enerjini keşfet.`,
+    type: "website",
+  },
+  alternates: {
+    canonical: "/testler",
+  },
 };
 
 export default function TestlerPage() {
   return (
-    <div className="bg-[#070B12] pb-28">
-
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-[#070B12]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,63,255,0.06),transparent_60%)]" />
-        <Container size="md">
-          <div className="relative py-16 text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold text-[#EDE9DF]">
-              Kişilik Testleri
-            </h1>
-            <p className="mt-4 text-[#8494B2]">
-              Kendini keşfetmek için eğlenceli ama düşündüren testler.
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      {/* TEST GRID */}
-      <section className="mt-16">
-        <Container size="lg">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-
-            {TESTS.map((test) => {
-              const image =
-                test.image ||
-                CATEGORY_IMAGES[test.category] ||
-                "/tests/default.png";
-
-              return (
-                <Link key={test.id} href={`/test/${test.slug}`}>
-                  <Card className="group overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-
-                    {/* Görsel */}
-                    <div className="relative aspect-[16/9] w-full overflow-hidden">
-                      <Image
-                        src={image}
-                        alt={test.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-
-                    {/* İçerik */}
-                    <div className="p-6">
-                      <h2 className="text-lg font-semibold text-[#EDE9DF]">
-                        {test.title}
-                      </h2>
-
-                      <p className="mt-2 text-sm text-[#6B7A99] line-clamp-2">
-                        {test.description}
-                      </p>
-
-                      <div className="mt-4 flex gap-2">
-                        <span className="rounded-full bg-[#D4AF72]/20 px-3 py-1 text-xs text-[#D4AF72]">
-                          {test.duration}
-                        </span>
-                        <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-[#8494B2]">
-                          {test.questionCount} soru
-                        </span>
-                      </div>
-                    </div>
-
-                  </Card>
-                </Link>
-              );
-            })}
-
-          </div>
-        </Container>
-      </section>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: "Astroloji Kişilik Testleri",
+            description:
+              "Burç ve element enerjilerine dayalı kişilik testleri. Ruh eşin, tarot kartın, önceki yaşamın ve 2025 enerjini keşfet.",
+            hasPart: TESTS.map((t) => ({
+              "@type": "Quiz",
+              name: t.title,
+              description: t.description,
+              url: `/test/${t.slug}`,
+            })),
+            breadcrumb: {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Ana Sayfa", item: "/" },
+                { "@type": "ListItem", position: 2, name: "Kişilik Testleri", item: "/testler" },
+              ],
+            },
+          }),
+        }}
+      />
+      <TestlerClient />
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import { forwardRef, type ButtonHTMLAttributes } from "react";
+﻿import { forwardRef, type ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost" | "outline";
@@ -13,13 +13,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary:
-        "bg-gradient-to-r from-[#D4AF72] to-[#C9A96E] text-[#070B12] shadow-lg shadow-[#D4AF72]/20 hover:shadow-[#D4AF72]/35 hover:scale-[1.02]",
+        "bg-gradient-to-r from-[#ffc552] to-[#ffd47a] text-[#070B12] shadow-lg shadow-[#ffc552]/20 hover:shadow-[#ffc552]/35 hover:scale-[1.02]",
       secondary:
         "bg-white/[0.06] border border-white/[0.12] text-[#EDE9DF] hover:bg-white/[0.10]",
       ghost:
         "bg-transparent text-[#EDE9DF] hover:bg-white/[0.06]",
       outline:
-        "border border-[#D4AF72]/40 text-[#D4AF72] hover:bg-[#D4AF72]/10",
+        "border border-[#ffc552]/40 text-[#ffc552] hover:bg-[#ffc552]/10",
     };
 
     const sizes = {
@@ -41,3 +41,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = "Button";
+

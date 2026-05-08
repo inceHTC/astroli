@@ -55,7 +55,7 @@ export function TestForm() {
   }
 
   const inputClass =
-    "w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-white placeholder-zinc-500 focus:border-[#d4af37]/50 focus:outline-none focus:ring-1 focus:ring-[#d4af37]/50";
+    "w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-white placeholder-zinc-500 focus:border-[#ffc552]/50 focus:outline-none focus:ring-1 focus:ring-[#ffc552]/50";
   const labelClass = "mb-1 block text-sm font-medium text-zinc-400";
 
   return (
@@ -163,7 +163,7 @@ export function TestForm() {
           type="checkbox"
           checked={published}
           onChange={(e) => setPublished(e.target.checked)}
-          className="h-4 w-4 rounded border-white/20 bg-white/5 text-[#d4af37] focus:ring-[#d4af37]"
+          className="h-4 w-4 rounded border-white/20 bg-white/5 text-[#ffc552] focus:ring-[#ffc552]"
         />
         <label htmlFor="published" className="text-sm text-zinc-400">
           Yayında (sitede görünsün)
@@ -174,7 +174,7 @@ export function TestForm() {
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-[#d4af37] px-6 py-2 text-sm font-medium text-black hover:bg-[#e8c547] disabled:opacity-50"
+          className="rounded-lg bg-[#ffc552] px-6 py-2 text-sm font-medium text-black hover:bg-[#ffd47a] disabled:opacity-50"
         >
           {loading ? "Kaydediliyor…" : "Testi oluştur"}
         </button>

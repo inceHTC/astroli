@@ -212,12 +212,19 @@ export function BirthForm({ onSubmit, isLoading = false }: BirthFormProps) {
       </div>
 
       <button
-  type="submit"
-  disabled={isLoading}
-  className="mt-2 rounded-xl bg-[#ffc552] px-6 py-3.5 font-medium text-white shadow-[0_0_20px_rgba(91,63,255,0.4)] transition hover:bg-[#ffd47a] hover:shadow-[0_0_28px_rgba(91,63,255,0.5)] disabled:opacity-60"
->
-  {isLoading ? "Hesaplanıyor…" : "Haritayı Hesapla"}
-</button>
+        type="submit"
+        disabled={isLoading}
+        className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#ffc552] px-6 py-3.5 font-medium text-white shadow-[0_0_20px_rgba(91,63,255,0.4)] transition-all hover:bg-[#ffd47a] hover:shadow-[0_0_28px_rgba(91,63,255,0.5)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {isLoading ? (
+          <>
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+            Hesaplanıyor…
+          </>
+        ) : (
+          "✦ Haritayı Hesapla"
+        )}
+      </button>
 
     </form>
   );

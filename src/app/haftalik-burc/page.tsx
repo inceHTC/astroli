@@ -26,7 +26,7 @@ type PageProps = { searchParams?: Promise<SearchParams> | SearchParams };
 
 function weekStartStrFromDate(date: Date): string {
   const { start } = getWeekRange(date);
-  return start.toISOString().slice(0, 10);
+  return `${start.getFullYear()}-${String(start.getMonth() + 1).padStart(2, "0")}-${String(start.getDate()).padStart(2, "0")}`;
 }
 
 function parseWeekParam(hafta: string | null, fallbackWeekStart: string): string {
